@@ -11,4 +11,4 @@ My personal portfolio website showcasing my skills, projects, and experience.
 
 ## View Website
 
-Visit the website at: [https://username.github.io](https://username.github.io)
+Visit the website at: [https://martinmzumara.github.io](https://martinmzumara.github.io)
