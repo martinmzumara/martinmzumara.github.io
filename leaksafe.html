@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeakSAFE System - Martin Mzumara</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MARTIN MZUMARA</a>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <i data-lucide="sun" class="icon-sun"></i>
+                    <i data-lucide="moon" class="icon-moon"></i>
+                </button>
+                <a href="index.html#projects" class="btn-primary">
+                    <i data-lucide="arrow-left"></i> BACK TO PROJECTS
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container project-detail-container">
+        <!-- Hero Title Section -->
+        <div class="project-detail-header">
+            <span class="system-label">// CASE STUDY: IOT & MOBILE ENGINEERING</span>
+            <h1 class="main-title">LeakSAFE – Smart Gas Leakage Detection System</h1>
+            <p class="lead-text">A cross-platform mobile application integrated with ESP32 hardware sensors to deliver real-time atmospheric gas tracking, dynamic threat analysis, and automated hazardous alerts.</p>
+        </div>
+
+        <!-- System Specifications -->
+        <div class="specs-grid">
+            <div class="spec-card">
+                <span class="spec-label">ROLE</span>
+                <span class="spec-value">Lead Developer & Hardware Integrator</span>
+            </div>
+            <div class="spec-card">
+                <span class="spec-label">TECHNOLOGIES</span>
+                <span class="spec-value">Flutter, Dart, ESP32, Gas Sensors, Figma</span>
+            </div>
+            <div class="spec-card">
+                <span class="spec-label">PROJECT SCOPE</span>
+                <span class="spec-value">Computer Science Capstone Engineering</span>
+            </div>
+        </div>
+
+        <!-- Technical Overview -->
+        <section class="section-padding">
+            <span class="system-label">// ARCHITECTURE OVERVIEW</span>
+            <h2 class="section-title underline">System Mechanics</h2>
+            
+            <ul class="custom-list">
+                <li><i data-lucide="play" class="list-icon"></i> Continuous atmospheric monitoring via calibrated MQ gas sensor modules connected to an ESP32 microcontroller node.</li>
+                <li><i data-lucide="play" class="list-icon"></i> Live telemetry data streaming directly to the Flutter application interface for real-time parts-per-million (PPM) concentration display.</li>
+                <li><i data-lucide="play" class="list-icon"></i> Dynamic threshold triggers that transform application UI color states from Safe (Green) to Danger (Red) upon detecting elevated PPM levels.</li>
+                <li><i data-lucide="play" class="list-icon"></i> Geographic sensor mapping and historical frequency charts to track leak origin points and temporal safety patterns.</li>
+            </ul>
+        </section>
+
+        <!-- Image Gallery Showcase -->
+        <section class="section-padding">
+            <span class="system-label">// INTERFACE & HARDWARE SHOWCASE</span>
+            <h2 class="section-title underline">Application Screenshots</h2>
+
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <img src="assets/images/leaksafe-safe-reading.jpeg" alt="Safe Level Display Screenshot">
+                    <div class="gallery-info">
+                        <h4>Safe PPM Monitoring</h4>
+                        <p>Normal atmospheric concentrations (40.0 PPM) visualized with clear green indicators.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="assets/images/leaksafe-danger-reading.jpeg" alt="Danger Level Alert Screenshot">
+                    <div class="gallery-info">
+                        <h4>Hazardous Threshold Alert</h4>
+                        <p>High PPM levels (210.0 PPM) trigger emergency red visual states and push notifications.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="assets/images/leaksafe-dashboard.jpeg" alt="Analytics and Mapping Dashboard">
+                    <div class="gallery-info">
+                        <h4>Telemetry & Mapping</h4>
+                        <p>Sensor location pinpointing alongside historical PPM reading frequency graphs.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="assets/images/leaksafe-wireframes2.jpeg" alt="Figma UI Wireframes">
+                    <div class="gallery-info">
+                        <h4>Figma UI Architecture</h4>
+                        <p>Design system and user authentication flows prototyped prior to Flutter development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>MARTIN MZUMARA</h3>
+                <p>Software Developer & IT Technician<br>Malawi</p>
+            </div>
+            <div class="footer-connect">
+                <h4>CONNECT</h4>
+                <ul class="contact-list">
+                    <li><i data-lucide="map-pin"></i> Lilongwe, Area 49, Malawi</li>
+                    <li><i data-lucide="phone"></i> +265 884 630 834 / +265 990 783 896</li>
+                    <li><i data-lucide="mail"></i> martinmzumara08@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-copyright">
+            <p>© <span id="current-year"></span> Martin Mzumara. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin Mzumara - Software Developer & IT Technician</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Primary Brand Typeface: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font for Monospace accents -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MARTIN MZUMARA</a>
+            
+            <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation">
+                <i data-lucide="menu" class="icon-menu"></i>
+                <i data-lucide="x" class="icon-close"></i>
+            </button>
+
+            <nav class="nav-links" id="nav-links">
+                <a href="#expertise" class="nav-link">EXPERTISE</a>
+                <a href="#projects" class="nav-link">PROJECTS</a>
+                <a href="#approach" class="nav-link">APPROACH</a>
+                <a href="#experience" class="nav-link">EXPERIENCE</a>
+                <a href="#showcase" class="nav-link">SHOWCASE</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <i data-lucide="sun" class="icon-sun"></i>
+                    <i data-lucide="moon" class="icon-moon"></i>
+                </button>
+                <a href="assets/Martin_Mzumara_CV.pdf" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   aria-label="View Resume PDF" class="btn-primary">VIEW RESUME</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero container">
+            <div class="hero-content">
+                <span class="system-label">// SYSTEM INITIALIZE</span>
+                <h1>Software Developer<br>& IT Technician</h1>
+                <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
+            </div>
+        </section>
+        
+        <!-- Hero Footer / Highlights -->
+        <div class="hero-footer container">
+            <div class="highlight-item">
+                <i data-lucide="target" class="icon-blue"></i>
+                <span>Goal-oriented</span>
+            </div>
+            <div class="highlight-item">
+                <i data-lucide="users" class="icon-blue"></i>
+                <span>Teamwork</span>
+            </div>
+            <div class="highlight-item">
+                <i data-lucide="book-open" class="icon-blue"></i>
+                <span>Continuous Learning</span>
+            </div>
+        </div>
+
+        <hr class="section-divider container">
+
+        <!-- Expertise Section -->
+        <section id="expertise" class="container section-padding">
+            <span class="system-label">// CORE COMPETENCIES</span>
+            <h2 class="section-title underline">Technical Expertise</h2>
+            
+            <div class="grid-cards">
+                <div class="card">
+                    <i data-lucide="code-2" class="icon-large"></i>
+                    <h3>Software Development</h3>
+                    <p>Development of software applications using programming languages such as Dart, Java, and C#.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="monitor" class="icon-large"></i>
+                    <h3>Web Development</h3>
+                    <p>Designing and building websites and web applications using HTML, CSS, and JavaScript.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="server" class="icon-large"></i>
+                    <h3>IT Technical Support</h3>
+                    <p>Providing technical assistance including Windows and Microsoft Office installation and general IT maintenance.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="cpu" class="icon-large"></i>
+                    <h3>IoT System Design</h3>
+                    <p>Designing and developing IoT-based systems with hardware integration and mobile application alerts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container section-padding">
+            <span class="system-label">// FEATURED WORK</span>
+            <h2 class="section-title underline">Software & IoT Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- LeakSAFE Project Card -->
+                <a href="leaksafe.html" class="project-card">
+                    <div class="project-thumb">
+                        <img src="assets/images/leaksafe-wireframes.jpeg" alt="LeakSAFE Gas Detection System Dashboard">
+                        <div class="project-badge">CASE STUDY</div>
+                    </div>
+                    <div class="project-body">
+                        <span class="system-label">// IOT & MOBILE ENGINEERING</span>
+                        <h3>LeakSAFE – Smart Gas Leakage Detection</h3>
+                        <p>An end-to-end hazardous gas detection system built with Flutter and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.</p>
+                        <div class="project-meta">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">ESP32</span>
+                            <span class="tag">IoT</span>
+                        </div>
+                        <span class="project-link-btn">
+                            EXPLORE FULL PROJECT <i data-lucide="arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Placeholder Project Card -->
+                <div class="project-card placeholder-card">
+                    <div class="project-thumb placeholder-thumb">
+                        <i data-lucide="server" class="placeholder-icon"></i>
+                        <div class="project-badge muted">IN DEVELOPMENT</div>
+                    </div>
+                    <div class="project-body">
+                        <span class="system-label">// SYSTEMS & DATA MANAGEMENT</span>
+                        <h3>Enterprise Network & Data Portal</h3>
+                        <p>Internal infrastructure management tools and automated data handling scripts designed for local enterprise network environments.</p>
+                        <div class="project-meta">
+                            <span class="tag">Linux</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Networking</span>
+                        </div>
+                        <span class="project-link-btn disabled">
+                            DOCUMENTATION COMING SOON
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Approach Section -->
+        <section id="approach" class="container section-padding">
+            <span class="system-label">// PROFESSIONAL POSITIONING</span>
+            <h2 class="section-title underline">Practical, Evidence-Based<br>Solutions</h2>
+            
+            <div class="approach-grid">
+                <div class="approach-text">
+                    <p class="lead-text">A competent and versatile technical professional offering a blend of software engineering and network infrastructure skills to the Malawian IT market.</p>
+                    <p class="sub-text">As a Computer Science graduate and CCNA-certified professional, I focus on practical, utility-driven solutions for businesses requiring robust software development and reliable hardware maintenance.</p>
+                    
+                    <ul class="custom-list">
+                        <li><i data-lucide="play" class="list-icon"></i> Accessible pricing models for local businesses</li>
+                        <li><i data-lucide="play" class="list-icon"></i> Incremental innovation focused on functional utility</li>
+                        <li><i data-lucide="play" class="list-icon"></i> Modern, trend-led design methodologies</li>
+                        <li><i data-lucide="play" class="list-icon"></i> Trust built on evidence science and verifiable results</li>
+                    </ul>
+                </div>
+                <div class="approach-image-container">
+                    <img src="./assets/images/profile-graduation.JPG" alt="Martin Mzumara celebrating graduation" class="approach-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Education Section -->
+        <section id="experience" class="container section-padding">
+            <span class="system-label">// TRACK RECORD</span>
+            <h2 class="section-title underline">Experience & Qualifications</h2>
+            
+            <div class="experience-grid">
+                <!-- Work History Timeline -->
+                <div class="timeline-column">
+                    <h3 class="column-title"><i data-lucide="briefcase" class="icon-blue"></i> Work Experience</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h4>IT Technician</h4>
+                            <span class="timeline-date">Jan 2026 - Present</span>
+                        </div>
+                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-desc">Coordinating network infrastructure projects including switches, routers, wireless, and cabling while managing concurrent client service requests.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h4>ICT Intern</h4>
+                            <span class="timeline-date">Jan 2025 - Nov 2025</span>
+                        </div>
+                        <p class="timeline-org">National Economic Empowerment Fund (NEEF) | Lilongwe</p>
+                        <p class="timeline-desc">Provided departmental technical support, monitored internal network infrastructure, and coordinated software and workstation deployments.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h4>IT Technician (Full-Time)</h4>
+                            <span class="timeline-date">Sep 2023 - Dec 2024</span>
+                        </div>
+                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-desc">Performed hardware diagnostics, operating system deployment, structured cabling, and CCTV surveillance system installations.</p>
+                    </div>
+                </div>
+
+                <!-- Education & Certifications -->
+                <div class="credentials-column">
+                    <h3 class="column-title"><i data-lucide="award" class="icon-blue"></i> Education & Certifications</h3>
+                    
+                    <div class="cred-card">
+                        <h4>Bachelor of Science in Computer Science</h4>
+                        <p class="cred-org">DMI St. John the Baptist University | Graduated 2024</p>
+                    </div>
+
+                    <div class="cred-card">
+                        <h4>Cisco Certified Network Associate (CCNA)</h4>
+                        <p class="cred-org">Lilongwe Technical College</p>
+                        <ul class="cred-list">
+                            <li><i data-lucide="check" class="check-icon"></i> CCNA: Introduction to Networks</li>
+                            <li><i data-lucide="check" class="check-icon"></i> CCNA: Switching, Routing & Wireless Essentials</li>
+                            <li><i data-lucide="check" class="check-icon"></i> CCNA: Enterprise Networking, Security & Automation</li>
+                        </ul>
+                    </div>
+
+                    <div class="cred-card">
+                        <h4>Specialized Capabilities</h4>
+                        <div class="skill-tags">
+                            <span>CCTV Deployment</span>
+                            <span>Structured Cabling</span>
+                            <span>Linux Admin</span>
+                            <span>MySQL / Firebase</span>
+                            <span>Git</span>
+                            <span>C++</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Showcase Section -->
+        <section id="showcase" class="container section-padding">
+            <span class="system-label">// BRAND & OPERATIONS</span>
+            <h2 class="section-title underline">Identity & Field Work</h2>
+            
+            <div class="grid-showcase">
+                <div class="showcase-item" data-full="assets/images/field-antenna.jpeg">
+                    <img src="assets/images/field-antenna.jpeg" alt="Martin Mzumara installing antenna hardware" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <i data-lucide="maximize-2"></i>
+                    </div>
+                </div>
+                <div class="showcase-item" data-full="assets/images/field-helmet.jpeg">
+                    <img src="assets/images/field-helmet.jpeg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <i data-lucide="maximize-2"></i>
+                    </div>
+                </div>
+                <div class="showcase-item" data-full="assets/images/field-headlamp.jpeg">
+                    <img src="assets/images/field-headlamp.jpeg" alt="Field technical work with safety headlamp" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <i data-lucide="maximize-2"></i>
+                    </div>
+                </div>
+                <div class="showcase-item" data-full="assets/images/field-workwear.jpeg">
+                    <img src="./assets/images/field-workwear.jpeg" alt="Field equipment setup" class="showcase-img">
+                    <div class="showcase-overlay">
+                        <i data-lucide="maximize-2"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Showcase Preview">
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>MARTIN MZUMARA</h3>
+                <p>Software Developer & IT Technician<br>Malawi</p>
+            </div>
+            <div class="footer-connect">
+                <h4>CONNECT</h4>
+                <ul class="contact-list">
+                    <li><i data-lucide="map-pin"></i> Lilongwe, Area 49, Malawi</li>
+                    <li><i data-lucide="phone"></i> +265 884 630 834 / +265 990 783 896</li>
+                    <li><i data-lucide="mail"></i> martinmzumara08@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-copyright">
+            <p>© <span id="current-year"></span> Martin Mzumara. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
