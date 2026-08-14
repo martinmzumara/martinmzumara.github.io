@@ -4,32 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martin Mzumara - Software Developer & IT Technician</title>
+    <meta name="description" content="Martin Mzumara is a Software Developer and IT Technician in Malawi specializing in software engineering, IoT systems, web development, and network infrastructure.">
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Martin Mzumara - Software Developer & IT Technician">
+    <meta property="og:description" content="Software Developer & IT Technician in Malawi. Specializing in software engineering, IoT systems, web development, and network infrastructure.">
+    <meta property="og:url" content="https://martinmzumara.github.io/">
+    <meta property="og:image" content="assets/images/profile-graduation.JPG">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Martin Mzumara - Software Developer & IT Technician">
+    <meta name="twitter:description" content="Software Developer & IT Technician in Malawi. Specializing in software engineering, IoT systems, web development, and network infrastructure.">
+    <meta name="twitter:image" content="assets/images/profile-graduation.JPG">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='50' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>M</text></svg>">
+    
     <link rel="stylesheet" href="css/style.css">
     
     <!-- Primary Brand Typeface: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font for Monospace accents -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.462.0" defer></script>
+    
+    <!-- Structured Data: Person -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Martin Mzumara",
+        "jobTitle": "Software Developer & IT Technician",
+        "url": "https://martinmzumara.github.io/",
+        "email": "mailto:martinmzumara08@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Lilongwe",
+            "addressCountry": "Malawi"
+        },
+        "sameAs": [
+            "https://github.com/martinmzumara",
+            "https://www.linkedin.com/in/martinmzumara",
+            "https://youtube.com/@martinmzumara"
+        ]
+    }
+    </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Navigation -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">MARTIN MZUMARA</a>
             
-            <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation">
+            <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
                 <i data-lucide="menu" class="icon-menu"></i>
                 <i data-lucide="x" class="icon-close"></i>
             </button>
 
-            <nav class="nav-links" id="nav-links">
+            <nav class="nav-links" id="nav-links" aria-label="Main navigation">
                 <a href="#expertise" class="nav-link">EXPERTISE</a>
                 <a href="#projects" class="nav-link">PROJECTS</a>
                 <a href="#approach" class="nav-link">APPROACH</a>
@@ -50,13 +88,17 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
         <section class="hero container">
             <div class="hero-content">
                 <span class="system-label">// SYSTEM INITIALIZE</span>
                 <h1>Software Developer<br>& IT Technician</h1>
                 <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary">VIEW MY WORK</a>
+                    <a href="#experience" class="btn-secondary">MY EXPERIENCE</a>
+                </div>
             </div>
         </section>
         
@@ -116,7 +158,7 @@
                 <!-- LeakSAFE Project Card -->
                 <a href="leaksafe.html" class="project-card">
                     <div class="project-thumb">
-                        <img src="assets/images/leaksafe-wireframes.jpeg" alt="LeakSAFE Gas Detection System Dashboard">
+                        <img src="assets/images/leaksafe-wireframes.jpeg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
                         <div class="project-badge">CASE STUDY</div>
                     </div>
                     <div class="project-body">
@@ -127,34 +169,72 @@
                             <span class="tag">Flutter</span>
                             <span class="tag">Dart</span>
                             <span class="tag">ESP32</span>
-                            <span class="tag">IoT</span>
+                            <span class="tag">Firebase</span>
                         </div>
-                        <span class="project-link-btn">
-                            EXPLORE FULL PROJECT <i data-lucide="arrow-right"></i>
-                        </span>
+                        <div class="project-links">
+                            <span class="project-link-btn">
+                                EXPLORE FULL PROJECT <i data-lucide="arrow-right"></i>
+                            </span>
+                            <span class="project-link-btn" aria-hidden="true">
+                                <i data-lucide="github"></i> SOURCE
+                            </span>
+                        </div>
                     </div>
                 </a>
 
-                <!-- Placeholder Project Card -->
-                <div class="project-card placeholder-card">
+                <!-- EncPlus Project Card -->
+                <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="project-card">
                     <div class="project-thumb placeholder-thumb">
-                        <i data-lucide="server" class="placeholder-icon"></i>
+                        <i data-lucide="lock" class="placeholder-icon"></i>
                         <div class="project-badge muted">IN DEVELOPMENT</div>
                     </div>
                     <div class="project-body">
-                        <span class="system-label">// SYSTEMS & DATA MANAGEMENT</span>
-                        <h3>Enterprise Network & Data Portal</h3>
-                        <p>Internal infrastructure management tools and automated data handling scripts designed for local enterprise network environments.</p>
+                        <span class="system-label">// SECURITY & MOBILE ENGINEERING</span>
+                        <h3>EncPlus – AES File Encryption</h3>
+                        <p>A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
                         <div class="project-meta">
-                            <span class="tag">Linux</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Networking</span>
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">AES</span>
+                            <span class="tag">Firebase</span>
                         </div>
-                        <span class="project-link-btn disabled">
-                            DOCUMENTATION COMING SOON
-                        </span>
+                        <div class="project-links">
+                            <span class="project-link-btn">
+                                VIEW REPOSITORY <i data-lucide="arrow-right"></i>
+                            </span>
+                            <span class="project-link-btn" aria-hidden="true">
+                                <i data-lucide="github"></i> SOURCE
+                            </span>
+                        </div>
                     </div>
-                </div>
+                </a>
+
+                <!-- Manguzi Executive Lodge Project Card -->
+                <a href="manguzi.html" class="project-card">
+                    <div class="project-thumb placeholder-thumb">
+                        <i data-lucide="building-2" class="placeholder-icon"></i>
+                        <div class="project-badge">CASE STUDY</div>
+                    </div>
+                    <div class="project-body">
+                        <span class="system-label">// WEB DEVELOPMENT & HOSPITALITY</span>
+                        <h3>Manguzi Executive Lodge</h3>
+                        <p>A premium hospitality website for an executive lodge in Karonga, Malawi — featuring accommodation, restaurant, and conference services with online booking.</p>
+                        <div class="project-meta">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <span class="project-link-btn">
+                                EXPLORE FULL PROJECT <i data-lucide="arrow-right"></i>
+                            </span>
+                            <span class="project-link-btn" aria-hidden="true">
+                                <i data-lucide="external-link"></i> LIVE
+                            </span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -176,7 +256,7 @@
                     </ul>
                 </div>
                 <div class="approach-image-container">
-                    <img src="./assets/images/profile-graduation.JPG" alt="Martin Mzumara celebrating graduation" class="approach-img">
+                    <img src="./assets/images/profile-graduation.JPG" alt="Martin Mzumara celebrating graduation" class="approach-img" loading="lazy" width="340" height="340">
                 </div>
             </div>
         </section>
@@ -259,37 +339,37 @@
             <h2 class="section-title underline">Identity & Field Work</h2>
             
             <div class="grid-showcase">
-                <div class="showcase-item" data-full="assets/images/field-antenna.jpeg">
-                    <img src="assets/images/field-antenna.jpeg" alt="Martin Mzumara installing antenna hardware" class="showcase-img">
+                <button class="showcase-item" data-full="assets/images/field-antenna.jpeg" aria-label="View full size: Martin Mzumara installing antenna hardware">
+                    <img src="assets/images/field-antenna.jpeg" alt="Martin Mzumara installing antenna hardware" class="showcase-img" loading="lazy" width="400" height="300">
                     <div class="showcase-overlay">
                         <i data-lucide="maximize-2"></i>
                     </div>
-                </div>
-                <div class="showcase-item" data-full="assets/images/field-helmet.jpeg">
-                    <img src="assets/images/field-helmet.jpeg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img">
+                </button>
+                <button class="showcase-item" data-full="assets/images/field-helmet.jpeg" aria-label="View full size: Martin Mzumara in hard hat and safety vest">
+                    <img src="assets/images/field-helmet.jpeg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img" loading="lazy" width="400" height="300">
                     <div class="showcase-overlay">
                         <i data-lucide="maximize-2"></i>
                     </div>
-                </div>
-                <div class="showcase-item" data-full="assets/images/field-headlamp.jpeg">
-                    <img src="assets/images/field-headlamp.jpeg" alt="Field technical work with safety headlamp" class="showcase-img">
+                </button>
+                <button class="showcase-item" data-full="assets/images/field-headlamp.jpeg" aria-label="View full size: Field technical work with safety headlamp">
+                    <img src="assets/images/field-headlamp.jpeg" alt="Field technical work with safety headlamp" class="showcase-img" loading="lazy" width="400" height="300">
                     <div class="showcase-overlay">
                         <i data-lucide="maximize-2"></i>
                     </div>
-                </div>
-                <div class="showcase-item" data-full="assets/images/field-workwear.jpeg">
-                    <img src="./assets/images/field-workwear.jpeg" alt="Field equipment setup" class="showcase-img">
+                </button>
+                <button class="showcase-item" data-full="assets/images/field-workwear.jpeg" aria-label="View full size: Field equipment setup">
+                    <img src="./assets/images/field-workwear.jpeg" alt="Field equipment setup" class="showcase-img" loading="lazy" width="400" height="300">
                     <div class="showcase-overlay">
                         <i data-lucide="maximize-2"></i>
                     </div>
-                </div>
+                </button>
             </div>
         </section>
     </main>
 
     <!-- Lightbox Modal -->
-    <div class="lightbox-modal" id="lightbox">
-        <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image preview">&times;</button>
         <img class="lightbox-content" id="lightbox-img" alt="Showcase Preview">
     </div>
 
@@ -299,13 +379,24 @@
             <div class="footer-brand">
                 <h3>MARTIN MZUMARA</h3>
                 <p>Software Developer & IT Technician<br>Malawi</p>
+                <div class="social-links">
+                    <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="https://youtube.com/@martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="social-link">
+                        <i data-lucide="youtube"></i>
+                    </a>
+                </div>
             </div>
             <div class="footer-connect">
                 <h4>CONNECT</h4>
                 <ul class="contact-list">
                     <li><i data-lucide="map-pin"></i> Lilongwe, Area 49, Malawi</li>
-                    <li><i data-lucide="phone"></i> +265 884 630 834 / +265 990 783 896</li>
-                    <li><i data-lucide="mail"></i> martinmzumara08@gmail.com</li>
+                    <li><i data-lucide="phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
+                    <li><i data-lucide="mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
                 </ul>
             </div>
         </div>

@@ -4,23 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeakSAFE System - Martin Mzumara</title>
+    <meta name="description" content="LeakSAFE is a smart gas leakage detection system built with Flutter, Firebase, and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.">
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="LeakSAFE – Smart Gas Leakage Detection System">
+    <meta property="og:description" content="An end-to-end hazardous gas detection system built with Flutter, Firebase, and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.">
+    <meta property="og:url" content="https://martinmzumara.github.io/leaksafe.html">
+    <meta property="og:image" content="assets/images/leaksafe-wireframes.jpeg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeakSAFE – Smart Gas Leakage Detection System">
+    <meta name="twitter:description" content="An end-to-end hazardous gas detection system built with Flutter, Firebase, and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.">
+    <meta name="twitter:image" content="assets/images/leaksafe-wireframes.jpeg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='50' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>M</text></svg>">
+    
     <link rel="stylesheet" href="css/style.css">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.462.0" defer></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">MARTIN MZUMARA</a>
+            
+            <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+                <i data-lucide="menu" class="icon-menu"></i>
+                <i data-lucide="x" class="icon-close"></i>
+            </button>
+
+            <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+                <a href="index.html#expertise" class="nav-link">EXPERTISE</a>
+                <a href="index.html#projects" class="nav-link">PROJECTS</a>
+                <a href="index.html#approach" class="nav-link">APPROACH</a>
+                <a href="index.html#experience" class="nav-link">EXPERIENCE</a>
+                <a href="index.html#showcase" class="nav-link">SHOWCASE</a>
+            </nav>
             
             <div class="nav-actions">
                 <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
@@ -34,12 +65,20 @@
         </div>
     </header>
 
-    <main class="container project-detail-container">
+    <main id="main-content" class="container project-detail-container">
         <!-- Hero Title Section -->
         <div class="project-detail-header">
             <span class="system-label">// CASE STUDY: IOT & MOBILE ENGINEERING</span>
             <h1 class="main-title">LeakSAFE – Smart Gas Leakage Detection System</h1>
             <p class="lead-text">A cross-platform mobile application integrated with ESP32 hardware sensors to deliver real-time atmospheric gas tracking, dynamic threat analysis, and automated hazardous alerts.</p>
+            <div class="hero-cta project-actions">
+                <a href="https://github.com/martinmzumara/gasdetectionapp" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <i data-lucide="github"></i> FLUTTER APP CODE
+                </a>
+                <a href="https://github.com/martinmzumara/LeakSafe" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                    <i data-lucide="cpu"></i> ARDUINO HARDWARE CODE
+                </a>
+            </div>
         </div>
 
         <!-- System Specifications -->
@@ -49,14 +88,128 @@
                 <span class="spec-value">Lead Developer & Hardware Integrator</span>
             </div>
             <div class="spec-card">
-                <span class="spec-label">TECHNOLOGIES</span>
-                <span class="spec-value">Flutter, Dart, ESP32, Gas Sensors, Figma</span>
+                <span class="spec-label">MOBILE FRONTEND</span>
+                <span class="spec-value">Flutter, Dart, fl_chart</span>
+            </div>
+            <div class="spec-card">
+                <span class="spec-label">BACKEND & DATA</span>
+                <span class="spec-value">Firebase Auth, Realtime Database</span>
+            </div>
+            <div class="spec-card">
+                <span class="spec-label">HARDWARE</span>
+                <span class="spec-value">ESP32, MQ Gas Sensors</span>
+            </div>
+            <div class="spec-card">
+                <span class="spec-label">MAPPING & LOCATION</span>
+                <span class="spec-value">Google Maps, Geolocator</span>
             </div>
             <div class="spec-card">
                 <span class="spec-label">PROJECT SCOPE</span>
                 <span class="spec-value">Computer Science Capstone Engineering</span>
             </div>
         </div>
+
+        <!-- Project Stats -->
+        <section class="section-padding">
+            <span class="system-label">// PROJECT METRICS</span>
+            <h2 class="section-title underline">At A Glance</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">8+</span>
+                    <span class="stat-label">Application Screens</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">Core Services</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">6</span>
+                    <span class="stat-label">Data Visualizations</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Platform Targets</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Overview -->
+        <section class="section-padding">
+            <span class="system-label">// ARCHITECTURE OVERVIEW</span>
+            <h2 class="section-title underline">System Data Flow</h2>
+            
+            <div class="architecture-flow">
+                <div class="arch-node">
+                    <i data-lucide="cpu" class="icon-large"></i>
+                    <h4>ESP32 + MQ Sensors</h4>
+                    <p>Calibrated gas sensor modules continuously sample atmospheric PPM concentrations.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i data-lucide="arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i data-lucide="database" class="icon-large"></i>
+                    <h4>Firebase Realtime DB</h4>
+                    <p>Telemetry streams to Firebase for live synchronization and historical persistence.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i data-lucide="arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i data-lucide="smartphone" class="icon-large"></i>
+                    <h4>Flutter Application</h4>
+                    <p>Cross-platform app renders real-time PPM readings with dynamic threshold UI states.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i data-lucide="arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i data-lucide="bell-ring" class="icon-large"></i>
+                    <h4>Alert & Notification</h4>
+                    <p>Local push notifications trigger instantly upon detecting elevated PPM thresholds.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section-padding">
+            <span class="system-label">// CORE FUNCTIONALITY</span>
+            <h2 class="section-title underline">Key Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i data-lucide="activity" class="icon-large"></i>
+                    <h3>Real-Time Monitoring</h3>
+                    <p>Continuously tracks atmospheric gas concentrations with visual Safe/Moderate/Danger UI color state transitions.</p>
+                </div>
+                <div class="feature-card">
+                    <i data-lucide="map" class="icon-large"></i>
+                    <h3>Live Sensor Mapping</h3>
+                    <p>Google Maps integration pinpoints sensor locations geographically for precise leak origin identification.</p>
+                </div>
+                <div class="feature-card">
+                    <i data-lucide="line-chart" class="icon-large"></i>
+                    <h3>Historical Analytics</h3>
+                    <p>Bar and line charts visualize historical PPM readings to identify frequency patterns and temporal safety trends.</p>
+                </div>
+                <div class="feature-card">
+                    <i data-lucide="bell" class="icon-large"></i>
+                    <h3>Instant Alerts</h3>
+                    <p>Local push notifications and dynamic threshold triggers notify users immediately when gas levels become hazardous.</p>
+                </div>
+                <div class="feature-card">
+                    <i data-lucide="user-check" class="icon-large"></i>
+                    <h3>User Authentication</h3>
+                    <p>Firebase Auth secures user accounts, ensuring only authorized individuals access telemetry data and settings.</p>
+                </div>
+                <div class="feature-card">
+                    <i data-lucide="settings" class="icon-large"></i>
+                    <h3>Customizable Thresholds</h3>
+                    <p>Users can configure alert thresholds in settings, tailoring safety responses to their specific environment requirements.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- Technical Overview -->
         <section class="section-padding">
@@ -71,6 +224,76 @@
             </ul>
         </section>
 
+        <!-- Tech Stack -->
+        <section class="section-padding">
+            <span class="system-label">// TECHNOLOGY STACK</span>
+            <h2 class="section-title underline">Tools & Technologies</h2>
+            
+            <div class="stack-categories">
+                <div class="stack-category">
+                    <h3 class="stack-title"><i data-lucide="code-2" class="icon-blue"></i> Frontend</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Dart</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">fl_chart</span>
+                        <span class="tag">Google Maps Flutter</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i data-lucide="database" class="icon-blue"></i> Backend & Data</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Firebase Auth</span>
+                        <span class="tag">Firebase Realtime DB</span>
+                        <span class="tag">Geolocator</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i data-lucide="cpu" class="icon-blue"></i> Hardware</h3>
+                    <div class="stack-tags">
+                        <span class="tag">ESP32</span>
+                        <span class="tag">MQ Gas Sensors</span>
+                        <span class="tag">C++ (Embedded)</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i data-lucide="hammer" class="icon-blue"></i> Tooling</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">Firebase Console</span>
+                        <span class="tag">Prototyping</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges & Solutions -->
+        <section class="section-padding">
+            <span class="system-label">// ENGINEERING INSIGHTS</span>
+            <h2 class="section-title underline">Challenges & Solutions</h2>
+            
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-tag">HARDWARE-APP SYNC</span>
+                    <h3>Real-Time Telemetry Pipeline</h3>
+                    <p><strong>Challenge:</strong> Ensuring low-latency data delivery from physical ESP32 sensor nodes to the mobile application without data loss or visual lag.</p>
+                    <p><strong>Solution:</strong> Implemented Firebase Realtime Database as the synchronization layer, enabling instantaneous streamed updates from hardware to app while maintaining historical persistence for analytics.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">USER SAFETY</span>
+                    <h3>Threshold Calibration Accuracy</h3>
+                    <p><strong>Challenge:</strong> Distinguishing normal atmospheric variations from dangerous PPM levels while avoiding false alarms that undermine user trust.</p>
+                    <p><strong>Solution:</strong> Designed dynamic threshold triggers with configurable user settings, combined with visual UI state transitions from Safe (green) to Danger (red) for rapid, intuitive threat assessment.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">CROSS-PLATFORM</span>
+                    <h3>Unified Mobile Experience</h3>
+                    <p><strong>Challenge:</strong> Delivering a consistent, feature-rich experience across both iOS and Android with native-level performance from a single codebase.</p>
+                    <p><strong>Solution:</strong> Leveraged Flutter's cross-platform framework with platform-adaptive plugins for geolocation, maps, and local notifications to ensure seamless parity across devices.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Image Gallery Showcase -->
         <section class="section-padding">
             <span class="system-label">// INTERFACE & HARDWARE SHOWCASE</span>
@@ -78,7 +301,7 @@
 
             <div class="gallery-grid">
                 <div class="gallery-card">
-                    <img src="assets/images/leaksafe-safe-reading.jpeg" alt="Safe Level Display Screenshot">
+                    <img src="assets/images/leaksafe-safe-reading.jpeg" alt="Safe Level Display Screenshot" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
                         <h4>Safe PPM Monitoring</h4>
                         <p>Normal atmospheric concentrations (40.0 PPM) visualized with clear green indicators.</p>
@@ -86,7 +309,7 @@
                 </div>
 
                 <div class="gallery-card">
-                    <img src="assets/images/leaksafe-danger-reading.jpeg" alt="Danger Level Alert Screenshot">
+                    <img src="assets/images/leaksafe-danger-reading.jpeg" alt="Danger Level Alert Screenshot" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
                         <h4>Hazardous Threshold Alert</h4>
                         <p>High PPM levels (210.0 PPM) trigger emergency red visual states and push notifications.</p>
@@ -94,7 +317,7 @@
                 </div>
 
                 <div class="gallery-card">
-                    <img src="assets/images/leaksafe-dashboard.jpeg" alt="Analytics and Mapping Dashboard">
+                    <img src="assets/images/leaksafe-dashboard.jpeg" alt="Analytics and Mapping Dashboard" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
                         <h4>Telemetry & Mapping</h4>
                         <p>Sensor location pinpointing alongside historical PPM reading frequency graphs.</p>
@@ -102,11 +325,25 @@
                 </div>
 
                 <div class="gallery-card">
-                    <img src="assets/images/leaksafe-wireframes2.jpeg" alt="Figma UI Wireframes">
+                    <img src="assets/images/leaksafe-wireframes2.jpeg" alt="User Registration Screen" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
-                        <h4>Figma UI Architecture</h4>
-                        <p>Design system and user authentication flows prototyped prior to Flutter development.</p>
+                        <h4>User Registration</h4>
+                        <p>Secure account creation flow with Firebase Auth, enabling personalized access to telemetry data and settings.</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- GitHub CTA -->
+            <div class="project-cta-box">
+                <h3>Interested in the full implementation?</h3>
+                <p>Explore the complete source code on GitHub — including the Flutter mobile application and the ESP32 Arduino hardware firmware.</p>
+                <div class="hero-cta" style="justify-content: center;">
+                    <a href="https://github.com/martinmzumara/gasdetectionapp" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <i data-lucide="github"></i> FLUTTER APP
+                    </a>
+                    <a href="https://github.com/martinmzumara/LeakSafe" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                        <i data-lucide="cpu"></i> ARDUINO FIRMWARE
+                    </a>
                 </div>
             </div>
         </section>
@@ -118,13 +355,24 @@
             <div class="footer-brand">
                 <h3>MARTIN MZUMARA</h3>
                 <p>Software Developer & IT Technician<br>Malawi</p>
+                <div class="social-links">
+                    <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="https://youtube.com/@martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="social-link">
+                        <i data-lucide="youtube"></i>
+                    </a>
+                </div>
             </div>
             <div class="footer-connect">
                 <h4>CONNECT</h4>
                 <ul class="contact-list">
                     <li><i data-lucide="map-pin"></i> Lilongwe, Area 49, Malawi</li>
-                    <li><i data-lucide="phone"></i> +265 884 630 834 / +265 990 783 896</li>
-                    <li><i data-lucide="mail"></i> martinmzumara08@gmail.com</li>
+                    <li><i data-lucide="phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
+                    <li><i data-lucide="mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
                 </ul>
             </div>
         </div>
