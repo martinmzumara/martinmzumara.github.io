@@ -1,11 +1,14 @@
 // Pre-apply theme early to prevent visual flashing on page load
 (function initTheme() {
     try {
+        // Check for saved theme preference first (user override)
         const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "light") {
-            document.documentElement.setAttribute("data-theme", "light");
+        if (savedTheme) {
+            document.documentElement.setAttribute("data-theme", savedTheme);
         } else {
-            document.documentElement.setAttribute("data-theme", "dark");
+            // No saved preference - use system preference or default to dark
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
         }
     } catch (e) {
         document.documentElement.setAttribute("data-theme", "dark");
