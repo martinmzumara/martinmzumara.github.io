@@ -1,17 +1,39 @@
 // Pre-apply theme early to prevent visual flashing on page load
 (function initTheme() {
-    try {
-        // Check for saved theme preference first (user override)
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-            document.documentElement.setAttribute("data-theme", savedTheme);
-        } else {
-            // No saved preference - use system preference or default to dark
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+    const STORAGE_KEY = "theme";
+
+    const getSystemTheme = () => {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+    };
+
+    const getSavedTheme = () => {
+        try {
+            return localStorage.getItem(STORAGE_KEY);
+        } catch (e) {
+            return null;
         }
-    } catch (e) {
-        document.documentElement.setAttribute("data-theme", "dark");
+    };
+
+    const applyTheme = (theme) => {
+        document.documentElement.setAttribute("data-theme", theme);
+    };
+
+    // Initial theme: saved preference or system
+    const savedTheme = getSavedTheme();
+    applyTheme(savedTheme || getSystemTheme());
+
+    // Listen for system theme changes (only matters when no saved preference)
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemChange = () => {
+        if (!getSavedTheme()) {
+            applyTheme(getSystemTheme());
+        }
+    };
+
+    if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener("change", handleSystemChange);
+    } else if (mediaQuery.addListener) {
+        mediaQuery.addListener(handleSystemChange); // Safari < 14
     }
 })();
 
@@ -23,6 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Light / Dark Theme Toggle Setup
     const themeToggleBtn = document.getElementById("theme-toggle");
+    const themeToggleLabel = document.getElementById("theme-toggle-label");
+
+    const updateThemeToggleLabel = () => {
+        if (!themeToggleLabel) return;
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        themeToggleLabel.textContent = currentTheme === "light" ? "Change to dark theme" : "Change to light theme";
+    };
+
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener("click", () => {
             const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -32,10 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 localStorage.setItem("theme", newTheme);
             } catch (e) {
-                // localStorage unavailable (e.g. private browsing) - theme still works for this session
+                // localStorage unavailable - theme still works for this session
             }
+            updateThemeToggleLabel();
         });
     }
+
+    // Initialize theme toggle label
+    updateThemeToggleLabel();
 
     // 3. Dynamic Copyright Year
     const yearSpan = document.getElementById("current-year");
