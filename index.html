@@ -11,13 +11,18 @@
     <meta property="og:title" content="Martin Mzumara - Software Developer & IT Technician">
     <meta property="og:description" content="Software Developer & IT Technician in Malawi. Specializing in software engineering, IoT systems, web development, and network infrastructure.">
     <meta property="og:url" content="https://martinmzumara.github.io/">
-    <meta property="og:image" content="assets/images/profile-graduation.JPG">
+    <meta property="og:image" content="https://martinmzumara.github.io/assets/images/optimized/profile-graduation.jpg">
+    <meta property="og:image:width" content="900">
+    <meta property="og:image:height" content="900">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Martin Mzumara - Software Developer & IT Technician">
     <meta name="twitter:description" content="Software Developer & IT Technician in Malawi. Specializing in software engineering, IoT systems, web development, and network infrastructure.">
-    <meta name="twitter:image" content="assets/images/profile-graduation.JPG">
+    <meta name="twitter:image" content="https://martinmzumara.github.io/assets/images/optimized/profile-graduation.jpg">
+    
+    <link rel="canonical" href="https://martinmzumara.github.io/">
+    <meta name="theme-color" content="#2563eb">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='50' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>M</text></svg>">
@@ -27,10 +32,9 @@
     <!-- Primary Brand Typeface: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@0.462.0" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
     
     <!-- Structured Data: Person -->
     <script type="application/ld+json">
@@ -57,14 +61,25 @@
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+        <div class="preloader-inner">
+            <span class="preloader-count" id="preloader-count">0</span>
+            <span class="preloader-label">MARTIN MZUMARA</span>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/" class="logo">MARTIN MZUMARA</a>
             
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-                <i data-lucide="menu" class="icon-menu"></i>
-                <i data-lucide="x" class="icon-close"></i>
+                <i class="ti ti-menu-2 icon-menu"></i>
+                <i class="ti ti-x icon-close"></i>
             </button>
 
             <nav class="nav-links" id="nav-links" aria-label="Main navigation">
@@ -72,6 +87,7 @@
                 <a href="#projects" class="nav-link">PROJECTS</a>
                 <a href="#approach" class="nav-link">APPROACH</a>
                 <a href="#experience" class="nav-link">EXPERIENCE</a>
+                <a href="#tools" class="nav-link">TOOLS</a>
                 <a href="#showcase" class="nav-link">SHOWCASE</a>
             </nav>
             
@@ -88,28 +104,41 @@
         <!-- Hero Section -->
         <section class="hero container">
             <div class="hero-content">
+                <div class="hero-status">
+                    <span class="status-badge"><span class="status-dot"></span> Available for work</span>
+                    <span class="status-time"><i class="ti ti-clock"></i> <span id="local-time">--:--</span> · GMT+2</span>
+                </div>
                 <span class="system-label">// SYSTEM INITIALIZE</span>
-                <h1>Software Developer<br>& IT Technician</h1>
+                <h1>Software Developer<br><span>&amp; IT Technician</span></h1>
                 <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
+                <div class="hero-stats" aria-label="Highlights">
+                    <div class="stat"><span class="stat-value" data-count="4">0</span><span class="stat-label">Years in Tech</span></div>
+                    <div class="stat"><span class="stat-value" data-count="3">0</span><span class="stat-label">Case Studies</span></div>
+                    <div class="stat"><span class="stat-value" data-count="2">0</span><span class="stat-label">Certifications</span></div>
+                </div>
                 <div class="hero-cta">
                     <a href="#projects" class="btn-primary">VIEW MY WORK</a>
                     <a href="#experience" class="btn-secondary">MY EXPERIENCE</a>
                 </div>
             </div>
+            <div class="scroll-cue" aria-hidden="true">
+                <span>SCROLL</span>
+                <span class="scroll-cue-line"></span>
+            </div>
         </section>
         
         <!-- Hero Footer / Highlights -->
-        <div class="hero-footer container">
+        <div class="hero-footer">
             <div class="highlight-item">
-                <i data-lucide="target" class="icon-blue"></i>
+                <i class="ti ti-target-arrow icon-blue"></i>
                 <span>Goal-oriented</span>
             </div>
             <div class="highlight-item">
-                <i data-lucide="users" class="icon-blue"></i>
+                <i class="ti ti-users icon-blue"></i>
                 <span>Teamwork</span>
             </div>
             <div class="highlight-item">
-                <i data-lucide="book-open" class="icon-blue"></i>
+                <i class="ti ti-book icon-blue"></i>
                 <span>Continuous Learning</span>
             </div>
         </div>
@@ -117,36 +146,48 @@
         <hr class="section-divider container">
 
         <!-- Expertise Section -->
-        <section id="expertise" class="container section-padding">
+        <section id="expertise" class="container section-padding chapter">
             <span class="system-label">// CORE COMPETENCIES</span>
             <h2 class="section-title underline">Technical Expertise</h2>
             
             <div class="grid-cards">
                 <div class="card">
-                    <i data-lucide="code-2" class="icon-large"></i>
+                    <i class="ti ti-code icon-large"></i>
                     <h3>Software Development</h3>
                     <p>Development of software applications using programming languages such as Dart, Java, and C#.</p>
                 </div>
                 <div class="card">
-                    <i data-lucide="monitor" class="icon-large"></i>
+                    <i class="ti ti-device-desktop icon-large"></i>
                     <h3>Web Development</h3>
                     <p>Designing and building websites and web applications using HTML, CSS, and JavaScript.</p>
                 </div>
                 <div class="card">
-                    <i data-lucide="server" class="icon-large"></i>
+                    <i class="ti ti-server icon-large"></i>
                     <h3>IT Technical Support</h3>
                     <p>Providing technical assistance including Windows and Microsoft Office installation and general IT maintenance.</p>
                 </div>
                 <div class="card">
-                    <i data-lucide="cpu" class="icon-large"></i>
+                    <i class="ti ti-cpu icon-large"></i>
                     <h3>IoT System Design</h3>
                     <p>Designing and developing IoT-based systems with hardware integration and mobile application alerts.</p>
                 </div>
             </div>
         </section>
 
+        <!-- Skills marquee -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track" id="marquee-track">
+                <span>SOFTWARE ENGINEERING</span><i class="ti ti-diamond"></i>
+                <span>WEB DEVELOPMENT</span><i class="ti ti-diamond"></i>
+                <span>IOT SYSTEMS</span><i class="ti ti-diamond"></i>
+                <span>NETWORK INFRASTRUCTURE</span><i class="ti ti-diamond"></i>
+                <span>MOBILE APPS</span><i class="ti ti-diamond"></i>
+                <span>CCTV &amp; SECURITY</span><i class="ti ti-diamond"></i>
+            </div>
+        </div>
+
         <!-- Projects Section -->
-        <section id="projects" class="container section-padding">
+        <section id="projects" class="container section-padding chapter">
             <span class="system-label">// FEATURED WORK</span>
             <h2 class="section-title underline">Software & IoT Projects</h2>
             
@@ -154,7 +195,10 @@
                 <!-- LeakSAFE Project Card -->
                 <a href="/leaksafe/" class="project-card">
                     <div class="project-thumb">
-                        <img src="/assets/images/leaksafe-wireframes.jpeg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
+                        <picture>
+                            <source type="image/webp" srcset="/assets/images/optimized/leaksafe-wireframes.webp">
+                            <img src="/assets/images/optimized/leaksafe-wireframes.jpg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
+                        </picture>
                         <div class="project-badge">CASE STUDY</div>
                     </div>
                     <div class="project-body">
@@ -169,10 +213,10 @@
                         </div>
                         <div class="project-links">
                             <span class="project-link-btn">
-                                EXPLORE FULL PROJECT <i data-lucide="arrow-right"></i>
+                                EXPLORE FULL PROJECT <i class="ti ti-arrow-right"></i>
                             </span>
                             <span class="project-link-btn" aria-hidden="true">
-                                <i data-lucide="github"></i> SOURCE
+                                <i class="ti ti-brand-github"></i> SOURCE
                             </span>
                         </div>
                     </div>
@@ -181,7 +225,7 @@
                 <!-- EncPlus Project Card -->
                 <a href="/encplus/" class="project-card">
                     <div class="project-thumb placeholder-thumb">
-                        <i data-lucide="lock" class="placeholder-icon"></i>
+                        <i class="ti ti-lock placeholder-icon"></i>
                         <div class="project-badge muted">IN DEVELOPMENT</div>
                     </div>
                     <div class="project-body">
@@ -196,10 +240,10 @@
                         </div>
                         <div class="project-links">
                             <span class="project-link-btn">
-                                VIEW REPOSITORY <i data-lucide="arrow-right"></i>
+                                VIEW REPOSITORY <i class="ti ti-arrow-right"></i>
                             </span>
                             <span class="project-link-btn" aria-hidden="true">
-                                <i data-lucide="github"></i> SOURCE
+                                <i class="ti ti-brand-github"></i> SOURCE
                             </span>
                         </div>
                     </div>
@@ -208,7 +252,7 @@
                 <!-- Manguzi Executive Lodge Project Card -->
                 <a href="/manguzi/" class="project-card">
                     <div class="project-thumb placeholder-thumb">
-                        <i data-lucide="building-2" class="placeholder-icon"></i>
+                        <i class="ti ti-building-skyscraper placeholder-icon"></i>
                         <div class="project-badge">CASE STUDY</div>
                     </div>
                     <div class="project-body">
@@ -223,10 +267,10 @@
                         </div>
                         <div class="project-links">
                             <span class="project-link-btn">
-                                EXPLORE FULL PROJECT <i data-lucide="arrow-right"></i>
+                                EXPLORE FULL PROJECT <i class="ti ti-arrow-right"></i>
                             </span>
                             <span class="project-link-btn" aria-hidden="true">
-                                <i data-lucide="external-link"></i> LIVE
+                                <i class="ti ti-external-link"></i> LIVE
                             </span>
                         </div>
                     </div>
@@ -235,37 +279,70 @@
         </section>
 
         <!-- Approach Section -->
-        <section id="approach" class="container section-padding">
-            <span class="system-label">// PROFESSIONAL POSITIONING</span>
-            <h2 class="section-title underline">Practical, Evidence-Based<br>Solutions</h2>
+        <section id="approach" class="container section-padding chapter">
+            <span class="system-label">// THE WAY I WORK</span>
+            <h2 class="section-title underline">Practical, evidence-based solutions</h2>
             
             <div class="approach-grid">
                 <div class="approach-text">
-                    <p class="lead-text">A competent and versatile technical professional offering a blend of software engineering and network infrastructure skills to the Malawian IT market.</p>
-                    <p class="sub-text">As a Computer Science graduate and CCNA-certified professional, I focus on practical, utility-driven solutions for businesses requiring robust software development and reliable hardware maintenance.</p>
+                    <p class="lead-text">I blend software engineering and network infrastructure into practical, utility-driven systems for the Malawian IT market.</p>
+                    <p class="sub-text">As a Computer Science graduate and CCNA-certified professional, I work in clear stages and keep every step grounded in verifiable results — so you always know where things stand and what comes next.</p>
                     
-                    <ul class="custom-list">
-                        <li><i data-lucide="play" class="list-icon"></i> Accessible pricing models for local businesses</li>
-                        <li><i data-lucide="play" class="list-icon"></i> Incremental innovation focused on functional utility</li>
-                        <li><i data-lucide="play" class="list-icon"></i> Modern, trend-led design methodologies</li>
-                        <li><i data-lucide="play" class="list-icon"></i> Trust built on evidence science and verifiable results</li>
-                    </ul>
+                    <ol class="principles-list">
+                        <li class="principle-item">
+                            <span class="principle-index">01</span>
+                            <div class="principle-body">
+                                <h3 class="principle-title">Pricing that fits local</h3>
+                                <p class="principle-text">Accessible, value-based pricing models built for local businesses.</p>
+                            </div>
+                        </li>
+                        <li class="principle-item">
+                            <span class="principle-index">02</span>
+                            <div class="principle-body">
+                                <h3 class="principle-title">Done in stages</h3>
+                                <p class="principle-text">Incremental delivery you can review and steer at every step.</p>
+                            </div>
+                        </li>
+                        <li class="principle-item">
+                            <span class="principle-index">03</span>
+                            <div class="principle-body">
+                                <h3 class="principle-title">Modern by default</h3>
+                                <p class="principle-text">Clean, trend-led design that reflects and lifts your brand.</p>
+                            </div>
+                        </li>
+                        <li class="principle-item">
+                            <span class="principle-index">04</span>
+                            <div class="principle-body">
+                                <h3 class="principle-title">Rigorous engineering</h3>
+                                <p class="principle-text">Trust built on solid engineering, evidence, and verifiable results.</p>
+                            </div>
+                        </li>
+                    </ol>
                 </div>
-                <div class="approach-image-container">
-                    <img src="/assets/images/profile-graduation.JPG" alt="Martin Mzumara celebrating graduation" class="approach-img" loading="lazy" width="340" height="340">
-                </div>
+                <figure class="approach-figure">
+                    <div class="approach-image-container">
+                        <picture>
+                            <source type="image/webp" srcset="/assets/images/optimized/profile-graduation.webp">
+                            <img src="/assets/images/optimized/profile-graduation.jpg" alt="Martin Mzumara celebrating graduation" class="approach-img" loading="lazy" width="340" height="340">
+                        </picture>
+                    </div>
+                    <figcaption class="approach-caption">
+                        <i class="ti ti-map-pin"></i>
+                        <span>Based in Lilongwe, Malawi — delivering for local businesses.</span>
+                    </figcaption>
+                </figure>
             </div>
         </section>
 
         <!-- Experience & Education Section -->
-        <section id="experience" class="container section-padding">
+        <section id="experience" class="container section-padding chapter">
             <span class="system-label">// TRACK RECORD</span>
             <h2 class="section-title underline">Experience & Qualifications</h2>
             
             <div class="experience-grid">
                 <!-- Work History Timeline -->
                 <div class="timeline-column">
-                    <h3 class="column-title"><i data-lucide="briefcase" class="icon-blue"></i> Work Experience</h3>
+                    <h3 class="column-title"><i class="ti ti-briefcase icon-blue"></i> Work Experience</h3>
                     
                     <div class="timeline-item">
                         <div class="timeline-header">
@@ -306,7 +383,7 @@
 
                 <!-- Education & Certifications -->
                 <div class="credentials-column">
-                    <h3 class="column-title"><i data-lucide="award" class="icon-blue"></i> Education & Certifications</h3>
+                    <h3 class="column-title"><i class="ti ti-award icon-blue"></i> Education & Certifications</h3>
                     
                     <div class="cred-card">
                         <h4>Bachelor of Science in Computer Science</h4>
@@ -317,9 +394,9 @@
                         <h4>Cisco Certified Network Associate (CCNA)</h4>
                         <p class="cred-org">Lilongwe Technical College</p>
                         <ul class="cred-list">
-                            <li><i data-lucide="check" class="check-icon"></i> CCNA: Introduction to Networks</li>
-                            <li><i data-lucide="check" class="check-icon"></i> CCNA: Switching, Routing & Wireless Essentials</li>
-                            <li><i data-lucide="check" class="check-icon"></i> CCNA: Enterprise Networking, Security & Automation</li>
+                            <li><i class="ti ti-check check-icon"></i> CCNA: Introduction to Networks</li>
+                            <li><i class="ti ti-check check-icon"></i> CCNA: Switching, Routing & Wireless Essentials</li>
+                            <li><i class="ti ti-check check-icon"></i> CCNA: Enterprise Networking, Security & Automation</li>
                         </ul>
                     </div>
 
@@ -348,39 +425,77 @@
             </div>
         </section>
 
+        <!-- Tools & Software Section -->
+        <section id="tools" class="container section-padding chapter">
+            <div class="section-head">
+                <span class="system-label">// 05 · TOOLS &amp; WORKFLOW</span>
+                <h2 class="section-title underline">Tools &amp; Software I Use</h2>
+                <p class="section-lead">The apps and services I rely on daily — for development, IT work, and getting things done — on both my laptop and my phone.</p>
+            </div>
+
+            <div class="tools-filter" role="tablist" aria-label="Filter tools by device">
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">ALL</button>
+                <button class="filter-btn" data-filter="laptop" role="tab" aria-selected="false"><i class="ti ti-device-laptop"></i> LAPTOP</button>
+                <button class="filter-btn" data-filter="phone" role="tab" aria-selected="false"><i class="ti ti-device-mobile"></i> PHONE</button>
+            </div>
+
+            <div class="tools-grid" id="tools-grid"><!-- tool cards injected by JS --></div>
+        </section>
+
         <!-- Showcase Section -->
-        <section id="showcase" class="container section-padding">
+        <section id="showcase" class="container section-padding chapter">
             <span class="system-label">// BRAND & OPERATIONS</span>
             <h2 class="section-title underline">Identity & Field Work</h2>
             
             <div class="grid-showcase">
-                <button class="showcase-item" data-full="/assets/images/field-antenna.jpeg" aria-label="View full size: Martin Mzumara installing antenna hardware">
-                    <img src="/assets/images/field-antenna.jpeg" alt="Martin Mzumara installing antenna hardware" class="showcase-img" loading="lazy" width="400" height="300">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-antenna.jpg" aria-label="View full size: Martin Mzumara installing antenna hardware">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/field-antenna.webp">
+                        <img src="/assets/images/optimized/field-antenna.jpg" alt="Martin Mzumara installing antenna hardware" class="showcase-img" loading="lazy" width="400" height="300">
+                    </picture>
                     <div class="showcase-overlay">
-                        <i data-lucide="maximize-2"></i>
+                        <i class="ti ti-maximize"></i>
                     </div>
                 </button>
-                <button class="showcase-item" data-full="/assets/images/field-helmet.jpeg" aria-label="View full size: Martin Mzumara in hard hat and safety vest">
-                    <img src="/assets/images/field-helmet.jpeg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img" loading="lazy" width="400" height="300">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-helmet.jpg" aria-label="View full size: Martin Mzumara in hard hat and safety vest">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/field-helmet.webp">
+                        <img src="/assets/images/optimized/field-helmet.jpg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img" loading="lazy" width="400" height="300">
+                    </picture>
                     <div class="showcase-overlay">
-                        <i data-lucide="maximize-2"></i>
+                        <i class="ti ti-maximize"></i>
                     </div>
                 </button>
-                <button class="showcase-item" data-full="/assets/images/field-headlamp.jpeg" aria-label="View full size: Field technical work with safety headlamp">
-                    <img src="/assets/images/field-headlamp.jpeg" alt="Field technical work with safety headlamp" class="showcase-img" loading="lazy" width="400" height="300">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-headlamp.jpg" aria-label="View full size: Field technical work with safety headlamp">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/field-headlamp.webp">
+                        <img src="/assets/images/optimized/field-headlamp.jpg" alt="Field technical work with safety headlamp" class="showcase-img" loading="lazy" width="400" height="300">
+                    </picture>
                     <div class="showcase-overlay">
-                        <i data-lucide="maximize-2"></i>
+                        <i class="ti ti-maximize"></i>
                     </div>
                 </button>
-                <button class="showcase-item" data-full="/assets/images/field-workwear.jpeg" aria-label="View full size: Field equipment setup">
-                    <img src="/assets/images/field-workwear.jpeg" alt="Field equipment setup" class="showcase-img" loading="lazy" width="400" height="300">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-workwear.jpg" aria-label="View full size: Field equipment setup">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/field-workwear.webp">
+                        <img src="/assets/images/optimized/field-workwear.jpg" alt="Field equipment setup" class="showcase-img" loading="lazy" width="400" height="300">
+                    </picture>
                     <div class="showcase-overlay">
-                        <i data-lucide="maximize-2"></i>
+                        <i class="ti ti-maximize"></i>
                     </div>
                 </button>
             </div>
         </section>
     </main>
+
+    <!-- Tools Reading Modal -->
+    <div class="tools-modal" id="tools-modal" role="dialog" aria-modal="true" aria-label="Tool article" aria-hidden="true">
+        <div class="tools-modal-backdrop" id="tools-modal-backdrop"></div>
+        <article class="tools-modal-card">
+            <button class="tools-modal-close" id="tools-modal-close" aria-label="Close article"><i class="ti ti-x"></i></button>
+            <div class="tools-modal-content" id="tools-modal-content"></div>
+        </article>
+    </div>
 
     <!-- Lightbox Modal -->
     <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
@@ -396,26 +511,26 @@
                 <p>Software Developer & IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
-                        <i data-lucide="github"></i>
+                        <i class="ti ti-brand-github"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link">
-                        <i data-lucide="linkedin"></i>
+                        <i class="ti ti-brand-linkedin"></i>
                     </a>
                     <a href="https://youtube.com/@martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="social-link">
-                        <i data-lucide="youtube"></i>
+                        <i class="ti ti-brand-youtube"></i>
                     </a>
                 </div>
             </div>
             <div class="footer-connect">
                 <h4>CONNECT</h4>
                 <ul class="contact-list">
-                    <li><i data-lucide="map-pin"></i> Lilongwe, Area 49, Malawi</li>
-                    <li><i data-lucide="phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
-                    <li><i data-lucide="mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
+                    <li><i class="ti ti-map-pin"></i> Lilongwe, Area 49, Malawi</li>
+                    <li><i class="ti ti-phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
+                    <li><i class="ti ti-mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
                 </ul>
                 <button class="theme-toggle-btn footer-theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
-                    <i data-lucide="sun" class="icon-sun"></i>
-                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i class="ti ti-sun icon-sun"></i>
+                    <i class="ti ti-moon icon-moon"></i>
                     <span class="theme-toggle-label" id="theme-toggle-label">Change to dark theme</span>
                 </button>
             </div>
@@ -425,6 +540,11 @@
         </div>
     </footer>
 
+    <script src="/js/icons.js"></script>
     <script src="/js/script.js"></script>
+    <!-- Back to Top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
+        <i class="ti ti-arrow-up"></i>
+    </button>
 </body>
 </html>

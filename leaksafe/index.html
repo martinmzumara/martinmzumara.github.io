@@ -10,14 +10,18 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="LeakSAFE – Smart Gas Leakage Detection System">
     <meta property="og:description" content="An end-to-end hazardous gas detection system built with Flutter, Firebase, and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.">
-    <meta property="og:url" content="https://martinmzumara.github.io/leaksafe.html">
-    <meta property="og:image" content="assets/images/leaksafe-wireframes.jpeg">
+    <meta property="og:url" content="https://martinmzumara.github.io/leaksafe/">
+    <meta property="og:image" content="https://martinmzumara.github.io/assets/images/optimized/leaksafe-wireframes.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="900">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="LeakSAFE – Smart Gas Leakage Detection System">
     <meta name="twitter:description" content="An end-to-end hazardous gas detection system built with Flutter, Firebase, and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.">
-    <meta name="twitter:image" content="assets/images/leaksafe-wireframes.jpeg">
+    <meta name="twitter:image" content="https://martinmzumara.github.io/assets/images/optimized/leaksafe-wireframes.jpg">
+    <link rel="canonical" href="https://martinmzumara.github.io/leaksafe/">
+    <meta name="theme-color" content="#2563eb">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='50' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>M</text></svg>">
@@ -28,9 +32,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@0.462.0" defer></script>
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -41,8 +44,8 @@
             <a href="/" class="logo">MARTIN MZUMARA</a>
             
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-                <i data-lucide="menu" class="icon-menu"></i>
-                <i data-lucide="x" class="icon-close"></i>
+                <i class="ti ti-menu-2 icon-menu"></i>
+                <i class="ti ti-x icon-close"></i>
             </button>
 
             <nav class="nav-links" id="nav-links" aria-label="Main navigation">
@@ -55,7 +58,7 @@
             
             <div class="nav-actions">
                 <a href="/#projects" class="btn-primary">
-                    <i data-lucide="arrow-left"></i> BACK TO PROJECTS
+                    <i class="ti ti-arrow-left"></i> BACK TO PROJECTS
                 </a>
             </div>
         </div>
@@ -69,10 +72,10 @@
             <p class="lead-text">A cross-platform mobile application integrated with ESP32 hardware sensors to deliver real-time atmospheric gas tracking, dynamic threat analysis, and automated hazardous alerts.</p>
             <div class="hero-cta project-actions">
                 <a href="https://github.com/martinmzumara/gasdetectionapp" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                    <i data-lucide="github"></i> FLUTTER APP CODE
+                    <i class="ti ti-brand-github"></i> FLUTTER APP CODE
                 </a>
                 <a href="https://github.com/martinmzumara/LeakSafe" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-                    <i data-lucide="cpu"></i> ARDUINO HARDWARE CODE
+                    <i class="ti ti-cpu"></i> ARDUINO HARDWARE CODE
                 </a>
             </div>
         </div>
@@ -137,31 +140,31 @@
             
             <div class="architecture-flow">
                 <div class="arch-node">
-                    <i data-lucide="cpu" class="icon-large"></i>
+                    <i class="ti ti-cpu icon-large"></i>
                     <h4>ESP32 + MQ Sensors</h4>
                     <p>Calibrated gas sensor modules continuously sample atmospheric PPM concentrations.</p>
                 </div>
                 <div class="arch-arrow">
-                    <i data-lucide="arrow-right"></i>
+                    <i class="ti ti-arrow-right"></i>
                 </div>
                 <div class="arch-node">
-                    <i data-lucide="database" class="icon-large"></i>
+                    <i class="ti ti-database icon-large"></i>
                     <h4>Firebase Realtime DB</h4>
                     <p>Telemetry streams to Firebase for live synchronization and historical persistence.</p>
                 </div>
                 <div class="arch-arrow">
-                    <i data-lucide="arrow-right"></i>
+                    <i class="ti ti-arrow-right"></i>
                 </div>
                 <div class="arch-node">
-                    <i data-lucide="smartphone" class="icon-large"></i>
+                    <i class="ti ti-device-mobile icon-large"></i>
                     <h4>Flutter Application</h4>
                     <p>Cross-platform app renders real-time PPM readings with dynamic threshold UI states.</p>
                 </div>
                 <div class="arch-arrow">
-                    <i data-lucide="arrow-right"></i>
+                    <i class="ti ti-arrow-right"></i>
                 </div>
                 <div class="arch-node">
-                    <i data-lucide="bell-ring" class="icon-large"></i>
+                    <i class="ti ti-bell-ringing icon-large"></i>
                     <h4>Alert & Notification</h4>
                     <p>Local push notifications trigger instantly upon detecting elevated PPM thresholds.</p>
                 </div>
@@ -175,32 +178,32 @@
             
             <div class="features-grid">
                 <div class="feature-card">
-                    <i data-lucide="activity" class="icon-large"></i>
+                    <i class="ti ti-activity icon-large"></i>
                     <h3>Real-Time Monitoring</h3>
                     <p>Continuously tracks atmospheric gas concentrations with visual Safe/Moderate/Danger UI color state transitions.</p>
                 </div>
                 <div class="feature-card">
-                    <i data-lucide="map" class="icon-large"></i>
+                    <i class="ti ti-map icon-large"></i>
                     <h3>Live Sensor Mapping</h3>
                     <p>Google Maps integration pinpoints sensor locations geographically for precise leak origin identification.</p>
                 </div>
                 <div class="feature-card">
-                    <i data-lucide="line-chart" class="icon-large"></i>
+                    <i class="ti ti-chart-line icon-large"></i>
                     <h3>Historical Analytics</h3>
                     <p>Bar and line charts visualize historical PPM readings to identify frequency patterns and temporal safety trends.</p>
                 </div>
                 <div class="feature-card">
-                    <i data-lucide="bell" class="icon-large"></i>
+                    <i class="ti ti-bell icon-large"></i>
                     <h3>Instant Alerts</h3>
                     <p>Local push notifications and dynamic threshold triggers notify users immediately when gas levels become hazardous.</p>
                 </div>
                 <div class="feature-card">
-                    <i data-lucide="user-check" class="icon-large"></i>
+                    <i class="ti ti-user-check icon-large"></i>
                     <h3>User Authentication</h3>
                     <p>Firebase Auth secures user accounts, ensuring only authorized individuals access telemetry data and settings.</p>
                 </div>
                 <div class="feature-card">
-                    <i data-lucide="settings" class="icon-large"></i>
+                    <i class="ti ti-settings icon-large"></i>
                     <h3>Customizable Thresholds</h3>
                     <p>Users can configure alert thresholds in settings, tailoring safety responses to their specific environment requirements.</p>
                 </div>
@@ -213,10 +216,10 @@
             <h2 class="section-title underline">System Mechanics</h2>
             
             <ul class="custom-list">
-                <li><i data-lucide="play" class="list-icon"></i> Continuous atmospheric monitoring via calibrated MQ gas sensor modules connected to an ESP32 microcontroller node.</li>
-                <li><i data-lucide="play" class="list-icon"></i> Live telemetry data streaming directly to the Flutter application interface for real-time parts-per-million (PPM) concentration display.</li>
-                <li><i data-lucide="play" class="list-icon"></i> Dynamic threshold triggers that transform application UI color states from Safe (Green) to Danger (Red) upon detecting elevated PPM levels.</li>
-                <li><i data-lucide="play" class="list-icon"></i> Geographic sensor mapping and historical frequency charts to track leak origin points and temporal safety patterns.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Continuous atmospheric monitoring via calibrated MQ gas sensor modules connected to an ESP32 microcontroller node.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Live telemetry data streaming directly to the Flutter application interface for real-time parts-per-million (PPM) concentration display.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Dynamic threshold triggers that transform application UI color states from Safe (Green) to Danger (Red) upon detecting elevated PPM levels.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Geographic sensor mapping and historical frequency charts to track leak origin points and temporal safety patterns.</li>
             </ul>
         </section>
 
@@ -227,7 +230,7 @@
             
             <div class="stack-categories">
                 <div class="stack-category">
-                    <h3 class="stack-title"><i data-lucide="code-2" class="icon-blue"></i> Frontend</h3>
+                    <h3 class="stack-title"><i class="ti ti-code icon-blue"></i> Frontend</h3>
                     <div class="stack-tags">
                         <span class="tag">Flutter</span>
                         <span class="tag">Dart</span>
@@ -237,7 +240,7 @@
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h3 class="stack-title"><i data-lucide="database" class="icon-blue"></i> Backend & Data</h3>
+                    <h3 class="stack-title"><i class="ti ti-database icon-blue"></i> Backend & Data</h3>
                     <div class="stack-tags">
                         <span class="tag">Firebase Auth</span>
                         <span class="tag">Firebase Realtime DB</span>
@@ -245,7 +248,7 @@
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h3 class="stack-title"><i data-lucide="cpu" class="icon-blue"></i> Hardware</h3>
+                    <h3 class="stack-title"><i class="ti ti-cpu icon-blue"></i> Hardware</h3>
                     <div class="stack-tags">
                         <span class="tag">ESP32</span>
                         <span class="tag">MQ Gas Sensors</span>
@@ -253,7 +256,7 @@
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h3 class="stack-title"><i data-lucide="hammer" class="icon-blue"></i> Tooling</h3>
+                    <h3 class="stack-title"><i class="ti ti-hammer icon-blue"></i> Tooling</h3>
                     <div class="stack-tags">
                         <span class="tag">Git</span>
                         <span class="tag">Firebase Console</span>
@@ -335,10 +338,10 @@
                 <p>Explore the complete source code on GitHub — including the Flutter mobile application and the ESP32 Arduino hardware firmware.</p>
                 <div class="hero-cta" style="justify-content: center;">
                     <a href="https://github.com/martinmzumara/gasdetectionapp" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                        <i data-lucide="github"></i> FLUTTER APP
+                        <i class="ti ti-brand-github"></i> FLUTTER APP
                     </a>
                     <a href="https://github.com/martinmzumara/LeakSafe" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-                        <i data-lucide="cpu"></i> ARDUINO FIRMWARE
+                        <i class="ti ti-cpu"></i> ARDUINO FIRMWARE
                     </a>
                 </div>
             </div>
@@ -353,26 +356,26 @@
                 <p>Software Developer & IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
-                        <i data-lucide="github"></i>
+                        <i class="ti ti-brand-github"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link">
-                        <i data-lucide="linkedin"></i>
+                        <i class="ti ti-brand-linkedin"></i>
                     </a>
                     <a href="https://youtube.com/@martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="social-link">
-                        <i data-lucide="youtube"></i>
+                        <i class="ti ti-brand-youtube"></i>
                     </a>
                 </div>
             </div>
             <div class="footer-connect">
                 <h4>CONNECT</h4>
                 <ul class="contact-list">
-                    <li><i data-lucide="map-pin"></i> Lilongwe, Area 49, Malawi</li>
-                    <li><i data-lucide="phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
-                    <li><i data-lucide="mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
+                    <li><i class="ti ti-map-pin"></i> Lilongwe, Area 49, Malawi</li>
+                    <li><i class="ti ti-phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
+                    <li><i class="ti ti-mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
                 </ul>
                 <button class="theme-toggle-btn footer-theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
-                    <i data-lucide="sun" class="icon-sun"></i>
-                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i class="ti ti-sun icon-sun"></i>
+                    <i class="ti ti-moon icon-moon"></i>
                     <span class="theme-toggle-label" id="theme-toggle-label">Change to dark theme</span>
                 </button>
             </div>
@@ -382,6 +385,11 @@
         </div>
     </footer>
 
+    <script src="/js/icons.js"></script>
     <script src="/js/script.js"></script>
+    <!-- Back to Top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
+        <i class="ti ti-arrow-up"></i>
+    </button>
 </body>
 </html>

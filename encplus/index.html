@@ -10,8 +10,11 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="EncPlus – AES File Encryption">
     <meta property="og:description" content="A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.">
-    <meta property="og:url" content="https://martinmzumara.github.io/encplus.html">
+    <meta property="og:url" content="https://martinmzumara.github.io/encplus/">
     <meta property="og:image" content="https://martinmzumara.github.io/assets/images/leaksafe-safe-reading.jpeg">
+    
+    <link rel="canonical" href="https://martinmzumara.github.io/encplus/">
+    <meta name="theme-color" content="#2563eb">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -28,9 +31,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@0.462.0" defer></script>
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -41,8 +43,8 @@
             <a href="/" class="logo">MARTIN MZUMARA</a>
             
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-                <i data-lucide="menu" class="icon-menu"></i>
-                <i data-lucide="x" class="icon-close"></i>
+                <i class="ti ti-menu-2 icon-menu"></i>
+                <i class="ti ti-x icon-close"></i>
             </button>
 
             <nav class="nav-links" id="nav-links" aria-label="Main navigation">
@@ -55,7 +57,7 @@
             
             <div class="nav-actions">
                 <a href="/#projects" class="btn-primary">
-                    <i data-lucide="arrow-left"></i> BACK TO PROJECTS
+                    <i class="ti ti-arrow-left"></i> BACK TO PROJECTS
                 </a>
             </div>
         </div>
@@ -69,7 +71,7 @@
             <p class="lead-text">A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
             <div class="hero-cta project-actions">
                 <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                    <i data-lucide="github"></i> VIEW REPOSITORY
+                    <i class="ti ti-brand-github"></i> VIEW REPOSITORY
                 </a>
             </div>
         </div>
@@ -130,23 +132,23 @@
             
             <div class="architecture-flow">
                 <div class="arch-node">
-                    <i data-lucide="smartphone" class="icon-large"></i>
+                    <i class="ti ti-device-mobile icon-large"></i>
                     <h4>Flutter Application</h4>
                     <p>Cross-platform mobile app built with Flutter and Dart, featuring secure file encryption/decryption operations.</p>
                 </div>
                 <div class="arch-arrow">
-                    <i data-lucide="arrow-right"></i>
+                    <i class="ti ti-arrow-right"></i>
                 </div>
                 <div class="arch-node">
-                    <i data-lucide="database" class="icon-large"></i>
+                    <i class="ti ti-database icon-large"></i>
                     <h4>Firebase Realtime DB</h4>
                     <p>Secure metadata storage and user authentication state synchronization.</p>
                 </div>
                 <div class="arch-arrow">
-                    <i data-lucide="arrow-right"></i>
+                    <i class="ti ti-arrow-right"></i>
                 </div>
                 <div class="arch-node">
-                    <i data-lucide="lock" class="icon-large"></i>
+                    <i class="ti ti-lock icon-large"></i>
                     <h4>AES-256 Encryption</h4>
                     <p>Industry-standard symmetric encryption for securing file contents on the device.</p>
                 </div>
@@ -160,17 +162,17 @@
             
             <div class="features-grid">
                 <div class="feature-card">
-                    <i data-lucide="lock" class="icon-large"></i>
+                    <i class="ti ti-lock icon-large"></i>
                     <h3>AES-256 Encryption</h3>
                     <p>Secure file encryption using the Advanced Encryption Standard with 256-bit keys, providing military-grade security for sensitive data.</p>
                 </div>
                 <div class="feature-card">
-                    <i data-lucide="user-check" class="icon-large"></i>
+                    <i class="ti ti-user-check icon-large"></i>
                     <h3>Firebase Authentication</h3>
                     <p>Secure user authentication ensuring only authorized individuals can access encrypted files and app features.</p>
                 </div>
                 <div class="feature-card">
-                    <i data-lucide="folder" class="icon-large"></i>
+                    <i class="ti ti-folder icon-large"></i>
                     <h3>File Management</h3>
                     <p>Intuitive interface for file selection, encryption, decryption, and secure storage operations.</p>
                 </div>
@@ -184,21 +186,21 @@
             
             <div class="stack-categories">
                 <div class="stack-category">
-                    <h3 class="stack-title"><i data-lucide="code-2" class="icon-blue"></i> Frontend</h3>
+                    <h3 class="stack-title"><i class="ti ti-code icon-blue"></i> Frontend</h3>
                     <div class="stack-tags">
                         <span class="tag">Flutter</span>
                         <span class="tag">Dart</span>
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h3 class="stack-title"><i data-lucide="database" class="icon-blue"></i> Backend & Data</h3>
+                    <h3 class="stack-title"><i class="ti ti-database icon-blue"></i> Backend & Data</h3>
                     <div class="stack-tags">
                         <span class="tag">Firebase Auth</span>
                         <span class="tag">Firebase Realtime DB</span>
                     </div>
                 </div>
                 <div class="stack-category">
-                    <h3 class="stack-title"><i data-lucide="lock" class="icon-blue"></i> Security</h3>
+                    <h3 class="stack-title"><i class="ti ti-lock icon-blue"></i> Security</h3>
                     <div class="stack-tags">
                         <span class="tag">AES-256</span>
                     </div>
@@ -235,7 +237,7 @@
             <div class="gallery-grid">
                 <div class="gallery-card">
                     <div class="gallery-placeholder">
-                        <i data-lucide="lock" class="placeholder-icon"></i>
+                        <i class="ti ti-lock placeholder-icon"></i>
                     </div>
                     <div class="gallery-info">
                         <h4>Encryption Interface</h4>
@@ -245,7 +247,7 @@
 
                 <div class="gallery-card">
                     <div class="gallery-placeholder">
-                        <i data-lucide="folder" class="placeholder-icon"></i>
+                        <i class="ti ti-folder placeholder-icon"></i>
                     </div>
                     <div class="gallery-info">
                         <h4>File Selection</h4>
@@ -255,7 +257,7 @@
 
                 <div class="gallery-card">
                     <div class="gallery-placeholder">
-                        <i data-lucide="lock-open" class="placeholder-icon"></i>
+                        <i class="ti ti-lock-open placeholder-icon"></i>
                     </div>
                     <div class="gallery-info">
                         <h4>Decryption Results</h4>
@@ -269,7 +271,7 @@
                 <h3>Explore the full implementation</h3>
                 <p>View the complete Flutter source code on GitHub, including all screens, services, and encryption logic.</p>
                 <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                    <i data-lucide="github"></i> VIEW REPOSITORY ON GITHUB
+                    <i class="ti ti-brand-github"></i> VIEW REPOSITORY ON GITHUB
                 </a>
             </div>
         </section>
@@ -283,26 +285,26 @@
                 <p>Software Developer & IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
-                        <i data-lucide="github"></i>
+                        <i class="ti ti-brand-github"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link">
-                        <i data-lucide="linkedin"></i>
+                        <i class="ti ti-brand-linkedin"></i>
                     </a>
                     <a href="https://youtube.com/@martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="social-link">
-                        <i data-lucide="youtube"></i>
+                        <i class="ti ti-brand-youtube"></i>
                     </a>
                 </div>
             </div>
             <div class="footer-connect">
                 <h4>CONNECT</h4>
                 <ul class="contact-list">
-                    <li><i data-lucide="map-pin"></i> Lilongwe, Area 49, Malawi</li>
-                    <li><i data-lucide="phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
-                    <li><i data-lucide="mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
+                    <li><i class="ti ti-map-pin"></i> Lilongwe, Area 49, Malawi</li>
+                    <li><i class="ti ti-phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
+                    <li><i class="ti ti-mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
                 </ul>
                 <button class="theme-toggle-btn footer-theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
-                    <i data-lucide="sun" class="icon-sun"></i>
-                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i class="ti ti-sun icon-sun"></i>
+                    <i class="ti ti-moon icon-moon"></i>
                     <span class="theme-toggle-label" id="theme-toggle-label">Change to dark theme</span>
                 </button>
             </div>
@@ -312,6 +314,11 @@
         </div>
     </footer>
 
+    <script src="/js/icons.js"></script>
     <script src="/js/script.js"></script>
+    <!-- Back to Top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
+        <i class="ti ti-arrow-up"></i>
+    </button>
 </body>
 </html>
