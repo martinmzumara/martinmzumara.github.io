@@ -2258,7 +2258,7 @@ body.loaded .hero-content {
 .stat-label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-top: 0.3rem; }
 
 /* Scroll cue */
-.scroll-cue { position: absolute; left: 50%; bottom: 0.25rem; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.28em; color: var(--text-faint); opacity: 0; animation: cue-in 1s ease 1.4s forwards; }
+.scroll-cue { position: absolute; left: 50%; bottom: 1.75rem; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.28em; color: var(--text-faint); opacity: 0; animation: cue-in 1s ease 1.4s forwards; }
 .scroll-cue-line { width: 1px; height: 42px; background: linear-gradient(180deg, var(--accent-blue), transparent); transform-origin: top; animation: cue-scroll 2s ease-in-out infinite; }
 @keyframes cue-in { to { opacity: 1; } }
 @keyframes cue-scroll { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); } }
