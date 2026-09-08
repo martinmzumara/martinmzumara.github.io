@@ -9,7 +9,6 @@
 // dev: 'laptop' or 'phone' (drives the filter + badge).
 // ============================================================
 var SITE_TOOLS = [];
-console.log('[tools-data] loaded with 10 posts');
 
 SITE_TOOLS.push({
     name: 'Visual Studio Code',
