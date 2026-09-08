@@ -12,8 +12,14 @@
     "use strict";
 
     var init = function () {
-        var tools = window.SITE_TOOLS || [];
+        var tools = window.SITE_TOOLS;
         var toolsGrid = document.getElementById('tools-grid');
+        if (!toolsGrid) return;
+        if (!tools || !tools.length) {
+            console.error('[tools] SITE_TOOLS is missing or empty — check that js/tools-data.js loaded (Network tab).');
+            toolsGrid.innerHTML = '<p style="color:tomato;font-family:monospace">[tools] Data failed to load — open DevTools Console for details.</p>';
+            return;
+        }
         var toolsModal = document.getElementById('tools-modal');
         var toolsModalContent = document.getElementById('tools-modal-content');
         var toolsModalClose = document.getElementById('tools-modal-close');
@@ -24,7 +30,6 @@
         var deviceIcon = function (dev) { return dev === 'phone' ? 'ti-device-mobile' : 'ti-device-laptop'; };
 
         var renderTools = function (filter) {
-            if (!toolsGrid) return;
             var list = tools.filter(function (t) {
                 if (filter === 'featured') return !!t.featured;
                 return filter === 'all' || t.dev === filter;
