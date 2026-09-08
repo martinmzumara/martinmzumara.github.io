@@ -8,7 +8,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 
 - **Glassmorphism design** — frosted-glass cards over an animated aurora background, light/dark themes with system-preference detection and a labeled footer toggle.
 - **Animated, non-static experience** — preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, 3D tilt/spotlight cards, and back-to-top button.
-- **Articles & Tools blog** — the homepage shows a few featured posts; a **"View All Posts"** button leads to `/articles/`, which lists every post with the filterable (Laptop / Phone / All) card grid and glass reading modal. Posts live in a shared JS data array (see below).
+- **Articles & Tools** — the homepage shows a few featured posts with glass reading modals (data in `js/tools-data.js`); a **"View All Posts"** button links to the separate blog at [martinmzumara.github.io/blog](https://martinmzumara.github.io/blog/), built with Astro in its own repo.
 - **Testimonials / social proof** — intentionally omitted for now (see "Adding Testimonials Later").
 - **Contact section** — email / phone / location glass cards with a copy-to-clipboard email button, `mailto:` + resume CTAs, and a matching nav link + hero "Get in Touch" button.
 - **Custom icon system** — a single SVG sprite swapped in at runtime; no icon font CDN.
@@ -20,7 +20,6 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 ## Project Structure
 
 - `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Approach, Experience, Tools, Showcase, Contact).
-- `articles/index.html`: Full articles & tools archive (all posts, with filters + reading modal).
 - `leaksafe/index.html`: LeakSAFE case study page.
 - `manguzi/index.html`: Manguzi Executive Lodge client project page.
 - `encplus/index.html`: EncPlus case study page.
