@@ -9,7 +9,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - **Glassmorphism design** — frosted-glass cards over an animated aurora background, light/dark themes with system-preference detection and a labeled footer toggle.
 - **Animated, non-static experience** — preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, 3D tilt/spotlight cards, and back-to-top button.
 - **Articles & Tools blog** — the homepage shows a few featured posts; a **"View All Posts"** button leads to `/articles/`, which lists every post with the filterable (Laptop / Phone / All) card grid and glass reading modal. Posts live in a shared JS data array (see below).
-- **Proof of Work section** — verifiable facts (CCNA, delivered projects, field experience, documented installs) instead of testimonials; placeholder quotes were removed until real ones exist.
+- **Testimonials / social proof** — intentionally omitted for now (see "Adding Testimonials Later").
 - **Contact section** — email / phone / location glass cards with a copy-to-clipboard email button, `mailto:` + resume CTAs, and a matching nav link + hero "Get in Touch" button.
 - **Custom icon system** — a single SVG sprite swapped in at runtime; no icon font CDN.
 - **Case study & client project pages** — LeakSAFE and EncPlus case studies plus the Manguzi Executive Lodge client project, each with image galleries and lightbox.
@@ -19,7 +19,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 
 ## Project Structure
 
-- `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Approach, Experience, Testimonials, Tools, Showcase, Contact).
+- `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Approach, Experience, Tools, Showcase, Contact).
 - `articles/index.html`: Full articles & tools archive (all posts, with filters + reading modal).
 - `leaksafe/index.html`: LeakSAFE case study page.
 - `manguzi/index.html`: Manguzi Executive Lodge client project page.
@@ -64,18 +64,23 @@ To add a post, copy a `SITE_TOOLS.push({ ... });` block, edit the fields, and
 save — no other files need to change. Set `featured: true` on the entries you
 want on the homepage (everything appears on `/articles/` regardless).
 
-## Proof of Work Section (formerly Testimonials)
+## Adding Testimonials Later
 
-The testimonial quote cards were removed because there are no real quotes yet —
-invented testimonials are worse than none. In their place, the homepage shows a
-**"Why Work With Me"** grid of verifiable facts (plain HTML in `index.html`, see
-the `<!-- Proof of Work Section -->` comment), reusing the existing `.card`
-styles from the Expertise section.
+Social proof is intentionally omitted for now. The CSS for quote cards
+(`.testimonials-grid` / `.testimonial-card`) is still in `style.css`, so when
+real quotes are collected (e.g. LinkedIn recommendations from past clients or
+colleagues), a section can be re-added to `index.html` before the Tools
+section using:
 
-To add real testimonials later, ask past clients/colleagues for one-line quotes
-(LinkedIn recommendations work well), then replace or supplement the facts grid
-with `testimonial-card` figures — the CSS for `.testimonials-grid` and
-`.testimonial-card` is still in `style.css`.
+```html
+<figure class="testimonial-card">
+    <blockquote>&ldquo;The real quote goes here.&rdquo;</blockquote>
+    <figcaption>
+        <span class="testimonial-name">Name Surname</span>
+        <span class="testimonial-role">Role, Organisation</span>
+    </figcaption>
+</figure>
+```
 
 ## Editing the Contact Section
 

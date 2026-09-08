@@ -2624,7 +2624,11 @@ a.project-link-btn:hover .ci {
 
 
 /* ---------- Tools section: view-all button (homepage) ---------- */
-.tools-cta { margin-top: 2rem; }
+.tools-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
 .tools-view-all {
     display: inline-flex;
     align-items: center;
