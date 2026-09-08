@@ -108,8 +108,13 @@
                 swapAll();
             })
             .catch(function () {
-                // Sprite unavailable (e.g. opened via file://) — leave Tabler icons as-is.
+                // Sprite unavailable (e.g. opened via file://) — fall back to the
+                // Tabler webfont, loaded on demand instead of blocking page render.
                 ready = true;
+                var link = document.createElement("link");
+                link.rel = "stylesheet";
+                link.href = "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css";
+                document.head.appendChild(link);
             });
     }
 

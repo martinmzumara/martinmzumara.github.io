@@ -2420,3 +2420,234 @@ body.tools-open { overflow: hidden; }
     .status-dot { animation: none; }
     .scroll-cue { opacity: 0; animation: none; }
 }
+
+/* ============================================================
+   Additions: project-card links, testimonials, contact section
+   ============================================================ */
+
+/* ---------- Project cards: real link targets ---------- */
+.project-card { position: relative; color: inherit; }
+.project-thumb-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+.project-body h3 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.project-body h3 a:hover { color: var(--accent-blue); }
+
+a.project-link-btn {
+    text-decoration: none;
+    color: var(--accent-blue);
+}
+a.project-link-btn i,
+a.project-link-btn .ci {
+    transition: transform 0.2s ease;
+}
+a.project-link-btn:hover {
+    color: var(--accent-cyan);
+}
+a.project-link-btn:hover i,
+a.project-link-btn:hover .ci {
+    transform: translateX(3px);
+}
+
+/* ---------- Testimonials ---------- */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.testimonial-card {
+    margin: 0;
+    padding: 1.8rem 1.6rem;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+
+.testimonial-card blockquote {
+    flex-grow: 1;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.testimonial-card figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 1rem;
+}
+
+.testimonial-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.testimonial-role {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+}
+
+/* ---------- Contact Section ---------- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.contact-card {
+    padding: 1.8rem 1.6rem;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+
+.contact-card-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-blue);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+}
+
+.contact-card h3 {
+    font-size: 1.05rem;
+}
+
+.contact-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.contact-card p a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-card p a:hover {
+    color: var(--accent-blue);
+    text-decoration: underline;
+}
+
+.copy-btn {
+    margin-top: 0.4rem;
+    background: var(--glass-bg-soft);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    color: var(--accent-blue);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.copy-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--glass-border-strong);
+    transform: translateY(-1px);
+}
+
+.contact-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .contact-cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .contact-cta .btn-primary,
+    .contact-cta .btn-secondary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+/* ---------- Tools section: view-all button (homepage) ---------- */
+.tools-cta { margin-top: 2rem; }
+.tools-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tools-view-all i { width: 16px; height: 16px; transition: transform 0.2s ease; }
+.tools-view-all:hover {
+    color: var(--text-primary);
+    border-color: var(--glass-border-strong);
+    transform: translateY(-1px);
+}
+.tools-view-all:hover i { transform: translateX(3px); }

@@ -3,86 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | Martin Mzumara</title>
-    <meta name="description" content="The page you're looking for could not be found. Return to Martin Mzumara's portfolio homepage.">
-    <meta name="robots" content="noindex, nofollow">
-    
+    <title>Articles &amp; Tools | Martin Mzumara</title>
+    <meta name="description" content="Articles and deep-dives on the tools Martin Mzumara uses daily — code editors, app development, terminals, and automation on both laptop and phone.">
+    <meta name="robots" content="noindex, follow">
+
     <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="404 - Page Not Found | Martin Mzumara">
-    <meta property="og:description" content="The page you're looking for could not be found. Return to Martin Mzumara's portfolio homepage.">
-    <meta property="og:url" content="https://martinmzumara.github.io/404.html">
-    
+    <meta property="og:title" content="Articles &amp; Tools | Martin Mzumara">
+    <meta property="og:description" content="The tools Martin Mzumara relies on daily — for development, IT work, and getting things done.">
+    <meta property="og:url" content="https://martinmzumara.github.io/articles/">
+
     <meta name="theme-color" content="#2563eb">
-    
+    <link rel="canonical" href="https://martinmzumara.github.io/articles/">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='50' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>M</text></svg>">
-    
+
     <link rel="stylesheet" href="/css/style.css">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Tabler Icons -->
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Navigation -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">MARTIN MZUMARA</a>
-            
+            <a href="/" class="logo">MARTIN MZUMARA</a>
+
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
                 <i class="ti ti-menu-2 icon-menu"></i>
                 <i class="ti ti-x icon-close"></i>
             </button>
 
             <nav class="nav-links" id="nav-links" aria-label="Main navigation">
-                <a href="index.html#expertise" class="nav-link">EXPERTISE</a>
-                <a href="index.html#projects" class="nav-link">PROJECTS</a>
-                <a href="index.html#approach" class="nav-link">APPROACH</a>
-                <a href="index.html#experience" class="nav-link">EXPERIENCE</a>
-                <a href="index.html#showcase" class="nav-link">SHOWCASE</a>
+                <a href="/#expertise" class="nav-link">EXPERTISE</a>
+                <a href="/#projects" class="nav-link">PROJECTS</a>
+                <a href="/#approach" class="nav-link">APPROACH</a>
+                <a href="/#experience" class="nav-link">EXPERIENCE</a>
+                <a href="/#showcase" class="nav-link">SHOWCASE</a>
             </nav>
-            
+
             <div class="nav-actions">
-                <a href="/assets/Martin_Mzumara_CV.pdf" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
+                <a href="/assets/Martin_Mzumara_CV.pdf"
+                   target="_blank"
+                   rel="noopener noreferrer"
                    aria-label="View Resume PDF" class="btn-primary">VIEW RESUME</a>
             </div>
         </div>
     </header>
 
     <main id="main-content">
-        <!-- 404 Error Section -->
-        <section class="error-section container">
-            <div class="error-content">
-                <span class="system-label">// SYSTEM ERROR: RESOURCE NOT FOUND</span>
-                <h1 class="error-code">404</h1>
-                <h2 class="error-title">Page Not Found</h2>
-                <p class="error-message">The page you're looking for doesn't exist, may have been moved, or the link is broken. Let's get you back on track.</p>
-                
-                <div class="hero-cta error-actions">
-                    <a href="index.html" class="btn-primary">
-                        <i class="ti ti-home"></i> BACK TO HOME
-                    </a>
-                    <a href="index.html#projects" class="btn-secondary">
-                        <i class="ti ti-folder"></i> VIEW PROJECTS
-                    </a>
-                </div>
+        <!-- Articles & Tools Section -->
+        <section class="container section-padding chapter">
+            <span class="system-label">// 05 · TOOLS &amp; WORKFLOW</span>
+            <h1 class="section-title underline">Articles &amp; Tools</h1>
+            <p class="section-lead">Every app and service I rely on daily — for development, IT work, and getting things done — on both my laptop and my phone. Click any card to read the full write-up.</p>
+
+            <div class="tools-filter" role="tablist" aria-label="Filter articles by device">
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">ALL</button>
+                <button class="filter-btn" data-filter="laptop" role="tab" aria-selected="false"><i class="ti ti-device-laptop"></i> LAPTOP</button>
+                <button class="filter-btn" data-filter="phone" role="tab" aria-selected="false"><i class="ti ti-device-mobile"></i> PHONE</button>
+            </div>
+
+            <div class="tools-grid" id="tools-grid"><!-- article cards injected by JS --></div>
+
+            <div class="tools-cta">
+                <a href="/" class="tools-view-all">
+                    <i class="ti ti-arrow-left"></i> BACK TO HOME
+                </a>
             </div>
         </section>
     </main>
+
+    <!-- Article reading modal -->
+    <div class="tools-modal" id="tools-modal" role="dialog" aria-modal="true" aria-label="Article" aria-hidden="true">
+        <div class="tools-modal-backdrop" id="tools-modal-backdrop"></div>
+        <article class="tools-modal-card">
+            <button class="tools-modal-close" id="tools-modal-close" aria-label="Close article"><i class="ti ti-x"></i></button>
+            <div class="tools-modal-content" id="tools-modal-content"></div>
+        </article>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <h3>MARTIN MZUMARA</h3>
-                <p>Software Developer & IT Technician<br>Malawi</p>
+                <p>Software Developer &amp; IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
                         <i class="ti ti-brand-github"></i>
@@ -115,6 +126,8 @@
     </footer>
 
     <script src="/js/icons.js"></script>
+    <script src="/js/tools-data.js"></script>
+    <script src="/js/tools.js"></script>
     <script src="/js/script.js"></script>
     <!-- Back to Top -->
     <button class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>

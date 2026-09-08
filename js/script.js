@@ -73,6 +73,38 @@ document.addEventListener("DOMContentLoaded", () => {
         yearSpan.textContent = new Date().getFullYear();
     }
 
+    // Copy email address to clipboard (contact section)
+    const copyEmailBtn = document.getElementById("copy-email");
+    if (copyEmailBtn) {
+        const EMAIL = "martinmzumara08@gmail.com";
+        const setCopied = (ok) => {
+            copyEmailBtn.innerHTML = ok
+                ? '<i class="ti ti-check"></i> COPIED!'
+                : '<i class="ti ti-copy"></i> COPY EMAIL';
+            clearTimeout(setCopied._t);
+            setCopied._t = setTimeout(() => {
+                copyEmailBtn.innerHTML = '<i class="ti ti-copy"></i> COPY EMAIL';
+            }, 2000);
+        };
+        copyEmailBtn.addEventListener("click", () => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(EMAIL).then(() => setCopied(true)).catch(() => setCopied(false));
+            } else {
+                // Legacy fallback
+                const tmp = document.createElement("textarea");
+                tmp.value = EMAIL;
+                tmp.style.position = "fixed";
+                tmp.style.opacity = "0";
+                document.body.appendChild(tmp);
+                tmp.select();
+                let ok = false;
+                try { ok = document.execCommand("copy"); } catch (e) {}
+                document.body.removeChild(tmp);
+                setCopied(ok);
+            }
+        });
+    }
+
     // 3. Mobile Navigation Toggle
     const navToggle = document.getElementById("nav-toggle");
     const navLinks = document.getElementById("nav-links");
@@ -411,248 +443,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =============== 14. Tools & Software data ===============
-    // Edit the entries below to add/remove tools. Each entry renders a card
-    // and a "read more" modal. dev: 'laptop' or 'phone'.
-    const tools = [];
-
-    tools.push({
-        name: 'Visual Studio Code',
-        dev: 'laptop',
-        tag: 'Code Editor',
-        icon: 'ti-brand-vscode',
-        summary: 'My daily driver for writing, debugging, and refactoring code across web, mobile, and embedded projects.',
-        intro: 'VS Code is the center of my development workflow — lightweight, fast, and endlessly extensible.',
-        body: 'I lean on it for Flutter/Dart, HTML/CSS/JS, and ESP32 firmware. The integrated terminal, Git panel, and Remote-SSH let me move between laptop and server work without switching tools.',
-        bullets: [
-            'Integrated Git and source control',
-            'Remote-SSH for managing servers and Raspberry Pi',
-            'Live Server + Flutter extensions for fast iteration',
-            'Settings and themes synced across machines'
-        ]
-    });
-
-    tools.push({
-        name: 'Flutter & Dart',
-        dev: 'laptop',
-        tag: 'App Development',
-        icon: 'ti-code',
-        summary: 'My framework of choice for building LeakSAFE, EncPlus, and other cross-platform mobile apps.',
-        intro: 'Flutter lets me ship one codebase to Android and iOS with a single, fast UI.',
-        body: 'I use Flutter with Dart to build the mobile front-ends for my IoT and security projects. Hot reload makes UI iteration extremely quick, and the widget system keeps the design consistent.',
-        bullets: [
-            'Hot reload for instant feedback',
-            'Single codebase for Android + iOS',
-            'Great fit for IoT companion apps',
-            'State management with Provider / Riverpod'
-        ]
-    });
-
-    tools.push({
-        name: 'Figma',
-        dev: 'laptop',
-        tag: 'UI / UX Design',
-        icon: 'ti-brand-figma',
-        summary: 'Where I turn ideas into clean, testable interfaces before writing any code.',
-        intro: 'Figma is my design playground for wireframes and high-fidelity mockups.',
-        body: 'Before building a feature I sketch the layout and interactions in Figma. It keeps the design consistent and helps clients and teammates visualise the end result early.',
-        bullets: [
-            'Wireframes and interactive prototypes',
-            'Design tokens mirrored into CSS variables',
-            'Collaborative feedback on projects'
-        ]
-    });
-
-    tools.push({
-        name: 'Git & GitHub',
-        dev: 'laptop',
-        tag: 'Version Control',
-        icon: 'ti-git-branch',
-        summary: 'Every project lives in Git, with GitHub for hosting, collaboration, and this very site.',
-        intro: 'Git is non-negotiable in my workflow — every project is versioned from day one.',
-        body: 'I use Git for branching, feature work, and clean history, and GitHub for remote backups, issues, and deploying this portfolio on GitHub Pages.',
-        bullets: [
-            'Feature branches and pull requests',
-            'Clean, readable commit history',
-            'GitHub Pages for static hosting'
-        ]
-    });
-
-    tools.push({
-        name: 'Arduino IDE',
-        dev: 'laptop',
-        tag: 'Embedded / IoT',
-        icon: 'ti-cpu',
-        summary: 'The tool I use to program ESP32 and Arduino boards for my IoT systems.',
-        intro: 'Arduino IDE is my entry point into the hardware side of my IoT projects.',
-        body: 'From sensor readouts to the ESP32 firmware behind LeakSAFE, I use the Arduino toolchain to flash and debug microcontrollers that talk to my mobile apps.',
-        bullets: [
-            'ESP32 Wi-Fi + BLE development',
-            'Sensor drivers and telemetry',
-            'Serial monitor for debugging'
-        ]
-    });
-
-    tools.push({
-        name: 'Postman',
-        dev: 'laptop',
-        tag: 'API Testing',
-        icon: 'ti-api',
-        summary: 'For designing, testing, and debugging the APIs that connect my apps to backends.',
-        intro: 'Postman keeps my API work organised and repeatable.',
-        body: 'I use it to test Firebase and REST endpoints, inspect responses, and document request collections that I can re-run after every change.',
-        bullets: [
-            'Request collections and environments',
-            'Automated API tests',
-            'Shareable API documentation'
-        ]
-    });
-
-    tools.push({
-        name: 'Termux',
-        dev: 'phone',
-        tag: 'Terminal',
-        icon: 'ti-terminal-2',
-        summary: 'A full Linux terminal on Android — for quick edits, Git, and SSH from my phone.',
-        intro: 'Termux turns my phone into a pocket Linux box.',
-        body: 'When I am away from the laptop I still commit code, run scripts, and SSH into servers straight from Termux. It is surprisingly capable for a terminal app.',
-        bullets: [
-            'Run Git, SSH, and shell scripts',
-            'Install packages via apt',
-            'Access servers on the go'
-        ]
-    });
-
-    tools.push({
-        name: 'Termius',
-        dev: 'phone',
-        tag: 'SSH Client',
-        icon: 'ti-terminal',
-        summary: 'A polished SSH client for managing servers and network gear from anywhere.',
-        intro: 'Termius is my go-to for remote server work on mobile.',
-        body: 'It stores host profiles and keys securely, syncs across devices, and makes it easy to jump into a server or a switch from my phone in the field.',
-        bullets: [
-            'Saved host profiles and key pairs',
-            'Cross-device sync',
-            'Great for on-site network work'
-        ]
-    });
-
-    tools.push({
-        name: 'GitHub Mobile',
-        dev: 'phone',
-        tag: 'Developer On-the-go',
-        icon: 'ti-brand-github',
-        summary: 'Reviewing PRs, triaging issues, and keeping tabs on repos without opening a laptop.',
-        intro: 'GitHub Mobile keeps my repos within reach.',
-        body: 'I use it to respond to issues, review pull requests, and check CI status while away from my desk.',
-        bullets: [
-            'Review and merge pull requests',
-            'Manage issues and notifications',
-            'Check build status'
-        ]
-    });
-
-    tools.push({
-        name: 'Tasker',
-        dev: 'phone',
-        tag: 'Automation',
-        icon: 'ti-settings',
-        summary: 'Automating the repetitive bits of my phone — from connectivity to quick actions.',
-        intro: 'Tasker automates the little things that save time every day.',
-        body: 'I use Tasker for profiles that toggle Wi-Fi, run quick scripts, and trigger actions based on time and location.',
-        bullets: [
-            'Location and time-based profiles',
-            'Trigger Termux scripts',
-            'Automate connectivity and notifications'
-        ]
-    });
-
-    // =============== 15. Render tools grid + filters + modal ===============
-    const toolsGrid = document.getElementById('tools-grid');
-    const toolsModal = document.getElementById('tools-modal');
-    const toolsModalContent = document.getElementById('tools-modal-content');
-    const toolsModalClose = document.getElementById('tools-modal-close');
-    const toolsModalBackdrop = document.getElementById('tools-modal-backdrop');
-
-    const deviceLabel = (dev) => (dev === 'phone' ? 'Phone' : 'Laptop');
-    const deviceIcon = (dev) => (dev === 'phone' ? 'ti-device-mobile' : 'ti-device-laptop');
-
-    const renderTools = (filter) => {
-        if (!toolsGrid) return;
-        const list = tools.filter(t => filter === 'all' || t.dev === filter);
-        toolsGrid.innerHTML = list.map((t, i) => `
-            <button class="tool-card" data-id="${t.name}" style="animation-delay:${i * 70}ms">
-                <div class="tool-card-top">
-                    <span class="tool-icon"><i class="ti ${t.icon}"></i></span>
-                    <span class="tool-device ${t.dev}"><i class="ti ${deviceIcon(t.dev)}"></i> ${deviceLabel(t.dev)}</span>
-                </div>
-                <span class="tool-tag">${t.tag}</span>
-                <h3>${t.name}</h3>
-                <p class="tool-summary">${t.summary}</p>
-                <span class="tool-arrow">Read more <i class="ti ti-arrow-right"></i></span>
-            </button>
-        `).join('');
-    };
-    renderTools('all');
-
-    // Filter buttons (Laptop / Phone / All)
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-selected', 'false');
-            });
-            btn.classList.add('active');
-            btn.setAttribute('aria-selected', 'true');
-            renderTools(btn.getAttribute('data-filter'));
-        });
-    });
-
-    // Reading modal
-    let lastToolTrigger = null;
-    const openToolModal = (tool) => {
-        if (!toolsModal || !toolsModalContent) return;
-        toolsModalContent.innerHTML = `
-            <span class="tool-device ${tool.dev}"><i class="ti ${deviceIcon(tool.dev)}"></i> ${deviceLabel(tool.dev)}</span>
-            <span class="tool-tag">${tool.tag}</span>
-            <h3>${tool.name}</h3>
-            <span class="tool-meta">${tool.summary}</span>
-            <p>${tool.intro}</p>
-            <p>${tool.body}</p>
-            <ul>${tool.bullets.map(b => `<li><i class="ti ti-check"></i> ${b}</li>`).join('')}</ul>
-        `;
-        toolsModal.classList.add('active');
-        toolsModal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('tools-open');
-        if (toolsModalClose) toolsModalClose.focus();
-    };
-
-    const closeToolModal = () => {
-        if (!toolsModal) return;
-        toolsModal.classList.remove('active');
-        toolsModal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('tools-open');
-        if (lastToolTrigger) lastToolTrigger.focus();
-    };
-
-    if (toolsGrid) {
-        toolsGrid.addEventListener('click', (e) => {
-            const card = e.target.closest('.tool-card');
-            if (!card) return;
-            const tool = tools.find(t => t.name === card.getAttribute('data-id'));
-            if (tool) {
-                lastToolTrigger = card;
-                openToolModal(tool);
-            }
-        });
-    }
-    if (toolsModalClose) toolsModalClose.addEventListener('click', closeToolModal);
-    if (toolsModalBackdrop) toolsModalBackdrop.addEventListener('click', closeToolModal);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && toolsModal && toolsModal.classList.contains('active')) {
-            closeToolModal();
-        }
-    });
 
 });

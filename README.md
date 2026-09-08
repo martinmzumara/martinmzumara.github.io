@@ -8,22 +8,28 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 
 - **Glassmorphism design** — frosted-glass cards over an animated aurora background, light/dark themes with system-preference detection and a labeled footer toggle.
 - **Animated, non-static experience** — preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, 3D tilt/spotlight cards, and back-to-top button.
-- **Tools & Software blog** — filterable (Laptop / Phone / All) card grid with a glass reading modal, driven by a simple JS data array (see below).
+- **Articles & Tools blog** — the homepage shows a few featured posts; a **"View All Posts"** button leads to `/articles/`, which lists every post with the filterable (Laptop / Phone / All) card grid and glass reading modal. Posts live in a shared JS data array (see below).
+- **Testimonials section** — glass quote cards; entries are plain HTML in `index.html` (currently marked PLACEHOLDER — see below).
+- **Contact section** — email / phone / location glass cards with a copy-to-clipboard email button, `mailto:` + resume CTAs, and a matching nav link + hero "Get in Touch" button.
 - **Custom icon system** — a single SVG sprite swapped in at runtime; no icon font CDN.
-- **Case study pages** — LeakSAFE, Manguzi Executive Lodge, and EncPlus, each with image galleries and lightbox.
+- **Case study & client project pages** — LeakSAFE and EncPlus case studies plus the Manguzi Executive Lodge client project, each with image galleries and lightbox.
+- **Project cards** — the homepage cards expose individually clickable links: case study / details, GitHub source (LeakSAFE, EncPlus), and the live Manguzi site.
 - **SEO basics** — `sitemap.xml` and `robots.txt`, plus a custom `404.html` (GitHub Pages serves it automatically).
-- **Performance** — pre-optimized `.webp` image variants under `assets/images/optimized/`.
+- **Performance** — pre-optimized `.webp` image variants under `assets/images/optimized/`; the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render.
 
 ## Project Structure
 
-- `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Approach, Experience, Tools, Showcase).
+- `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Approach, Experience, Testimonials, Tools, Showcase, Contact).
+- `articles/index.html`: Full articles & tools archive (all posts, with filters + reading modal).
 - `leaksafe/index.html`: LeakSAFE case study page.
-- `manguzi/index.html`: Manguzi Executive Lodge case study page.
+- `manguzi/index.html`: Manguzi Executive Lodge client project page.
 - `encplus/index.html`: EncPlus case study page.
 - `404.html`: Custom error page for missing routes.
 - `css/style.css`: Custom styles — CSS variables, glass components, responsive breakpoints, `prefers-reduced-motion` fallbacks.
-- `js/script.js`: All interactivity — preloader, scroll reveal, counters, marquee, tilt/spotlight, live clock, theme toggle, tools data + filter + modal, lightbox.
-- `js/icons.js`: Swaps `ti-…` icon classes for the matching `<svg><use>` from the sprite (with a Tabler webfont fallback if the sprite can't be fetched, e.g. `file://`).
+- `js/tools-data.js`: The posts data array (`SITE_TOOLS`) shared by the homepage and `/articles/` (see below).
+- `js/tools.js`: Renders the tools grid wherever `#tools-grid` exists — featured subset on the homepage, full archive with filters on `/articles/`; wires the reading modal on both.
+- `js/script.js`: All other interactivity — preloader, scroll reveal, counters, marquee, tilt/spotlight, live clock, theme toggle, lightbox, copy-email button.
+- `js/icons.js`: Swaps `ti-…` icon classes for the matching `<svg><use>` from the sprite; if the sprite can't be fetched (e.g. `file://`), it injects the Tabler webfont stylesheet on demand as a fallback — the font is never loaded on normal page views.
 - `assets/icons/icons.svg`: SVG icon sprite (Phosphor regular icons rendered with `currentColor`; `icons.backup.svg` holds the previous Iconoir set).
 - `assets/images/`: Source images; `assets/images/optimized/`: compressed `.webp` variants.
 
@@ -36,16 +42,17 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 
 ## Adding a Tools & Software Post
 
-The "Tools I Use" section is rendered from a JavaScript data array in `js/script.js`
-(see `=============== 14. Tools & Software data ===============`). Each entry is an
-object pushed onto the `tools` array:
+The articles are rendered from a JavaScript data array in `js/tools-data.js`
+(`SITE_TOOLS`), shared by the homepage (featured subset) and `/articles/`
+(full archive). Each entry is an object pushed onto the array:
 
 ```js
-tools.push({
+SITE_TOOLS.push({
     name: 'Visual Studio Code',   // card title + modal heading
     dev: 'laptop',                // 'laptop' or 'phone' (drives the filter + badge)
     tag: 'Code Editor',           // small label shown on the card
     icon: 'ti-brand-vscode',      // icon converted by js/icons.js to the sprite
+    featured: true,               // show on the homepage (keep ~3 featured)
     summary: 'One-line card blurb.',
     intro: 'Opening paragraph of the modal.',
     body: 'Longer body text of the modal.',
@@ -53,8 +60,36 @@ tools.push({
 });
 ```
 
-To add a post, copy a `tools.push({ ... });` block, edit the fields, and save —
-no other files need to change.
+To add a post, copy a `SITE_TOOLS.push({ ... });` block, edit the fields, and
+save — no other files need to change. Set `featured: true` on the entries you
+want on the homepage (everything appears on `/articles/` regardless).
+
+## Editing the Testimonials Section
+
+The "What People Say" section is plain HTML in `index.html` (see the
+`<!-- Testimonials Section -->` comment). Each quote is a card:
+
+```html
+<figure class="testimonial-card">
+    <blockquote>&ldquo;The real quote goes here.&rdquo;</blockquote>
+    <figcaption>
+        <span class="testimonial-name">Name Surname</span>
+        <span class="testimonial-role">Role, Organisation</span>
+    </figcaption>
+</figure>
+```
+
+The section currently ships with PLACEHOLDER quotes — replace all three
+(or add/remove cards) with real quotes before promoting the site. Never
+publish invented testimonials.
+
+## Editing the Contact Section
+
+The "Let's Work Together" section is plain HTML in `index.html` (see the
+`<!-- Contact Section -->` comment). The copy-to-clipboard button reads its
+email address from `js/script.js` (search for `copy-email`); update both the
+`mailto:` links in the HTML and the `EMAIL` constant in the script if the
+address ever changes.
 
 ## Deployment
 

@@ -33,8 +33,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Tabler Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
     
     <!-- Structured Data: Person -->
     <script type="application/ld+json">
@@ -89,6 +87,7 @@
                 <a href="#experience" class="nav-link">EXPERIENCE</a>
                 <a href="#tools" class="nav-link">TOOLS</a>
                 <a href="#showcase" class="nav-link">SHOWCASE</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
             </nav>
             
             <div class="nav-actions">
@@ -113,12 +112,12 @@
                 <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
                 <div class="hero-stats" aria-label="Highlights">
                     <div class="stat"><span class="stat-value" data-count="4">0</span><span class="stat-label">Years in Tech</span></div>
-                    <div class="stat"><span class="stat-value" data-count="3">0</span><span class="stat-label">Case Studies</span></div>
+                    <div class="stat"><span class="stat-value" data-count="3">0</span><span class="stat-label">Projects Delivered</span></div>
                     <div class="stat"><span class="stat-value" data-count="2">0</span><span class="stat-label">Certifications</span></div>
                 </div>
                 <div class="hero-cta">
                     <a href="#projects" class="btn-primary">VIEW MY WORK</a>
-                    <a href="#experience" class="btn-secondary">MY EXPERIENCE</a>
+                    <a href="#contact" class="btn-secondary">GET IN TOUCH</a>
                 </div>
             </div>
             <div class="scroll-cue" aria-hidden="true">
@@ -193,17 +192,19 @@
             
             <div class="projects-grid">
                 <!-- LeakSAFE Project Card -->
-                <a href="/leaksafe/" class="project-card">
-                    <div class="project-thumb">
-                        <picture>
-                            <source type="image/webp" srcset="/assets/images/optimized/leaksafe-wireframes.webp">
-                            <img src="/assets/images/optimized/leaksafe-wireframes.jpg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
-                        </picture>
-                        <div class="project-badge">CASE STUDY</div>
-                    </div>
+                <div class="project-card">
+                    <a href="/leaksafe/" class="project-thumb-link" aria-label="Read the LeakSAFE case study">
+                        <div class="project-thumb">
+                            <picture>
+                                <source type="image/webp" srcset="/assets/images/optimized/leaksafe-wireframes.webp">
+                                <img src="/assets/images/optimized/leaksafe-wireframes.jpg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
+                            </picture>
+                            <div class="project-badge">CASE STUDY</div>
+                        </div>
+                    </a>
                     <div class="project-body">
-                        <span class="system-label">// IOT & MOBILE ENGINEERING</span>
-                        <h3>LeakSAFE – Smart Gas Leakage Detection</h3>
+                        <span class="system-label">// IOT &amp; MOBILE ENGINEERING</span>
+                        <h3><a href="/leaksafe/">LeakSAFE - Smart Gas Leakage Detection</a></h3>
                         <p>An end-to-end hazardous gas detection system built with Flutter and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.</p>
                         <div class="project-meta">
                             <span class="tag">Flutter</span>
@@ -212,25 +213,27 @@
                             <span class="tag">Firebase</span>
                         </div>
                         <div class="project-links">
-                            <span class="project-link-btn">
-                                EXPLORE FULL PROJECT <i class="ti ti-arrow-right"></i>
-                            </span>
-                            <span class="project-link-btn" aria-hidden="true">
+                            <a href="/leaksafe/" class="project-link-btn">
+                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/martinmzumara/LeakSafe" target="_blank" rel="noopener noreferrer" class="project-link-btn">
                                 <i class="ti ti-brand-github"></i> SOURCE
-                            </span>
+                            </a>
                         </div>
                     </div>
-                </a>
+                </div>
 
                 <!-- EncPlus Project Card -->
-                <a href="/encplus/" class="project-card">
-                    <div class="project-thumb placeholder-thumb">
-                        <i class="ti ti-lock placeholder-icon"></i>
-                        <div class="project-badge muted">IN DEVELOPMENT</div>
-                    </div>
+                <div class="project-card">
+                    <a href="/encplus/" class="project-thumb-link" aria-label="Read the EncPlus project details">
+                        <div class="project-thumb placeholder-thumb">
+                            <i class="ti ti-lock placeholder-icon"></i>
+                            <div class="project-badge muted">IN DEVELOPMENT</div>
+                        </div>
+                    </a>
                     <div class="project-body">
-                        <span class="system-label">// SECURITY & MOBILE ENGINEERING</span>
-                        <h3>EncPlus – AES File Encryption</h3>
+                        <span class="system-label">// SECURITY &amp; MOBILE ENGINEERING</span>
+                        <h3><a href="/encplus/">EncPlus - AES File Encryption</a></h3>
                         <p>A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
                         <div class="project-meta">
                             <span class="tag">Flutter</span>
@@ -239,25 +242,27 @@
                             <span class="tag">Firebase</span>
                         </div>
                         <div class="project-links">
-                            <span class="project-link-btn">
-                                VIEW REPOSITORY <i class="ti ti-arrow-right"></i>
-                            </span>
-                            <span class="project-link-btn" aria-hidden="true">
+                            <a href="/encplus/" class="project-link-btn">
+                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="project-link-btn">
                                 <i class="ti ti-brand-github"></i> SOURCE
-                            </span>
+                            </a>
                         </div>
                     </div>
-                </a>
+                </div>
 
                 <!-- Manguzi Executive Lodge Project Card -->
-                <a href="/manguzi/" class="project-card">
-                    <div class="project-thumb placeholder-thumb">
-                        <i class="ti ti-building-skyscraper placeholder-icon"></i>
-                        <div class="project-badge">CASE STUDY</div>
-                    </div>
+                <div class="project-card">
+                    <a href="/manguzi/" class="project-thumb-link" aria-label="Read the Manguzi Executive Lodge project details">
+                        <div class="project-thumb placeholder-thumb">
+                            <i class="ti ti-building-skyscraper placeholder-icon"></i>
+                            <div class="project-badge">CLIENT PROJECT</div>
+                        </div>
+                    </a>
                     <div class="project-body">
-                        <span class="system-label">// WEB DEVELOPMENT & HOSPITALITY</span>
-                        <h3>Manguzi Executive Lodge</h3>
+                        <span class="system-label">// WEB DEVELOPMENT &amp; HOSPITALITY</span>
+                        <h3><a href="/manguzi/">Manguzi Executive Lodge</a></h3>
                         <p>A premium hospitality website for an executive lodge in Karonga, Malawi — featuring accommodation, restaurant, and conference services with online booking.</p>
                         <div class="project-meta">
                             <span class="tag">HTML</span>
@@ -266,15 +271,15 @@
                             <span class="tag">Firebase</span>
                         </div>
                         <div class="project-links">
-                            <span class="project-link-btn">
-                                EXPLORE FULL PROJECT <i class="ti ti-arrow-right"></i>
-                            </span>
-                            <span class="project-link-btn" aria-hidden="true">
-                                <i class="ti ti-external-link"></i> LIVE
-                            </span>
+                            <a href="/manguzi/" class="project-link-btn">
+                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
+                            </a>
+                            <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                                <i class="ti ti-external-link"></i> LIVE SITE
+                            </a>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
 
@@ -425,6 +430,37 @@
             </div>
         </section>
 
+        <!-- Testimonials Section (placeholder quotes - replace with real ones) -->
+        <section id="testimonials" class="container section-padding chapter">
+            <span class="system-label">// SOCIAL PROOF</span>
+            <h2 class="section-title underline">What People Say</h2>
+            <p class="section-lead">Feedback from the people I've built with and worked for.</p>
+
+            <div class="testimonials-grid">
+                <figure class="testimonial-card">
+                    <blockquote>&ldquo;PLACEHOLDER &mdash; Replace this with a real quote from a colleague, client, or lecturer about your work.&rdquo;</blockquote>
+                    <figcaption>
+                        <span class="testimonial-name">Name Surname</span>
+                        <span class="testimonial-role">Role, Organisation</span>
+                    </figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <blockquote>&ldquo;PLACEHOLDER &mdash; Replace this with a real quote from a colleague, client, or lecturer about your work.&rdquo;</blockquote>
+                    <figcaption>
+                        <span class="testimonial-name">Name Surname</span>
+                        <span class="testimonial-role">Role, Organisation</span>
+                    </figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <blockquote>&ldquo;PLACEHOLDER &mdash; Replace this with a real quote from a colleague, client, or lecturer about your work.&rdquo;</blockquote>
+                    <figcaption>
+                        <span class="testimonial-name">Name Surname</span>
+                        <span class="testimonial-role">Role, Organisation</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
         <!-- Tools & Software Section -->
         <section id="tools" class="container section-padding chapter">
             <div class="section-head">
@@ -433,10 +469,10 @@
                 <p class="section-lead">The apps and services I rely on daily — for development, IT work, and getting things done — on both my laptop and my phone.</p>
             </div>
 
-            <div class="tools-filter" role="tablist" aria-label="Filter tools by device">
-                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">ALL</button>
-                <button class="filter-btn" data-filter="laptop" role="tab" aria-selected="false"><i class="ti ti-device-laptop"></i> LAPTOP</button>
-                <button class="filter-btn" data-filter="phone" role="tab" aria-selected="false"><i class="ti ti-device-mobile"></i> PHONE</button>
+            <div class="tools-cta">
+                <a href="/articles/" class="tools-view-all">
+                    VIEW ALL POSTS <i class="ti ti-arrow-right"></i>
+                </a>
             </div>
 
             <div class="tools-grid" id="tools-grid"><!-- tool cards injected by JS --></div>
@@ -486,6 +522,46 @@
                 </button>
             </div>
         </section>
+        <!-- Contact Section -->
+        <section id="contact" class="container section-padding chapter">
+            <span class="system-label">// GET IN TOUCH</span>
+            <h2 class="section-title underline">Let's Work Together</h2>
+            <p class="section-lead">Have a project in mind, need IT support, or want to discuss an opportunity? Reach out — I usually reply within a day.</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="ti ti-mail contact-card-icon"></i>
+                    <h3>Email</h3>
+                    <p><a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></p>
+                    <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard">
+                        <i class="ti ti-copy"></i> COPY EMAIL
+                    </button>
+                </div>
+                <div class="contact-card">
+                    <i class="ti ti-phone contact-card-icon"></i>
+                    <h3>Phone</h3>
+                    <p>
+                        <a href="tel:+265884630834">+265 884 630 834</a><br>
+                        <a href="tel:+265990783896">+265 990 783 896</a>
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <i class="ti ti-map-pin contact-card-icon"></i>
+                    <h3>Location</h3>
+                    <p>Area 49, Lilongwe<br>Malawi</p>
+                </div>
+            </div>
+
+            <div class="contact-cta">
+                <a href="mailto:martinmzumara08@gmail.com" class="btn-primary">
+                    <i class="ti ti-send"></i> SEND ME AN EMAIL
+                </a>
+                <a href="/assets/Martin_Mzumara_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                    <i class="ti ti-file-text"></i> VIEW RESUME
+                </a>
+            </div>
+        </section>
+
     </main>
 
     <!-- Tools Reading Modal -->
