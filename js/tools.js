@@ -11,10 +11,18 @@
 (function () {
     "use strict";
 
+    var retries = 0;
     var init = function () {
         var tools = window.SITE_TOOLS;
         var toolsGrid = document.getElementById('tools-grid');
         if (!toolsGrid) return;
+        // If tools-data.js hasn't executed yet (slow load, ordering edge case),
+        // wait briefly and retry before showing a failure message.
+        if ((!tools || !tools.length) && retries < 20) {
+            retries++;
+            setTimeout(init, 100);
+            return;
+        }
         console.log('[tools] init running. SITE_TOOLS:', tools ? tools.length + ' entries' : 'MISSING');
         if (!tools || !tools.length) {
             console.error('[tools] SITE_TOOLS is missing or empty — check that js/tools-data.js loaded (Network tab).');
