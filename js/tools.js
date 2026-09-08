@@ -15,6 +15,7 @@
         var tools = window.SITE_TOOLS;
         var toolsGrid = document.getElementById('tools-grid');
         if (!toolsGrid) return;
+        console.log('[tools] init running. SITE_TOOLS:', tools ? tools.length + ' entries' : 'MISSING');
         if (!tools || !tools.length) {
             console.error('[tools] SITE_TOOLS is missing or empty — check that js/tools-data.js loaded (Network tab).');
             toolsGrid.innerHTML = '<p style="color:tomato;font-family:monospace">[tools] Data failed to load — open DevTools Console for details.</p>';
@@ -46,6 +47,7 @@
                     '<span class="tool-arrow">Read more <i class="ti ti-arrow-right"></i></span>' +
                 '</button>';
             }).join('');
+            console.log('[tools] rendered', list.length, 'cards (filter: ' + filter + ')');
         };
 
         renderTools(hasFilters ? 'all' : 'featured');
