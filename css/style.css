@@ -322,7 +322,7 @@ body::after {
     text-decoration: none;
     letter-spacing: 0.05em;
     flex-shrink: 0;
-    text-shadow: 0 0 18px rgba(77,155,255,0.45);
+    text-shadow: 0 0 18px var(--accent-blue-glow);
 }
 
 [data-theme="light"] .logo {
@@ -724,7 +724,7 @@ body::after {
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(77,155,255,0.45), transparent 65%);
+    background: radial-gradient(circle, var(--accent-blue-glow), transparent 65%);
     filter: blur(6px);
     opacity: 0;
     transition: opacity 0.25s ease;
@@ -843,8 +843,8 @@ body::after {
     align-items: center;
     justify-content: center;
     background:
-        radial-gradient(60% 60% at 30% 30%, rgba(77,155,255,0.28), transparent 70%),
-        radial-gradient(60% 60% at 75% 70%, rgba(77,155,255,0.18), transparent 70%),
+        radial-gradient(60% 60% at 30% 30%, rgba(63,185,80,0.25), transparent 70%),
+        radial-gradient(60% 60% at 75% 70%, rgba(63,185,80,0.15), transparent 70%),
         var(--glass-bg-soft);
 }
 
@@ -2104,7 +2104,7 @@ body.lightbox-open {
    ============================================================ */
 
 :root {
-    --font-display: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
+    --font-display: 'JetBrains Mono', 'Inter', monospace;
 }
 
 /* Chapter numbering for section titles */
@@ -2190,7 +2190,7 @@ main { counter-reset: chapter; }
     background: #06080e;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
-[data-theme="light"] .preloader { background: #eef1f7; }
+[data-theme="light"] .preloader { background: #f5f2ec; }
 .preloader-inner { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
 .preloader-count {
     font-family: var(--font-mono);
