@@ -139,8 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const sections = [];
     navLinksAll.forEach(link => {
         const href = link.getAttribute('href');
-        if (href && href.startsWith('/#')) {
-            const id = href.substring(2);
+        // Support both "/#id" (cross-page) and "#id" (same-page anchors)
+        const id = href && href.startsWith('/#') ? href.substring(2)
+                 : href && href.startsWith('#') && !href.startsWith('#/') ? href.substring(1)
+                 : null;
+        if (id) {
             const sec = document.getElementById(id);
             if (sec) sections.push({ id, sec, link });
         }
@@ -153,7 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         navLinksAll.forEach(link => {
             const isActive = link.getAttribute('href') === '#/' + currentId ||
-                link.getAttribute('href') === '/#' + currentId;
+                link.getAttribute('href') === '/#' + currentId ||
+                link.getAttribute('href') === '#' + currentId;
             if (isActive) {
                 link.setAttribute('aria-current', 'true');
                 link.classList.add('nav-link-active');

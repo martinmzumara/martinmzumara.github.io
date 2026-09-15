@@ -2683,6 +2683,9 @@ a.project-link-btn:hover .ci {
 }
 .tools-view-all:hover i { transform: translateX(3px); }
 
+/* Anchor jumps: keep section headings clear of the fixed navbar */
+section[id] { scroll-margin-top: 90px; }
+
 /* Hidden terminal easter egg (opens on backtick) */
 .term-egg {
     position: fixed; inset: 0; z-index: 2000;
