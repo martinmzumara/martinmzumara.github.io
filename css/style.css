@@ -2682,3 +2682,40 @@ a.project-link-btn:hover .ci {
     transform: translateY(-1px);
 }
 .tools-view-all:hover i { transform: translateX(3px); }
+
+/* Hidden terminal easter egg (opens on backtick) */
+.term-egg {
+    position: fixed; inset: 0; z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.65);
+    opacity: 0; pointer-events: none; transition: opacity 0.18s ease;
+}
+.term-egg.is-open { opacity: 1; pointer-events: auto; }
+.term-egg-window {
+    width: min(680px, 92vw); max-height: 70vh;
+    display: flex; flex-direction: column;
+    background: var(--bg-main, #0b0f14);
+    border: 1px solid var(--glass-border); border-radius: 12px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    overflow: hidden;
+    font-family: var(--font-display, monospace);
+    transform: translateY(8px) scale(0.98); transition: transform 0.18s ease;
+}
+.term-egg.is-open .term-egg-window { transform: none; }
+.term-egg-bar { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--glass-border); font-size: 0.8rem; color: var(--text-secondary); position: relative; }
+.term-egg-close { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-secondary); font-size: 1.1rem; line-height: 1; }
+.term-egg-close:hover { color: var(--accent-blue); }
+.term-egg-out { flex: 1; overflow-y: auto; padding: 0.9rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); min-height: 220px; }
+.term-egg-line { white-space: pre-wrap; word-break: break-word; }
+.term-egg-cmd { color: var(--accent-blue); }
+.term-egg-ok { color: var(--accent-blue); }
+.term-egg-err { color: #f85149; }
+.term-egg-input-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 0.9rem; border-top: 1px solid var(--glass-border); }
+.term-egg-prompt { color: var(--accent-blue); font-size: 0.85rem; white-space: nowrap; }
+.term-egg-input { flex: 1; background: none; border: none; outline: none; color: var(--text-primary); font: inherit; font-size: 0.85rem; }
+@media (prefers-reduced-motion: reduce) {
+    .term-egg, .term-egg-window { transition: none; }
+}
+
+.term-hint { margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-faint); font-family: var(--font-mono); opacity: 0.8; }
+.term-hint kbd { border: 1px solid var(--glass-border); border-radius: 4px; padding: 0 0.35em; font-family: inherit; }

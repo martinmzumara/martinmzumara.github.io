@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  links:
+    name: Link & HTML check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check internal links and image references
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Internal links/images only; external sites rate-limit and cause flaky failures
+          args: >-
+            --no-progress
+            --offline
+            './**/*.html'
+          fail: true
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Lighthouse CI
+        run: npm i -g @lhci/cli
+      - name: Run Lighthouse CI (3 runs, mobile)
+        run: |
+          lhci autorun \
+            --collect.staticDistDir=. \
+            --collect.numberOfRuns=3 \
+            --assert.assertions.categories:performance='error' \
+            --assert.assertions.categories:accessibility='error' \
+            --assert.assertions.categories:best-practices='error' \
+            --assert.assertions.categories:seo='error'
