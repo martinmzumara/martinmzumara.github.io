@@ -6,58 +6,59 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
-    /* Primary brand accent (blue) */
-    --accent-blue: #4d9bff;
-    --accent-blue-hover: #3a86f0;
-    --accent-blue-deep: #2563eb;
-    --accent-cyan: #7db8ff;
-    --accent-blue-glow: rgba(77, 155, 255, 0.45);
-    --accent-violet: #a78bfa;
+    /* Primary brand accent — phosphor green (terminal) */
+    --accent-blue: #3fb950;
+    --accent-blue-hover: #2ea043;
+    --accent-blue-deep: #238636;
+    --accent-cyan: #2dd4a7;
+    --accent-blue-glow: rgba(63, 185, 80, 0.35);
+    --accent-violet: #e3b341;
 
-    /* Glass surfaces */
-    --glass-bg: linear-gradient(160deg, rgba(255,255,255,0.11), rgba(255,255,255,0.02) 60%), rgba(16,18,28,0.28);
-    --glass-bg-strong: linear-gradient(160deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04) 60%), rgba(16,18,28,0.42);
-    --glass-bg-soft: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)), rgba(12,14,22,0.30);
-    --glass-border: rgba(255,255,255,0.14);
-    --glass-border-strong: rgba(255,255,255,0.26);
-    --glass-highlight: rgba(255,255,255,0.10);
-    --glass-shadow: 0 22px 55px rgba(0,0,0,0.45);
-    --glass-shadow-soft: 0 10px 28px rgba(0,0,0,0.28);
-    --glass-blur: 20px;
+    /* Flat console surfaces */
+    --glass-bg: rgba(255,255,255,0.03);
+    --glass-bg-strong: rgba(255,255,255,0.05);
+    --glass-bg-soft: rgba(255,255,255,0.025);
+    --glass-border: rgba(255,255,255,0.13);
+    --glass-border-strong: rgba(63,185,80,0.45);
+    --glass-highlight: rgba(255,255,255,0.04);
+    --glass-shadow: 0 14px 34px rgba(0,0,0,0.5);
+    --glass-shadow-soft: 0 6px 16px rgba(0,0,0,0.35);
+    --glass-blur: 0px;
 
     /* Text + bg */
-    --bg-main: #0a0b11;
-    --text-primary: #f4f6fb;
-    --text-secondary: #aab2c3;
-    --text-faint: #7c8496;
-    --system-label-color: #8fb4ff;
+    --bg-main: #0b0f14;
+    --text-primary: #d6dee6;
+    --text-secondary: #8b949e;
+    --text-faint: #6a737d;
+    --system-label-color: #3fb950;
 
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'JetBrains Mono', 'Inter', monospace;
 }
 
-/* ---------- Light Theme Tokens ---------- */
+/* ---------- Light Theme Tokens (paper console) ---------- */
 [data-theme="light"] {
-    --glass-bg: linear-gradient(160deg, rgba(255,255,255,0.72), rgba(255,255,255,0.45) 60%), rgba(255,255,255,0.35);
-    --glass-bg-strong: linear-gradient(160deg, rgba(255,255,255,0.82), rgba(255,255,255,0.55) 60%), rgba(255,255,255,0.45);
-    --glass-bg-soft: linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.40)), rgba(255,255,255,0.45);
-    --glass-border: rgba(15,23,42,0.13);
-    --glass-border-strong: rgba(15,23,42,0.28);
-    --glass-highlight: rgba(255,255,255,0.75);
-    --glass-shadow: 0 22px 55px rgba(15,23,42,0.18);
-    --glass-shadow-soft: 0 10px 28px rgba(15,23,42,0.12);
-    --accent-blue: #2563eb;
-    --accent-blue-hover: #1d4ed8;
-    --accent-blue-deep: #1e40af;
-    --accent-cyan: #60a5fa;
-    --accent-blue-glow: rgba(37, 99, 235, 0.35);
-    --accent-violet: #7c6cf6;
+    --glass-bg: rgba(255,255,255,0.65);
+    --glass-bg-strong: rgba(255,255,255,0.85);
+    --glass-bg-soft: rgba(255,255,255,0.55);
+    --glass-border: rgba(27,31,35,0.18);
+    --glass-border-strong: rgba(26,127,55,0.5);
+    --glass-highlight: rgba(255,255,255,0.6);
+    --glass-shadow: 0 10px 24px rgba(27,31,35,0.12);
+    --glass-shadow-soft: 0 4px 12px rgba(27,31,35,0.08);
+    --accent-blue: #1a7f37;
+    --accent-blue-hover: #116329;
+    --accent-blue-deep: #0e4f22;
+    --accent-cyan: #0f766e;
+    --accent-blue-glow: rgba(26, 127, 55, 0.25);
+    --accent-violet: #9a6700;
 
-    --bg-main: #eef1f7;
-    --text-primary: #0f172a;
-    --text-secondary: #46506b;
-    --text-faint: #6b7488;
-    --system-label-color: #2563eb;
+    --bg-main: #f5f2ec;
+    --text-primary: #1c2026;
+    --text-secondary: #4b535c;
+    --text-faint: #6e7681;
+    --system-label-color: #1a7f37;
 }
 
 /* ---------- Base ---------- */
@@ -87,22 +88,40 @@ body {
     position: relative;
 }
 
-/* Animated aurora background — gives the glass something to blur */
+/* Terminal aesthetic — monospace display type for headings */
+h1, h2, .section-title, .logo, .footer-brand h3 {
+    font-family: var(--font-mono);
+    letter-spacing: -0.01em;
+}
+
+/* Blinking cursor after the hero headline */
+.hero-content h1 span::after {
+    content: '_';
+    color: var(--accent-blue);
+    -webkit-text-fill-color: var(--accent-blue);
+    animation: cursor-blink 1.1s steps(2, start) infinite;
+}
+@keyframes cursor-blink {
+    to { visibility: hidden; }
+}
+
+/* Terminal backdrop — flat, with subtle scanlines + vignette */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background:
-        radial-gradient(46% 40% at 8% 4%, rgba(77,155,255,0.35), transparent 62%),
-        radial-gradient(42% 36% at 92% 10%, rgba(77,155,255,0.28), transparent 62%),
-        radial-gradient(55% 48% at 60% 100%, rgba(147,97,255,0.20), transparent 62%),
-        radial-gradient(38% 32% at 70% 45%, rgba(0,200,230,0.12), transparent 60%);
-    animation: glass-aurora 26s ease-in-out infinite alternate;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.018) 0px,
+        rgba(255,255,255,0.018) 1px,
+        transparent 1px,
+        transparent 3px
+    );
 }
 
-/* Soft vignette + film grain-ish top sheen */
+/* Soft vignette */
 body::after {
     content: '';
     position: fixed;
@@ -110,14 +129,17 @@ body::after {
     z-index: -1;
     pointer-events: none;
     background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 40%),
-        radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(0,0,0,0.35));
+        radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(0,0,0,0.4));
 }
 
-@keyframes glass-aurora {
-    0%   { transform: translate3d(0, 0, 0) scale(1); }
-    50%  { transform: translate3d(2%, -1%, 0) scale(1.06); }
-    100% { transform: translate3d(-2%, 2%, 0) scale(1.02); }
+[data-theme="light"] body::before {
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(27,31,35,0.02) 0px,
+        rgba(27,31,35,0.02) 1px,
+        transparent 1px,
+        transparent 3px
+    );
 }
 
 /* Skip to content link for keyboard users */
