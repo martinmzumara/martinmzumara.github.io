@@ -105,6 +105,73 @@ h1, h2, .section-title, .logo, .footer-brand h3 {
     to { visibility: hidden; }
 }
 
+/* ============================================================
+   Terminal theme — structural elements
+   ============================================================ */
+
+/* Fake window title bars on cards (label from data-term attr) */
+.card::before,
+.project-card::before,
+.cred-card::before,
+.contact-card::before {
+    content: '● ● ●   ' attr(data-term);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    padding-bottom: 0.7rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid var(--glass-border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Project cards are full-bleed: bar spans the top edge */
+.project-card::before {
+    margin: 0;
+    padding: 0.75rem 1.2rem;
+}
+
+/* Dashed terminal dividers */
+.section-divider {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--glass-border) 0 10px,
+        transparent 10px 18px
+    );
+}
+
+/* Nav links as paths; logo prompt already in markup */
+.nav-link::before {
+    content: './';
+    color: var(--accent-blue);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    margin-right: 0.15rem;
+}
+
+/* Flat terminal buttons (no gradient) */
+.btn-primary,
+.project-cta-box .btn-primary {
+    background: var(--accent-blue);
+    box-shadow: 0 4px 14px var(--accent-blue-glow);
+}
+.btn-primary:hover,
+.project-cta-box .btn-primary:hover {
+    background: var(--accent-blue-hover);
+    box-shadow: 0 6px 18px var(--accent-blue-glow);
+}
+
+/* Typewriter caret on the hero command line */
+#hero-term::after {
+    content: '▌';
+    color: var(--accent-blue);
+    animation: cursor-blink 1s steps(2, start) infinite;
+    margin-left: 0.15rem;
+}
+
 /* Terminal backdrop — flat, with subtle scanlines + vignette */
 body::before {
     content: '';

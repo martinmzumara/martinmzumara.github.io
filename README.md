@@ -6,7 +6,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 
 ## Current Features
 
-- **Glassmorphism design** — frosted-glass cards over an animated aurora background, light/dark themes with system-preference detection and a labeled footer toggle.
+- **Terminal aesthetic** — flat near-black console with phosphor-green accent, subtle scanlines, monospace headings, fake window title bars on cards, shell-command section labels (`$ ls ~/projects/`), prompt-style logo and nav, blinking hero cursor with typewriter effect, light "paper console" second theme.
 - **Animated, non-static experience** — preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, 3D tilt/spotlight cards, and back-to-top button.
 - **Articles & Tools** — the homepage shows a few featured posts with glass reading modals (data in `js/tools-data.js`); a **"View All Posts"** button links to the separate blog at [martinmzumara.github.io/blog](https://martinmzumara.github.io/blog/), built with Astro in its own repo.
 - **Testimonials / social proof** — intentionally omitted for now (see "Adding Testimonials Later").

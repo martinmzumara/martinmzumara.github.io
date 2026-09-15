@@ -422,5 +422,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // =============== 14. Hero command-line typewriter ===============
+    const heroTerm = document.getElementById('hero-term');
+    if (heroTerm) {
+        const fullText = heroTerm.textContent;
+        if (reduceMotion) {
+            // Static text, caret still blinks via CSS
+        } else {
+            heroTerm.textContent = '';
+            heroTerm.setAttribute('aria-label', fullText);
+            let ti = 0;
+            const typeStep = () => {
+                if (ti <= fullText.length) {
+                    heroTerm.textContent = fullText.slice(0, ti);
+                    ti++;
+                    setTimeout(typeStep, 55 + Math.random() * 45);
+                }
+            };
+            setTimeout(typeStep, 700);
+        }
+    }
 
 });
