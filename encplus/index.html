@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
+    <script data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))})();</script>
     <title>EncPlus - AES File Encryption | Martin Mzumara</title>
     <meta name="description" content="EncPlus is a cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.">
     
@@ -313,8 +315,8 @@
         </div>
     </footer>
 
-    <script src="/js/icons.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="/js/icons.js" defer></script>
+    <script src="/js/script.js" defer></script>
     <!-- Back to Top -->
     <button class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
         <i class="ti ti-arrow-up"></i>

@@ -1,44 +1,20 @@
-// Pre-apply theme early to prevent visual flashing on page load.
-// The site defaults to the light theme; a user's saved choice overrides it.
-(function initTheme() {
-    const STORAGE_KEY = "theme";
-
-    const getSystemTheme = () => {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
-    };
-
-    const getSavedTheme = () => {
-        try {
-            return localStorage.getItem(STORAGE_KEY);
-        } catch (e) {
-            return null;
-        }
-    };
-
-    const applyTheme = (theme) => {
-        document.documentElement.setAttribute("data-theme", theme);
-    };
-
-    // Initial theme: saved preference or system
-    const savedTheme = getSavedTheme();
-    applyTheme(savedTheme || getSystemTheme());
-
-    // Listen for system theme changes (only matters when no saved preference)
+document.addEventListener("DOMContentLoaded", () => {
+    // Follow system theme changes while the user has no saved preference
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleSystemChange = () => {
-        if (!getSavedTheme()) {
-            applyTheme(getSystemTheme());
+        let saved = null;
+        try { saved = localStorage.getItem("theme"); } catch (e) {}
+        if (!saved) {
+            document.documentElement.setAttribute("data-theme", mediaQuery.matches ? "dark" : "light");
+            updateThemeToggleLabel();
         }
     };
-
     if (mediaQuery.addEventListener) {
         mediaQuery.addEventListener("change", handleSystemChange);
     } else if (mediaQuery.addListener) {
         mediaQuery.addListener(handleSystemChange); // Safari < 14
     }
-})();
 
-document.addEventListener("DOMContentLoaded", () => {
     // 1. Light / Dark Theme Toggle Setup
     const themeToggleBtn = document.getElementById("theme-toggle");
     const themeToggleLabel = document.getElementById("theme-toggle-label");
@@ -203,6 +179,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const openLightbox = (src, trigger) => {
             lastFocused = trigger;
             lightboxImg.src = src;
+            // Mirror the source image's alt text instead of a generic label
+            const triggerImg = trigger && trigger.querySelector ? trigger.querySelector('img') : null;
+            lightboxImg.alt = (triggerImg && triggerImg.alt) ? triggerImg.alt : 'Showcase preview';
             lightbox.classList.add('active');
             lightbox.setAttribute('aria-hidden','false');
             document.body.classList.add('lightbox-open');
@@ -346,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =============== 10. Scroll-reveal system ===============
-    const REVEAL_SEL = '.system-label, .section-title, .section-lead, .section-head, .card, .project-card, .timeline-item, .cred-card, .approach-text, .approach-image-container, .showcase-item';
+    const REVEAL_SEL = '.system-label, .section-title, .section-lead, .section-head, .card, .project-card, .timeline-item, .cred-card, .showcase-item';
     const revealEls = document.querySelectorAll(REVEAL_SEL);
     if (revealEls.length && 'IntersectionObserver' in window && !reduceMotion) {
         revealEls.forEach(el => el.classList.add('reveal-el'));

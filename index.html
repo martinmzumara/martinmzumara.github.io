@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
+    <script data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))})();</script>
     <title>Martin Mzumara - Software Developer & IT Technician</title>
     <meta name="description" content="Martin Mzumara is a Software Developer and IT Technician in Malawi specializing in software engineering, IoT systems, web development, and network infrastructure.">
     
@@ -12,8 +14,8 @@
     <meta property="og:description" content="Software Developer & IT Technician in Malawi. Specializing in software engineering, IoT systems, web development, and network infrastructure.">
     <meta property="og:url" content="https://martinmzumara.github.io/">
     <meta property="og:image" content="https://martinmzumara.github.io/assets/images/optimized/profile-graduation.jpg">
-    <meta property="og:image:width" content="900">
-    <meta property="og:image:height" content="900">
+    <meta property="og:image:width" content="1333">
+    <meta property="og:image:height" content="2000">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -22,6 +24,9 @@
     <meta name="twitter:image" content="https://martinmzumara.github.io/assets/images/optimized/profile-graduation.jpg">
     
     <link rel="canonical" href="https://martinmzumara.github.io/">
+    <!-- Preload LCP hero image -->
+    <link rel="preload" as="image" href="/assets/images/optimized/profile-graduation.webp" fetchpriority="high">
+    
     <meta name="theme-color" content="#2563eb">
     
     <!-- Favicon -->
@@ -83,7 +88,6 @@
             <nav class="nav-links" id="nav-links" aria-label="Main navigation">
                 <a href="#expertise" class="nav-link">EXPERTISE</a>
                 <a href="#projects" class="nav-link">PROJECTS</a>
-                <a href="#approach" class="nav-link">APPROACH</a>
                 <a href="#experience" class="nav-link">EXPERIENCE</a>
                 <a href="#tools" class="nav-link">TOOLS</a>
                 <a href="#showcase" class="nav-link">SHOWCASE</a>
@@ -120,6 +124,19 @@
                     <a href="#projects" class="btn-primary">VIEW MY WORK</a>
                     <a href="#contact" class="btn-secondary">GET IN TOUCH</a>
                 </div>
+            </div>
+            <div class="hero-visual">
+                <picture>
+                    <source type="image/webp" srcset="/assets/images/optimized/profile-graduation.webp">
+                    <img src="/assets/images/optimized/profile-graduation.jpg"
+                         alt="Martin Mzumara celebrating graduation"
+                         class="hero-img" width="400" height="600"
+                         fetchpriority="high" decoding="async">
+                </picture>
+                <span class="hero-visual-caption">
+                    <i class="ti ti-map-pin"></i>
+                    <span>Lilongwe, Malawi</span>
+                </span>
             </div>
             <div class="scroll-cue" aria-hidden="true">
                 <span>SCROLL</span>
@@ -284,62 +301,6 @@
             </div>
         </section>
 
-        <!-- Approach Section -->
-        <section id="approach" class="container section-padding chapter">
-            <span class="system-label">// THE WAY I WORK</span>
-            <h2 class="section-title underline">Practical, evidence-based solutions</h2>
-            
-            <div class="approach-grid">
-                <div class="approach-text">
-                    <p class="lead-text">I blend software engineering and network infrastructure into practical, utility-driven systems for the Malawian IT market.</p>
-                    <p class="sub-text">As a Computer Science graduate and CCNA-certified professional, I work in clear stages and keep every step grounded in verifiable results — so you always know where things stand and what comes next.</p>
-                    
-                    <ol class="principles-list">
-                        <li class="principle-item">
-                            <span class="principle-index">01</span>
-                            <div class="principle-body">
-                                <h3 class="principle-title">Pricing that fits local</h3>
-                                <p class="principle-text">Accessible, value-based pricing models built for local businesses.</p>
-                            </div>
-                        </li>
-                        <li class="principle-item">
-                            <span class="principle-index">02</span>
-                            <div class="principle-body">
-                                <h3 class="principle-title">Done in stages</h3>
-                                <p class="principle-text">Incremental delivery you can review and steer at every step.</p>
-                            </div>
-                        </li>
-                        <li class="principle-item">
-                            <span class="principle-index">03</span>
-                            <div class="principle-body">
-                                <h3 class="principle-title">Modern by default</h3>
-                                <p class="principle-text">Clean, trend-led design that reflects and lifts your brand.</p>
-                            </div>
-                        </li>
-                        <li class="principle-item">
-                            <span class="principle-index">04</span>
-                            <div class="principle-body">
-                                <h3 class="principle-title">Rigorous engineering</h3>
-                                <p class="principle-text">Trust built on solid engineering, evidence, and verifiable results.</p>
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-                <figure class="approach-figure">
-                    <div class="approach-image-container">
-                        <picture>
-                            <source type="image/webp" srcset="/assets/images/optimized/profile-graduation.webp">
-                            <img src="/assets/images/optimized/profile-graduation.jpg" alt="Martin Mzumara celebrating graduation" class="approach-img" loading="lazy" width="340" height="340">
-                        </picture>
-                    </div>
-                    <figcaption class="approach-caption">
-                        <i class="ti ti-map-pin"></i>
-                        <span>Based in Lilongwe, Malawi — delivering for local businesses.</span>
-                    </figcaption>
-                </figure>
-            </div>
-        </section>
-
         <!-- Experience & Education Section -->
         <section id="experience" class="container section-padding chapter">
             <span class="system-label">// TRACK RECORD</span>
@@ -499,6 +460,7 @@
             <span class="system-label">// GET IN TOUCH</span>
             <h2 class="section-title underline">Let's Work Together</h2>
             <p class="section-lead">Have a project in mind, need IT support, or want to discuss an opportunity? Reach out — I usually reply within a day.</p>
+            <p class="contact-principles"><i class="ti ti-check"></i> Fair, local-friendly pricing &nbsp;·&nbsp; <i class="ti ti-check"></i> Work delivered in reviewable stages &nbsp;·&nbsp; <i class="ti ti-check"></i> Modern design, rigorous engineering</p>
 
             <div class="contact-grid">
                 <div class="contact-card">
@@ -588,10 +550,10 @@
         </div>
     </footer>
 
-    <script src="/js/icons.js"></script>
-    <script src="/js/tools-data.js?v=2"></script>
-    <script src="/js/tools.js?v=2"></script>
-    <script src="/js/script.js"></script>
+    <script src="/js/icons.js" defer></script>
+    <script src="/js/tools-data.js?v=2" defer></script>
+    <script src="/js/tools.js?v=2" defer></script>
+    <script src="/js/script.js" defer></script>
     <!-- Back to Top -->
     <button class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
         <i class="ti ti-arrow-up"></i>
