@@ -17,18 +17,17 @@
     
     <meta name="theme-color" content="#238636">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Favicon (generated from assets/images/logo.png) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
     <link rel="stylesheet" href="/css/style.css">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
+    <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Tabler Icons -->
     </head>
 <body>
@@ -37,7 +36,7 @@
     <!-- Navigation -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">MARTIN MZUMARA</a>
+            <a href="index.html" class="logo">martin@portfolio<span>:~$</span></a>
             
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
                 <i class="ti ti-menu-2 icon-menu"></i>
@@ -85,7 +84,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <h3>MARTIN MZUMARA</h3>
+                <div class="footer-logo-row">
+                    <img src="/assets/images/optimized/logo-96.webp" alt="" width="44" height="44" class="footer-logo" loading="lazy" decoding="async">
+                    <h3>MARTIN MZUMARA</h3>
+                </div>
                 <p>Software Developer & IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">

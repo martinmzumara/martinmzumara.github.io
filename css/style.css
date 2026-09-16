@@ -4,6 +4,27 @@
    with a full glassmorphism treatment throughout.
    ============================================================ */
 
+/* ---------- Self-hosted fonts (latin subset, variable woff2) ----------
+   Generated from the OFL-licensed variable TTFs with:
+   pyftsubset <font>.ttf --flavor=woff2 --unicodes=<latin+symbols>
+   Inter: wght 100–900 · JetBrains Mono: wght 100–800
+   Replaces the previous Google Fonts <link> (no third-party requests).       */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('../assets/fonts/inter/inter-var.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 100 800;
+    font-display: swap;
+    src: url('../assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2') format('woff2');
+}
+
 /* ---------- Design Tokens ---------- */
 :root {
     /* Primary brand accent — phosphor green (terminal) */
@@ -113,9 +134,15 @@ h1, h2, .section-title, .logo, .footer-brand h3 {
 .card::before,
 .project-card::before,
 .cred-card::before,
-.contact-card::before {
+.contact-card::before,
+.stat-card::before,
+.spec-card::before,
+.gallery-card::before {
     content: '● ● ●   ' attr(data-term);
     display: block;
+    /* No-op in block layout; stretches the bar to full width inside the flex
+       column that .gallery-card uses for its thumbnail + caption. */
+    align-self: stretch;
     font-family: var(--font-mono);
     font-size: 0.66rem;
     letter-spacing: 0.1em;
@@ -127,6 +154,9 @@ h1, h2, .section-title, .logo, .footer-brand h3 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* .stat-card centers its text; keep its title bar left-aligned like the rest */
+.stat-card::before { text-align: left; }
 
 /* Project cards are full-bleed: bar spans the top edge */
 .project-card::before {
@@ -1216,8 +1246,20 @@ body.lightbox-open {
 /* Project Stats */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Every case study has exactly 4 metric cards — explicit equal columns keep the
+       rows balanced (auto-fit left an orphaned card / a trailing empty track). */
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.25rem;
+}
+
+/* Keep rows balanced instead of auto-fit leaving an orphaned card on the left
+   (4 cards → 2×2 below 1024px, single column on phones) */
+@media (max-width: 1024px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+    .stats-grid { grid-template-columns: 1fr; }
 }
 
 .stat-card {
@@ -1627,6 +1669,24 @@ body.lightbox-open {
 .footer-brand p {
     color: var(--text-secondary);
     font-size: 0.9rem;
+}
+
+/* Footer brand: logo mark beside the wordmark */
+.footer-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo-row h3 {
+    margin-bottom: 0;
+}
+
+.footer-logo {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
 }
 
 .footer-connect h4 {
@@ -2281,6 +2341,11 @@ body.loaded .hero-visual {
     color: transparent;
 }
 .stat-label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-top: 0.3rem; }
+
+/* The .stat-value rule above sets width: fit-content (so the gradient spans only
+   the text), which left-aligns the block box inside a centered card. Auto margins
+   re-center it while keeping the fit-content gradient. */
+.stat-card .stat-value { margin-inline: auto; }
 
 /* Scroll cue */
 .scroll-cue { position: absolute; left: 50%; bottom: 2.5rem; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.28em; color: var(--text-faint); opacity: 0; animation: cue-in 1s ease 1.4s forwards; }

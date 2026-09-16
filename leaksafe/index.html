@@ -25,18 +25,17 @@
     <link rel="canonical" href="https://martinmzumara.github.io/leaksafe/">
     <meta name="theme-color" content="#238636">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Favicon (generated from assets/images/logo.png) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
     <link rel="stylesheet" href="/css/style.css">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
+    <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Tabler Icons -->
     </head>
 <body>
@@ -45,7 +44,7 @@
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">MARTIN MZUMARA</a>
+            <a href="/" class="logo">martin@portfolio<span>:~$</span></a>
             
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
                 <i class="ti ti-menu-2 icon-menu"></i>
@@ -70,7 +69,7 @@
     <main id="main-content" class="container project-detail-container">
         <!-- Hero Title Section -->
         <div class="project-detail-header">
-            <span class="system-label">// CASE STUDY: IOT & MOBILE ENGINEERING</span>
+            <span class="system-label">$ cat ~/projects/leaksafe</span>
             <h1 class="main-title">LeakSAFE – Smart Gas Leakage Detection System</h1>
             <p class="lead-text">A cross-platform mobile application integrated with ESP32 hardware sensors to deliver real-time atmospheric gas tracking, dynamic threat analysis, and automated hazardous alerts.</p>
             <div class="hero-cta project-actions">
@@ -85,50 +84,51 @@
 
         <!-- System Specifications -->
         <div class="specs-grid">
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/role">
                 <span class="spec-label">ROLE</span>
                 <span class="spec-value">Lead Developer & Hardware Integrator</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/mobile-frontend">
                 <span class="spec-label">MOBILE FRONTEND</span>
                 <span class="spec-value">Flutter, Dart, fl_chart</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/backend-and-data">
                 <span class="spec-label">BACKEND & DATA</span>
                 <span class="spec-value">Firebase Auth, Realtime Database</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/hardware">
                 <span class="spec-label">HARDWARE</span>
                 <span class="spec-value">ESP32, MQ Gas Sensors</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/mapping-and-location">
                 <span class="spec-label">MAPPING & LOCATION</span>
                 <span class="spec-value">Google Maps, Geolocator</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/project-scope">
                 <span class="spec-label">PROJECT SCOPE</span>
                 <span class="spec-value">Computer Science Capstone Engineering</span>
             </div>
         </div>
 
         <!-- Project Stats -->
-        <section class="section-padding" id="overview">// PROJECT METRICS</span>
+        <section class="section-padding" id="overview">
+            <span class="system-label">$ cat metrics.log</span>
             <h2 class="section-title underline">At A Glance</h2>
             
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/application-screens">
                     <span class="stat-value">8+</span>
                     <span class="stat-label">Application Screens</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/core-services">
                     <span class="stat-value">4</span>
                     <span class="stat-label">Core Services</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/data-visualizations">
                     <span class="stat-value">6</span>
                     <span class="stat-label">Data Visualizations</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/platform-targets">
                     <span class="stat-value">3</span>
                     <span class="stat-label">Platform Targets</span>
                 </div>
@@ -137,7 +137,7 @@
 
         <!-- Architecture Overview -->
         <section class="section-padding">
-            <span class="system-label">// ARCHITECTURE OVERVIEW</span>
+            <span class="system-label">$ tree ~/projects/leaksafe</span>
             <h2 class="section-title underline">System Data Flow</h2>
             
             <div class="architecture-flow">
@@ -174,7 +174,8 @@
         </section>
 
         <!-- Key Features -->
-        <section class="section-padding" id="functionality">// CORE FUNCTIONALITY</span>
+        <section class="section-padding" id="functionality">
+            <span class="system-label">$ cat features.md</span>
             <h2 class="section-title underline">Key Features</h2>
             
             <div class="features-grid">
@@ -213,7 +214,7 @@
 
         <!-- Technical Overview -->
         <section class="section-padding">
-            <span class="system-label">// ARCHITECTURE OVERVIEW</span>
+            <span class="system-label">$ cat mechanics.md</span>
             <h2 class="section-title underline">System Mechanics</h2>
             
             <ul class="custom-list">
@@ -225,7 +226,8 @@
         </section>
 
         <!-- Tech Stack -->
-        <section class="section-padding" id="stack">// TECHNOLOGY STACK</span>
+        <section class="section-padding" id="stack">
+            <span class="system-label">$ ls ~/stack/</span>
             <h2 class="section-title underline">Tools & Technologies</h2>
             
             <div class="stack-categories">
@@ -267,7 +269,8 @@
         </section>
 
         <!-- Challenges & Solutions -->
-        <section class="section-padding" id="insights">// ENGINEERING INSIGHTS</span>
+        <section class="section-padding" id="insights">
+            <span class="system-label">$ tail -f lessons.log</span>
             <h2 class="section-title underline">Challenges & Solutions</h2>
             
             <div class="challenge-grid">
@@ -294,11 +297,11 @@
 
         <!-- Image Gallery Showcase -->
         <section class="section-padding">
-            <span class="system-label">// INTERFACE & HARDWARE SHOWCASE</span>
+            <span class="system-label">$ ls ~/screens/</span>
             <h2 class="section-title underline">Application Screenshots</h2>
 
             <div class="gallery-grid">
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/safe-ppm-monitoring">
                     <img src="/assets/images/leaksafe-safe-reading.jpeg" alt="Safe Level Display Screenshot" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
                         <h3>Safe PPM Monitoring</h3>
@@ -306,7 +309,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/hazardous-threshold-alert">
                     <img src="/assets/images/leaksafe-danger-reading.jpeg" alt="Danger Level Alert Screenshot" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
                         <h3>Hazardous Threshold Alert</h3>
@@ -314,7 +317,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/telemetry-and-mapping">
                     <img src="/assets/images/leaksafe-dashboard.jpeg" alt="Analytics and Mapping Dashboard" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
                         <h3>Telemetry & Mapping</h3>
@@ -322,7 +325,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/user-registration">
                     <img src="/assets/images/leaksafe-wireframes2.jpeg" alt="User Registration Screen" loading="lazy" width="200" height="400">
                     <div class="gallery-info">
                         <h3>User Registration</h3>
@@ -351,7 +354,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <h3>MARTIN MZUMARA</h3>
+                <div class="footer-logo-row">
+                    <img src="/assets/images/optimized/logo-96.webp" alt="" width="44" height="44" class="footer-logo" loading="lazy" decoding="async">
+                    <h3>MARTIN MZUMARA</h3>
+                </div>
                 <p>Software Developer & IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">

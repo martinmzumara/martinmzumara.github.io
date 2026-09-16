@@ -24,18 +24,17 @@
     <meta name="twitter:description" content="A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.">
     <meta name="twitter:image" content="https://martinmzumara.github.io/assets/images/leaksafe-safe-reading.jpeg">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Favicon (generated from assets/images/logo.png) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
     <link rel="stylesheet" href="/css/style.css">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
+    <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Tabler Icons -->
     </head>
 <body>
@@ -44,7 +43,7 @@
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">MARTIN MZUMARA</a>
+            <a href="/" class="logo">martin@portfolio<span>:~$</span></a>
             
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
                 <i class="ti ti-menu-2 icon-menu"></i>
@@ -69,7 +68,7 @@
     <main id="main-content" class="container project-detail-container">
         <!-- Hero Title Section -->
         <div class="project-detail-header">
-            <span class="system-label">// CASE STUDY: SECURITY & MOBILE ENGINEERING</span>
+            <span class="system-label">$ cat ~/projects/encplus</span>
             <h1 class="main-title">EncPlus – AES File Encryption</h1>
             <p class="lead-text">A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
             <div class="hero-cta project-actions">
@@ -81,46 +80,47 @@
 
         <!-- System Specifications -->
         <div class="specs-grid">
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/role">
                 <span class="spec-label">ROLE</span>
                 <span class="spec-value">Lead Developer</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/mobile-frontend">
                 <span class="spec-label">MOBILE FRONTEND</span>
                 <span class="spec-value">Flutter, Dart</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/backend-and-data">
                 <span class="spec-label">BACKEND & DATA</span>
                 <span class="spec-value">Firebase Auth, Realtime Database</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/encryption">
                 <span class="spec-label">ENCRYPTION</span>
                 <span class="spec-value">AES-256</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/platform-targets">
                 <span class="spec-label">PLATFORM TARGETS</span>
                 <span class="spec-value">iOS, Android</span>
             </div>
         </div>
 
         <!-- Project Stats -->
-        <section class="section-padding" id="overview">// PROJECT METRICS</span>
+        <section class="section-padding" id="overview">
+            <span class="system-label">$ cat metrics.log</span>
             <h2 class="section-title underline">At A Glance</h2>
             
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/core-screens">
                     <span class="stat-value">3</span>
                     <span class="stat-label">Core Screens</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/encryption-algorithm">
                     <span class="stat-value">1</span>
                     <span class="stat-label">Encryption Algorithm</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/auth-methods">
                     <span class="stat-value">2</span>
                     <span class="stat-label">Auth Methods</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/compatibility">
                     <span class="stat-value">Cross-platform</span>
                     <span class="stat-label">Compatibility</span>
                 </div>
@@ -129,7 +129,7 @@
 
         <!-- Architecture Overview -->
         <section class="section-padding">
-            <span class="system-label">// ARCHITECTURE OVERVIEW</span>
+            <span class="system-label">$ tree ~/projects/encplus</span>
             <h2 class="section-title underline">System Design</h2>
             
             <div class="architecture-flow">
@@ -158,7 +158,8 @@
         </section>
 
         <!-- Key Features -->
-        <section class="section-padding" id="functionality">// CORE FUNCTIONALITY</span>
+        <section class="section-padding" id="functionality">
+            <span class="system-label">$ cat features.md</span>
             <h2 class="section-title underline">Key Features</h2>
             
             <div class="features-grid">
@@ -181,7 +182,8 @@
         </section>
 
         <!-- Technical Overview -->
-        <section class="section-padding" id="stack">// TECHNOLOGY STACK</span>
+        <section class="section-padding" id="stack">
+            <span class="system-label">$ ls ~/stack/</span>
             <h2 class="section-title underline">Tools & Technologies</h2>
             
             <div class="stack-categories">
@@ -209,7 +211,8 @@
         </section>
 
         <!-- Challenges & Solutions -->
-        <section class="section-padding" id="insights">// ENGINEERING INSIGHTS</span>
+        <section class="section-padding" id="insights">
+            <span class="system-label">$ tail -f lessons.log</span>
             <h2 class="section-title underline">Challenges & Solutions</h2>
             
             <div class="challenge-grid">
@@ -230,11 +233,11 @@
 
         <!-- Image Gallery Showcase -->
         <section class="section-padding">
-            <span class="system-label">// APPLICATION Screenshots</span>
+            <span class="system-label">$ ls ~/screens/</span>
             <h2 class="section-title underline">Application Screenshots</h2>
 
             <div class="gallery-grid">
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/encryption-interface">
                     <div class="gallery-placeholder">
                         <i class="ti ti-lock placeholder-icon"></i>
                     </div>
@@ -244,7 +247,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/file-selection">
                     <div class="gallery-placeholder">
                         <i class="ti ti-folder placeholder-icon"></i>
                     </div>
@@ -254,7 +257,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/decryption-results">
                     <div class="gallery-placeholder">
                         <i class="ti ti-lock-open placeholder-icon"></i>
                     </div>
@@ -280,7 +283,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <h3>MARTIN MZUMARA</h3>
+                <div class="footer-logo-row">
+                    <img src="/assets/images/optimized/logo-96.webp" alt="" width="44" height="44" class="footer-logo" loading="lazy" decoding="async">
+                    <h3>MARTIN MZUMARA</h3>
+                </div>
                 <p>Software Developer & IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">

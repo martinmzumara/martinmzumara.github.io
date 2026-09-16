@@ -26,18 +26,17 @@
     <meta name="twitter:description" content="A premium hospitality website for Manguzi Executive Lodge in Karonga, Malawi, featuring accommodation, restaurant, and conference services with online booking.">
     <meta name="twitter:image" content="https://martinmzumara.github.io/assets/images/manguzi-about-desk.jpg">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Favicon (generated from assets/images/logo.png) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
     <link rel="stylesheet" href="/css/style.css">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
+    <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Tabler Icons -->
     </head>
 <body>
@@ -46,7 +45,7 @@
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">MARTIN MZUMARA</a>
+            <a href="/" class="logo">martin@portfolio<span>:~$</span></a>
             
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
                 <i class="ti ti-menu-2 icon-menu"></i>
@@ -71,7 +70,7 @@
     <main id="main-content" class="container project-detail-container">
         <!-- Hero Title Section -->
         <div class="project-detail-header">
-            <span class="system-label">// CLIENT PROJECT: WEB DEVELOPMENT & HOSPITALITY</span>
+            <span class="system-label">$ cat ~/projects/manguzi</span>
             <h1 class="main-title">Manguzi Executive Lodge</h1>
             <p class="lead-text">A premium hospitality website for an executive lodge in Karonga, Malawi — featuring accommodation, restaurant, and conference services with a seamless online booking experience.</p>
             <div class="hero-cta project-actions">
@@ -83,50 +82,51 @@
 
         <!-- System Specifications -->
         <div class="specs-grid">
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/role">
                 <span class="spec-label">ROLE</span>
                 <span class="spec-value">Web Developer & Designer</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/frontend">
                 <span class="spec-label">FRONTEND</span>
                 <span class="spec-value">HTML5, CSS3, JavaScript</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/hosting">
                 <span class="spec-label">HOSTING</span>
                 <span class="spec-value">Firebase Hosting</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/location">
                 <span class="spec-label">LOCATION</span>
                 <span class="spec-value">Karonga, Malawi</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/services">
                 <span class="spec-label">SERVICES</span>
                 <span class="spec-value">Accommodation, Restaurant, Conference</span>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-term="~/spec/project-type">
                 <span class="spec-label">PROJECT TYPE</span>
                 <span class="spec-value">Business Website</span>
             </div>
         </div>
 
         <!-- Project Stats -->
-        <section class="section-padding" id="overview">// PROJECT METRICS</span>
+        <section class="section-padding" id="overview">
+            <span class="system-label">$ cat metrics.log</span>
             <h2 class="section-title underline">At A Glance</h2>
             
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/website-pages">
                     <span class="stat-value">4+</span>
                     <span class="stat-label">Website Pages</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/core-services">
                     <span class="stat-value">3</span>
                     <span class="stat-label">Core Services</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/responsive-design">
                     <span class="stat-value">100%</span>
                     <span class="stat-label">Responsive Design</span>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-term="~/metrics/live-availability">
                     <span class="stat-value">24/7</span>
                     <span class="stat-label">Live Availability</span>
                 </div>
@@ -135,7 +135,7 @@
 
         <!-- Architecture Overview -->
         <section class="section-padding">
-            <span class="system-label">// ARCHITECTURE OVERVIEW</span>
+            <span class="system-label">$ tree ~/projects/manguzi</span>
             <h2 class="section-title underline">Site Structure</h2>
             
             <div class="architecture-flow">
@@ -172,7 +172,8 @@
         </section>
 
         <!-- Key Features -->
-        <section class="section-padding" id="functionality">// CORE FUNCTIONALITY</span>
+        <section class="section-padding" id="functionality">
+            <span class="system-label">$ cat features.md</span>
             <h2 class="section-title underline">Key Features</h2>
             
             <div class="features-grid">
@@ -211,7 +212,7 @@
 
         <!-- Technical Overview -->
         <section class="section-padding">
-            <span class="system-label">// ARCHITECTURE OVERVIEW</span>
+            <span class="system-label">$ cat build-log.txt</span>
             <h2 class="section-title underline">Design & Development</h2>
             
             <ul class="custom-list">
@@ -223,7 +224,8 @@
         </section>
 
         <!-- Tech Stack -->
-        <section class="section-padding" id="stack">// TECHNOLOGY STACK</span>
+        <section class="section-padding" id="stack">
+            <span class="system-label">$ ls ~/stack/</span>
             <h2 class="section-title underline">Tools & Technologies</h2>
             
             <div class="stack-categories">
@@ -262,7 +264,8 @@
         </section>
 
         <!-- Challenges & Solutions -->
-        <section class="section-padding" id="insights">// ENGINEERING INSIGHTS</span>
+        <section class="section-padding" id="insights">
+            <span class="system-label">$ tail -f lessons.log</span>
             <h2 class="section-title underline">Challenges & Solutions</h2>
             
             <div class="challenge-grid">
@@ -289,11 +292,11 @@
 
         <!-- Image Gallery Showcase -->
         <section class="section-padding">
-            <span class="system-label">// SITE SHOWCASE</span>
+            <span class="system-label">$ ls ~/screens/</span>
             <h2 class="section-title underline">Website Highlights</h2>
 
             <div class="gallery-grid">
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/elegant-branding">
                     <div class="gallery-placeholder">
                         <i class="ti ti-photo placeholder-icon"></i>
                     </div>
@@ -303,7 +306,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/online-booking">
                     <div class="gallery-placeholder">
                         <i class="ti ti-calendar-check placeholder-icon"></i>
                     </div>
@@ -313,7 +316,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/google-maps-integration">
                     <div class="gallery-placeholder">
                         <i class="ti ti-map-pin placeholder-icon"></i>
                     </div>
@@ -323,7 +326,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
+                <div class="gallery-card" data-term="~/screens/fully-responsive">
                     <div class="gallery-placeholder">
                         <i class="ti ti-device-mobile placeholder-icon"></i>
                     </div>
@@ -351,7 +354,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <h3>MARTIN MZUMARA</h3>
+                <div class="footer-logo-row">
+                    <img src="/assets/images/optimized/logo-96.webp" alt="" width="44" height="44" class="footer-logo" loading="lazy" decoding="async">
+                    <h3>MARTIN MZUMARA</h3>
+                </div>
                 <p>Software Developer & IT Technician<br>Malawi</p>
                 <div class="social-links">
                     <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
