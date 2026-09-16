@@ -45,6 +45,7 @@
     --glass-shadow: 0 14px 34px rgba(0,0,0,0.5);
     --glass-shadow-soft: 0 6px 16px rgba(0,0,0,0.35);
     --glass-blur: 0px;
+    --menu-bg: rgba(13,18,24,0.82);
 
     /* Text + bg */
     --bg-main: #0b0f14;
@@ -68,6 +69,7 @@
     --glass-highlight: rgba(255,255,255,0.6);
     --glass-shadow: 0 10px 24px rgba(27,31,35,0.12);
     --glass-shadow-soft: 0 4px 12px rgba(27,31,35,0.08);
+    --menu-bg: rgba(245,242,236,0.88);
     --accent-blue: #1a7f37;
     --accent-blue-hover: #116329;
     --accent-blue-deep: #0e4f22;
@@ -422,17 +424,18 @@ body::after {
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     padding: 0.5rem;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .theme-toggle-btn:hover {
     border-color: var(--accent-blue);
-    background-color: var(--bg-card);
+    background-color: var(--glass-bg);
+    box-shadow: 0 0 10px var(--accent-blue-glow);
 }
 
 .footer-theme-toggle {
@@ -445,20 +448,25 @@ body::after {
     font-weight: 600;
     letter-spacing: 0.05em;
     color: var(--text-secondary);
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border: 1px solid transparent;
-    border-radius: 999px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
     cursor: pointer;
-    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    font-family: var(--font-mono);
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer-theme-toggle::before {
+    content: '$';
+    color: var(--accent-blue);
+    font-weight: 700;
 }
 
 .footer-theme-toggle:hover {
     color: var(--accent-blue);
     border-color: var(--accent-blue);
-    background-color: var(--bg-card);
-    transform: translateY(-1px);
+    background-color: var(--glass-bg);
+    box-shadow: 0 0 12px var(--accent-blue-glow);
 }
 
 .footer-theme-toggle .icon-sun,
@@ -1956,9 +1964,9 @@ body.lightbox-open {
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--glass-bg-strong);
-        -webkit-backdrop-filter: blur(20px) saturate(160%);
-        backdrop-filter: blur(20px) saturate(160%);
+        background: var(--menu-bg);
+        -webkit-backdrop-filter: blur(18px) saturate(150%);
+        backdrop-filter: blur(18px) saturate(150%);
         border-bottom: 1px solid var(--glass-border);
         box-shadow: var(--glass-shadow);
         flex-direction: column;
