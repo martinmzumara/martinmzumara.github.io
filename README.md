@@ -15,11 +15,11 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - **Case study & client project pages** — LeakSAFE and EncPlus case studies plus the Manguzi Executive Lodge client project, each with image galleries and lightbox.
 - **Project cards** — the homepage cards expose individually clickable links: case study / details, GitHub source (LeakSAFE, EncPlus), and the live Manguzi site.
 - **SEO basics** — `sitemap.xml` and `robots.txt`, plus a custom `404.html` (GitHub Pages serves it automatically).
-- **Performance** — pre-optimized `.webp` image variants under `assets/images/optimized/`; the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render.
+- **Performance** — pre-optimized `.webp` image variants under `assets/images/optimized/`; fonts are self-hosted (no third-party font requests); images carry explicit `width`/`height` (no layout shift); the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render.
 
 ## Project Structure
 
-- `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Approach, Experience, Tools, Showcase, Contact).
+- `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Experience, Tools, Showcase, Contact).
 - `leaksafe/index.html`: LeakSAFE case study page.
 - `manguzi/index.html`: Manguzi Executive Lodge client project page.
 - `encplus/index.html`: EncPlus case study page.
@@ -28,9 +28,13 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - `js/tools-data.js`: The posts data array (`SITE_TOOLS`) shared by the homepage and `/articles/` (see below).
 - `js/tools.js`: Renders the tools grid wherever `#tools-grid` exists — featured subset on the homepage, full archive with filters on `/articles/`; wires the reading modal on both.
 - `js/script.js`: All other interactivity — preloader, scroll reveal, counters, marquee, tilt/spotlight, live clock, theme toggle, lightbox, copy-email button.
+- `js/terminal.js`: The hidden terminal easter egg (press <kbd>`</kbd> on any page) — a fake shell with `help`, `whoami`, `ls`, `open <project>`, `contact`, `theme`, `uptime`, `clear`, `exit` and `sudo hire-me`, plus command history; honours `prefers-reduced-motion`.
 - `js/icons.js`: Swaps `ti-…` icon classes for the matching `<svg><use>` from the sprite; if the sprite can't be fetched (e.g. `file://`), it injects the Tabler webfont stylesheet on demand as a fallback — the font is never loaded on normal page views.
 - `assets/icons/icons.svg`: SVG icon sprite (Phosphor regular icons rendered with `currentColor`; `icons.backup.svg` holds the previous Iconoir set).
-- `assets/images/`: Source images; `assets/images/optimized/`: compressed `.webp` variants.
+- `assets/images/`: Source images; `assets/images/optimized/`: compressed `.webp` variants. `logo.png` is the brand mark (its `optimized/logo-96.webp` is used in the footer).
+- `assets/fonts/`: Self-hosted **Inter** and **JetBrains Mono** variable fonts as latin-subset `.woff2` (~104 KB total, replacing Google Fonts). Regenerate with `pyftsubset <font>.ttf --flavor=woff2 --unicodes=<latin+symbols>`; the OFL licences sit beside each file.
+- `favicon.ico`, `favicon-32.png`, `favicon-16.png`, `apple-touch-icon.png`: generated from `assets/images/logo.png`.
+- `.github/workflows/ci.yml` + `.lighthouserc.json`: CI on every push/PR — internal link & asset check (lychee in offline mode with `--root-dir .`) plus Lighthouse CI assertions (mobile, 3 runs: performance ≥ 0.7, accessibility / best-practices / SEO ≥ 0.9). `404.html` is excluded from auditing because it is intentionally `noindex`.
 
 ## Local Development
 
@@ -91,4 +95,4 @@ address ever changes.
 
 ## Deployment
 
-Push to `main` — GitHub Pages serves the repository root automatically.
+Push to `main` — GitHub Pages serves the repository root automatically. Each push also runs the CI workflow above (link check + Lighthouse); results appear under the repository's **Actions** tab.
