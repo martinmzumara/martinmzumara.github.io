@@ -241,22 +241,41 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. Back to Top button
-    const backToTopBtn = document.getElementById('back-to-top');
-    if (backToTopBtn) {
-        const toggleBackToTop = () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-                backToTopBtn.removeAttribute('hidden');
-            } else {
-                backToTopBtn.classList.remove('visible');
-                backToTopBtn.setAttribute('hidden', '');
+    // 5. Auto-hiding navbar (reveal on scroll up)
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        const HIDE_AFTER = 120;      // never hide near the top
+        const DELTA = 4;             // ignore micro-scroll jitter
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const updateNav = () => {
+            ticking = false;
+            const y = window.scrollY;
+            const menuOpen = navLinks && navLinks.classList.contains('active');
+            const terminalOpen = document.querySelector('.term-overlay.is-open');
+            if (menuOpen || terminalOpen || y < HIDE_AFTER) {
+                navbar.classList.remove('nav-hidden');
+            } else if (y > lastY + DELTA) {
+                navbar.classList.add('nav-hidden');     // scrolling down
+            } else if (y < lastY - DELTA) {
+                navbar.classList.remove('nav-hidden');  // scrolling up
             }
+            lastY = y;
         };
-        window.addEventListener('scroll', toggleBackToTop, { passive: true });
-        toggleBackToTop();
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(updateNav);
+            }
+        }, { passive: true });
+
+        // Always reveal when jumping to a section (hash navigation)
+        window.addEventListener('hashchange', () => navbar.classList.remove('nav-hidden'));
+        document.addEventListener('click', (e) => {
+            const a = e.target.closest('a[href*="#"]');
+            if (a) navbar.classList.remove('nav-hidden');
         });
     }
 

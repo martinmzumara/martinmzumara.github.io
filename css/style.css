@@ -45,7 +45,8 @@
     --glass-shadow: 0 14px 34px rgba(0,0,0,0.5);
     --glass-shadow-soft: 0 6px 16px rgba(0,0,0,0.35);
     --glass-blur: 0px;
-    --menu-bg: rgba(13,18,24,0.45);
+    --menu-bg: rgba(13,18,24,0.38);
+    --menu-rim: rgba(255,255,255,0.16);
 
     /* Text + bg */
     --bg-main: #0b0f14;
@@ -69,7 +70,8 @@
     --glass-highlight: rgba(255,255,255,0.6);
     --glass-shadow: 0 10px 24px rgba(27,31,35,0.12);
     --glass-shadow-soft: 0 4px 12px rgba(27,31,35,0.08);
-    --menu-bg: rgba(245,242,236,0.5);
+    --menu-bg: rgba(245,242,236,0.42);
+    --menu-rim: rgba(27,31,35,0.12);
     --accent-blue: #1a7f37;
     --accent-blue-hover: #116329;
     --accent-blue-deep: #0e4f22;
@@ -93,7 +95,7 @@
 
 html, body {
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 html {
@@ -322,16 +324,35 @@ body::after {
     margin: 2rem auto;
 }
 
-/* ---------- Navigation (glass navbar) ---------- */
+/* ---------- Navigation (liquid glass navbar) ---------- */
 .navbar {
-    background: var(--glass-bg-soft);
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
     position: sticky;
     top: 0;
     z-index: 1000;
     padding: 1rem 0;
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Frosted glass — on a ::before pseudo at ALL widths, so the mobile panel's own
+   backdrop-filter is not cancelled by a nested backdrop root. */
+.navbar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(13,18,24,0.55);
+    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+    backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+[data-theme="light"] .navbar::before {
+    background: rgba(245,242,236,0.55);
+    border-bottom-color: rgba(27,31,35,0.10);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
 .nav-container {
@@ -1959,22 +1980,44 @@ body.lightbox-open {
     .nav-links {
         display: none;
         position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+        top: calc(100% + 0.6rem);
+        left: 0.75rem;
+        right: 0.75rem;
         background: var(--menu-bg);
-        -webkit-backdrop-filter: blur(32px) saturate(180%);
-        backdrop-filter: blur(32px) saturate(180%);
-        border-bottom: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+        -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.05);
+        backdrop-filter: blur(32px) saturate(200%) brightness(1.05);
+        border: 1px solid var(--menu-rim);
+        border-radius: 24px;
+        box-shadow:
+            0 24px 60px rgba(0,0,0,0.45),
+            inset 0 1px 0 rgba(255,255,255,0.22),
+            inset 0 -1px 0 rgba(255,255,255,0.06),
+            inset 1px 0 0 rgba(255,255,255,0.08),
+            inset -1px 0 0 rgba(255,255,255,0.08);
         flex-direction: column;
         padding: 1.5rem;
         gap: 1.25rem;
         align-items: flex-start;
+        overflow: hidden;
+    }
+
+    .nav-links::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.03) 55%, transparent 70%);
     }
 
     .nav-links.active {
         display: flex;
+        animation: menu-sheen 0.9s ease-out 1;
+    }
+
+    @keyframes menu-sheen {
+        0% { box-shadow: 0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(255,255,255,0.06), inset 1px 0 0 rgba(255,255,255,0.3), inset -1px 0 0 rgba(255,255,255,0.3); }
+        100% { box-shadow: 0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(255,255,255,0.06), inset 1px 0 0 rgba(255,255,255,0.08), inset -1px 0 0 rgba(255,255,255,0.08); }
     }
 
     .experience-grid {
@@ -2067,56 +2110,19 @@ body.lightbox-open {
     }
 }
 
-/* ---------- Back to Top ---------- */
-.back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 998;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: 1px solid var(--glass-border);
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    backdrop-filter: blur(18px) saturate(160%);
-    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
-    color: var(--text-primary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    opacity: 0;
-    transform: translateY(1rem);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+/* ---------- Auto-hiding navbar ---------- */
+.navbar {
+    transition: transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform;
 }
 
-.back-to-top.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+.navbar.nav-hidden {
+    transform: translateY(-110%);
 }
 
-.back-to-top:hover {
-    background: var(--accent-blue);
-    color: #fff;
-    box-shadow: 0 8px 24px var(--accent-blue-glow), inset 0 1px 0 rgba(255,255,255,0.3);
-    transform: translateY(-2px);
-}
-
-.back-to-top:active {
-    transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-    .back-to-top {
-        bottom: 1.25rem;
-        right: 1.25rem;
-        width: 2.6rem;
-        height: 2.6rem;
-        font-size: 1.1rem;
+@media (prefers-reduced-motion: reduce) {
+    .navbar {
+        transition: none;
     }
 }
 

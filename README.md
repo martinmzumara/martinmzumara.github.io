@@ -7,7 +7,8 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 ## Current Features
 
 - **Terminal aesthetic** — flat near-black console with phosphor-green accent, subtle scanlines, monospace headings, fake window title bars on cards, shell-command section labels (`$ ls ~/projects/`), prompt-style logo and nav, blinking hero cursor with typewriter effect, light "paper console" second theme.
-- **Animated, non-static experience** — preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, 3D tilt/spotlight cards, and back-to-top button.
+- **Animated, non-static experience** — preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, 3D tilt/spotlight cards, and an auto-hiding navbar that slides away as you scroll down and reveals on any scroll up.
+- **Liquid-glass surfaces** — iOS-style frosted materials: the sticky navbar (all widths) and the mobile dropdown panel (floating rounded card with rim lighting and an opening sheen pulse) blur the page behind them; built with `backdrop-filter` on sibling pseudo-elements so nested filters never cancel each other.
 - **Articles & Tools** — the homepage shows a few featured posts with glass reading modals (data in `js/tools-data.js`); a **"View All Posts"** button links to the separate blog at [martinmzumara.github.io/blog](https://martinmzumara.github.io/blog/), built with Astro in its own repo.
 - **Testimonials / social proof** — intentionally omitted for now (see "Adding Testimonials Later").
 - **Contact section** — email / phone / location glass cards with a copy-to-clipboard email button, `mailto:` + resume CTAs, and a matching nav link + hero "Get in Touch" button.
@@ -24,7 +25,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - `manguzi/index.html`: Manguzi Executive Lodge client project page.
 - `encplus/index.html`: EncPlus case study page.
 - `404.html`: Custom error page for missing routes.
-- `css/style.css`: Custom styles — CSS variables, glass components, responsive breakpoints, `prefers-reduced-motion` fallbacks.
+- `css/style.css`: Custom styles — CSS variables, liquid-glass navbar and mobile panel, responsive breakpoints, `prefers-reduced-motion` fallbacks. Note: the page uses `overflow-x: clip` (not `hidden`) — `hidden` on `html`/`body` silently breaks the navbar's `position: sticky`.
 - `js/tools-data.js`: The posts data array (`SITE_TOOLS`) shared by the homepage and `/articles/` (see below).
 - `js/tools.js`: Renders the tools grid wherever `#tools-grid` exists — featured subset on the homepage, full archive with filters on `/articles/`; wires the reading modal on both.
 - `js/script.js`: All other interactivity — preloader, scroll reveal, counters, marquee, tilt/spotlight, live clock, theme toggle, lightbox, copy-email button.
