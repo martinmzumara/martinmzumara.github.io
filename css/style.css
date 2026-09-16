@@ -2127,6 +2127,33 @@ body.lightbox-open {
 }
 
 /* Very small devices: further constrain header to keep CTA visible */
+/* Small contextual code links (e.g. "+ hardware firmware" beside hero CTAs) */
+.code-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--text-faint);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--glass-border-strong);
+    padding-bottom: 1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.code-link:hover {
+    color: var(--accent-blue);
+    border-bottom-color: var(--accent-blue);
+}
+
+.code-link i {
+    font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .code-link { transition: none; }
+}
+
+/* Very small devices: further constrain header to keep CTA visible */
 @media (max-width: 380px) {
     .nav-container {
         padding-left: 0.75rem;
