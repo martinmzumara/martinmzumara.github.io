@@ -22,7 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateThemeToggleLabel = () => {
         if (!themeToggleLabel) return;
         const currentTheme = document.documentElement.getAttribute("data-theme");
-        themeToggleLabel.textContent = currentTheme === "light" ? "Change to dark theme" : "Change to light theme";
+        const label = currentTheme === "light" ? "Change to dark theme" : "Change to light theme";
+        themeToggleLabel.textContent = label;
+        // Accessible name must match the visible text, otherwise Lighthouse's
+        // label-content-name-mismatch audit fails (a static aria-label that
+        // differs from the visible label causes the mismatch).
+        if (themeToggleBtn) themeToggleBtn.setAttribute("aria-label", label);
     };
 
     if (themeToggleBtn) {

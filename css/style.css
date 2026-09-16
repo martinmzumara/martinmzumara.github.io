@@ -29,7 +29,7 @@
     --bg-main: #0b0f14;
     --text-primary: #d6dee6;
     --text-secondary: #8b949e;
-    --text-faint: #6a737d;
+    --text-faint: #7d8590;
     --system-label-color: #3fb950;
 
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -57,7 +57,7 @@
     --bg-main: #f5f2ec;
     --text-primary: #1c2026;
     --text-secondary: #4b535c;
-    --text-faint: #6e7681;
+    --text-faint: #5c6570;
     --system-label-color: #1a7f37;
 }
 
@@ -1285,7 +1285,7 @@ body.lightbox-open {
     margin-bottom: 0.75rem;
 }
 
-.arch-node h4 {
+.arch-node h3 {
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
 }
@@ -1589,7 +1589,7 @@ body.lightbox-open {
     color: var(--accent-blue);
 }
 
-.gallery-info h4 {
+.gallery-info h3 {
     font-size: 0.95rem;
     margin-bottom: 0.25rem;
 }
@@ -2691,9 +2691,12 @@ section[id] { scroll-margin-top: 90px; }
     position: fixed; inset: 0; z-index: 2000;
     display: flex; align-items: center; justify-content: center;
     background: rgba(0,0,0,0.65);
-    opacity: 0; pointer-events: none; transition: opacity 0.18s ease;
+    /* visibility:hidden (not just opacity) keeps the closed overlay's focusable
+       children out of the tab order / a11y tree — required by Lighthouse's
+       aria-hidden-focus audit since the overlay carries aria-hidden="true". */
+    opacity: 0; pointer-events: none; visibility: hidden; transition: opacity 0.18s ease;
 }
-.term-egg.is-open { opacity: 1; pointer-events: auto; }
+.term-egg.is-open { opacity: 1; pointer-events: auto; visibility: visible; }
 .term-egg-window {
     width: min(680px, 92vw); max-height: 70vh;
     display: flex; flex-direction: column;

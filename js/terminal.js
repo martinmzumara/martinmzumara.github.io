@@ -13,6 +13,9 @@
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-label', 'Hidden terminal');
     overlay.setAttribute('aria-hidden', 'true');
+    // inert + visually hidden while closed: keeps the input/close control out of
+    // the tab order and the a11y tree (Lighthouse aria-hidden-focus audit).
+    overlay.inert = true;
     overlay.innerHTML =
         '<div class="term-egg-window">' +
         '  <div class="term-bar term-egg-bar"><span class="term-egg-close" title="Close (Esc)">×</span></div>' +
@@ -123,6 +126,7 @@
         lastFocus = document.activeElement;
         overlay.classList.add('is-open');
         overlay.setAttribute('aria-hidden', 'false');
+        overlay.inert = false;
         if (!out.childElementCount) {
             typeLine('// martin@portfolio — v1.0. type "help" for commands.', 'term-egg-ok');
         }
@@ -132,6 +136,7 @@
     function close() {
         overlay.classList.remove('is-open');
         overlay.setAttribute('aria-hidden', 'true');
+        overlay.inert = true;
         if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
 

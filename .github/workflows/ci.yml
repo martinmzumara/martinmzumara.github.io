@@ -11,13 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Check internal links and image references
         uses: lycheeverse/lychee-action@v2
         with:
-          # Internal links/images only; external sites rate-limit and cause flaky failures
+          # --offline    only check local targets (external sites rate-limit and cause flaky failures)
+          # --root-dir   REQUIRED: without it lychee errors on every root-relative link
+          #              ("Cannot resolve root-relative link '/css/style.css': provide a root dir")
           args: >-
             --no-progress
             --offline
+            --root-dir .
             './**/*.html'
           fail: true
 
@@ -26,17 +30,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Install Lighthouse CI
         run: npm i -g @lhci/cli
-      - name: Run Lighthouse CI (3 runs, mobile)
-        run: |
-          lhci autorun \
-            --collect.staticDistDir=. \
-            --collect.numberOfRuns=3 \
-            --assert.assertions.categories:performance='error' \
-            --assert.assertions.categories:accessibility='error' \
-            --assert.assertions.categories:best-practices='error' \
-            --assert.assertions.categories:seo='error'
+
+      # Assertions & collection settings live in .lighthouserc.json
+      # NOTE: an assertion level without options defaults to minScore 1 (perfect score),
+      # so every threshold below is set explicitly.
+      - name: Run Lighthouse CI
+        run: lhci autorun
