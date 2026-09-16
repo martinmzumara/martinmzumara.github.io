@@ -1859,6 +1859,7 @@ body.lightbox-open {
     gap: 1rem;
     margin-top: 1.5rem;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 /* Tabler icon base sizing & size overrides for the webfont style */
@@ -2137,6 +2138,10 @@ body.lightbox-open {
     text-decoration: none;
     border-bottom: 1px dashed var(--glass-border-strong);
     padding-bottom: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    line-height: 1.4;
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 
