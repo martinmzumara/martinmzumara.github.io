@@ -141,7 +141,8 @@ h1, h2, .section-title, .logo, .footer-brand h3 {
 .contact-card::before,
 .stat-card::before,
 .spec-card::before,
-.gallery-card::before {
+.gallery-card::before,
+.cv-frame::before {
     content: '● ● ●   ' attr(data-term);
     display: block;
     /* No-op in block layout; stretches the bar to full width inside the flex
@@ -1579,6 +1580,62 @@ body.lightbox-open {
     font-size: 2.4rem;
     line-height: 1.2;
     margin: 0.5rem 0 1rem;
+}
+
+/* Lead paragraph under a page title. NOTE: this rule was accidentally dropped when the
+   homepage "Approach" section was removed, but all three case-study pages use `.lead-text`. */
+.lead-text {
+    font-family: var(--font-primary);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+/* CV page — framed PDF preview */
+.cv-frame {
+    margin-top: 2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1.6rem;
+    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
+}
+
+.cv-frame iframe {
+    display: block;
+    width: 100%;
+    height: 78vh;
+    min-height: 520px;
+    border: 0;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.cv-note,
+.cv-mobile-note {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.cv-note { margin-top: 1rem; }
+
+/* Inline PDF frames are unreliable on phones (Safari won't scroll them), so the
+   preview is desktop-only and mobile gets a pointer to the buttons above. */
+.cv-mobile-note {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px dashed var(--glass-border);
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .cv-frame { display: none; }
+    .cv-mobile-note { display: flex; }
 }
 
 .specs-grid {

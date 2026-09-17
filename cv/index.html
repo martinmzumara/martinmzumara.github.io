@@ -5,77 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
     <script data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))})();</script>
-    <title>404 - Page Not Found | Martin Mzumara</title>
-    <meta name="description" content="The page you're looking for could not be found. Return to Martin Mzumara's portfolio homepage.">
-    <meta name="robots" content="noindex, nofollow">
-    
+    <title>CV - Martin Mzumara</title>
+    <meta name="description" content="View or download the CV of Martin Mzumara — Software Developer & IT Technician based in Malawi.">
+
     <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="404 - Page Not Found | Martin Mzumara">
-    <meta property="og:description" content="The page you're looking for could not be found. Return to Martin Mzumara's portfolio homepage.">
-    <meta property="og:url" content="https://martinmzumara.github.io/404.html">
-    
+    <meta property="og:site_name" content="Martin Mzumara">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="CV - Martin Mzumara">
+    <meta property="og:description" content="View or download the CV of Martin Mzumara — Software Developer & IT Technician based in Malawi.">
+    <meta property="og:url" content="https://martinmzumara.github.io/cv/">
+    <meta property="og:image" content="https://martinmzumara.github.io/assets/images/og-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Martin Mzumara - Software Developer & IT Technician">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CV - Martin Mzumara">
+    <meta name="twitter:description" content="View or download the CV of Martin Mzumara — Software Developer & IT Technician based in Malawi.">
+    <meta name="twitter:image" content="https://martinmzumara.github.io/assets/images/og-cover.jpg">
+    <meta name="twitter:image:alt" content="Martin Mzumara - Software Developer & IT Technician">
+
+    <link rel="canonical" href="https://martinmzumara.github.io/cv/">
     <meta name="theme-color" content="#238636">
-    
+
     <!-- Favicon (generated from assets/images/logo.png) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
+
     <link rel="stylesheet" href="/css/style.css">
-    
+
     <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
     <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
-    <!-- Tabler Icons -->
-    </head>
+</head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Navigation -->
+    <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">martin@portfolio<span>:~$</span></a>
-            
+            <a href="/" class="logo">martin@portfolio<span>:~$</span></a>
+
             <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
                 <i class="ti ti-menu-2 icon-menu"></i>
                 <i class="ti ti-x icon-close"></i>
             </button>
 
             <nav class="nav-links" id="nav-links" aria-label="Main navigation">
-                <a href="index.html#expertise" class="nav-link">EXPERTISE</a>
-                <a href="index.html#projects" class="nav-link">PROJECTS</a>
-                <a href="index.html#experience" class="nav-link">EXPERIENCE</a>
-                <a href="index.html#showcase" class="nav-link">SHOWCASE</a>
+                <a href="/" class="nav-link">HOME</a>
+                <a href="/#projects" class="nav-link">PROJECTS</a>
+                <a href="/#experience" class="nav-link">EXPERIENCE</a>
+                <a href="/#contact" class="nav-link">CONTACT</a>
             </nav>
-            
+
             <div class="nav-actions">
-                <a href="/cv/" class="btn-primary">VIEW RESUME</a>
+                <a href="/" class="btn-primary">
+                    <i class="ti ti-arrow-left"></i> BACK TO HOME
+                </a>
             </div>
         </div>
     </header>
 
-    <main id="main-content">
-        <!-- 404 Error Section -->
-        <section class="error-section container">
-            <div class="error-content">
-                <span class="system-label">// SYSTEM ERROR: RESOURCE NOT FOUND</span>
-                <h1 class="error-code">404</h1>
-                <h2 class="error-title">Page Not Found</h2>
-                <p class="error-message">The page you're looking for doesn't exist, may have been moved, or the link is broken. Let's get you back on track.</p>
-                
-                <div class="hero-cta error-actions">
-                    <a href="index.html" class="btn-primary">
-                        <i class="ti ti-home"></i> BACK TO HOME
-                    </a>
-                    <a href="index.html#projects" class="btn-secondary">
-                        <i class="ti ti-folder"></i> VIEW PROJECTS
-                    </a>
-                </div>
+    <main id="main-content" class="container">
+        <section class="section-padding" aria-labelledby="cv-title">
+            <span class="system-label">$ cat ~/cv/martin-mzumara</span>
+            <h1 id="cv-title" class="page-title">Curriculum Vitae</h1>
+            <p class="lead-text">Martin Mzumara — Software Developer &amp; IT Technician</p>
+            <p>View my CV below or download a copy for later.</p>
+            <div class="hero-cta">
+                <a href="/cv/Martin-Mzumara-CV.pdf" download="Martin-Mzumara-CV.pdf" class="btn-primary">DOWNLOAD CV (PDF)</a>
+                <a href="/cv/Martin-Mzumara-CV.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary">OPEN PDF IN NEW TAB</a>
+            </div>
+            <p class="cv-mobile-note">On mobile, use the buttons above to open or download the two-page PDF.</p>
+            <div class="cv-frame" data-term="~/cv/Martin-Mzumara-CV.pdf">
+                <h2 class="sr-only">CV preview</h2>
+                <iframe src="/cv/Martin-Mzumara-CV.pdf" title="Martin Mzumara’s CV — PDF preview" loading="lazy"></iframe>
+                <p class="cv-note">Preview unavailable? <a href="/cv/Martin-Mzumara-CV.pdf" target="_blank" rel="noopener noreferrer">Open the PDF in a new tab</a> or use the download button above.</p>
             </div>
         </section>
     </main>
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -114,10 +127,12 @@
         </div>
         <div class="container footer-copyright">
             <p>© <span id="current-year"></span> Martin Mzumara. All rights reserved.</p>
+            <p class="term-hint">psst — press <kbd>`</kbd> for a terminal</p>
         </div>
     </footer>
 
     <script src="/js/icons.js" defer></script>
     <script src="/js/script.js" defer></script>
+    <script src="/js/terminal.js" defer></script>
 </body>
 </html>

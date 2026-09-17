@@ -25,6 +25,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - `leaksafe/index.html`: LeakSAFE case study page.
 - `manguzi/index.html`: Manguzi Executive Lodge client project page.
 - `encplus/index.html`: EncPlus case study page.
+- `cv/index.html`: Branded CV page at `/cv/`, with a desktop PDF preview and open/download controls on all devices. Replace `cv/Martin-Mzumara-CV.pdf` when updating the CV; also refresh `assets/Martin_Mzumara_CV.pdf`, retained for previously shared links. Browser PDF support varies; the direct link remains available if embedding fails.
 - `404.html`: Custom error page for missing routes.
 - `css/style.css`: Custom styles — CSS variables, liquid-glass navbar and mobile panel, responsive breakpoints, `prefers-reduced-motion` fallbacks. Note: the page uses `overflow-x: clip` (not `hidden`) — `hidden` on `html`/`body` silently breaks the navbar's `position: sticky`.
 - `js/tools-data.js`: The posts data array (`SITE_TOOLS`) shared by the homepage and `/articles/` (see below).
