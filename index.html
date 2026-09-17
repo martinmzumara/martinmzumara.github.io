@@ -39,7 +39,11 @@
     
     <link rel="canonical" href="https://martinmzumara.github.io/">
     <!-- Preload LCP hero image -->
-    <link rel="preload" as="image" href="/assets/images/optimized/profile-graduation.webp" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp"
+          href="/assets/images/optimized/profile-graduation-800w.webp"
+          imagesrcset="/assets/images/optimized/profile-graduation-400w.webp 400w, /assets/images/optimized/profile-graduation-800w.webp 800w"
+          imagesizes="(max-width: 768px) min(280px, 70vw), 320px"
+          fetchpriority="high">
     
     <meta name="theme-color" content="#238636">
     
@@ -152,8 +156,10 @@
             </div>
             <div class="hero-visual">
                 <picture>
-                    <source type="image/webp" srcset="/assets/images/optimized/profile-graduation.webp">
-                    <img src="/assets/images/optimized/profile-graduation.jpg"
+                    <source type="image/webp"
+                            srcset="/assets/images/optimized/profile-graduation-400w.webp 400w, /assets/images/optimized/profile-graduation-800w.webp 800w"
+                            sizes="(max-width: 768px) min(280px, 70vw), 320px">
+                    <img src="/assets/images/optimized/profile-graduation-800w.jpg"
                          alt="Martin Mzumara celebrating graduation"
                          class="hero-img" width="400" height="600"
                          fetchpriority="high" decoding="async">
@@ -442,37 +448,45 @@
             <h2 class="section-title underline">Identity & Field Work</h2>
             
             <div class="grid-showcase">
-                <button class="showcase-item" data-full="/assets/images/optimized/field-antenna.jpg" aria-label="View full size: Martin Mzumara installing antenna hardware">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-antenna-full.jpg" aria-label="View full size: Martin Mzumara installing antenna hardware">
                     <picture>
-                        <source type="image/webp" srcset="/assets/images/optimized/field-antenna.webp">
-                        <img src="/assets/images/optimized/field-antenna.jpg" alt="Martin Mzumara installing antenna hardware" class="showcase-img" loading="lazy" width="400" height="300">
+                        <source type="image/webp"
+                                srcset="/assets/images/optimized/field-antenna-400w.webp 400w, /assets/images/optimized/field-antenna-765w.webp 765w"
+                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
+                        <img src="/assets/images/optimized/field-antenna-765w.jpg" alt="Martin Mzumara installing antenna hardware" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
                     </picture>
                     <div class="showcase-overlay">
                         <i class="ti ti-maximize"></i>
                     </div>
                 </button>
-                <button class="showcase-item" data-full="/assets/images/optimized/field-helmet.jpg" aria-label="View full size: Martin Mzumara in hard hat and safety vest">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-helmet-full.jpg" aria-label="View full size: Martin Mzumara in hard hat and safety vest">
                     <picture>
-                        <source type="image/webp" srcset="/assets/images/optimized/field-helmet.webp">
-                        <img src="/assets/images/optimized/field-helmet.jpg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img" loading="lazy" width="400" height="300">
+                        <source type="image/webp"
+                                srcset="/assets/images/optimized/field-helmet-400w.webp 400w, /assets/images/optimized/field-helmet-800w.webp 800w"
+                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
+                        <img src="/assets/images/optimized/field-helmet-800w.jpg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
                     </picture>
                     <div class="showcase-overlay">
                         <i class="ti ti-maximize"></i>
                     </div>
                 </button>
-                <button class="showcase-item" data-full="/assets/images/optimized/field-headlamp.jpg" aria-label="View full size: Field technical work with safety headlamp">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-headlamp-full.jpg" aria-label="View full size: Field technical work with safety headlamp">
                     <picture>
-                        <source type="image/webp" srcset="/assets/images/optimized/field-headlamp.webp">
-                        <img src="/assets/images/optimized/field-headlamp.jpg" alt="Field technical work with safety headlamp" class="showcase-img" loading="lazy" width="400" height="300">
+                        <source type="image/webp"
+                                srcset="/assets/images/optimized/field-headlamp-400w.webp 400w, /assets/images/optimized/field-headlamp-800w.webp 800w"
+                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
+                        <img src="/assets/images/optimized/field-headlamp-800w.jpg" alt="Field technical work with safety headlamp" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
                     </picture>
                     <div class="showcase-overlay">
                         <i class="ti ti-maximize"></i>
                     </div>
                 </button>
-                <button class="showcase-item" data-full="/assets/images/optimized/field-workwear.jpg" aria-label="View full size: Field equipment setup">
+                <button class="showcase-item" data-full="/assets/images/optimized/field-workwear-full.jpg" aria-label="View full size: Field equipment setup">
                     <picture>
-                        <source type="image/webp" srcset="/assets/images/optimized/field-workwear.webp">
-                        <img src="/assets/images/optimized/field-workwear.jpg" alt="Field equipment setup" class="showcase-img" loading="lazy" width="400" height="300">
+                        <source type="image/webp"
+                                srcset="/assets/images/optimized/field-workwear-400w.webp 400w, /assets/images/optimized/field-workwear-800w.webp 800w"
+                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
+                        <img src="/assets/images/optimized/field-workwear-800w.jpg" alt="Field equipment setup" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
                     </picture>
                     <div class="showcase-overlay">
                         <i class="ti ti-maximize"></i>

@@ -15,13 +15,19 @@ jobs:
       - name: Check internal links and image references
         uses: lycheeverse/lychee-action@v2
         with:
-          # --offline    only check local targets (external sites rate-limit and cause flaky failures)
-          # --root-dir   REQUIRED: without it lychee errors on every root-relative link
-          #              ("Cannot resolve root-relative link '/css/style.css': provide a root dir")
+          # --offline           only check local targets (external sites rate-limit and cause flaky failures)
+          # --root-dir          REQUIRED: without it lychee errors on every root-relative link
+          #                     ("Cannot resolve root-relative link '/css/style.css': provide a root dir")
+          # --index-files       resolves directory links ("/") to index.html so their #fragments can be
+          #                     checked; without it a valid cross-page anchor like "/#projects" is a false positive
+          # --include-fragments also verify that every #anchor target actually exists on the target page
+          #                     (catches dead in-page links, e.g. nav items left behind after a section is removed)
           args: >-
             --no-progress
             --offline
             --root-dir .
+            --index-files index.html
+            --include-fragments
             './**/*.html'
           fail: true
 
