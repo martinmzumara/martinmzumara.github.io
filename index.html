@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
     <script data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))})();</script>
+    <!-- Preloader failsafe: the preloader overlay and the hero's opacity:0 base state are both
+         cleared only from js/script.js. If that file fails to load or throws, the page would
+         stay black forever, so force the loaded state if it never arrives. -->
+    <script data-preload-failsafe>(function(){window.__preloadFailsafe=setTimeout(function(){if(document.body.classList.contains("loaded")){return}document.documentElement.style.overflow="";document.body.classList.add("loaded");var p=document.getElementById("preloader");if(p){p.classList.add("done");if(p.parentNode){p.parentNode.removeChild(p)}}},4500)})();</script>
+    <noscript>
+        <style>
+            .preloader { display: none !important; }
+            .hero-content, .hero-visual { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
     <title>Martin Mzumara - Software Developer & IT Technician</title>
     <meta name="description" content="Martin Mzumara — Software Developer & IT Technician in Malawi. IoT systems, web apps, networks.">
     

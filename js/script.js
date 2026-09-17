@@ -286,6 +286,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const preloaderCount = document.getElementById('preloader-count');
 
     const finishPreload = () => {
+        // Cancel the inline head failsafe (see index.html) now that the real path ran
+        if (window.__preloadFailsafe) {
+            clearTimeout(window.__preloadFailsafe);
+            window.__preloadFailsafe = null;
+        }
         document.body.classList.add('loaded');
         if (preloader) {
             preloader.classList.add('done');

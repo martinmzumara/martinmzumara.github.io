@@ -17,6 +17,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - **Project cards** — the homepage cards expose individually clickable links: case study / details, GitHub source (LeakSAFE, EncPlus), and the live Manguzi site.
 - **SEO basics** — `sitemap.xml` and `robots.txt`, plus a custom `404.html` (GitHub Pages serves it automatically).
 - **Performance** — pre-optimized `.webp` image variants under `assets/images/optimized/`; fonts are self-hosted (no third-party font requests); images carry explicit `width`/`height` (no layout shift); the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render.
+- **Resilient hero (no-JS / script-failure safe)** — the preloader overlay and the hero's `opacity: 0` base state are cleared from `js/script.js`. Two safeguards in `index.html` prevent a permanently blank page if that file never runs: a `<noscript>` style block that hides the preloader and reveals the hero, and an inline head failsafe that force-adds `.loaded` after 4.5 s (cancelled by `finishPreload()` on the normal path). Verified with JavaScript disabled and with `/js/script.js` blocked.
 
 ## Project Structure
 
