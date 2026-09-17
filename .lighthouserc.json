@@ -3,7 +3,10 @@
     "collect": {
       "staticDistDir": ".",
       "numberOfRuns": 3,
-      "autodiscoverUrlBlocklist": ["404.html"]
+      "autodiscoverUrlBlocklist": [
+        "404.html",
+        "google19deb8b21f6153e2.html"
+      ]
     },
     "assert": {
       "assertions": {
