@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
-    <script data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))})();</script>
+    <script data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||"dark")})();</script>
     <title>404 - Page Not Found | Martin Mzumara</title>
     <meta name="description" content="The page you're looking for could not be found. Return to Martin Mzumara's portfolio homepage.">
     <meta name="robots" content="noindex, nofollow">

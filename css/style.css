@@ -33,7 +33,19 @@
     --accent-blue-deep: #238636;
     --accent-cyan: #2dd4a7;
     --accent-blue-glow: rgba(63, 185, 80, 0.35);
+    --accent-amber: #e3b341;
+    --accent-amber-soft: rgba(227, 179, 65, 0.15);
     --accent-violet: #e3b341;
+
+    /* Spacing rhythm — 8px-based scale */
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --space-4: 2rem;
+    --space-5: 3rem;
+    --space-6: 4rem;
+    --space-7: 5rem;
+    --space-8: 6rem;
 
     /* Flat console surfaces */
     --glass-bg: rgba(255,255,255,0.03);
@@ -44,9 +56,13 @@
     --term-line: rgba(255,255,255,0.10);
     --glass-border-strong: rgba(63,185,80,0.45);
     --glass-highlight: rgba(255,255,255,0.04);
-    --glass-shadow: 0 14px 34px rgba(0,0,0,0.5);
-    --glass-shadow-soft: 0 6px 16px rgba(0,0,0,0.35);
-    --chip-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    /* Elevation scale — 3 levels (chips / cards / focal) */
+    --elev-1: 0 2px 8px rgba(0,0,0,0.30);
+    --elev-2: 0 6px 16px rgba(0,0,0,0.35);
+    --elev-3: 0 14px 34px rgba(0,0,0,0.50);
+    --glass-shadow: var(--elev-3);
+    --glass-shadow-soft: var(--elev-2);
+    --chip-shadow: var(--elev-1);
     --glass-blur: 0px;
     --menu-bg: rgba(13,18,24,0.38);
     --menu-rim: rgba(255,255,255,0.16);
@@ -73,9 +89,13 @@
     --term-line: rgba(27,31,35,0.14);
     --glass-border-strong: rgba(26,127,55,0.5);
     --glass-highlight: rgba(255,255,255,0.6);
-    --glass-shadow: 0 10px 24px rgba(27,31,35,0.12);
-    --glass-shadow-soft: 0 4px 12px rgba(27,31,35,0.08);
-    --chip-shadow: 0 2px 5px rgba(27,31,35,0.10);
+    /* Elevation scale — softer for paper mode */
+    --elev-1: 0 2px 5px rgba(27,31,35,0.10);
+    --elev-2: 0 4px 12px rgba(27,31,35,0.08);
+    --elev-3: 0 10px 24px rgba(27,31,35,0.12);
+    --glass-shadow: var(--elev-3);
+    --glass-shadow-soft: var(--elev-2);
+    --chip-shadow: var(--elev-1);
     --menu-bg: rgba(245,242,236,0.42);
     --menu-rim: rgba(27,31,35,0.12);
     --accent-blue: #1a7f37;
@@ -83,6 +103,8 @@
     --accent-blue-deep: #0e4f22;
     --accent-cyan: #0f766e;
     --accent-blue-glow: rgba(26, 127, 55, 0.25);
+    --accent-amber: #9a6700;
+    --accent-amber-soft: rgba(154, 103, 0, 0.15);
     --accent-violet: #9a6700;
 
     --bg-main: #f5f2ec;
@@ -333,8 +355,8 @@ body::after {
 }
 
 .section-padding {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
 }
 
 .section-divider {
@@ -2921,3 +2943,52 @@ section[id] { scroll-margin-top: 90px; }
     border-color: var(--chip-border);
     box-shadow: var(--chip-shadow);
 }
+
+/* ---------- Phosphor Terminal pass (redesign-lab) ---------- */
+
+/* 1. Phosphor grain — ultra-faint CRT noise over the whole viewport.
+   Lives on html::before because body::before/::after already carry the
+   scanline backdrop and vignette (see ~line 239). Keep them intact.
+   Noise is desaturated via feColorMatrix so the grain only adds luminance,
+   never colour, and no blend mode is used (a plain composited layer is
+   far cheaper to scroll than mix-blend-mode: screen). */
+html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.035;
+}
+/* Paper mode stays clean — no grain. (html can't be its own descendant,
+   so this must be a compound selector on html itself.) */
+html[data-theme="light"]::before { display: none; }
+@media print { html::before { display: none; } }
+
+/* 2. Terminal tag chips — mono labels framed as [tech] brackets.
+   Borderless system stays: definition comes from --chip-shadow, and hover
+   lifts the chip one elevation instead of drawing an outline. */
+.tag::before,
+.tag::after {
+    font-family: var(--font-mono);
+    color: var(--accent-blue);
+    opacity: 0.8;
+}
+.tag::before { content: "["; margin-right: 0.2rem; }
+.tag::after { content: "]"; margin-left: 0.2rem; }
+.tag:hover {
+    color: var(--accent-blue);
+    border-color: transparent;
+    box-shadow: var(--elev-2);
+}
+
+/* 3. Hero command line — no width reservation needed.
+   .system-label is already display:block inside .hero-content, which is a
+   flex item (flex: 1 1 520px) of fixed width, so the typewriter in
+   js/script.js (section 14) cannot shift any surrounding layout. Verified
+   by measurement: hero left/width and document height are identical with
+   the prompt empty and fully typed. Do NOT re-add a min-width or change
+   display here — it would only narrow the label without preventing shift. */
+

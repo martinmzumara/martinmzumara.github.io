@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Follow system theme changes while the user has no saved preference
+    // Follow system theme changes while the user has no saved preference.
+    // Dark-first: with no saved choice, the canonical phosphor experience wins.
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleSystemChange = () => {
         let saved = null;
         try { saved = localStorage.getItem("theme"); } catch (e) {}
         if (!saved) {
-            document.documentElement.setAttribute("data-theme", mediaQuery.matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", "dark");
             updateThemeToggleLabel();
         }
     };
@@ -316,6 +317,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         finishPreload();
     }
+
+    // NOTE: the hero command-line typewriter lives in section 14 below — it
+    // reads its text from the HTML and types after the preloader lifts.
 
     // =============== 7. Scroll progress bar ===============
     const progressBar = document.getElementById('scroll-progress');
