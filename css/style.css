@@ -272,6 +272,13 @@ body::after {
     );
 }
 
+/* Light vignette — paper ink at elevation-scale alpha. The dark theme's
+   pure black at 0.4 reads as a gray smudge on the cream background. */
+[data-theme="light"] body::after {
+    background:
+        radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(27,31,35,0.12));
+}
+
 /* Screen-reader-only text (SEO: name in H1 without changing visuals) */
 .sr-only {
     position: absolute;
