@@ -394,11 +394,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =============== 11. Animated stat counters ===============
+    // The DOM ships the real values (data-count) as text so no-JS,
+    // crawlers, and slow connections never see "0". JS resets to 0
+    // and animates up when the stats scroll into view.
     const statValues = document.querySelectorAll('.stat-value[data-count]');
     const heroStats = document.querySelector('.hero-stats');
     const animateStat = (el) => {
         const target = parseInt(el.getAttribute('data-count'), 10) || 0;
         if (reduceMotion) { el.textContent = target; return; }
+        el.textContent = 0;
         const sStart = performance.now();
         const sDur = 1400;
         const sStep = (now) => {
