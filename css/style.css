@@ -2525,6 +2525,27 @@ main { counter-reset: chapter; }
     height: 15px;
     flex-shrink: 0;
 }
+/* Each tick stays glued to its own text; separators break independently */
+.principle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+}
+.principle-sep {
+    color: var(--text-faint);
+}
+/* Mobile: stack the principles so every tick starts its own line */
+@media (max-width: 520px) {
+    .contact-principles {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+    .principle-sep {
+        display: none;
+    }
+}
 .section-head { position: relative; }
 
 /* Scroll progress bar */
