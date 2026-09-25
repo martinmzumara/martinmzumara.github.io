@@ -142,9 +142,9 @@
                 <h1><span class="sr-only">Martin Mzumara – </span>Software Developer<br><span>&amp; IT Technician</span></h1>
                 <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
                 <div class="hero-stats" aria-label="Highlights">
-                    <div class="stat"><span class="stat-value" data-count="4">0</span><span class="stat-label">Years in Tech</span></div>
-                    <div class="stat"><span class="stat-value" data-count="3">0</span><span class="stat-label">Projects Delivered</span></div>
-                    <div class="stat"><span class="stat-value" data-count="2">0</span><span class="stat-label">Certifications</span></div>
+                    <div class="stat"><span class="stat-value" data-count="4">4</span><span class="stat-label">Years in Tech</span></div>
+                    <div class="stat"><span class="stat-value" data-count="3">3</span><span class="stat-label">Projects Delivered</span></div>
+                    <div class="stat"><span class="stat-value" data-count="2">2</span><span class="stat-label">Certifications</span></div>
                 </div>
                 <div class="hero-cta">
                     <a href="#projects" class="btn-primary">VIEW MY WORK</a>
@@ -234,7 +234,7 @@
         <!-- Projects Section -->
         <section id="projects" class="container section-padding chapter">
             <span class="system-label">$ ls ~/projects/ --featured</span>
-            <h2 class="section-title underline">Software & IoT Projects</h2>
+            <h2 class="section-title underline">Selected Work</h2>
             
             <div class="projects-grid">
                 <!-- LeakSAFE Project Card -->
@@ -262,7 +262,7 @@
                             <a href="/leaksafe/" class="project-link-btn">
                                 VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
                             </a>
-                            <a href="https://github.com/martinmzumara/LeakSafe" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="project-link-btn">
                                 <i class="ti ti-brand-github"></i> SOURCE
                             </a>
                         </div>
@@ -281,6 +281,7 @@
                         <span class="system-label">~/projects/encplus — init</span>
                         <h3><a href="/encplus/">EncPlus - AES File Encryption</a></h3>
                         <p>A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
+                        <p class="project-note"><i class="ti ti-info-circle"></i> In active development — v1 (encrypted vault + sharing) expected Q1 2026.</p>
                         <div class="project-meta">
                             <span class="tag">Flutter</span>
                             <span class="tag">Dart</span>
@@ -322,6 +323,35 @@
                             </a>
                             <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">
                                 <i class="ti ti-external-link"></i> LIVE SITE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAH CCTV Project Card -->
+                <div class="project-card" data-term="~/projects/lah-cctv">
+                    <a href="/lah-cctv/" class="project-thumb-link" aria-label="Read the LAH CCTV case study">
+                        <div class="project-thumb">
+                            <picture>
+                                <source type="image/webp" srcset="/assets/images/optimized/lah-indoor-camera-1-400w.webp">
+                                <img src="/assets/images/lah-indoor-camera-1.jpg" alt="Indoor 6MP dome camera installed at Lilongwe Adventist Hospital" loading="lazy" width="600" height="400">
+                            </picture>
+                            <div class="project-badge">CLIENT PROJECT</div>
+                        </div>
+                    </a>
+                    <div class="project-body">
+                        <span class="system-label">~/projects/lah-cctv — init</span>
+                        <h3><a href="/lah-cctv/">LAH CCTV - Hospital Surveillance System</a></h3>
+                        <p>A 13-camera 6MP surveillance installation for Lilongwe Adventist Hospital — 32-channel NVR, 2TB storage, UPS backup, and secure remote viewing.</p>
+                        <div class="project-meta">
+                            <span class="tag">CCTV</span>
+                            <span class="tag">NVR</span>
+                            <span class="tag">Remote Viewing</span>
+                            <span class="tag">Infrastructure</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="/lah-cctv/" class="project-link-btn">
+                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -444,51 +474,30 @@
             <span class="system-label">$ ls ~/showcase/</span>
             <h2 class="section-title underline">Identity & Field Work</h2>
             
-            <div class="grid-showcase">
-                <button class="showcase-item" data-full="/assets/images/optimized/field-antenna-full.jpg" aria-label="View full size: Martin Mzumara installing antenna hardware">
-                    <picture>
-                        <source type="image/webp"
-                                srcset="/assets/images/optimized/field-antenna-400w.webp 400w, /assets/images/optimized/field-antenna-765w.webp 765w"
-                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
-                        <img src="/assets/images/optimized/field-antenna-765w.jpg" alt="Martin Mzumara installing antenna hardware" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
-                    </picture>
-                    <div class="showcase-overlay">
-                        <i class="ti ti-maximize"></i>
+            <div class="showcase-carousel" data-carousel>
+                <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+<button class="showcase-item" data-full="/assets/images/optimized/field-antenna-full.jpg" aria-label="View full size: Martin Mzumara with rooftop antenna install"><picture><source type="image/webp" srcset="/assets/images/optimized/field-antenna-400w.webp 400w, /assets/images/optimized/field-antenna-765w.webp 765w" sizes="280px"><img src="/assets/images/optimized/field-antenna-765w.jpg" alt="Martin Mzumara with rooftop antenna install" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Rooftop antenna install</span></button>
+<button class="showcase-item" data-full="/assets/images/optimized/field-helmet-full.jpg" aria-label="View full size: Martin Mzumara in server room with Dell racks"><picture><source type="image/webp" srcset="/assets/images/optimized/field-helmet-400w.webp 400w, /assets/images/optimized/field-helmet-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-helmet-800w.jpg" alt="Martin Mzumara in server room with Dell racks" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Server room visit</span></button>
+<button class="showcase-item" data-full="/assets/images/optimized/field-headlamp-full.jpg" aria-label="View full size: Flutter development work on laptop"><picture><source type="image/webp" srcset="/assets/images/optimized/field-headlamp-400w.webp 400w, /assets/images/optimized/field-headlamp-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-headlamp-800w.jpg" alt="Flutter development work on laptop" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Dev session, Flutter</span></button>
+<button class="showcase-item" data-full="/assets/images/field-warehouse-site.jpg" aria-label="View full size: PPE check inside warehouse"><picture><source type="image/webp" srcset="/assets/images/optimized/field-warehouse-site-400w.webp 400w, /assets/images/optimized/field-warehouse-site-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-warehouse-site-800w.jpg" alt="PPE check inside warehouse" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">PPE check, warehouse site</span></button>
+<button class="showcase-item" data-full="/assets/images/field-trunking.jpg" aria-label="View full size: Cable trunking and wiring installation"><picture><source type="image/webp" srcset="/assets/images/optimized/field-trunking-400w.webp 400w, /assets/images/optimized/field-trunking-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-trunking-800w.jpg" alt="Cable trunking and wiring installation" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Trunking & cabling</span></button>
+<button class="showcase-item" data-full="/assets/images/field-workwear-site.jpg" aria-label="View full size: Gearing up in workwear on site"><picture><source type="image/webp" srcset="/assets/images/optimized/field-workwear-site-400w.webp 400w, /assets/images/optimized/field-workwear-site-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-workwear-site-800w.jpg" alt="Gearing up in workwear on site" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Gearing up on site</span></button>
+<button class="showcase-item" data-full="/assets/images/field-cabledrum.jpg" aria-label="View full size: Fibre cable drum on site"><picture><source type="image/webp" srcset="/assets/images/optimized/field-cabledrum-400w.webp 400w, /assets/images/optimized/field-cabledrum-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-cabledrum-800w.jpg" alt="Fibre cable drum on site" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Cable drum, fibre pull</span></button>
+<button class="showcase-item" data-full="/assets/images/field-team-rig.jpg" aria-label="View full size: With teammate at industrial site"><picture><source type="image/webp" srcset="/assets/images/optimized/field-team-rig-400w.webp 400w, /assets/images/optimized/field-team-rig-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-team-rig-800w.jpg" alt="With teammate at industrial site" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Crew on industrial site</span></button>
+<button class="showcase-item" data-full="/assets/images/field-team-rack.jpg" aria-label="View full size: Team network cabinet work"><picture><source type="image/webp" srcset="/assets/images/optimized/field-team-rack-400w.webp 400w, /assets/images/optimized/field-team-rack-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-team-rack-800w.jpg" alt="Team network cabinet work" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Cabinet work with crew</span></button>
+<button class="showcase-item" data-full="/assets/images/field-site-break.jpg" aria-label="View full size: Break time on site"><picture><source type="image/webp" srcset="/assets/images/optimized/field-site-break-400w.webp 400w, /assets/images/optimized/field-site-break-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-site-break-800w.jpg" alt="Break time on site" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Site break</span></button>
+<button class="showcase-item" data-full="/assets/images/field-install-team.jpg" aria-label="View full size: Indoor network install with teammate"><picture><source type="image/webp" srcset="/assets/images/optimized/field-install-team-400w.webp 400w, /assets/images/optimized/field-install-team-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-install-team-800w.jpg" alt="Indoor network install with teammate" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Indoor network install</span></button>
+<button class="showcase-item" data-full="/assets/images/field-site-portrait.jpg" aria-label="View full size: Site portrait at perimeter wall"><picture><source type="image/webp" srcset="/assets/images/optimized/field-site-portrait-400w.webp 400w, /assets/images/optimized/field-site-portrait-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-site-portrait-800w.jpg" alt="Site portrait at perimeter wall" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Site portrait, perimeter wall</span></button>
+<button class="showcase-item" data-full="/assets/images/field-rooftop-dish.jpg" aria-label="View full size: Starlink installation on rooftop"><picture><source type="image/webp" srcset="/assets/images/optimized/field-rooftop-dish-400w.webp 400w, /assets/images/optimized/field-rooftop-dish-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-rooftop-dish-800w.jpg" alt="Starlink installation on rooftop" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Starlink install</span></button>
+<button class="showcase-item" data-full="/assets/images/field-container-yard.jpg" aria-label="View full size: CCTV installation on rooftop over container yard"><picture><source type="image/webp" srcset="/assets/images/optimized/field-container-yard-400w.webp 400w, /assets/images/optimized/field-container-yard-800w.webp 800w" sizes="280px"><img src="/assets/images/optimized/field-container-yard-800w.jpg" alt="CCTV installation on rooftop over container yard" class="showcase-img" loading="lazy" width="400" height="533" decoding="async"></picture><span class="showcase-overlay"><i class="ti ti-maximize"></i></span><span class="showcase-caption">Rooftop CCTV install</span></button>
                     </div>
-                </button>
-                <button class="showcase-item" data-full="/assets/images/optimized/field-helmet-full.jpg" aria-label="View full size: Martin Mzumara in hard hat and safety vest">
-                    <picture>
-                        <source type="image/webp"
-                                srcset="/assets/images/optimized/field-helmet-400w.webp 400w, /assets/images/optimized/field-helmet-800w.webp 800w"
-                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
-                        <img src="/assets/images/optimized/field-helmet-800w.jpg" alt="Martin Mzumara in hard hat and safety vest" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
-                    </picture>
-                    <div class="showcase-overlay">
-                        <i class="ti ti-maximize"></i>
-                    </div>
-                </button>
-                <button class="showcase-item" data-full="/assets/images/optimized/field-headlamp-full.jpg" aria-label="View full size: Field technical work with safety headlamp">
-                    <picture>
-                        <source type="image/webp"
-                                srcset="/assets/images/optimized/field-headlamp-400w.webp 400w, /assets/images/optimized/field-headlamp-800w.webp 800w"
-                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
-                        <img src="/assets/images/optimized/field-headlamp-800w.jpg" alt="Field technical work with safety headlamp" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
-                    </picture>
-                    <div class="showcase-overlay">
-                        <i class="ti ti-maximize"></i>
-                    </div>
-                </button>
-                <button class="showcase-item" data-full="/assets/images/optimized/field-workwear-full.jpg" aria-label="View full size: Field equipment setup">
-                    <picture>
-                        <source type="image/webp"
-                                srcset="/assets/images/optimized/field-workwear-400w.webp 400w, /assets/images/optimized/field-workwear-800w.webp 800w"
-                                sizes="(max-width: 600px) 90vw, (max-width: 1024px) 30vw, 285px">
-                        <img src="/assets/images/optimized/field-workwear-800w.jpg" alt="Field equipment setup" class="showcase-img" loading="lazy" width="400" height="300" decoding="async">
-                    </picture>
-                    <div class="showcase-overlay">
-                        <i class="ti ti-maximize"></i>
-                    </div>
-                </button>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" data-carousel-prev aria-label="Previous photos"><i class="ti ti-arrow-left"></i></button>
+                    <div class="carousel-dots" data-carousel-dots role="tablist" aria-label="Showcase pages"></div>
+                    <button class="carousel-btn" data-carousel-next aria-label="Next photos"><i class="ti ti-arrow-right"></i></button>
+                </div>
             </div>
         </section>
         <!-- Contact Section -->

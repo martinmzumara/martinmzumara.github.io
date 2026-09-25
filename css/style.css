@@ -980,6 +980,27 @@ body::after {
     flex-grow: 1;
 }
 
+.project-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    background: var(--glass-bg-soft);
+    border: 1px solid var(--glass-border);
+    border-radius: 6px;
+    padding: 0.55rem 0.7rem;
+    margin: -0.5rem 0 1.25rem;
+}
+
+.project-note i {
+    color: var(--accent-blue);
+    font-size: 15px;
+    line-height: 1.4;
+    flex-shrink: 0;
+}
+
 .project-meta {
     display: flex;
     gap: 0.5rem;
@@ -1184,10 +1205,36 @@ body::after {
 }
 
 /* ---------- Identity & Fieldwork Showcase ---------- */
-.grid-showcase {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.showcase-carousel {
+    position: relative;
+}
+
+.carousel-viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+    margin: 0 -0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.carousel-viewport::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-track {
+    display: flex;
     gap: 1.25rem;
+    width: max-content;
+    max-width: none;
+}
+
+.showcase-carousel .showcase-item {
+    flex: 0 0 260px;
+    width: 260px;
+    scroll-snap-align: start;
 }
 
 .showcase-item {
@@ -1195,7 +1242,7 @@ body::after {
     border-radius: 14px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
-    height: 220px;
+    height: 380px;
     cursor: pointer;
     padding: 0;
     width: 100%;
@@ -1243,6 +1290,86 @@ body::after {
     width: 26px;
     height: 26px;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.showcase-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.6rem 0.9rem 0.7rem;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: #fff;
+    background: linear-gradient(180deg, transparent, rgba(8,9,14,0.75));
+    pointer-events: none;
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.carousel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg-soft);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-btn:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.carousel-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+.carousel-btn[disabled] {
+    opacity: 0.35;
+    cursor: default;
+    transform: none;
+}
+
+.carousel-dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.carousel-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: var(--glass-border-strong);
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-dot[aria-selected="true"] {
+    opacity: 1;
+    transform: scale(1.25);
+    background: var(--accent-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-viewport {
+        scroll-behavior: auto;
+    }
 }
 
 .showcase-item:hover .showcase-overlay,
@@ -1771,6 +1898,32 @@ body.lightbox-open {
 .gallery-info p {
     font-size: 0.85rem;
     color: var(--text-secondary);
+}
+
+/* Uniform gallery frames (opt-in): equal 4:3 windows, center-cropped.
+   Apply `gallery-grid--uniform` alongside `gallery-grid` on pages whose
+   photos mix landscape/portrait (e.g. lah-cctv). Pages with intentionally
+   tall screenshots (e.g. leaksafe phone screens) omit the modifier. */
+.gallery-grid--uniform .gallery-card picture {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background: var(--glass-bg-soft);
+}
+
+.gallery-grid--uniform .gallery-card picture img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin-bottom: 0;
+    border-radius: 0;
+    box-shadow: none;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* ---------- Footer (glass) ---------- */

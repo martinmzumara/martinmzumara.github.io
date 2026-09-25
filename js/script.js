@@ -186,12 +186,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let lastFocused = null;
 
     if (lightbox && lightboxImg && showcaseItems.length > 0) {
+        const items = Array.from(showcaseItems);
+        let currentIndex = 0;
+        const showAt = (index) => {
+            currentIndex = (index + items.length) % items.length;
+            const item = items[currentIndex];
+            const fullSrc = item.getAttribute('data-full');
+            if (fullSrc) { lightboxImg.src = fullSrc; }
+            const triggerImg = item && item.querySelector ? item.querySelector('img') : null;
+            lightboxImg.alt = (triggerImg && triggerImg.alt) ? triggerImg.alt : 'Showcase preview';
+        };
         const openLightbox = (src, trigger) => {
             lastFocused = trigger;
-            lightboxImg.src = src;
-            // Mirror the source image's alt text instead of a generic label
-            const triggerImg = trigger && trigger.querySelector ? trigger.querySelector('img') : null;
-            lightboxImg.alt = (triggerImg && triggerImg.alt) ? triggerImg.alt : 'Showcase preview';
+            currentIndex = Math.max(0, items.indexOf(trigger));
+            showAt(currentIndex);
             lightbox.classList.add('active');
             lightbox.setAttribute('aria-hidden','false');
             document.body.classList.add('lightbox-open');
@@ -221,10 +229,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target === lightbox) { closeLightbox(); }
         });
 
-        // Close on Escape key + trap Tab inside modal
+        // Close on Escape key + trap Tab inside modal + arrow-key browsing
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 closeLightbox();
+            }
+            if (lightbox.classList.contains('active') && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+                e.preventDefault();
+                showAt(currentIndex + (e.key === 'ArrowRight' ? 1 : -1));
             }
             if (e.key === 'Tab' && lightbox.classList.contains('active')) {
                 const focusable = lightbox.querySelectorAll(
@@ -240,6 +252,62 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
+    }
+
+    // 4b. Showcase carousel controls (scroll-snap + dots + lightbox prev/next)
+    const carousel = document.querySelector('[data-carousel]');
+    if (carousel) {
+        const viewport = carousel.querySelector('.carousel-viewport');
+        const track = carousel.querySelector('[data-carousel-track]');
+        const prevBtn = carousel.querySelector('[data-carousel-prev]');
+        const nextBtn = carousel.querySelector('[data-carousel-next]');
+        const dotsWrap = carousel.querySelector('[data-carousel-dots]');
+        const items = track ? Array.from(track.querySelectorAll('.showcase-item')) : [];
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (viewport && track && items.length > 0) {
+            const step = () => {
+                const first = items[0];
+                const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 20;
+                return first.getBoundingClientRect().width + gap;
+            };
+            const maxScroll = () => track.scrollWidth - viewport.clientWidth - 4;
+            const pageCount = () => Math.max(1, Math.ceil(track.scrollWidth / viewport.clientWidth));
+            const activePage = () => Math.min(pageCount() - 1, Math.round(viewport.scrollLeft / viewport.clientWidth));
+            const paint = () => {
+                const pages = pageCount();
+                const active = activePage();
+                if (dotsWrap) {
+                    const dots = Array.from(dotsWrap.querySelectorAll('.carousel-dot'));
+                    dots.forEach((d, i) => d.setAttribute('aria-selected', i === active ? 'true' : 'false'));
+                }
+                if (prevBtn) { prevBtn.disabled = viewport.scrollLeft <= 4; }
+                if (nextBtn) { nextBtn.disabled = viewport.scrollLeft >= maxScroll(); }
+            };
+            if (dotsWrap) {
+                const pages = pageCount();
+                for (let i = 0; i < pages; i += 1) {
+                    const dot = document.createElement('button');
+                    dot.className = 'carousel-dot';
+                    dot.type = 'button';
+                    dot.setAttribute('role', 'tab');
+                    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+                    dot.setAttribute('aria-label', 'Go to showcase page ' + (i + 1));
+                    dot.addEventListener('click', () => {
+                        viewport.scrollTo({ left: i * viewport.clientWidth, behavior: reduceMotion ? 'auto' : 'smooth' });
+                    });
+                    dotsWrap.appendChild(dot);
+                }
+            }
+            if (prevBtn) { prevBtn.addEventListener('click', () => viewport.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' })); }
+            if (nextBtn) { nextBtn.addEventListener('click', () => viewport.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' })); }
+            let raf = null;
+            viewport.addEventListener('scroll', () => {
+                if (raf) { return; }
+                raf = requestAnimationFrame(() => { raf = null; paint(); });
+            }, { passive: true });
+            window.addEventListener('resize', paint);
+            paint();
+        }
     }
 
     // 5. Auto-hiding navbar (reveal on scroll up)
@@ -394,11 +462,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =============== 11. Animated stat counters ===============
+    // The DOM ships the real values (data-count) as text so no-JS,
+    // crawlers, and slow connections never see "0". JS resets to 0
+    // and animates up when the stats scroll into view.
     const statValues = document.querySelectorAll('.stat-value[data-count]');
     const heroStats = document.querySelector('.hero-stats');
     const animateStat = (el) => {
         const target = parseInt(el.getAttribute('data-count'), 10) || 0;
         if (reduceMotion) { el.textContent = target; return; }
+        el.textContent = 0;
         const sStart = performance.now();
         const sDur = 1400;
         const sStep = (now) => {
