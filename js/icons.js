@@ -48,7 +48,7 @@
         var size = iconSize(el);
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("viewBox", "0 0 24 24");
+        svg.setAttribute("viewBox", "0 0 256 256");
         svg.setAttribute("width", size);
         svg.setAttribute("height", size);
         svg.setAttribute("aria-hidden", "true");
