@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
+    <script data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||"dark")})();</script>
+    <title>LAH CCTV Surveillance Installation - Martin Mzumara</title>
+    <meta name="description" content="CCTV case study: 13-camera 6MP surveillance system for Lilongwe Adventist Hospital — 32-channel NVR, 2TB storage, UPS backup, secure remote viewing.">
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Martin Mzumara">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="LAH CCTV – 13-Camera Surveillance Installation">
+    <meta property="og:description" content="CCTV case study: 13-camera 6MP surveillance system for Lilongwe Adventist Hospital — 32-channel NVR, 2TB storage, UPS backup, secure remote viewing.">
+    <meta property="og:url" content="https://martinmzumara.github.io/lah-cctv/">
+    <meta property="og:image" content="https://martinmzumara.github.io/assets/images/og-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LAH CCTV – 13-Camera Surveillance Installation">
+    <meta name="twitter:description" content="CCTV case study: 13-camera 6MP surveillance system for Lilongwe Adventist Hospital — 32-channel NVR, 2TB storage, UPS backup, secure remote viewing.">
+    <meta name="twitter:image" content="https://martinmzumara.github.io/assets/images/og-cover.jpg">
+    <link rel="canonical" href="https://martinmzumara.github.io/lah-cctv/">
+    <meta name="theme-color" content="#238636">
+    
+    <!-- Favicon (generated from assets/images/logo.png) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
+    <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Tabler Icons -->
+    </head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation Header -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">martin@portfolio<span>:~$</span></a>
+            
+            <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+                <i class="ti ti-menu-2 icon-menu"></i>
+                <i class="ti ti-x icon-close"></i>
+            </button>
+
+            <nav class="nav-links" id="nav-links" aria-label="Case study navigation">
+                <a href="#overview" class="nav-link">OVERVIEW</a>
+                <a href="#scope" class="nav-link">SCOPE</a>
+                <a href="#handover" class="nav-link">HANDOVER</a>
+                <a href="#gallery" class="nav-link">GALLERY</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="/#projects" class="btn-primary">
+                    <i class="ti ti-arrow-left"></i> BACK TO PROJECTS
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container project-detail-container">
+        <!-- Hero Title Section -->
+        <div class="project-detail-header">
+            <span class="system-label">$ cat ~/projects/lah-cctv</span>
+            <h1 class="main-title">LAH CCTV – 13-Camera Surveillance Installation</h1>
+            <p class="lead-text">A 13-camera 6MP surveillance system for Lilongwe Adventist Hospital — 32-channel NVR, 2TB storage, UPS backup, and secure remote viewing. Deployed through Bits &amp; Bytes Computers; commissioned, tested, and handed over for operational use.</p>
+            <div class="hero-cta project-actions">
+                <a href="/#contact" class="btn-primary">
+                    <i class="ti ti-mail"></i> DISCUSS A SIMILAR PROJECT
+                </a>
+            </div>
+        </div>
+
+        <!-- System Specifications -->
+        <div class="specs-grid">
+            <div class="spec-card" data-term="~/spec/client">
+                <span class="spec-label">CLIENT</span>
+                <span class="spec-value">Lilongwe Adventist Hospital</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/contractor">
+                <span class="spec-label">CONTRACTOR</span>
+                <span class="spec-value">Bits &amp; Bytes Computers</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/role">
+                <span class="spec-label">ROLE</span>
+                <span class="spec-value">Installation Team — Deployment &amp; Configuration</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/cameras">
+                <span class="spec-label">CAMERAS</span>
+                <span class="spec-value">13x 6MP — 6 outdoor, 7 indoor</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/recording">
+                <span class="spec-label">RECORDING</span>
+                <span class="spec-value">32-channel NVR, 2TB surveillance HDD</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/power-and-access">
+                <span class="spec-label">POWER &amp; ACCESS</span>
+                <span class="spec-value">Dedicated UPS on NVR; secure remote viewing</span>
+            </div>
+        </div>
+
+        <!-- Project Stats -->
+        <section class="section-padding" id="overview">
+            <span class="system-label">$ cat metrics.log</span>
+            <h2 class="section-title underline">At A Glance</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card" data-term="~/metrics/cameras">
+                    <span class="stat-value">13</span>
+                    <span class="stat-label">Cameras Installed</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/outdoor-cameras">
+                    <span class="stat-value">6</span>
+                    <span class="stat-label">Outdoor Units</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/indoor-cameras">
+                    <span class="stat-value">7</span>
+                    <span class="stat-label">Indoor Units</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/nvr-channels">
+                    <span class="stat-value">32</span>
+                    <span class="stat-label">NVR Channels</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Brief -->
+        <section class="section-padding">
+            <span class="system-label">$ cat brief.log</span>
+            <h2 class="section-title underline">The Brief</h2>
+            <p class="section-lead">Lilongwe Adventist Hospital required reliable visual coverage of key indoor and outdoor areas, with footage retained on-site and accessible to authorized personnel. Bits &amp; Bytes Computers contracted the deployment; I served on the installation team supporting deployment and configuration through commissioning and handover.</p>
+        </section>
+
+        <!-- What Was Installed -->
+        <section class="section-padding" id="scope">
+            <span class="system-label">$ ./deploy.sh --scope</span>
+            <h2 class="section-title underline">What Was Installed</h2>
+
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-tag">COVERAGE</span>
+                    <h3>13x 6MP Cameras</h3>
+                    <p>Installed and aimed 13 high-resolution 6MP cameras — 6 outdoor units covering perimeters and entry points, 7 indoor units covering corridors and service areas.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">RECORDING</span>
+                    <h3>32-Channel NVR + 2TB Storage</h3>
+                    <p>Installed and configured a 32-channel Network Video Recorder with a 2TB surveillance-grade hard drive for continuous on-site footage retention, with channel headroom for future additions.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">POWER</span>
+                    <h3>Dedicated UPS Backup</h3>
+                    <p>Connected the NVR directly to a dedicated UPS so recording continues through mains outages — no gaps in footage when hospital power drops.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">ACCESS</span>
+                    <h3>Secure Remote Viewing</h3>
+                    <p>Configured authenticated remote access so authorized hospital personnel can monitor live cameras and review recorded footage from mobile devices or computers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Handover -->
+        <section class="section-padding" id="handover">
+            <span class="system-label">$ tail -f handover.log</span>
+            <h2 class="section-title underline">Result &amp; Handover</h2>
+            <p class="section-lead">The system was installed, configured, tested, and commissioned successfully, then formally handed over to Lilongwe Adventist Hospital for operational use — with an operation &amp; maintenance guide covering:</p>
+
+            <ul class="custom-list">
+                <li><i class="ti ti-player-play list-icon"></i> Power reliability for the NVR, UPS, and network equipment.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Verifying cameras stay online and recording.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Monitoring NVR storage and exporting footage before overwrite.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Maintaining stable internet connectivity for remote viewing.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Restricting system access to authorized personnel only.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Periodic UPS battery checks.</li>
+                <li><i class="ti ti-player-play list-icon"></i> A fault-reporting process for issues and support requests.</li>
+            </ul>
+        </section>
+
+        <!-- Field Notes -->
+        <section class="section-padding" id="insights">
+            <span class="system-label">$ tail -f lessons.log</span>
+            <h2 class="section-title underline">Field Notes</h2>
+
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-tag">COVERAGE</span>
+                    <h3>Balancing Indoor and Outdoor Coverage</h3>
+                    <p>Entry points, perimeters, corridors, and service areas each needed a different mounting height and viewing angle. Camera positions were walked and verified on live view before final fixing.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">POWER</span>
+                    <h3>Outage-Proof Recording</h3>
+                    <p>Hospital mains power is not guaranteed. The NVR runs on a dedicated UPS so recording continues through outages — verified by simulating a mains cut during commissioning.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">HANDOVER</span>
+                    <h3>Leaving the Client Self-Sufficient</h3>
+                    <p>The operation &amp; maintenance guide covers storage monitoring, footage export before overwrite, access control, UPS checks, and fault reporting — so the system stays healthy after handover.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Gallery Showcase -->
+        <section class="section-padding" id="gallery">
+            <span class="system-label">$ ls ~/sites/lah/</span>
+            <h2 class="section-title underline">Installation Photos</h2>
+
+            <div class="gallery-grid">
+                <!-- PHOTO PLACEHOLDER 1 -->
+                <div class="gallery-card" data-term="~/sites/lah/outdoor-camera">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-photo placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Outdoor Camera (photo pending)</h3>
+                        <p>Exterior 6MP unit mounted at LAH — photo to be added.</p>
+                    </div>
+                </div>
+
+                <!-- PHOTO PLACEHOLDER 2 -->
+                <div class="gallery-card" data-term="~/sites/lah/indoor-camera">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-photo placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Indoor Camera (photo pending)</h3>
+                        <p>Interior 6MP unit covering corridors and service areas — photo to be added.</p>
+                    </div>
+                </div>
+
+                <!-- PHOTO PLACEHOLDER 3 -->
+                <div class="gallery-card" data-term="~/sites/lah/nvr-ups-setup">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-server placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>NVR &amp; UPS Setup (photo pending)</h3>
+                        <p>32-channel NVR with 2TB storage on dedicated UPS — photo to be added.</p>
+                    </div>
+                </div>
+
+                <!-- PHOTO PLACEHOLDER 4 -->
+                <div class="gallery-card" data-term="~/sites/lah/commissioning">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-device-desktop placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Commissioning &amp; Testing (photo pending)</h3>
+                        <p>Live-view verification and remote-access testing at handover — photo to be added.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="project-cta-box">
+                <h3>Need CCTV or network infrastructure?</h3>
+                <p>I deploy surveillance and network systems for clinics, lodges, offices, and homes — scoped, installed, and handed over with documentation.</p>
+                <div class="hero-cta" style="justify-content: center;">
+                    <a href="/#contact" class="btn-primary">
+                        <i class="ti ti-mail"></i> GET IN TOUCH
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo-row">
+                    <img src="/assets/images/optimized/logo-96.webp" alt="" width="44" height="44" class="footer-logo" loading="lazy" decoding="async">
+                    <h3>MARTIN MZUMARA</h3>
+                </div>
+                <p>Software Developer & IT Technician<br>Malawi</p>
+                <div class="social-links">
+                    <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
+                        <i class="ti ti-brand-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link">
+                        <i class="ti ti-brand-linkedin"></i>
+                    </a>
+                    <a href="https://youtube.com/@martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="social-link">
+                        <i class="ti ti-brand-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-connect">
+                <h4>CONNECT</h4>
+                <ul class="contact-list">
+                    <li><i class="ti ti-map-pin"></i> Lilongwe, Area 49, Malawi</li>
+                    <li><i class="ti ti-phone"></i> <a href="tel:+265884630834">+265 884 630 834</a> / <a href="tel:+265990783896">+265 990 783 896</a></li>
+                    <li><i class="ti ti-mail"></i> <a href="mailto:martinmzumara08@gmail.com">martinmzumara08@gmail.com</a></li>
+                </ul>
+                <button class="theme-toggle-btn footer-theme-toggle" id="theme-toggle" aria-label="Change to dark theme">
+                    <i class="ti ti-sun icon-sun"></i>
+                    <i class="ti ti-moon icon-moon"></i>
+                    <span class="theme-toggle-label" id="theme-toggle-label">Change to dark theme</span>
+                </button>
+            </div>
+        </div>
+        <div class="container footer-copyright">
+            <p>© <span id="current-year"></span> Martin Mzumara. All rights reserved.</p>
+            <p class="term-hint">psst — press <kbd>`</kbd> for a terminal</p>
+        </div>
+    </footer>
+
+    <script src="/js/icons.js" defer></script>
+    <script src="/js/script.js" defer></script>
+    <script src="/js/terminal.js" defer></script>
+</body>
+</html>

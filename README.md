@@ -13,8 +13,8 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - **Testimonials / social proof** — intentionally omitted for now (see "Adding Testimonials Later").
 - **Contact section** — email / phone / location glass cards with a copy-to-clipboard email button, `mailto:` + resume CTAs, and a matching nav link + hero "Get in Touch" button.
 - **Custom icon system** — a single SVG sprite swapped in at runtime; no icon font CDN.
-- **Case study & client project pages** — LeakSAFE and EncPlus case studies plus the Manguzi Executive Lodge client project, each with image galleries and lightbox.
-- **Project cards** — the homepage cards expose individually clickable links: case study / details, GitHub source (LeakSAFE, EncPlus), and the live Manguzi site.
+- **Case study & client project pages** — LeakSAFE and EncPlus case studies plus the Manguzi Executive Lodge client project and the LAH CCTV surveillance installation, each with image galleries and lightbox.
+- **Project cards** — the homepage cards expose individually clickable links: case study / details, GitHub source (LeakSAFE, EncPlus), the live Manguzi site, and the LAH CCTV case study.
 - **SEO basics** — `sitemap.xml` and `robots.txt`, plus a custom `404.html` (GitHub Pages serves it automatically).
 - **Performance** — responsive images: the hero and showcase photos ship `400w`/`800w` WebP candidates with `srcset`/`sizes` (plus a same-size JPEG fallback), and the lightbox loads a separate 1600px-capped `-full.jpg` only when opened; the LeakSAFE gallery screenshots use `400w` WebP variants. Fonts are self-hosted (no third-party font requests); images carry explicit `width`/`height` (no layout shift); the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render.
 - **Resilient hero (no-JS / script-failure safe)** — the preloader overlay and the hero's `opacity: 0` base state are cleared from `js/script.js`. Two safeguards in `index.html` prevent a permanently blank page if that file never runs: a `<noscript>` style block that hides the preloader and reveals the hero, and an inline head failsafe that force-adds `.loaded` after 4.5 s (cancelled by `finishPreload()` on the normal path). Verified with JavaScript disabled and with `/js/script.js` blocked.
@@ -23,6 +23,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 
 - `index.html`: Core markup and section architecture (numbered "chapter" sections: Expertise, Projects, Experience, Tools, Showcase, Contact).
 - `leaksafe/index.html`: LeakSAFE case study page.
+- `lah-cctv/index.html`: LAH CCTV surveillance installation case study page.
 - `manguzi/index.html`: Manguzi Executive Lodge client project page.
 - `encplus/index.html`: EncPlus case study page.
 - `cv/index.html`: Branded CV page at `/cv/`, with a desktop PDF preview and open/download controls on all devices. Replace `cv/Martin-Mzumara-CV.pdf` when updating the CV; also refresh `assets/Martin_Mzumara_CV.pdf`, retained for previously shared links. Browser PDF support varies; the direct link remains available if embedding fails.

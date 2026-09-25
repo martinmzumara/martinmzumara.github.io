@@ -25,6 +25,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://martinmzumara.github.io/lah-cctv/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://martinmzumara.github.io/cv/</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>

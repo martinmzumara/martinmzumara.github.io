@@ -74,10 +74,10 @@
             '  exit            close terminal'
         ],
         whoami: () => ['martin mzumara — software developer & it technician, lilongwe malawi'],
-        ls: () => ['leaksafe/  encplus/  manguzi/  blog/'],
+        ls: () => ['leaksafe/  encplus/  manguzi/  lah-cctv/  blog/'],
         open: (arg) => {
             const routes = {
-                leaksafe: '/leaksafe/', encplus: '/encplus/', manguzi: '/manguzi/',
+                leaksafe: '/leaksafe/', encplus: '/encplus/', manguzi: '/manguzi/', 'lah-cctv': '/lah-cctv/', lah: '/lah-cctv/',
                 blog: 'https://martinmzumara.github.io/blog/'
             };
             const r = routes[(arg || '').toLowerCase()];
