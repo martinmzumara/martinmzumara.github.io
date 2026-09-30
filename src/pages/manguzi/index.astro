@@ -1,0 +1,309 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+
+const navLinks = [
+  { href: '#overview', label: 'OVERVIEW' },
+  { href: '#functionality', label: 'FUNCTIONALITY' },
+  { href: '#stack', label: 'STACK' },
+  { href: '#insights', label: 'INSIGHTS' },
+];
+const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malawi. Rooms, restaurant & conference booking.';
+---
+<BaseLayout
+  title='Manguzi Executive Lodge - Martin Mzumara'
+  description={description}
+  path="/manguzi/"
+  ogType="article"
+  ogTitle='Manguzi Executive Lodge – Hospitality Website'
+  ogImage="/assets/images/manguzi-about-desk.jpg"
+  ogImageWidth={1600}
+  ogImageHeight={1067}
+  scripts={['/js/icons.js', '/js/script.js', '/js/terminal.js']}
+>
+    <Navbar ariaLabel='Case study navigation' links={navLinks} action={{ href: '/#projects', label: 'BACK TO PROJECTS', icon: 'ti-arrow-left' }} />
+
+    <main id="main-content" class="container project-detail-container">
+
+        <!-- Hero Title Section -->
+        <div class="project-detail-header">
+            <span class="system-label">$ cat ~/projects/manguzi</span>
+            <h1 class="main-title">Manguzi Executive Lodge</h1>
+            <p class="lead-text">A premium hospitality website for an executive lodge in Karonga, Malawi — featuring accommodation, restaurant, and conference services with a seamless online booking experience.</p>
+            <div class="hero-cta project-actions">
+                <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <i class="ti ti-external-link"></i> VISIT LIVE SITE
+                </a>
+            </div>
+        </div>
+
+        <!-- System Specifications -->
+        <div class="specs-grid">
+            <div class="spec-card" data-term="~/spec/role">
+                <span class="spec-label">ROLE</span>
+                <span class="spec-value">Web Developer & Designer</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/frontend">
+                <span class="spec-label">FRONTEND</span>
+                <span class="spec-value">HTML5, CSS3, JavaScript</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/hosting">
+                <span class="spec-label">HOSTING</span>
+                <span class="spec-value">Firebase Hosting</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/location">
+                <span class="spec-label">LOCATION</span>
+                <span class="spec-value">Karonga &amp; Rumphi, Malawi</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/services">
+                <span class="spec-label">SERVICES</span>
+                <span class="spec-value">Accommodation, Restaurant, Conference</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/project-type">
+                <span class="spec-label">PROJECT TYPE</span>
+                <span class="spec-value">Business Website</span>
+            </div>
+        </div>
+
+        <!-- Project Stats -->
+        <section class="section-padding" id="overview">
+            <span class="system-label">$ cat metrics.log</span>
+            <h2 class="section-title underline">At A Glance</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-term="~/metrics/website-pages">
+                    <span class="stat-value">4+</span>
+                    <span class="stat-label">Website Pages</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/core-services">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Core Services</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/locations">
+                    <span class="stat-value">2</span>
+                    <span class="stat-label">Lodge Locations</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/live-availability">
+                    <span class="stat-value">24/7</span>
+                    <span class="stat-label">Live Availability</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Overview -->
+        <section class="section-padding">
+            <span class="system-label">$ tree ~/projects/manguzi</span>
+            <h2 class="section-title underline">Site Structure</h2>
+            
+            <div class="architecture-flow">
+                <div class="arch-node">
+                    <i class="ti ti-home icon-large"></i>
+                    <h3>Home Page</h3>
+                    <p>Hero section, about, services, core values, contact with embedded Google Maps, and a location switcher linking the Karonga and Rumphi sites.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i class="ti ti-arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i class="ti ti-calendar-check icon-large"></i>
+                    <h3>Booking Page</h3>
+                    <p>Dedicated booking flow for guests to reserve accommodation and services.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i class="ti ti-arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i class="ti ti-tools-kitchen icon-large"></i>
+                    <h3>Restaurant Page</h3>
+                    <p>Showcases the lodge's dining offerings — lunch, supper, and refreshments.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i class="ti ti-arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i class="ti ti-presentation icon-large"></i>
+                    <h3>Conference Page</h3>
+                    <p>Details the executive conference hall facilities for business meetings and events.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section-padding" id="functionality">
+            <span class="system-label">$ cat features.md</span>
+            <h2 class="section-title underline">Key Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="ti ti-bed icon-large"></i>
+                    <h3>Premium Accommodation</h3>
+                    <p>Bed & Breakfast experience presented with elegant imagery and detailed service descriptions for business and leisure travelers.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-calendar icon-large"></i>
+                    <h3>Online Booking</h3>
+                    <p>Dedicated booking page with a clear call-to-action, backed by email, phone, and WhatsApp reservation channels for potential guests.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-map-pin icon-large"></i>
+                    <h3>Embedded Google Maps</h3>
+                    <p>Interactive map integration pinpoints the lodge's location in Karonga, helping guests navigate with ease.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-device-mobile icon-large"></i>
+                    <h3>Fully Responsive</h3>
+                    <p>Mobile-first design ensures a seamless browsing experience across all devices, from smartphones to desktops.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-tools-kitchen icon-large"></i>
+                    <h3>Restaurant Showcase</h3>
+                    <p>Dedicated page highlighting the lodge's dining options — refined lunch, supper, and refreshing soft drinks.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-presentation icon-large"></i>
+                    <h3>Conference Facilities</h3>
+                    <p>Executive conference hall page detailing modern equipment and capacity for business meetings and events.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Overview -->
+        <section class="section-padding">
+            <span class="system-label">$ cat build-log.txt</span>
+            <h2 class="section-title underline">Design & Development</h2>
+            
+            <ul class="custom-list">
+                <li><i class="ti ti-player-play list-icon"></i> Custom-designed hero section with Abril Fatface display typography for an elegant, premium brand presence.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Multi-page architecture (Home, Booking, Restaurant, Conference) with consistent navigation and branding across all pages.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Embedded Google Maps for location discovery, helping guests find the lodge in Karonga.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Deployed on Firebase Hosting with a custom domain for reliable, always-available performance.</li>
+            </ul>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="section-padding" id="stack">
+            <span class="system-label">$ ls ~/stack/</span>
+            <h2 class="section-title underline">Tools & Technologies</h2>
+            
+            <div class="stack-categories">
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-code icon-blue"></i> Frontend</h3>
+                    <div class="stack-tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Google Fonts</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-server icon-blue"></i> Hosting & Deployment</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Firebase Hosting</span>
+                        <span class="tag">Custom Domain</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-map icon-blue"></i> Integrations</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Google Maps Embed</span>
+                        <span class="tag">Responsive Design</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-hammer icon-blue"></i> Tooling</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">Firebase CLI</span>
+                        <span class="tag">Design Prototyping</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges & Solutions -->
+        <section class="section-padding" id="insights">
+            <span class="system-label">$ tail -f lessons.log</span>
+            <h2 class="section-title underline">Challenges & Solutions</h2>
+            
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-tag">BRAND IDENTITY</span>
+                    <h3>Premium Hospitality Aesthetic</h3>
+                    <p><strong>Challenge:</strong> Creating a website that conveys the elegance and executive quality of the lodge while remaining functional and fast-loading.</p>
+                    <p><strong>Solution:</strong> Leveraged Abril Fatface display typography paired with Inter for body text, combined with a refined color palette and generous whitespace to establish a premium brand presence.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">USER EXPERIENCE</span>
+                    <h3>Multi-Service Navigation</h3>
+                    <p><strong>Challenge:</strong> Presenting three distinct services (accommodation, restaurant, conference) without overwhelming visitors or creating navigation confusion.</p>
+                    <p><strong>Solution:</strong> Designed a clear multi-page architecture with consistent navigation, dedicated service pages, and prominent "Book Now" CTAs to guide users through the booking journey.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">DISCOVERABILITY</span>
+                    <h3>Location Accessibility</h3>
+                    <p><strong>Challenge:</strong> Helping potential guests find the lodge's physical location in Karonga, especially for first-time visitors unfamiliar with the area.</p>
+                    <p><strong>Solution:</strong> Integrated an embedded Google Maps widget directly into the contact section, allowing visitors to view the exact location and get directions without leaving the site.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Gallery Showcase -->
+        <section class="section-padding">
+            <span class="system-label">$ ls ~/screens/</span>
+            <h2 class="section-title underline">Website Highlights</h2>
+
+            <div class="gallery-grid">
+                <div class="gallery-card" data-term="~/screens/elegant-branding">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-photo placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Elegant Branding</h3>
+                        <p>Premium hospitality aesthetic with refined typography and curated imagery.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-term="~/screens/online-booking">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-calendar-check placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Online Booking</h3>
+                        <p>Streamlined booking page with clear call-to-action for guest reservations.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-term="~/screens/google-maps-integration">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-map-pin placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Google Maps Integration</h3>
+                        <p>Embedded map pinpoints the lodge's location in Karonga for easy navigation.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-term="~/screens/fully-responsive">
+                    <div class="gallery-placeholder">
+                        <i class="ti ti-device-mobile placeholder-icon"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Fully Responsive</h3>
+                        <p>Mobile-first design delivering a seamless experience across all devices.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Site CTA -->
+            <div class="project-cta-box">
+                <h3>Experience the live website</h3>
+                <p>Visit Manguzi Executive Lodge's live site to explore the full hospitality experience — from premium accommodation to conference facilities.</p>
+                <div class="hero-cta" style="justify-content: center;">
+                    <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <i class="ti ti-external-link"></i> VISIT LIVE SITE
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

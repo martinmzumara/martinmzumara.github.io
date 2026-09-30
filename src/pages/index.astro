@@ -1,0 +1,584 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import { SITE, abs } from '../config/site';
+import { SITE_TOOLS } from '../data/tools';
+import { emailLink, phoneLink } from '../utils/obfuscate';
+
+// Contact details — entity-encoded at build time (see utils/obfuscate.ts), so
+// the served HTML holds no plain e-mail address or phone number.
+const EMAIL = 'martinmzumara08@gmail.com';
+const PHONES = [
+  { display: '+265 884 630 834', e164: '+265884630834' },
+  { display: '+265 990 783 896', e164: '+265990783896' },
+];
+const emailCardHtml = emailLink(EMAIL);
+const phoneCardHtml = PHONES.map((p) => phoneLink(p.display, p.e164)).join('<br>\n                        ');
+const emailCtaHtml = emailLink(EMAIL, 'btn-primary', '<i class="ti ti-send"></i> EMAIL&nbsp;ME ');
+
+// Featured tools are pre-rendered into static HTML at build time (no JS needed
+// to see them); the full list is embedded as JSON below for the reading modal.
+const featuredTools = SITE_TOOLS.filter((t) => t.featured);
+const deviceIcon = (dev: string) => (dev === 'phone' ? 'ti-device-mobile' : 'ti-device-laptop');
+const deviceLabel = (dev: string) => (dev === 'phone' ? 'Phone' : 'Laptop');
+
+// Field photos for the showcase carousel. Each entry carries its own srcset
+// widths (one original is capped at 765px) plus the full-size file the
+// lightbox loads on demand, so the markup below stays a single loop.
+const FIELD_PHOTOS = [
+  { base: 'field-antenna', w2: 765, full: '/assets/images/optimized/field-antenna-full.jpg', alt: 'Martin Mzumara with rooftop antenna install', caption: 'Rooftop antenna install' },
+  { base: 'field-helmet', w2: 800, full: '/assets/images/optimized/field-helmet-full.jpg', alt: 'Martin Mzumara in server room with Dell racks', caption: 'Server room visit' },
+  { base: 'field-headlamp', w2: 800, full: '/assets/images/optimized/field-headlamp-full.jpg', alt: 'Flutter development work on laptop', caption: 'Dev session, Flutter' },
+  { base: 'field-warehouse-site', w2: 800, full: '/assets/images/field-warehouse-site.jpg', alt: 'PPE check inside warehouse', caption: 'PPE check, warehouse site' },
+  { base: 'field-trunking', w2: 800, full: '/assets/images/field-trunking.jpg', alt: 'Cable trunking and wiring installation', caption: 'Trunking & cabling' },
+  { base: 'field-workwear-site', w2: 800, full: '/assets/images/field-workwear-site.jpg', alt: 'Gearing up in workwear on site', caption: 'Gearing up on site' },
+  { base: 'field-cabledrum', w2: 800, full: '/assets/images/field-cabledrum.jpg', alt: 'Fibre cable drum on site', caption: 'Cable drum, fibre pull' },
+  { base: 'field-team-rig', w2: 800, full: '/assets/images/field-team-rig.jpg', alt: 'With teammate at industrial site', caption: 'Crew on industrial site' },
+  { base: 'field-team-rack', w2: 800, full: '/assets/images/field-team-rack.jpg', alt: 'Team network cabinet work', caption: 'Cabinet work with crew' },
+  { base: 'field-site-break', w2: 800, full: '/assets/images/field-site-break.jpg', alt: 'Break time on site', caption: 'Site break' },
+  { base: 'field-install-team', w2: 800, full: '/assets/images/field-install-team.jpg', alt: 'Indoor network install with teammate', caption: 'Indoor network install' },
+  { base: 'field-site-portrait', w2: 800, full: '/assets/images/field-site-portrait.jpg', alt: 'Site portrait at perimeter wall', caption: 'Site portrait, perimeter wall' },
+  { base: 'field-rooftop-dish', w2: 800, full: '/assets/images/field-rooftop-dish.jpg', alt: 'Starlink installation on rooftop', caption: 'Starlink install' },
+  { base: 'field-container-yard', w2: 800, full: '/assets/images/field-container-yard.jpg', alt: 'CCTV installation on rooftop over container yard', caption: 'Rooftop CCTV install' },
+];
+// Matches the rendered card width exactly: 268px from 620px up, otherwise the
+// 240px cap below 620px (the cap stops binding under ~333px, where 72vw wins).
+const IMG_SIZES = '(min-width: 620px) 268px, (max-width: 333px) 72vw, 240px';
+
+const navLinks = [
+  { href: '#expertise', label: 'EXPERTISE' },
+  { href: '#projects', label: 'PROJECTS' },
+  { href: '#experience', label: 'EXPERIENCE' },
+  { href: '#tools', label: 'TOOLS' },
+  { href: abs('/blog/'), label: 'BLOG', external: true },
+  { href: '#contact', label: 'CONTACT' },
+];
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Martin Mzumara',
+  jobTitle: 'Software Developer & IT Technician',
+  url: SITE.url,
+  email: `mailto:${EMAIL}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Lilongwe', addressCountry: 'Malawi' },
+  sameAs: [
+    'https://github.com/martinmzumara',
+    'https://www.linkedin.com/in/martinmzumara',
+    'https://youtube.com/@martinmzumara',
+  ],
+  knowsAbout: ['Software Engineering', 'IoT Systems', 'Web Development', 'Network Infrastructure', 'Flutter', 'Firebase'],
+};
+const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Martin Mzumara – Portfolio', url: SITE.url };
+
+// JSON-LD: escape only the "@" inside the e-mail value (keeps "@context"/"@type"
+// untouched while still avoiding a plain address in the served source).
+const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto:${EMAIL.replace('@', '\\u0040')}`);
+---
+<BaseLayout
+  title={SITE.title}
+  description={SITE.description}
+  path="/"
+  ogType="website"
+  preloadHero
+  preloader
+  scripts={['/js/icons.js', '/js/tools.js?v=3', '/js/script.js', '/js/terminal.js']}
+>
+    <Fragment slot="head-start">
+        <!-- Preloader failsafe: the preloader overlay and the hero's opacity:0 base state are both
+             cleared only from js/script.js. If that file fails to load or throws, the page would
+             stay black forever, so force the loaded state if it never arrives. -->
+        <script is:inline data-preload-failsafe>(function(){window.__preloadFailsafe=setTimeout(function(){if(document.body.classList.contains("loaded")){return}document.documentElement.style.overflow="";document.body.classList.add("loaded");var p=document.getElementById("preloader");if(p){p.classList.add("done");if(p.parentNode){p.parentNode.removeChild(p)}}},4500)})();</script>
+        <noscript>
+            <style is:inline>
+                .preloader { display: none !important; }
+                .hero-content, .hero-visual { opacity: 1 !important; transform: none !important; }
+            </style>
+        </noscript>
+    </Fragment>
+    <Fragment slot="head-end">
+        <!-- Structured Data: Person -->
+        <script type="application/ld+json" is:inline set:html={personLdJson}></script>
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteLd)}></script>
+    </Fragment>
+
+    <Navbar links={navLinks} action={{ href: '/cv/', label: 'VIEW RESUME' }} />
+
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section class="hero container">
+            <div class="hero-content">
+                <div class="hero-status">
+                    <span class="status-badge"><span class="status-dot"></span> Available for work</span>
+                    <span class="status-time"><i class="ti ti-clock"></i> <span id="local-time">--:--</span> · GMT+2</span>
+                </div>
+                <span class="system-label" id="hero-term">$ whoami</span>
+                <h1><span class="sr-only">Martin Mzumara – </span>Software Developer<br><span>&amp; IT Technician</span></h1>
+                <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
+                <div class="hero-stats" aria-label="Highlights">
+                    <div class="stat"><span class="stat-value" data-count="5">5</span><span class="stat-label">Years in Tech</span></div>
+                    <div class="stat"><span class="stat-value" data-count="4">4</span><span class="stat-label">Projects Delivered</span></div>
+                    <div class="stat"><span class="stat-value" data-count="3">3</span><span class="stat-label">CCNA Courses</span></div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary">VIEW MY WORK</a>
+                    <a href="#contact" class="btn-secondary">GET IN TOUCH</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <picture>
+                    <source type="image/webp"
+                            srcset="/assets/images/optimized/profile-graduation-400w.webp 400w, /assets/images/optimized/profile-graduation-800w.webp 800w"
+                            sizes="(max-width: 768px) min(280px, 70vw), 320px">
+                    <img src="/assets/images/optimized/profile-graduation-800w.jpg"
+                         alt="Martin Mzumara celebrating graduation"
+                         class="hero-img" width="400" height="600"
+                         fetchpriority="high" decoding="async">
+                </picture>
+                <span class="hero-visual-caption">
+                    <i class="ti ti-map-pin"></i>
+                    <span>Lilongwe, Malawi</span>
+                </span>
+            </div>
+            <div class="scroll-cue" aria-hidden="true">
+                <span>SCROLL</span>
+                <span class="scroll-cue-line"></span>
+            </div>
+        </section>
+        
+        <!-- Hero Footer / Highlights -->
+        <div class="hero-footer">
+            <div class="highlight-item">
+                <i class="ti ti-target-arrow icon-blue"></i>
+                <span>Goal-oriented</span>
+            </div>
+            <div class="highlight-item">
+                <i class="ti ti-users icon-blue"></i>
+                <span>Teamwork</span>
+            </div>
+            <div class="highlight-item">
+                <i class="ti ti-book icon-blue"></i>
+                <span>Continuous Learning</span>
+            </div>
+        </div>
+
+        <hr class="section-divider container">
+
+        <!-- Expertise Section -->
+        <section id="expertise" class="container section-padding chapter">
+            <span class="system-label">$ ls ~/skills/</span>
+            <h2 class="section-title underline">Technical Expertise</h2>
+            
+            <div class="grid-cards">
+                <div class="card" data-term="~/skills/software-dev">
+                    <i class="ti ti-code icon-large"></i>
+                    <h3>Software Development</h3>
+                    <p>Development of software applications using programming languages such as Dart, Java, and C#.</p>
+                </div>
+                <div class="card" data-term="~/skills/web-dev">
+                    <i class="ti ti-device-desktop icon-large"></i>
+                    <h3>Web Development</h3>
+                    <p>Designing and building websites and web applications using HTML, CSS, and JavaScript.</p>
+                </div>
+                <div class="card" data-term="~/skills/it-support">
+                    <i class="ti ti-server icon-large"></i>
+                    <h3>IT Technical Support</h3>
+                    <p>Providing technical assistance including Windows and Microsoft Office installation and general IT maintenance.</p>
+                </div>
+                <div class="card" data-term="~/skills/iot">
+                    <i class="ti ti-cpu icon-large"></i>
+                    <h3>IoT System Design</h3>
+                    <p>Designing and developing IoT-based systems with hardware integration and mobile application alerts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills marquee -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track" id="marquee-track">
+                <span>SOFTWARE ENGINEERING</span><i class="ti ti-diamond"></i>
+                <span>WEB DEVELOPMENT</span><i class="ti ti-diamond"></i>
+                <span>IOT SYSTEMS</span><i class="ti ti-diamond"></i>
+                <span>NETWORK INFRASTRUCTURE</span><i class="ti ti-diamond"></i>
+                <span>MOBILE APPS</span><i class="ti ti-diamond"></i>
+                <span>CCTV &amp; SECURITY</span><i class="ti ti-diamond"></i>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container section-padding chapter">
+            <span class="system-label">$ ls ~/projects/ --featured</span>
+            <h2 class="section-title underline">Selected Work</h2>
+            
+            <div class="projects-grid">
+                <!-- LeakSAFE Project Card -->
+                <div class="project-card" data-term="~/projects/leaksafe">
+                    <a href="/leaksafe/" class="project-thumb-link" aria-label="Read the LeakSAFE case study">
+                        <div class="project-thumb">
+                            <picture>
+                                <source type="image/webp" srcset="/assets/images/optimized/leaksafe-wireframes.webp">
+                                <img src="/assets/images/optimized/leaksafe-wireframes.jpg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
+                            </picture>
+                            <div class="project-badge">CASE STUDY</div>
+                        </div>
+                    </a>
+                    <div class="project-body">
+                        <span class="system-label">~/projects/leaksafe — init</span>
+                        <h3><a href="/leaksafe/">LeakSAFE - Smart Gas Leakage Detection</a></h3>
+                        <p>An end-to-end hazardous gas detection system built with Flutter and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.</p>
+                        <div class="project-meta">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">ESP32</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="/leaksafe/" class="project-link-btn">
+                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                                <i class="ti ti-brand-github"></i> SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EncPlus Project Card -->
+                <div class="project-card" data-term="~/projects/encplus">
+                    <a href="/encplus/" class="project-thumb-link" aria-label="Read the EncPlus project details">
+                        <div class="project-thumb placeholder-thumb">
+                            <i class="ti ti-lock placeholder-icon"></i>
+                            <div class="project-badge muted">IN DEVELOPMENT</div>
+                        </div>
+                    </a>
+                    <div class="project-body">
+                        <span class="system-label">~/projects/encplus — init</span>
+                        <h3><a href="/encplus/">EncPlus - AES File Encryption</a></h3>
+                        <p>A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
+                        <p class="project-note"><i class="ti ti-info-circle"></i> Currently in development.</p>
+                        <div class="project-meta">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">AES</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="/encplus/" class="project-link-btn">
+                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                                <i class="ti ti-brand-github"></i> SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manguzi Executive Lodge Project Card -->
+                <div class="project-card" data-term="~/projects/manguzi">
+                    <a href="/manguzi/" class="project-thumb-link" aria-label="Read the Manguzi Executive Lodge project details">
+                        <div class="project-thumb placeholder-thumb">
+                            <i class="ti ti-building-skyscraper placeholder-icon"></i>
+                            <div class="project-badge">CLIENT PROJECT</div>
+                        </div>
+                    </a>
+                    <div class="project-body">
+                        <span class="system-label">~/projects/manguzi — init</span>
+                        <h3><a href="/manguzi/">Manguzi Executive Lodge</a></h3>
+                        <p>A premium hospitality website for an executive lodge in Karonga, Malawi — featuring accommodation, restaurant, and conference services with online booking.</p>
+                        <div class="project-meta">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="/manguzi/" class="project-link-btn">
+                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
+                            </a>
+                            <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                                <i class="ti ti-external-link"></i> LIVE SITE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAH CCTV Project Card -->
+                <div class="project-card" data-term="~/projects/lah-cctv">
+                    <a href="/lah-cctv/" class="project-thumb-link" aria-label="Read the LAH CCTV case study">
+                        <div class="project-thumb">
+                            <picture>
+                                <source type="image/webp" srcset="/assets/images/optimized/lah-indoor-camera-1-400w.webp">
+                                <img src="/assets/images/lah-indoor-camera-1.jpg" alt="Indoor HD dome camera installed at Lilongwe Adventist Hospital" loading="lazy" width="600" height="400">
+                            </picture>
+                            <div class="project-badge">CLIENT PROJECT</div>
+                        </div>
+                    </a>
+                    <div class="project-body">
+                        <span class="system-label">~/projects/lah-cctv — init</span>
+                        <h3><a href="/lah-cctv/">LAH CCTV - Hospital Surveillance System</a></h3>
+                        <p>A 10+ camera HD surveillance installation for Lilongwe Adventist Hospital — multi-channel NVR, high-capacity storage, UPS backup, and secure remote viewing.</p>
+                        <div class="project-meta">
+                            <span class="tag">CCTV</span>
+                            <span class="tag">NVR</span>
+                            <span class="tag">Remote Viewing</span>
+                            <span class="tag">Infrastructure</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="/lah-cctv/" class="project-link-btn">
+                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Education Section -->
+        <section id="experience" class="container section-padding chapter">
+            <span class="system-label">$ cat track_record.log</span>
+            <h2 class="section-title underline">Experience & Qualifications</h2>
+            
+            <div class="experience-grid">
+                <!-- Work History Timeline -->
+                <div class="timeline-column">
+                    <h3 class="column-title"><i class="ti ti-briefcase icon-blue"></i> Work Experience</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h4>IT Technician</h4>
+                            <span class="timeline-date">Jan 2026 - Present</span>
+                        </div>
+                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-desc">Coordinating network infrastructure projects including switches, routers, wireless, and cabling while managing concurrent client service requests.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h4>ICT Intern</h4>
+                            <span class="timeline-date">Jan 2025 - Nov 2025</span>
+                        </div>
+                        <p class="timeline-org">National Economic Empowerment Fund (NEEF) | Lilongwe</p>
+                        <p class="timeline-desc">Provided departmental technical support, monitored internal network infrastructure, and coordinated software and workstation deployments.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h4>IT Technician (Full-Time)</h4>
+                            <span class="timeline-date">Sep 2023 - Dec 2024</span>
+                        </div>
+                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-desc">Performed hardware diagnostics and repairs, OS and Microsoft Office deployments, network installation (switches, routers, WAPs, structured cabling), and CCTV surveillance system configurations for small to medium-sized organizations.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h4>IT Technician Intern</h4>
+                            <span class="timeline-date">Nov 2021 - Aug 2023</span>
+                        </div>
+                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-desc">Assisted with hardware troubleshooting, OS and Microsoft Office installations, network cabling, and CCTV system deployments during university holiday periods.</p>
+                    </div>
+                </div>
+
+                <!-- Education & Certifications -->
+                <div class="credentials-column">
+                    <h3 class="column-title"><i class="ti ti-award icon-blue"></i> Education & Certifications</h3>
+                    
+                    <div class="cred-card" data-term="~/education/bsc-cs">
+                        <h4>Bachelor of Science in Computer Science</h4>
+                        <p class="cred-org">DMI St. John the Baptist University | Graduated 2024</p>
+                    </div>
+
+                    <div class="cred-card" data-term="~/certs/ccna">
+                        <h4>Cisco Certified Network Associate (CCNA)</h4>
+                        <p class="cred-org">Lilongwe Technical College</p>
+                        <ul class="cred-list">
+                            <li><i class="ti ti-check check-icon"></i> CCNA: Introduction to Networks</li>
+                            <li><i class="ti ti-check check-icon"></i> CCNA: Switching, Routing & Wireless Essentials</li>
+                            <li><i class="ti ti-check check-icon"></i> CCNA: Enterprise Networking, Security & Automation</li>
+                        </ul>
+                    </div>
+
+                    <div class="cred-card" data-term="~/certs/specialized">
+                        <h4>Specialized Capabilities</h4>
+                        <div class="skill-tags">
+                            <span>CCTV Deployment</span>
+                            <span>Structured Cabling</span>
+                            <span>Linux Admin</span>
+                            <span>MySQL / Firebase</span>
+                            <span>Git</span>
+                            <span>C++</span>
+                            <span>C#</span>
+                            <span>Java</span>
+                            <span>Flutter</span>
+                            <span>Dart</span>
+                            <span>Xamarin</span>
+                            <span>ESP32 IoT</span>
+                            <span>AES-256 Encryption</span>
+                            <span>HTML5 / CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Web Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Networking Section -->
+        <section id="networking" class="container section-padding chapter">
+            <span class="system-label">$ ip -br addr show</span>
+            <h2 class="section-title underline">Networking &amp; Field Work</h2>
+
+            <div class="grid-cards">
+                <div class="card" data-term="~/networking/ccna">
+                    <i class="ti ti-award icon-large"></i>
+                    <h3>CCNA Coursework</h3>
+                    <p>Introduction to Networks; Switching, Routing &amp; Wireless Essentials; Enterprise Networking, Security &amp; Automation.</p>
+                </div>
+                <div class="card" data-term="~/networking/structured-cabling">
+                    <i class="ti ti-hammer icon-large"></i>
+                    <h3>Structured Cabling</h3>
+                    <p>Network installation and structured cabling — switches, routers, WAPs, trunking, and patch work for small to medium-sized organisations.</p>
+                </div>
+                <div class="card" data-term="~/networking/cctv">
+                    <i class="ti ti-photo icon-large"></i>
+                    <h3>CCTV &amp; Surveillance</h3>
+                    <p>Camera and NVR deployments with secure remote viewing — most recently the <a href="/lah-cctv/">LAH CCTV hospital installation</a>.</p>
+                </div>
+                <div class="card" data-term="~/networking/wireless">
+                    <i class="ti ti-activity icon-large"></i>
+                    <h3>Starlink &amp; Wireless</h3>
+                    <p>Wireless links, WAPs, and Starlink/antenna installations for sites that need connectivity beyond fixed lines.</p>
+                </div>
+            </div>
+
+            <!-- Placeholder: network diagram goes here once drawn -->
+            <figure class="network-diagram" data-term="~/networking/topology">
+                <div class="network-diagram-canvas placeholder-thumb">
+                    <i class="ti ti-presentation placeholder-icon"></i>
+                    <span class="project-badge muted">DIAGRAM PLACEHOLDER</span>
+                    <span class="network-diagram-note">Representative switch / router / WAP topology to be added here.</span>
+                </div>
+                <figcaption>Network diagram — reserved slot for a typical deployment topology.</figcaption>
+            </figure>
+        </section>
+
+        <!-- Tools & Software Section -->
+        <section id="tools" class="container section-padding chapter">
+            <div class="section-head">
+                <span class="system-label">$ ls ~/tools/</span>
+                <h2 class="section-title underline">Tools &amp; Software I Use</h2>
+                <p class="section-lead">The apps and services I rely on daily — for development, IT work, and getting things done — on both my laptop and my phone.</p>
+            </div>
+
+
+            <div class="tools-grid" id="tools-grid">{featuredTools.map((t, i) => (
+                <button class="tool-card" data-id={t.name} style={`animation-delay:${i * 70}ms`}>
+                    <div class="tool-card-top">
+                        <span class="tool-icon"><i class={`ti ${t.icon}`}></i></span>
+                        <span class={`tool-device ${t.dev}`}><i class={`ti ${deviceIcon(t.dev)}`}></i> {deviceLabel(t.dev)}</span>
+                    </div>
+                    <span class="tool-tag">{t.tag}</span>
+                    <h3>{t.name}</h3>
+                    <p class="tool-summary">{t.summary}</p>
+                    <span class="tool-arrow">Read more <i class="ti ti-arrow-right"></i></span>
+                </button>
+            ))}</div>
+            <!-- Full tools data for the reading modal (tools.js) — replaces js/tools-data.js -->
+            <script type="application/json" id="site-tools-data" set:html={JSON.stringify(SITE_TOOLS).replace(/</g, '\\u003c')}></script>
+
+            <div class="tools-cta">
+                <a href={abs('/blog/')} target="_blank" rel="noopener noreferrer" class="tools-view-all">
+                    VIEW ALL POSTS <i class="ti ti-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Showcase Section -->
+        <section id="showcase" class="container section-padding chapter">
+            <div class="section-head showcase-head">
+                <span class="system-label">$ ls ~/showcase/</span>
+                <h2 class="section-title underline">Identity &amp; Field Work</h2>
+                <p class="section-lead">Rack installs, cabling and rooftop work — the field side of the job, alongside the code.</p>
+            </div>
+
+            <div class="showcase-carousel" data-carousel role="group" aria-label="Field work photos">
+                <div class="carousel-rail">
+                    <div class="carousel-viewport" data-carousel-viewport tabindex="0" role="group" aria-label="Photo rail — scroll, swipe or use the arrow keys">
+                        <div class="carousel-track" data-carousel-track>
+{FIELD_PHOTOS.map((p) => (
+                            <button type="button" class="showcase-item" data-full={p.full} aria-label={`View full size: ${p.alt}`}>
+                                <picture>
+                                    <source type="image/webp" srcset={`/assets/images/optimized/${p.base}-400w.webp 400w, /assets/images/optimized/${p.base}-${p.w2}w.webp ${p.w2}w`} sizes={IMG_SIZES} />
+                                    <img src={`/assets/images/optimized/${p.base}-${p.w2}w.jpg`} alt={p.alt} class="showcase-img" loading="lazy" width="400" height="533" decoding="async" draggable="false" />
+                                </picture>
+                                <span class="showcase-overlay" aria-hidden="true"><i class="ti ti-maximize"></i></span>
+                                <span class="showcase-caption"><i class="ti ti-photo" aria-hidden="true"></i>{p.caption}</span>
+                            </button>
+))}
+                        </div>
+                    </div>
+                    <button type="button" class="carousel-btn carousel-btn--prev" data-carousel-prev aria-label="Previous photos"><i class="ti ti-arrow-left"></i></button>
+                    <button type="button" class="carousel-btn carousel-btn--next" data-carousel-next aria-label="Next photos"><i class="ti ti-arrow-right"></i></button>
+                </div>
+                <div class="carousel-foot">
+                    <div class="carousel-dots" data-carousel-dots role="tablist" aria-label="Showcase pages"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+        <section id="contact" class="container section-padding chapter">
+            <span class="system-label">$ ssh martin@local</span>
+            <h2 class="section-title underline">Let's Work Together</h2>
+            <p class="section-lead">Have a project in mind, need IT support, or want to discuss an opportunity? Reach out — I usually reply within a day.</p>
+            <p class="contact-principles"><span class="principle"><i class="ti ti-check"></i> Fair, local-friendly pricing</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Work delivered in reviewable stages</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Modern design, rigorous engineering</span></p>
+
+            <div class="contact-grid">
+                <div class="contact-card" data-term="~/contact/email">
+                    <i class="ti ti-mail contact-card-icon"></i>
+                    <h3>Email</h3>
+                    <p set:html={emailCardHtml}></p>
+                    <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard">
+                        <i class="ti ti-copy"></i> COPY EMAIL
+                    </button>
+                </div>
+                <div class="contact-card" data-term="~/contact/phone">
+                    <i class="ti ti-phone contact-card-icon"></i>
+                    <h3>Phone</h3>
+                    <p set:html={phoneCardHtml}></p>
+                </div>
+                <div class="contact-card" data-term="~/contact/location">
+                    <i class="ti ti-map-pin contact-card-icon"></i>
+                    <h3>Location</h3>
+                    <p>Area 49, Lilongwe<br>Malawi</p>
+                </div>
+            </div>
+
+            <div class="contact-cta">
+                <Fragment set:html={emailCtaHtml} />
+                <a href="/cv/" class="btn-secondary">
+                    <i class="ti ti-file-text"></i> VIEW RESUME
+                </a>
+            </div>
+        </section>
+    </main>
+
+<!-- Tools Reading Modal -->
+    <div class="tools-modal" id="tools-modal" role="dialog" aria-modal="true" aria-label="Tool article" aria-hidden="true">
+        <div class="tools-modal-backdrop" id="tools-modal-backdrop"></div>
+        <article class="tools-modal-card">
+            <button class="tools-modal-close" id="tools-modal-close" aria-label="Close article"><i class="ti ti-x"></i></button>
+            <div class="tools-modal-content" id="tools-modal-content"></div>
+        </article>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image preview">&times;</button>
+        <img class="lightbox-content" id="lightbox-img" alt="Showcase Preview">
+    </div>
+
+    
+</BaseLayout>

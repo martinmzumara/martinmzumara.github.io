@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+
+const navLinks = [
+  { href: '#overview', label: 'OVERVIEW' },
+  { href: '#functionality', label: 'FUNCTIONALITY' },
+  { href: '#stack', label: 'STACK' },
+  { href: '#insights', label: 'INSIGHTS' },
+];
+const description = 'LeakSAFE: real-time gas leak detection with Flutter, Firebase & ESP32 sensors. Live telemetry & alerts.';
+---
+<BaseLayout
+  title='LeakSAFE System - Martin Mzumara'
+  description={description}
+  path="/leaksafe/"
+  ogType="article"
+  ogTitle='LeakSAFE – Smart Gas Leakage Detection System'
+  ogImage="/assets/images/optimized/leaksafe-wireframes.jpg"
+  ogImageWidth={1200}
+  ogImageHeight={900}
+  scripts={['/js/icons.js', '/js/script.js', '/js/terminal.js']}
+>
+    <Navbar ariaLabel='Case study navigation' links={navLinks} action={{ href: '/#projects', label: 'BACK TO PROJECTS', icon: 'ti-arrow-left' }} />
+
+    <main id="main-content" class="container project-detail-container">
+
+        <!-- Hero Title Section -->
+        <div class="project-detail-header">
+            <span class="system-label">$ cat ~/projects/leaksafe</span>
+            <h1 class="main-title">LeakSAFE – Smart Gas Leakage Detection System</h1>
+            <p class="lead-text">A cross-platform mobile application integrated with ESP32 hardware sensors to deliver real-time atmospheric gas tracking, dynamic threat analysis, and automated hazardous alerts.</p>
+            <div class="hero-cta project-actions">
+                <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <i class="ti ti-brand-github"></i> VIEW APP CODE
+                </a>
+                <a href="https://github.com/martinmzumara/leaksafe-firmware" target="_blank" rel="noopener noreferrer" class="code-link">
+                    <i class="ti ti-cpu"></i> + hardware firmware
+                </a>
+            </div>
+        </div>
+
+        <!-- System Specifications -->
+        <div class="specs-grid">
+            <div class="spec-card" data-term="~/spec/role">
+                <span class="spec-label">ROLE</span>
+                <span class="spec-value">Lead Developer & Hardware Integrator</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/mobile-frontend">
+                <span class="spec-label">MOBILE FRONTEND</span>
+                <span class="spec-value">Flutter, Dart, fl_chart</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/backend-and-data">
+                <span class="spec-label">BACKEND & DATA</span>
+                <span class="spec-value">Firebase Auth, Realtime Database</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/hardware">
+                <span class="spec-label">HARDWARE</span>
+                <span class="spec-value">ESP32, MQ Gas Sensors</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/mapping-and-location">
+                <span class="spec-label">MAPPING & LOCATION</span>
+                <span class="spec-value">Google Maps, Geolocator</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/project-scope">
+                <span class="spec-label">PROJECT SCOPE</span>
+                <span class="spec-value">Computer Science Capstone Engineering</span>
+            </div>
+        </div>
+
+        <!-- Project Stats -->
+        <section class="section-padding" id="overview">
+            <span class="system-label">$ cat metrics.log</span>
+            <h2 class="section-title underline">At A Glance</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-term="~/metrics/application-screens">
+                    <span class="stat-value">8+</span>
+                    <span class="stat-label">Application Screens</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/core-services">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">Core Services</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/data-visualizations">
+                    <span class="stat-value">6</span>
+                    <span class="stat-label">Data Visualizations</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/platform-targets">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Platform Targets</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Overview -->
+        <section class="section-padding">
+            <span class="system-label">$ tree ~/projects/leaksafe</span>
+            <h2 class="section-title underline">System Data Flow</h2>
+            
+            <div class="architecture-flow">
+                <div class="arch-node">
+                    <i class="ti ti-cpu icon-large"></i>
+                    <h3>ESP32 + MQ Sensors</h3>
+                    <p>Calibrated gas sensor modules continuously sample atmospheric PPM concentrations. <a class="code-link" href="https://github.com/martinmzumara/leaksafe-firmware" target="_blank" rel="noopener noreferrer">Firmware on GitHub →</a></p>
+                </div>
+                <div class="arch-arrow">
+                    <i class="ti ti-arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i class="ti ti-database icon-large"></i>
+                    <h3>Firebase Realtime DB</h3>
+                    <p>Telemetry streams to Firebase for live synchronization and historical persistence.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i class="ti ti-arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i class="ti ti-device-mobile icon-large"></i>
+                    <h3>Flutter Application</h3>
+                    <p>Cross-platform app renders real-time PPM readings with dynamic threshold UI states.</p>
+                </div>
+                <div class="arch-arrow">
+                    <i class="ti ti-arrow-right"></i>
+                </div>
+                <div class="arch-node">
+                    <i class="ti ti-bell-ringing icon-large"></i>
+                    <h3>Alert & Notification</h3>
+                    <p>Local push notifications trigger instantly upon detecting elevated PPM thresholds.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section-padding" id="functionality">
+            <span class="system-label">$ cat features.md</span>
+            <h2 class="section-title underline">Key Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="ti ti-activity icon-large"></i>
+                    <h3>Real-Time Monitoring</h3>
+                    <p>Continuously tracks atmospheric gas concentrations with visual Safe/Moderate/Danger UI color state transitions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-map icon-large"></i>
+                    <h3>Live Sensor Mapping</h3>
+                    <p>Google Maps integration pinpoints sensor locations geographically for precise leak origin identification.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-chart-line icon-large"></i>
+                    <h3>Historical Analytics</h3>
+                    <p>Bar and line charts visualize historical PPM readings to identify frequency patterns and temporal safety trends.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-bell icon-large"></i>
+                    <h3>Instant Alerts</h3>
+                    <p>Local push notifications and dynamic threshold triggers notify users immediately when gas levels become hazardous.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-user-check icon-large"></i>
+                    <h3>User Authentication</h3>
+                    <p>Firebase Auth secures user accounts, ensuring only authorized individuals access telemetry data and settings.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-settings icon-large"></i>
+                    <h3>Customizable Thresholds</h3>
+                    <p>Users can configure alert thresholds in settings, tailoring safety responses to their specific environment requirements.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Overview -->
+        <section class="section-padding">
+            <span class="system-label">$ cat mechanics.md</span>
+            <h2 class="section-title underline">System Mechanics</h2>
+            
+            <ul class="custom-list">
+                <li><i class="ti ti-player-play list-icon"></i> Continuous atmospheric monitoring via calibrated MQ gas sensor modules connected to an ESP32 microcontroller node.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Live telemetry data streaming directly to the Flutter application interface for real-time parts-per-million (PPM) concentration display.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Dynamic threshold triggers that transform application UI color states from Safe (Green) to Danger (Red) upon detecting elevated PPM levels.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Geographic sensor mapping and historical frequency charts to track leak origin points and temporal safety patterns.</li>
+            </ul>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="section-padding" id="stack">
+            <span class="system-label">$ ls ~/stack/</span>
+            <h2 class="section-title underline">Tools & Technologies</h2>
+            
+            <div class="stack-categories">
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-code icon-blue"></i> Frontend</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Dart</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">fl_chart</span>
+                        <span class="tag">Google Maps Flutter</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-database icon-blue"></i> Backend & Data</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Firebase Auth</span>
+                        <span class="tag">Firebase Realtime DB</span>
+                        <span class="tag">Geolocator</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-cpu icon-blue"></i> Hardware</h3>
+                    <div class="stack-tags">
+                        <span class="tag">ESP32</span>
+                        <span class="tag">MQ Gas Sensors</span>
+                        <span class="tag">C++ (Embedded)</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3 class="stack-title"><i class="ti ti-hammer icon-blue"></i> Tooling</h3>
+                    <div class="stack-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">Firebase Console</span>
+                        <span class="tag">Prototyping</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges & Solutions -->
+        <section class="section-padding" id="insights">
+            <span class="system-label">$ tail -f lessons.log</span>
+            <h2 class="section-title underline">Challenges & Solutions</h2>
+            
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-tag">HARDWARE-APP SYNC</span>
+                    <h3>Real-Time Telemetry Pipeline</h3>
+                    <p><strong>Challenge:</strong> Ensuring low-latency data delivery from physical ESP32 sensor nodes to the mobile application without data loss or visual lag.</p>
+                    <p><strong>Solution:</strong> Implemented Firebase Realtime Database as the synchronization layer, enabling instantaneous streamed updates from hardware to app while maintaining historical persistence for analytics.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">USER SAFETY</span>
+                    <h3>Threshold Calibration Accuracy</h3>
+                    <p><strong>Challenge:</strong> Distinguishing normal atmospheric variations from dangerous PPM levels while avoiding false alarms that undermine user trust.</p>
+                    <p><strong>Solution:</strong> Designed dynamic threshold triggers with configurable user settings, combined with visual UI state transitions from Safe (green) to Danger (red) for rapid, intuitive threat assessment.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">CROSS-PLATFORM</span>
+                    <h3>Unified Mobile Experience</h3>
+                    <p><strong>Challenge:</strong> Delivering a consistent, feature-rich experience across both iOS and Android with native-level performance from a single codebase.</p>
+                    <p><strong>Solution:</strong> Leveraged Flutter's cross-platform framework with platform-adaptive plugins for geolocation, maps, and local notifications to ensure seamless parity across devices.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Gallery Showcase -->
+        <section class="section-padding">
+            <span class="system-label">$ ls ~/screens/</span>
+            <h2 class="section-title underline">Application Screenshots</h2>
+
+            <div class="gallery-grid">
+                <div class="gallery-card" data-term="~/screens/safe-ppm-monitoring">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/leaksafe-safe-reading-400w.webp">
+                        <img src="/assets/images/leaksafe-safe-reading.jpeg" alt="Safe Level Display Screenshot" loading="lazy" width="200" height="400" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>Safe PPM Monitoring</h3>
+                        <p>Normal atmospheric concentrations (40.0 PPM) visualized with clear green indicators.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-term="~/screens/hazardous-threshold-alert">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/leaksafe-danger-reading-400w.webp">
+                        <img src="/assets/images/leaksafe-danger-reading.jpeg" alt="Danger Level Alert Screenshot" loading="lazy" width="200" height="400" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>Hazardous Threshold Alert</h3>
+                        <p>High PPM levels (210.0 PPM) trigger emergency red visual states and push notifications.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-term="~/screens/telemetry-and-mapping">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/leaksafe-dashboard-400w.webp">
+                        <img src="/assets/images/leaksafe-dashboard.jpeg" alt="Analytics and Mapping Dashboard" loading="lazy" width="200" height="400" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>Telemetry & Mapping</h3>
+                        <p>Sensor location pinpointing alongside historical PPM reading frequency graphs.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-term="~/screens/user-registration">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/leaksafe-wireframes2-400w.webp">
+                        <img src="/assets/images/leaksafe-wireframes2.jpeg" alt="User Registration Screen" loading="lazy" width="200" height="400" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>User Registration</h3>
+                        <p>Secure account creation flow with Firebase Auth, enabling personalized access to telemetry data and settings.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub CTA -->
+            <div class="project-cta-box">
+                <h3>Interested in the full implementation?</h3>
+                <p>Explore the complete source code on GitHub — including the Flutter mobile application and the ESP32 Arduino hardware firmware.</p>
+                <div class="hero-cta" style="justify-content: center;">
+                    <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <i class="ti ti-brand-github"></i> VIEW APP CODE
+                    </a>
+                    <a href="https://github.com/martinmzumara/leaksafe-firmware" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                        <i class="ti ti-cpu"></i> HARDWARE FIRMWARE
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

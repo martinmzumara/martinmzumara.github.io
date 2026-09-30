@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+
+const navLinks = [
+  { href: '#overview', label: 'OVERVIEW' },
+  { href: '#scope', label: 'SCOPE' },
+  { href: '#handover', label: 'HANDOVER' },
+  { href: '#gallery', label: 'GALLERY' },
+];
+const description = 'CCTV case study: 10+ camera HD surveillance system for Lilongwe Adventist Hospital — multi-channel NVR, high-capacity storage, UPS backup, secure remote viewing.';
+---
+<BaseLayout
+  title='LAH CCTV Surveillance Installation - Martin Mzumara'
+  description={description}
+  path="/lah-cctv/"
+  ogType="article"
+  ogTitle='LAH CCTV – 10+ Camera Surveillance Installation'
+  ogImage="/assets/images/og-cover.jpg"
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  scripts={['/js/icons.js', '/js/script.js', '/js/terminal.js']}
+>
+    <Navbar ariaLabel='Case study navigation' links={navLinks} action={{ href: '/#projects', label: 'BACK TO PROJECTS', icon: 'ti-arrow-left' }} />
+
+    <main id="main-content" class="container project-detail-container">
+
+        <!-- Hero Title Section -->
+        <div class="project-detail-header">
+            <span class="system-label">$ cat ~/projects/lah-cctv</span>
+            <h1 class="main-title">LAH CCTV – 10+ Camera Surveillance Installation</h1>
+            <p class="lead-text">A 10+ camera HD surveillance system for Lilongwe Adventist Hospital — multi-channel NVR, high-capacity storage, UPS backup, and secure remote viewing. Deployed through Bits &amp; Bytes Computers; commissioned, tested, and handed over for operational use.</p>
+            <div class="hero-cta project-actions">
+                <a href="/#contact" class="btn-primary">
+                    <i class="ti ti-mail"></i> DISCUSS A SIMILAR PROJECT
+                </a>
+            </div>
+        </div>
+
+        <!-- System Specifications -->
+        <div class="specs-grid">
+            <div class="spec-card" data-term="~/spec/client">
+                <span class="spec-label">CLIENT</span>
+                <span class="spec-value">Lilongwe Adventist Hospital</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/contractor">
+                <span class="spec-label">CONTRACTOR</span>
+                <span class="spec-value">Bits &amp; Bytes Computers</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/role">
+                <span class="spec-label">ROLE</span>
+                <span class="spec-value">Installation Team — Deployment &amp; Configuration</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/cameras">
+                <span class="spec-label">CAMERAS</span>
+                <span class="spec-value">10+ x HD — 5+ outdoor, 5+ indoor</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/recording">
+                <span class="spec-label">RECORDING</span>
+                <span class="spec-value">Multi-channel NVR, high-capacity surveillance storage</span>
+            </div>
+            <div class="spec-card" data-term="~/spec/power-and-access">
+                <span class="spec-label">POWER &amp; ACCESS</span>
+                <span class="spec-value">Dedicated UPS on NVR; secure remote viewing</span>
+            </div>
+        </div>
+
+        <!-- Project Stats -->
+        <section class="section-padding" id="overview">
+            <span class="system-label">$ cat metrics.log</span>
+            <h2 class="section-title underline">At A Glance</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card" data-term="~/metrics/cameras">
+                    <span class="stat-value">10+</span>
+                    <span class="stat-label">Cameras Installed</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/outdoor-cameras">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Outdoor Units</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/indoor-cameras">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Indoor Units</span>
+                </div>
+                <div class="stat-card" data-term="~/metrics/recording">
+                    <span class="stat-value">24/7</span>
+                    <span class="stat-label">Continuous Recording</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Brief -->
+        <section class="section-padding">
+            <span class="system-label">$ cat brief.log</span>
+            <h2 class="section-title underline">The Brief</h2>
+            <p class="section-lead">Lilongwe Adventist Hospital required reliable visual coverage of key indoor and outdoor areas, with footage retained on-site and accessible to authorized personnel. Bits &amp; Bytes Computers contracted the deployment; I served on the installation team supporting deployment and configuration through commissioning and handover.</p>
+        </section>
+
+        <!-- What Was Installed -->
+        <section class="section-padding" id="scope">
+            <span class="system-label">$ ./deploy.sh --scope</span>
+            <h2 class="section-title underline">What Was Installed</h2>
+
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-tag">COVERAGE</span>
+                    <h3>10+ HD Cameras</h3>
+                    <p>Installed and aimed 10+ high-resolution cameras — 5+ outdoor units covering perimeters and entry points, 5+ indoor units covering corridors and service areas.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">RECORDING</span>
+                    <h3>Multi-Channel NVR + Ample Storage</h3>
+                    <p>Installed and configured a multi-channel Network Video Recorder with a high-capacity surveillance-grade hard drive for continuous on-site footage retention, with channel headroom for future additions.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">POWER</span>
+                    <h3>Dedicated UPS Backup</h3>
+                    <p>Connected the NVR directly to a dedicated UPS so recording continues through mains outages — no gaps in footage when hospital power drops.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">ACCESS</span>
+                    <h3>Secure Remote Viewing</h3>
+                    <p>Configured authenticated remote access so authorized hospital personnel can monitor live cameras and review recorded footage from mobile devices or computers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Handover -->
+        <section class="section-padding" id="handover">
+            <span class="system-label">$ tail -f handover.log</span>
+            <h2 class="section-title underline">Result &amp; Handover</h2>
+            <p class="section-lead">The system was installed, configured, tested, and commissioned successfully, then formally handed over to Lilongwe Adventist Hospital for operational use — with an operation &amp; maintenance guide covering:</p>
+
+            <ul class="custom-list">
+                <li><i class="ti ti-player-play list-icon"></i> Power reliability for the NVR, UPS, and network equipment.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Verifying cameras stay online and recording.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Monitoring NVR storage and exporting footage before overwrite.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Maintaining stable internet connectivity for remote viewing.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Restricting system access to authorized personnel only.</li>
+                <li><i class="ti ti-player-play list-icon"></i> Periodic UPS battery checks.</li>
+                <li><i class="ti ti-player-play list-icon"></i> A fault-reporting process for issues and support requests.</li>
+            </ul>
+        </section>
+
+        <!-- Field Notes -->
+        <section class="section-padding" id="insights">
+            <span class="system-label">$ tail -f lessons.log</span>
+            <h2 class="section-title underline">Field Notes</h2>
+
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-tag">COVERAGE</span>
+                    <h3>Balancing Indoor and Outdoor Coverage</h3>
+                    <p>Entry points, perimeters, corridors, and service areas each needed a different mounting height and viewing angle. Camera positions were walked and verified on live view before final fixing.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">POWER</span>
+                    <h3>Outage-Proof Recording</h3>
+                    <p>Hospital mains power is not guaranteed. The NVR runs on a dedicated UPS so recording continues through outages — verified by simulating a mains cut during commissioning.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-tag">HANDOVER</span>
+                    <h3>Leaving the Client Self-Sufficient</h3>
+                    <p>The operation &amp; maintenance guide covers storage monitoring, footage export before overwrite, access control, UPS checks, and fault reporting — so the system stays healthy after handover.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Gallery Showcase -->
+        <section class="section-padding" id="gallery">
+            <span class="system-label">$ ls ~/sites/lah/</span>
+            <h2 class="section-title underline">Installation Photos</h2>
+
+            <div class="gallery-grid gallery-grid--uniform">
+                <!-- PHOTO 1: Outdoor bullet (side view) -->
+                <div class="gallery-card" data-term="~/sites/lah/outdoor-camera">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/lah-outdoor-camera-1-400w.webp">
+                        <img src="/assets/images/lah-outdoor-camera-1.jpg" alt="Outdoor HD bullet camera mounted under eave at Lilongwe Adventist Hospital" loading="lazy" width="400" height="300" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>Outdoor Camera</h3>
+                        <p>Exterior HD bullet unit mounted under the eave for perimeter coverage.</p>
+                    </div>
+                </div>
+
+                <!-- PHOTO 2: Indoor dome -->
+                <div class="gallery-card" data-term="~/sites/lah/indoor-camera">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/lah-indoor-camera-1-400w.webp">
+                        <img src="/assets/images/lah-indoor-camera-1.jpg" alt="Indoor HD dome camera ceiling-mounted inside the hospital building" loading="lazy" width="400" height="533" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>Indoor Camera</h3>
+                        <p>Interior HD dome unit covering corridors and service areas.</p>
+                    </div>
+                </div>
+
+                <!-- PHOTO 3: Outdoor bullet (front / perimeter view) — occupies 3rd gallery slot -->
+                <div class="gallery-card" data-term="~/sites/lah/outdoor-camera-perimeter">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/lah-outdoor-camera-3-400w.webp">
+                        <img src="/assets/images/lah-outdoor-camera-3.jpg" alt="Second outdoor HD bullet camera covering the hospital perimeter" loading="lazy" width="400" height="300" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>Outdoor Camera — Perimeter View</h3>
+                        <p>Second exterior HD bullet unit on perimeter duty above the floodlight line.</p>
+                    </div>
+                </div>
+
+                <!-- PHOTO 4: NVR + UPS (monitor blacked for privacy) — occupies 4th gallery slot -->
+                <div class="gallery-card" data-term="~/sites/lah/nvr-ups">
+                    <picture>
+                        <source type="image/webp" srcset="/assets/images/optimized/lah-nvr-ups-400w.webp">
+                        <img src="/assets/images/lah-nvr-ups.jpg" alt="NVR and UPS installed in wall-mounted cabinet, monitor display blacked out for privacy" loading="lazy" width="400" height="533" decoding="async">
+                    </picture>
+                    <div class="gallery-info">
+                        <h3>NVR &amp; UPS Setup</h3>
+                        <p>Multi-channel NVR with high-capacity storage and dedicated UPS in a secured cabinet. Monitor display blacked out for client privacy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="project-cta-box">
+                <h3>Need CCTV or network infrastructure?</h3>
+                <p>I deploy surveillance and network systems for clinics, lodges, offices, and homes — scoped, installed, and handed over with documentation.</p>
+                <div class="hero-cta" style="justify-content: center;">
+                    <a href="/#contact" class="btn-primary">
+                        <i class="ti ti-mail"></i> GET IN TOUCH
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

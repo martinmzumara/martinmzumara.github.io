@@ -1,0 +1,130 @@
+---
+import { SITE, abs } from '../config/site';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Root-relative path of this page, e.g. "/", "/leaksafe/", "/404.html" */
+  path: string;
+  ogType?: 'website' | 'article';
+  ogTitle?: string;
+  ogDescription?: string;
+  /** Root-relative image path */
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageAlt?: string;
+  canonical?: boolean;
+  robots?: string;
+  /** Homepage only: preload the LCP hero image */
+  preloadHero?: boolean;
+  /** Homepage only: scroll-progress bar + preloader markup */
+  preloader?: boolean;
+  /** External scripts (root-relative or absolute), loaded with defer, in order */
+  scripts: string[];
+  showTermHint?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  ogType = 'website',
+  ogTitle = title,
+  ogDescription = description,
+  ogImage = '/assets/images/og-cover.jpg',
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+  ogImageAlt = SITE.ogImageAlt,
+  canonical = true,
+  robots,
+  preloadHero = false,
+  preloader = false,
+  scripts,
+  showTermHint = true,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
+    <script is:inline data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||"dark")})();</script>
+    <!-- Page-specific early head content (preloader failsafe, noscript styles) -->
+    <slot name="head-start" />
+    <title>{title}</title>
+    <meta name="description" content={description}>
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content={ogType}>
+    <meta property="og:site_name" content={SITE.name}>
+    <meta property="og:locale" content={SITE.locale}>
+    <meta property="og:title" content={ogTitle}>
+    <meta property="og:description" content={ogDescription}>
+    <meta property="og:url" content={abs(path)}>
+    <meta property="og:image" content={abs(ogImage)}>
+    <meta property="og:image:width" content={String(ogImageWidth)}>
+    <meta property="og:image:height" content={String(ogImageHeight)}>
+    <meta property="og:image:alt" content={ogImageAlt}>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={ogTitle}>
+    <meta name="twitter:description" content={ogDescription}>
+    <meta name="twitter:image" content={abs(ogImage)}>
+    <meta name="twitter:image:alt" content={ogImageAlt}>
+
+    {canonical && <link rel="canonical" href={abs(path)}>}
+    {preloadHero && (
+      <link rel="preload" as="image" type="image/webp"
+            href="/assets/images/optimized/profile-graduation-800w.webp"
+            imagesrcset="/assets/images/optimized/profile-graduation-400w.webp 400w, /assets/images/optimized/profile-graduation-800w.webp 800w"
+            imagesizes="(max-width: 768px) min(280px, 70vw), 320px"
+            fetchpriority="high" />
+    )}
+    <meta name="theme-color" content={SITE.themeColor}>
+    {robots && <meta name="robots" content={robots}>}
+
+    <!-- Favicon (generated from assets/images/logo.png) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
+    <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Page-specific late head content (JSON-LD) -->
+    <slot name="head-end" />
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    {preloader && (
+      <>
+        <!-- Scroll progress bar -->
+        <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+        <!-- Preloader -->
+        <div class="preloader" id="preloader" aria-hidden="true">
+            <div class="preloader-inner">
+                <span class="preloader-count" id="preloader-count">0</span>
+                <span class="preloader-label">MARTIN MZUMARA</span>
+            </div>
+        </div>
+      </>
+    )}
+
+    <!-- Page content: navbar, main, modals -->
+    <slot />
+
+    <Footer showTermHint={showTermHint} />
+
+    {scripts.map((src) => <script is:inline src={src} defer></script>)}
+</body>
+</html>

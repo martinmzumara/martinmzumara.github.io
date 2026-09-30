@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  links:
+    name: Build & link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # `npm run build` = `astro build` + scripts/check.mjs (internal
+      # link/fragment check + stale-domain guard). It must pass first —
+      # lychee and Lighthouse then audit the exact `dist/` we ship.
+      - name: Build (Astro + post-build checks)
+        run: npm run build
+
+      - name: Check internal links and image references
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # --offline           only check local targets (external sites rate-limit and cause flaky failures)
+          # --root-dir          REQUIRED: without it lychee errors on every root-relative link
+          #                     ("Cannot resolve root-relative link '/css/style.css': provide a root dir")
+          # --index-files       resolves directory links ("/") to index.html so their #fragments can be
+          #                     checked; without it a valid cross-page anchor like "/#projects" is a false positive
+          # --include-fragments also verify that every #anchor target actually exists on the target page
+          #                     (catches dead in-page links, e.g. nav items left behind after a section is removed)
+          args: >-
+            --no-progress
+            --offline
+            --root-dir dist
+            --index-files index.html
+            --include-fragments
+            './dist/**/*.html'
+          fail: true
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Lighthouse CI
+        run: npm i -g @lhci/cli
+
+      # Assertions & collection settings live in .lighthouserc.json
+      # (staticDistDir "dist"). NOTE: an assertion level without options
+      # defaults to minScore 1 (perfect score), so every threshold is explicit.
+      - name: Build, then run Lighthouse CI
+        run: |
+          npm run build
+          lhci autorun

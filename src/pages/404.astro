@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+
+const navLinks = [
+  { href: '/#expertise', label: 'EXPERTISE' },
+  { href: '/#projects', label: 'PROJECTS' },
+  { href: '/#experience', label: 'EXPERIENCE' },
+];
+---
+<BaseLayout
+  title="404 - Page Not Found | Martin Mzumara"
+  description="The page you're looking for could not be found. Return to Martin Mzumara's portfolio homepage."
+  path="/404.html"
+  ogType="website"
+  ogTitle="404 - Page Not Found | Martin Mzumara"
+  ogDescription="The page you're looking for could not be found. Return to Martin Mzumara's portfolio homepage."
+  canonical={false}
+  robots="noindex, nofollow"
+  scripts={['/js/icons.js', '/js/script.js']}
+  showTermHint={false}
+>
+    <Navbar links={navLinks} action={{ href: '/cv/', label: 'VIEW RESUME' }} />
+
+    <main id="main-content">
+        <!-- 404 Error Section -->
+        <section class="error-section container">
+            <div class="error-content">
+                <span class="system-label">// SYSTEM ERROR: RESOURCE NOT FOUND</span>
+                <h1 class="error-code">404</h1>
+                <h2 class="error-title">Page Not Found</h2>
+                <p class="error-message">The page you're looking for doesn't exist, may have been moved, or the link is broken. Let's get you back on track.</p>
+
+                <div class="hero-cta error-actions">
+                    <a href="/" class="btn-primary">
+                        <i class="ti ti-home"></i> BACK TO HOME
+                    </a>
+                    <a href="/#projects" class="btn-secondary">
+                        <i class="ti ti-folder"></i> VIEW PROJECTS
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

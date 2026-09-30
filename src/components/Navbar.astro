@@ -1,0 +1,38 @@
+---
+interface NavLink {
+  href: string;
+  label: string;
+  external?: boolean;
+}
+interface Props {
+  /** aria-label for the nav element */
+  ariaLabel?: string;
+  links: NavLink[];
+  /** The button on the right side of the bar */
+  action: { href: string; label: string; icon?: string };
+}
+
+const { ariaLabel = 'Main navigation', links, action } = Astro.props;
+---
+<header class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">martin@portfolio<span>:~$</span></a>
+
+        <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+            <i class="ti ti-menu-2 icon-menu"></i>
+            <i class="ti ti-x icon-close"></i>
+        </button>
+
+        <nav class="nav-links" id="nav-links" aria-label={ariaLabel}>
+            {links.map((link) => link.external ? (
+                <a href={link.href} target="_blank" rel="noopener noreferrer" class="nav-link">{link.label}</a>
+            ) : (
+                <a href={link.href} class="nav-link">{link.label}</a>
+            ))}
+        </nav>
+
+        <div class="nav-actions">
+            <a href={action.href} class="btn-primary">{action.icon && <><i class={`ti ${action.icon}`}></i>{' '}</>}{action.label}</a>
+        </div>
+    </div>
+</header>

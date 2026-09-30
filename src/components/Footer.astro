@@ -1,0 +1,53 @@
+---
+import { emailLink, phoneLink } from '../utils/obfuscate';
+
+interface Props {
+  showTermHint?: boolean;
+}
+const { showTermHint = true } = Astro.props;
+
+// Contact details entity-encoded at build time — see utils/obfuscate.ts
+const EMAIL = 'martinmzumara08@gmail.com';
+const phoneListHtml = `${phoneLink('+265 884 630 834', '+265884630834')} / ${phoneLink('+265 990 783 896', '+265990783896')}`;
+const emailListHtml = emailLink(EMAIL);
+---
+<!-- Footer -->
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <div class="footer-logo-row">
+                <img src="/assets/images/optimized/logo-96.webp" alt="" width="44" height="44" class="footer-logo" loading="lazy" decoding="async">
+                <h2>MARTIN MZUMARA</h2>
+            </div>
+            <p>Software Developer & IT Technician<br>Malawi</p>
+            <div class="social-links">
+                <a href="https://github.com/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link">
+                    <i class="ti ti-brand-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link">
+                    <i class="ti ti-brand-linkedin"></i>
+                </a>
+                <a href="https://youtube.com/@martinmzumara" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="social-link">
+                    <i class="ti ti-brand-youtube"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-connect">
+            <h3>CONNECT</h3>
+            <ul class="contact-list">
+                <li><i class="ti ti-map-pin"></i> Lilongwe, Area 49, Malawi</li>
+                <li><i class="ti ti-phone"></i> <span set:html={phoneListHtml}></span></li>
+                <li><i class="ti ti-mail"></i> <span set:html={emailListHtml}></span></li>
+            </ul>
+            <button class="theme-toggle-btn footer-theme-toggle" id="theme-toggle" aria-label="Change to dark theme">
+                <i class="ti ti-sun icon-sun"></i>
+                <i class="ti ti-moon icon-moon"></i>
+                <span class="theme-toggle-label" id="theme-toggle-label">Change to dark theme</span>
+            </button>
+        </div>
+    </div>
+    <div class="container footer-copyright">
+        <p>© <span id="current-year"></span> Martin Mzumara. All rights reserved.</p>
+        {showTermHint && <p class="term-hint">psst — press <kbd>`</kbd> for a terminal</p>}
+    </div>
+</footer>

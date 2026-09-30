@@ -1,0 +1,617 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // Follow system theme changes while the user has no saved preference.
+    // Dark-first: with no saved choice, the canonical phosphor experience wins.
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemChange = () => {
+        let saved = null;
+        try { saved = localStorage.getItem("theme"); } catch (e) {}
+        if (!saved) {
+            document.documentElement.setAttribute("data-theme", "dark");
+            updateThemeToggleLabel();
+        }
+    };
+    if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener("change", handleSystemChange);
+    } else if (mediaQuery.addListener) {
+        mediaQuery.addListener(handleSystemChange); // Safari < 14
+    }
+
+    // 1. Light / Dark Theme Toggle Setup
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    const themeToggleLabel = document.getElementById("theme-toggle-label");
+
+    const updateThemeToggleLabel = () => {
+        if (!themeToggleLabel) return;
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const label = currentTheme === "light" ? "Change to dark theme" : "Change to light theme";
+        themeToggleLabel.textContent = label;
+        // Accessible name must match the visible text, otherwise Lighthouse's
+        // label-content-name-mismatch audit fails (a static aria-label that
+        // differs from the visible label causes the mismatch).
+        if (themeToggleBtn) themeToggleBtn.setAttribute("aria-label", label);
+    };
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            
+            document.documentElement.setAttribute("data-theme", newTheme);
+            try {
+                localStorage.setItem("theme", newTheme);
+            } catch (e) {
+                // localStorage unavailable - theme still works for this session
+            }
+            updateThemeToggleLabel();
+        });
+    }
+
+    // Initialize theme toggle label
+    updateThemeToggleLabel();
+
+    // 3. Dynamic Copyright Year
+    const yearSpan = document.getElementById("current-year");
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Copy email address to clipboard (contact section)
+    const copyEmailBtn = document.getElementById("copy-email");
+    if (copyEmailBtn) {
+        // Assembled at runtime so the address never appears as plain text in
+        // the served source (see src/utils/obfuscate.ts for the HTML side).
+        const EMAIL = ["martinmzumara08", "gmail.com"].join("@");
+        const setCopied = (ok) => {
+            copyEmailBtn.innerHTML = ok
+                ? '<i class="ti ti-check"></i> COPIED!'
+                : '<i class="ti ti-copy"></i> COPY EMAIL';
+            clearTimeout(setCopied._t);
+            setCopied._t = setTimeout(() => {
+                copyEmailBtn.innerHTML = '<i class="ti ti-copy"></i> COPY EMAIL';
+            }, 2000);
+        };
+        copyEmailBtn.addEventListener("click", () => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(EMAIL).then(() => setCopied(true)).catch(() => setCopied(false));
+            } else {
+                // Legacy fallback
+                const tmp = document.createElement("textarea");
+                tmp.value = EMAIL;
+                tmp.style.position = "fixed";
+                tmp.style.opacity = "0";
+                document.body.appendChild(tmp);
+                tmp.select();
+                let ok = false;
+                try { ok = document.execCommand("copy"); } catch (e) {}
+                document.body.removeChild(tmp);
+                setCopied(ok);
+            }
+        });
+    }
+
+    // 3. Mobile Navigation Toggle
+    const navToggle = document.getElementById("nav-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    if (navToggle && navLinks) {
+        const updateNavIcons = () => {
+            const isOpen = navLinks.classList.contains("active");
+            const iconMenu = document.querySelector(".icon-menu");
+            const iconClose = document.querySelector(".icon-close");
+            
+            if (iconMenu) {
+                iconMenu.style.display = isOpen ? "none" : "block";
+            }
+            if (iconClose) {
+                iconClose.style.display = isOpen ? "block" : "none";
+            }
+            
+            navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        };
+
+        navToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            updateNavIcons();
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                updateNavIcons();
+            });
+        });
+
+        // Close menu on Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && navLinks.classList.contains("active")) {
+                navLinks.classList.remove("active");
+                updateNavIcons();
+                navToggle.focus();
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (e) => {
+            if (navLinks.classList.contains("active") && 
+                !navLinks.contains(e.target) && 
+                !navToggle.contains(e.target)) {
+                navLinks.classList.remove("active");
+                updateNavIcons();
+            }
+        });
+    }
+
+// 3b. Active section highlighting (scroll-spy) with aria-current
+    const navLinksAll = document.querySelectorAll('.nav-link');
+    const sections = [];
+    navLinksAll.forEach(link => {
+        const href = link.getAttribute('href');
+        // Support both "/#id" (cross-page) and "#id" (same-page anchors)
+        const id = href && href.startsWith('/#') ? href.substring(2)
+                 : href && href.startsWith('#') && !href.startsWith('#/') ? href.substring(1)
+                 : null;
+        if (id) {
+            const sec = document.getElementById(id);
+            if (sec) sections.push({ id, sec, link });
+        }
+    });
+    const spy = () => {
+        const pos = window.scrollY + 120;
+        let currentId = sections.length ? sections[0].id : null;
+        sections.forEach(s => {
+            if (s.sec.offsetTop <= pos) currentId = s.id;
+        });
+        navLinksAll.forEach(link => {
+            const isActive = link.getAttribute('href') === '#/' + currentId ||
+                link.getAttribute('href') === '/#' + currentId ||
+                link.getAttribute('href') === '#' + currentId;
+            if (isActive) {
+                link.setAttribute('aria-current', 'true');
+                link.classList.add('nav-link-active');
+            } else {
+                link.removeAttribute('aria-current');
+                link.classList.remove('nav-link-active');
+            }
+        });
+    };
+    if (sections.length > 0) {
+        window.addEventListener('scroll', spy, { passive: true });
+        window.addEventListener('resize', spy, { passive: true });
+        spy();
+    }
+    // 4. Lightbox Modal + focus management for showcase items
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const showcaseItems = document.querySelectorAll('.showcase-item');
+    let lastFocused = null;
+
+    if (lightbox && lightboxImg && showcaseItems.length > 0) {
+        const items = Array.from(showcaseItems);
+        let currentIndex = 0;
+        const showAt = (index) => {
+            currentIndex = (index + items.length) % items.length;
+            const item = items[currentIndex];
+            const fullSrc = item.getAttribute('data-full');
+            if (fullSrc) { lightboxImg.src = fullSrc; }
+            const triggerImg = item && item.querySelector ? item.querySelector('img') : null;
+            lightboxImg.alt = (triggerImg && triggerImg.alt) ? triggerImg.alt : 'Showcase preview';
+        };
+        const openLightbox = (src, trigger) => {
+            lastFocused = trigger;
+            currentIndex = Math.max(0, items.indexOf(trigger));
+            showAt(currentIndex);
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden','false');
+            document.body.classList.add('lightbox-open');
+            lightbox.setAttribute('role','dialog');
+            if (lightboxClose) { lightboxClose.focus(); }
+        };
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden','true');
+            document.body.classList.remove('lightbox-open');
+            lightboxImg.src = '';
+            lightbox.removeAttribute('role');
+            if (lastFocused) { lastFocused.focus(); lastFocused = null; }
+        };
+
+        showcaseItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const fullSrc = item.getAttribute('data-full');
+                if (fullSrc) { openLightbox(fullSrc, item); }
+            });
+        });
+
+        if (lightboxClose) { lightboxClose.addEventListener('click', closeLightbox); }
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) { closeLightbox(); }
+        });
+
+        // Close on Escape key + trap Tab inside modal + arrow-key browsing
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+            if (lightbox.classList.contains('active') && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+                e.preventDefault();
+                showAt(currentIndex + (e.key === 'ArrowRight' ? 1 : -1));
+            }
+            if (e.key === 'Tab' && lightbox.classList.contains('active')) {
+                const focusable = lightbox.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                if (focusable.length === 0) return;
+                const firstElem = focusable[0];
+                const lastElem = focusable[focusable.length - 1];
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElem) { e.preventDefault(); lastElem.focus(); }
+                } else {
+                    if (document.activeElement === lastElem) { e.preventDefault(); firstElem.focus(); }
+                }
+            }
+        });
+    }
+
+    // 4b. Showcase carousel: arrows, dots, keyboard + pointer-drag
+    const carousel = document.querySelector('[data-carousel]');
+    if (carousel) {
+        const viewport = carousel.querySelector('[data-carousel-viewport]');
+        const track = carousel.querySelector('[data-carousel-track]');
+        const prevBtn = carousel.querySelector('[data-carousel-prev]');
+        const nextBtn = carousel.querySelector('[data-carousel-next]');
+        const dotsWrap = carousel.querySelector('[data-carousel-dots]');
+        const carouselItems = track ? Array.from(track.querySelectorAll('.showcase-item')) : [];
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const scrollBehavior = () => (reduceMotion ? 'auto' : 'smooth');
+        if (viewport && track && carouselItems.length > 0) {
+            const gapSize = () => parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 16;
+            const step = () => carouselItems[0].getBoundingClientRect().width + gapSize();
+            // scrollWidth (not track.scrollWidth) includes the viewport's own
+            // horizontal padding, which scroll-snap counts too.
+            const maxScroll = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+            const pageCount = () => Math.max(1, Math.ceil(maxScroll() / Math.max(1, viewport.clientWidth)));
+            const activePage = () => Math.min(pageCount() - 1, Math.round(viewport.scrollLeft / Math.max(1, viewport.clientWidth)));
+            const goToPage = (i) => viewport.scrollTo({
+                left: Math.min(i * viewport.clientWidth, maxScroll()),
+                behavior: scrollBehavior()
+            });
+            // Dots are rebuilt whenever the page count changes (resize/zoom)
+            const buildDots = () => {
+                if (!dotsWrap) { return; }
+                const pages = pageCount();
+                if (dotsWrap.childElementCount === pages) { return; }
+                dotsWrap.textContent = '';
+                for (let i = 0; i < pages; i += 1) {
+                    const dot = document.createElement('button');
+                    dot.className = 'carousel-dot';
+                    dot.type = 'button';
+                    dot.setAttribute('role', 'tab');
+                    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+                    dot.setAttribute('aria-label', 'Go to showcase page ' + (i + 1));
+                    dot.addEventListener('click', () => goToPage(i));
+                    dotsWrap.appendChild(dot);
+                }
+            };
+            let paintFrame = null;
+            const paint = () => {
+                paintFrame = null;
+                buildDots();
+                const active = activePage();
+                if (dotsWrap) {
+                    Array.from(dotsWrap.children).forEach((d, i) => d.setAttribute('aria-selected', i === active ? 'true' : 'false'));
+                }
+                // snap-start leaves the rail resting ~4px in, so treat the
+                // outermost pixels as "at the edge" to keep the arrows from
+                // flickering between enabled/disabled near the ends.
+                if (prevBtn) { prevBtn.disabled = viewport.scrollLeft <= 8; }
+                if (nextBtn) { nextBtn.disabled = viewport.scrollLeft >= maxScroll() - 8; }
+            };
+            const requestPaint = () => { if (paintFrame === null) { paintFrame = requestAnimationFrame(paint); } };
+            const nudge = (dir) => viewport.scrollBy({ left: dir * step(), behavior: scrollBehavior() });
+            if (prevBtn) { prevBtn.addEventListener('click', () => nudge(-1)); }
+            if (nextBtn) { nextBtn.addEventListener('click', () => nudge(1)); }
+            // Keyboard: arrows move one card, Home/End jump to the edges. The
+            // lightbox binds the arrow keys globally, so stand down while it is open.
+            carousel.addEventListener('keydown', (e) => {
+                const lb = document.getElementById('lightbox');
+                if (lb && lb.classList.contains('active')) { return; }
+                if (e.key === 'ArrowRight') { e.preventDefault(); nudge(1); }
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); nudge(-1); }
+                else if (e.key === 'Home') { e.preventDefault(); viewport.scrollTo({ left: 0, behavior: scrollBehavior() }); }
+                else if (e.key === 'End') { e.preventDefault(); viewport.scrollTo({ left: maxScroll(), behavior: scrollBehavior() }); }
+            });
+            // Mouse drag-to-swipe; touch falls through to native momentum scrolling
+            let dragId = null;
+            let dragStartX = 0;
+            let dragStartLeft = 0;
+            let dragMoved = false;
+            viewport.addEventListener('pointerdown', (e) => {
+                if (e.pointerType !== 'mouse') { return; }
+                dragId = e.pointerId;
+                dragStartX = e.clientX;
+                dragStartLeft = viewport.scrollLeft;
+                dragMoved = false;
+            });
+            viewport.addEventListener('pointermove', (e) => {
+                if (dragId === null || e.pointerId !== dragId) { return; }
+                const dx = e.clientX - dragStartX;
+                if (!dragMoved) {
+                    if (Math.abs(dx) < 6) { return; }
+                    dragMoved = true;
+                    viewport.classList.add('is-dragging');
+                    if (viewport.setPointerCapture) { viewport.setPointerCapture(dragId); }
+                }
+                viewport.scrollLeft = dragStartLeft - dx;
+            });
+            const endDrag = () => {
+                if (dragId === null) { return; }
+                dragId = null;
+                viewport.classList.remove('is-dragging');
+                if (dragMoved) {
+                    const stepPx = step();
+                    viewport.scrollTo({ left: Math.round(viewport.scrollLeft / stepPx) * stepPx, behavior: scrollBehavior() });
+                }
+            };
+            viewport.addEventListener('pointerup', endDrag);
+            viewport.addEventListener('pointercancel', endDrag);
+            // Swallow the click that follows a drag so the lightbox stays shut
+            viewport.addEventListener('click', (e) => {
+                if (!dragMoved) { return; }
+                dragMoved = false;
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+            viewport.addEventListener('scroll', requestPaint, { passive: true });
+            window.addEventListener('resize', requestPaint);
+            window.addEventListener('load', requestPaint);
+            paint();
+        }
+    }
+
+    // 5. Auto-hiding navbar (reveal on scroll up)
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        const HIDE_AFTER = 120;      // never hide near the top
+        const DELTA = 4;             // ignore micro-scroll jitter
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const updateNav = () => {
+            ticking = false;
+            const y = window.scrollY;
+            const menuOpen = navLinks && navLinks.classList.contains('active');
+            const terminalOpen = document.querySelector('.term-overlay.is-open');
+            if (menuOpen || terminalOpen || y < HIDE_AFTER) {
+                navbar.classList.remove('nav-hidden');
+            } else if (y > lastY + DELTA) {
+                navbar.classList.add('nav-hidden');     // scrolling down
+            } else if (y < lastY - DELTA) {
+                navbar.classList.remove('nav-hidden');  // scrolling up
+            }
+            lastY = y;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(updateNav);
+            }
+        }, { passive: true });
+
+        // Always reveal when jumping to a section (hash navigation)
+        window.addEventListener('hashchange', () => navbar.classList.remove('nav-hidden'));
+        document.addEventListener('click', (e) => {
+            const a = e.target.closest('a[href*="#"]');
+            if (a) navbar.classList.remove('nav-hidden');
+        });
+    }
+
+    // =============== 6. Preloader ===============
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+    const preloader = document.getElementById('preloader');
+    const preloaderCount = document.getElementById('preloader-count');
+
+    const finishPreload = () => {
+        // Cancel the inline head failsafe (see index.html) now that the real path ran
+        if (window.__preloadFailsafe) {
+            clearTimeout(window.__preloadFailsafe);
+            window.__preloadFailsafe = null;
+        }
+        document.body.classList.add('loaded');
+        if (preloader) {
+            preloader.classList.add('done');
+            setTimeout(() => { if (preloader.parentNode) preloader.parentNode.removeChild(preloader); }, 400);
+        }
+    };
+
+    if (preloader && !reduceMotion) {
+        document.documentElement.style.overflow = 'hidden';
+        const pStart = performance.now();
+        const pDur = 1300;
+        const pStep = (now) => {
+            const p = Math.min((now - pStart) / pDur, 1);
+            if (preloaderCount) preloaderCount.textContent = Math.round((1 - Math.pow(1 - p, 3)) * 100);
+            if (p < 1) {
+                requestAnimationFrame(pStep);
+            } else {
+                document.documentElement.style.overflow = '';
+                finishPreload();
+            }
+        };
+        requestAnimationFrame(pStep);
+    } else {
+        finishPreload();
+    }
+
+    // NOTE: the hero command-line typewriter lives in section 14 below — it
+    // reads its text from the HTML and types after the preloader lifts.
+
+    // =============== 7. Scroll progress bar ===============
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) {
+        const updateProgress = () => {
+            const doc = document.documentElement;
+            const max = doc.scrollHeight - window.innerHeight;
+            const sy = doc.scrollTop || window.pageYOffset || 0;
+            progressBar.style.transform = `scaleX(${max > 0 ? sy / max : 0})`;
+        };
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        window.addEventListener('resize', updateProgress, { passive: true });
+        updateProgress();
+    }
+
+    // =============== 8. Live local time (Lilongwe) ===============
+    const clockEl = document.getElementById('local-time');
+    const updateClock = () => {
+        if (!clockEl) return;
+        try {
+            clockEl.textContent = new Intl.DateTimeFormat('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+                timeZone: 'Africa/Blantyre'
+            }).format(new Date());
+        } catch (e) {
+            clockEl.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+        }
+    };
+    if (clockEl) {
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
+
+    // =============== 9. Skills marquee: duplicate for seamless loop ===============
+    const marqueeTrack = document.getElementById('marquee-track');
+    if (marqueeTrack && !reduceMotion) {
+        marqueeTrack.innerHTML += marqueeTrack.innerHTML;
+    }
+
+    // =============== 10. Scroll-reveal system ===============
+    const REVEAL_SEL = '.system-label, .section-title, .section-lead, .section-head, .card, .project-card, .timeline-item, .cred-card, .showcase-item';
+    const revealEls = document.querySelectorAll(REVEAL_SEL);
+    if (revealEls.length && 'IntersectionObserver' in window && !reduceMotion) {
+        revealEls.forEach(el => el.classList.add('reveal-el'));
+        const revealDelay = (el) => {
+            const parent = el.parentElement;
+            if (!parent) return 0;
+            const peers = Array.prototype.filter.call(parent.children, (c) => c.classList && c.classList.contains('reveal-el'));
+            return Math.min(peers.indexOf(el) * 90, 450);
+        };
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const delay = revealDelay(el);
+                    el.style.transitionDelay = delay + 'ms';
+                    el.classList.add('revealed');
+                    setTimeout(() => {
+                        el.classList.remove('reveal-el');
+                        el.style.transitionDelay = '';
+                    }, delay + 780);
+                    revealObs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => revealObs.observe(el));
+    } else {
+        revealEls.forEach(el => el.classList.add('revealed'));
+        revealEls.forEach(el => el.classList.remove('reveal-el'));
+    }
+
+    // =============== 11. Animated stat counters ===============
+    // The DOM ships the real values (data-count) as text so no-JS,
+    // crawlers, and slow connections never see "0". JS resets to 0
+    // and animates up when the stats scroll into view.
+    const statValues = document.querySelectorAll('.stat-value[data-count]');
+    const heroStats = document.querySelector('.hero-stats');
+    const animateStat = (el) => {
+        const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+        if (reduceMotion) { el.textContent = target; return; }
+        el.textContent = 0;
+        const sStart = performance.now();
+        const sDur = 1400;
+        const sStep = (now) => {
+            const p = Math.min((now - sStart) / sDur, 1);
+            el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target);
+            if (p < 1) requestAnimationFrame(sStep);
+            else el.textContent = target;
+        };
+        requestAnimationFrame(sStep);
+    };
+    if (statValues.length && heroStats && 'IntersectionObserver' in window) {
+        const statsObs = new IntersectionObserver((entries) => {
+            entries.forEach(en => {
+                if (en.isIntersecting) {
+                    statValues.forEach(animateStat);
+                    statsObs.disconnect();
+                }
+            });
+        }, { threshold: 0.25 });
+        statsObs.observe(heroStats);
+    } else {
+        statValues.forEach(el => { el.textContent = el.getAttribute('data-count'); });
+    }
+
+    // =============== 12. 3D tilt + cursor spotlight on cards ===============
+    if (!reduceMotion && finePointer) {
+        document.querySelectorAll('.card, .project-card, .tool-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+                if (r.width >= 280 && !card.classList.contains('tool-card')) {
+                    card.style.transform = `perspective(760px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-6px)`;
+                } else {
+                    card.style.transform = 'translateY(-5px)';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.removeProperty('--mx');
+                card.style.removeProperty('--my');
+                card.style.transform = '';
+            });
+        });
+    }
+
+    // =============== 13. Magnetic primary buttons ===============
+    if (!reduceMotion && finePointer) {
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const dx = e.clientX - r.left - r.width / 2;
+                const dy = e.clientY - r.top - r.height / 2;
+                btn.style.transform = `translate(${dx * 0.14}px, ${dy * 0.14}px)`;
+            });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+        });
+    }
+
+    // =============== 14. Hero command-line typewriter ===============
+    const heroTerm = document.getElementById('hero-term');
+    if (heroTerm) {
+        const fullText = heroTerm.textContent;
+        if (reduceMotion) {
+            // Static text, caret still blinks via CSS
+        } else {
+            heroTerm.textContent = '';
+            heroTerm.setAttribute('aria-label', fullText);
+            let ti = 0;
+            const typeStep = () => {
+                if (ti <= fullText.length) {
+                    heroTerm.textContent = fullText.slice(0, ti);
+                    ti++;
+                    setTimeout(typeStep, 55 + Math.random() * 45);
+                }
+            };
+            setTimeout(typeStep, 700);
+        }
+    }
+
+});
