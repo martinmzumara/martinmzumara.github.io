@@ -11,7 +11,9 @@ export const SITE = {
   title: 'Martin Mzumara - Software Developer & IT Technician',
   description:
     'Martin Mzumara — Software Developer & IT Technician in Malawi. IoT systems, web apps, networks.',
-  ogImage: `${SITE_URL}/assets/images/og-cover.jpg`,
+  // ?v=2 busts link-preview scraper caches (the old image showed the retired
+  // github.io domain; platforms cache og:image by URL).
+  ogImage: `${SITE_URL}/assets/images/og-cover.jpg?v=2`,
   ogImageAlt: 'Martin Mzumara - Software Developer & IT Technician',
   locale: 'en_US',
   themeColor: '#238636',
