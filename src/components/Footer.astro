@@ -1,11 +1,6 @@
 ---
 import { emailLink, phoneLink } from '../utils/obfuscate';
 
-interface Props {
-  showTermHint?: boolean;
-}
-const { showTermHint = true } = Astro.props;
-
 // Contact details entity-encoded at build time - see utils/obfuscate.ts
 const EMAIL = 'martin@martinmzumara.com';
 const phoneListHtml = `${phoneLink('+265 884 630 834', '+265884630834')} / ${phoneLink('+265 990 783 896', '+265990783896')}`;
@@ -48,6 +43,5 @@ const emailListHtml = emailLink(EMAIL);
     </div>
     <div class="container footer-copyright">
         <p>© <span id="current-year"></span> Martin Mzumara. All rights reserved.</p>
-        {showTermHint && <p class="term-hint">psst - press <kbd>`</kbd> for a terminal</p>}
     </div>
 </footer>

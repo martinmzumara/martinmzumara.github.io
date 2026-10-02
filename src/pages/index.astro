@@ -46,12 +46,10 @@ const FIELD_PHOTOS = [
 const IMG_SIZES = '(min-width: 620px) 268px, (max-width: 333px) 72vw, 240px';
 
 const navLinks = [
-  { href: '#expertise', label: 'EXPERTISE' },
-  { href: '#projects', label: 'PROJECTS' },
-  { href: '#experience', label: 'EXPERIENCE' },
-  { href: '#tools', label: 'TOOLS' },
-  { href: abs('/blog/'), label: 'BLOG', external: true },
-  { href: '#contact', label: 'CONTACT' },
+  { href: '#projects', label: 'Work' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#showcase', label: 'Field' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 const personLd = {
@@ -113,9 +111,9 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                     <span class="status-badge"><span class="status-dot"></span> Available for work</span>
                     <span class="status-time"><i class="ti ti-clock"></i> <span id="local-time">--:--</span> · GMT+2</span>
                 </div>
-                <span class="system-label" id="hero-term">$ whoami</span>
-                <h1><span class="sr-only">Martin Mzumara – </span>Software Developer<br><span>&amp; IT Technician</span></h1>
-                <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
+                <span class="system-label">Software · Infrastructure · Networks</span>
+                <h1><span class="sr-only">Martin Mzumara – </span>Building software &amp; the networks it runs on<span class="accent-dot">.</span></h1>
+                <p>I'm Martin, a software developer and IT technician in Lilongwe, Malawi. I ship cross-platform apps and design, install, and maintain the network infrastructure behind them.</p>
                 <div class="hero-stats" aria-label="Highlights">
                     <div class="stat"><span class="stat-value" data-count="5">5</span><span class="stat-label">Years in Tech</span></div>
                     <div class="stat"><span class="stat-value" data-count="4">4</span><span class="stat-label">Projects Delivered</span></div>
@@ -167,29 +165,29 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
 
         <!-- Expertise Section -->
         <section id="expertise" class="container section-padding chapter">
-            <span class="system-label">$ ls ~/skills/</span>
-            <h2 class="section-title underline">Technical Expertise</h2>
-            
-            <div class="grid-cards">
-                <div class="card" data-term="~/skills/software-dev">
-                    <i class="ti ti-code icon-large"></i>
-                    <h3>Software Development</h3>
-                    <p>Development of software applications using programming languages such as Dart, Java, and C#.</p>
+            <span class="system-label">Expertise</span>
+            <h2 class="section-title">What I do</h2>
+
+            <div class="skills-matrix">
+                <div class="skills-col">
+                    <h3 class="skills-col-title"><i class="ti ti-code"></i> Software</h3>
+                    <ul class="skills-list">
+                        <li>Mobile apps <span>Flutter, Dart, Firebase</span></li>
+                        <li>Backend &amp; APIs <span>Java, C#, REST</span></li>
+                        <li>Web development <span>HTML, CSS, JavaScript, Astro</span></li>
+                        <li>IoT systems <span>ESP32, sensors, telemetry</span></li>
+                        <li>Cryptography <span>AES-256, secure storage</span></li>
+                    </ul>
                 </div>
-                <div class="card" data-term="~/skills/web-dev">
-                    <i class="ti ti-device-desktop icon-large"></i>
-                    <h3>Web Development</h3>
-                    <p>Designing and building websites and web applications using HTML, CSS, and JavaScript.</p>
-                </div>
-                <div class="card" data-term="~/skills/it-support">
-                    <i class="ti ti-server icon-large"></i>
-                    <h3>IT Technical Support</h3>
-                    <p>Providing technical assistance including Windows and Microsoft Office installation and general IT maintenance.</p>
-                </div>
-                <div class="card" data-term="~/skills/iot">
-                    <i class="ti ti-cpu icon-large"></i>
-                    <h3>IoT System Design</h3>
-                    <p>Designing and developing IoT-based systems with hardware integration and mobile application alerts.</p>
+                <div class="skills-col">
+                    <h3 class="skills-col-title"><i class="ti ti-network"></i> Infrastructure &amp; Networks</h3>
+                    <ul class="skills-list">
+                        <li>Network installation <span>switches, routers, WAPs, structured cabling</span></li>
+                        <li>CCTV &amp; surveillance <span>NVR, multi-channel, remote viewing</span></li>
+                        <li>Systems administration <span>Windows, Linux, MySQL</span></li>
+                        <li>Wireless &amp; satellite <span>Starlink, wireless links</span></li>
+                        <li>IT support <span>diagnostics, deployment, maintenance</span></li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -208,136 +206,63 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
 
         <!-- Projects Section -->
         <section id="projects" class="container section-padding chapter">
-            <span class="system-label">$ ls ~/projects/ --featured</span>
-            <h2 class="section-title underline">Selected Work</h2>
+            <span class="system-label">Featured</span>
+            <h2 class="section-title">Selected Work</h2>
             
-            <div class="projects-grid">
-                <!-- LeakSAFE Project Card -->
-                <div class="project-card" data-term="~/projects/leaksafe">
-                    <a href="/leaksafe/" class="project-thumb-link" aria-label="Read the LeakSAFE case study">
-                        <div class="project-thumb">
-                            <picture>
-                                <source type="image/webp" srcset="/assets/images/optimized/leaksafe-wireframes.webp">
-                                <img src="/assets/images/optimized/leaksafe-wireframes.jpg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
-                            </picture>
-                            <div class="project-badge">CASE STUDY</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <span class="system-label">~/projects/leaksafe - init</span>
-                        <h3><a href="/leaksafe/">LeakSAFE - Smart Gas Leakage Detection</a></h3>
-                        <p>An end-to-end hazardous gas detection system built with Flutter and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.</p>
-                        <div class="project-meta">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Dart</span>
-                            <span class="tag">ESP32</span>
-                            <span class="tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/leaksafe/" class="project-link-btn">
-                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
-                            </a>
-                            <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                                <i class="ti ti-brand-github"></i> SOURCE
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="work-index">
+                <a href="/leaksafe/" class="work-row" data-preview="/assets/images/optimized/leaksafe-wireframes.jpg">
+                    <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/leaksafe-wireframes.webp" alt="" loading="lazy" width="600" height="400"></span>
+                    <span class="work-row-num">01</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">LeakSAFE</span>
+                        <span class="work-row-desc">Smart Gas Leakage Detection &middot; Flutter, Dart, ESP32, Firebase</span>
+                    </span>
+                    <span class="work-row-meta">Case Study</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
 
-                <!-- EncPlus Project Card -->
-                <div class="project-card" data-term="~/projects/encplus">
-                    <a href="/encplus/" class="project-thumb-link" aria-label="Read the EncPlus project details">
-                        <div class="project-thumb placeholder-thumb">
-                            <i class="ti ti-lock placeholder-icon"></i>
-                            <div class="project-badge muted">IN DEVELOPMENT</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <span class="system-label">~/projects/encplus - init</span>
-                        <h3><a href="/encplus/">EncPlus - AES File Encryption</a></h3>
-                        <p>A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
-                        <p class="project-note"><i class="ti ti-info-circle"></i> Currently in development.</p>
-                        <div class="project-meta">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Dart</span>
-                            <span class="tag">AES</span>
-                            <span class="tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/encplus/" class="project-link-btn">
-                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
-                            </a>
-                            <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                                <i class="ti ti-brand-github"></i> SOURCE
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <a href="/encplus/" class="work-row">
+                    <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-lock placeholder-icon"></i></span>
+                    <span class="work-row-num">02</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">EncPlus</span>
+                        <span class="work-row-desc">AES-256 file encryption app &middot; Flutter, Dart, Firebase</span>
+                    </span>
+                    <span class="work-row-meta">In Development</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
 
-                <!-- Manguzi Executive Lodge Project Card -->
-                <div class="project-card" data-term="~/projects/manguzi">
-                    <a href="/manguzi/" class="project-thumb-link" aria-label="Read the Manguzi Executive Lodge project details">
-                        <div class="project-thumb placeholder-thumb">
-                            <i class="ti ti-building-skyscraper placeholder-icon"></i>
-                            <div class="project-badge">CLIENT PROJECT</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <span class="system-label">~/projects/manguzi - init</span>
-                        <h3><a href="/manguzi/">Manguzi Executive Lodge</a></h3>
-                        <p>A premium hospitality website for an executive lodge in Karonga, Malawi - featuring accommodation, restaurant, and conference services with online booking.</p>
-                        <div class="project-meta">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/manguzi/" class="project-link-btn">
-                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
-                            </a>
-                            <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                                <i class="ti ti-external-link"></i> LIVE SITE
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <a href="/manguzi/" class="work-row">
+                    <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-building-skyscraper placeholder-icon"></i></span>
+                    <span class="work-row-num">03</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">Manguzi Executive Lodge</span>
+                        <span class="work-row-desc">Hospitality website with online booking &middot; HTML, CSS, JS, Firebase</span>
+                    </span>
+                    <span class="work-row-meta">Client Project</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
 
-                <!-- LAH CCTV Project Card -->
-                <div class="project-card" data-term="~/projects/lah-cctv">
-                    <a href="/lah-cctv/" class="project-thumb-link" aria-label="Read the LAH CCTV case study">
-                        <div class="project-thumb">
-                            <picture>
-                                <source type="image/webp" srcset="/assets/images/optimized/lah-indoor-camera-1-400w.webp">
-                                <img src="/assets/images/lah-indoor-camera-1.jpg" alt="Indoor HD dome camera installed at Lilongwe Adventist Hospital" loading="lazy" width="600" height="400">
-                            </picture>
-                            <div class="project-badge">CLIENT PROJECT</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <span class="system-label">~/projects/lah-cctv - init</span>
-                        <h3><a href="/lah-cctv/">LAH CCTV - Hospital Surveillance System</a></h3>
-                        <p>A 10+ camera HD surveillance installation for Lilongwe Adventist Hospital - multi-channel NVR, high-capacity storage, UPS backup, and secure remote viewing.</p>
-                        <div class="project-meta">
-                            <span class="tag">CCTV</span>
-                            <span class="tag">NVR</span>
-                            <span class="tag">Remote Viewing</span>
-                            <span class="tag">Infrastructure</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/lah-cctv/" class="project-link-btn">
-                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <a href="/lah-cctv/" class="work-row" data-preview="/assets/images/lah-indoor-camera-1.jpg">
+                    <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/lah-indoor-camera-1-400w.webp" alt="" loading="lazy" width="600" height="400"></span>
+                    <span class="work-row-num">04</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">LAH CCTV</span>
+                        <span class="work-row-desc">Hospital surveillance system, 10+ HD cameras &middot; CCTV, NVR, Remote Viewing</span>
+                    </span>
+                    <span class="work-row-meta">Client Project</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
             </div>
+
+            <!-- Floating preview for the work index (desktop hover) -->
+            <div class="work-preview" id="work-preview" aria-hidden="true"><img alt="" decoding="async"></div>
         </section>
 
         <!-- Experience & Education Section -->
         <section id="experience" class="container section-padding chapter">
-            <span class="system-label">$ cat track_record.log</span>
-            <h2 class="section-title underline">Experience & Qualifications</h2>
+            <span class="system-label">Experience</span>
+            <h2 class="section-title">Experience & Qualifications</h2>
             
             <div class="experience-grid">
                 <!-- Work History Timeline -->
@@ -381,95 +306,31 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                     </div>
                 </div>
 
-                <!-- Education & Certifications -->
-                <div class="credentials-column">
-                    <h3 class="column-title"><i class="ti ti-award icon-blue"></i> Education & Certifications</h3>
-                    
-                    <div class="cred-card" data-term="~/education/bsc-cs">
-                        <h4>Bachelor of Science in Computer Science</h4>
-                        <p class="cred-org">DMI St. John the Baptist University | Graduated 2024</p>
-                    </div>
+            </div>
 
-                    <div class="cred-card" data-term="~/certs/ccna">
-                        <h4>Cisco Certified Network Associate (CCNA)</h4>
-                        <p class="cred-org">Lilongwe Technical College</p>
-                        <ul class="cred-list">
-                            <li><i class="ti ti-check check-icon"></i> CCNA: Introduction to Networks</li>
-                            <li><i class="ti ti-check check-icon"></i> CCNA: Switching, Routing & Wireless Essentials</li>
-                            <li><i class="ti ti-check check-icon"></i> CCNA: Enterprise Networking, Security & Automation</li>
-                        </ul>
-                    </div>
-
-                    <div class="cred-card" data-term="~/certs/specialized">
-                        <h4>Specialized Capabilities</h4>
-                        <div class="skill-tags">
-                            <span>CCTV Deployment</span>
-                            <span>Structured Cabling</span>
-                            <span>Linux Admin</span>
-                            <span>MySQL / Firebase</span>
-                            <span>Git</span>
-                            <span>C++</span>
-                            <span>C#</span>
-                            <span>Java</span>
-                            <span>Flutter</span>
-                            <span>Dart</span>
-                            <span>Xamarin</span>
-                            <span>ESP32 IoT</span>
-                            <span>AES-256 Encryption</span>
-                            <span>HTML5 / CSS3</span>
-                            <span>JavaScript</span>
-                            <span>Web Design</span>
-                        </div>
-                    </div>
+            <!-- Compact credentials strip -->
+            <div class="cred-strip">
+                <div class="cred-strip-item">
+                    <span class="cred-strip-label">Education</span>
+                    <span class="cred-strip-value">BSc Computer Science, DMI St. John the Baptist University (2024)</span>
+                </div>
+                <div class="cred-strip-item">
+                    <span class="cred-strip-label">Certification</span>
+                    <span class="cred-strip-value">CCNA - Introduction to Networks; Switching, Routing &amp; Wireless Essentials; Enterprise Networking, Security &amp; Automation</span>
+                </div>
+                <div class="cred-strip-item">
+                    <span class="cred-strip-label">Core stack</span>
+                    <span class="cred-strip-value">Flutter, Dart, Java, C#, ESP32, Linux, MySQL/Firebase, CCTV/NVR, structured cabling</span>
                 </div>
             </div>
         </section>
 
-
-        <!-- Networking Section -->
-        <section id="networking" class="container section-padding chapter">
-            <span class="system-label">$ ip -br addr show</span>
-            <h2 class="section-title underline">Networking &amp; Field Work</h2>
-
-            <div class="grid-cards">
-                <div class="card" data-term="~/networking/ccna">
-                    <i class="ti ti-award icon-large"></i>
-                    <h3>CCNA Coursework</h3>
-                    <p>Introduction to Networks; Switching, Routing &amp; Wireless Essentials; Enterprise Networking, Security &amp; Automation.</p>
-                </div>
-                <div class="card" data-term="~/networking/structured-cabling">
-                    <i class="ti ti-hammer icon-large"></i>
-                    <h3>Structured Cabling</h3>
-                    <p>Network installation and structured cabling - switches, routers, WAPs, trunking, and patch work for small to medium-sized organisations.</p>
-                </div>
-                <div class="card" data-term="~/networking/cctv">
-                    <i class="ti ti-photo icon-large"></i>
-                    <h3>CCTV &amp; Surveillance</h3>
-                    <p>Camera and NVR deployments with secure remote viewing - most recently the <a href="/lah-cctv/">LAH CCTV hospital installation</a>.</p>
-                </div>
-                <div class="card" data-term="~/networking/wireless">
-                    <i class="ti ti-activity icon-large"></i>
-                    <h3>Starlink &amp; Wireless</h3>
-                    <p>Wireless links, WAPs, and Starlink/antenna installations for sites that need connectivity beyond fixed lines.</p>
-                </div>
-            </div>
-
-            <!-- Placeholder: network diagram goes here once drawn -->
-            <figure class="network-diagram" data-term="~/networking/topology">
-                <div class="network-diagram-canvas placeholder-thumb">
-                    <i class="ti ti-presentation placeholder-icon"></i>
-                    <span class="project-badge muted">DIAGRAM PLACEHOLDER</span>
-                    <span class="network-diagram-note">Representative switch / router / WAP topology to be added here.</span>
-                </div>
-                <figcaption>Network diagram - reserved slot for a typical deployment topology.</figcaption>
-            </figure>
-        </section>
 
         <!-- Tools & Software Section -->
         <section id="tools" class="container section-padding chapter">
             <div class="section-head">
-                <span class="system-label">$ ls ~/tools/</span>
-                <h2 class="section-title underline">Tools &amp; Software I Use</h2>
+                <span class="system-label">Tools</span>
+                <h2 class="section-title">Tools &amp; Software I Use</h2>
                 <p class="section-lead">The apps and services I rely on daily - for development, IT work, and getting things done - on both my laptop and my phone.</p>
             </div>
 
@@ -499,8 +360,8 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <!-- Showcase Section -->
         <section id="showcase" class="container section-padding chapter">
             <div class="section-head showcase-head">
-                <span class="system-label">$ ls ~/showcase/</span>
-                <h2 class="section-title underline">Identity &amp; Field Work</h2>
+                <span class="system-label">Showcase</span>
+                <h2 class="section-title">Identity &amp; Field Work</h2>
                 <p class="section-lead">Rack installs, cabling and rooftop work - the field side of the job, alongside the code.</p>
             </div>
 
@@ -530,13 +391,13 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         </section>
         <!-- Contact Section -->
         <section id="contact" class="container section-padding chapter">
-            <span class="system-label">$ ssh martin@local</span>
-            <h2 class="section-title underline">Let's Work Together</h2>
-            <p class="section-lead">Have a project in mind, need IT support, or want to discuss an opportunity? Reach out - I usually reply within a day.</p>
+            <span class="system-label">Contact</span>
+            <h2 class="section-title contact-title">Have a project, a network to build, or a role to fill? Let's talk<span class="accent-dot">.</span></h2>
+            <p class="section-lead">Reach out by email or phone - I usually reply within a day.</p>
             <p class="contact-principles"><span class="principle"><i class="ti ti-check"></i> Fair, local-friendly pricing</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Work delivered in reviewable stages</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Modern design, rigorous engineering</span></p>
 
             <div class="contact-grid">
-                <div class="contact-card" data-term="~/contact/email">
+                <div class="contact-card">
                     <i class="ti ti-mail contact-card-icon"></i>
                     <h3>Email</h3>
                     <p set:html={emailCardHtml}></p>
@@ -544,12 +405,12 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                         <i class="ti ti-copy"></i> COPY EMAIL
                     </button>
                 </div>
-                <div class="contact-card" data-term="~/contact/phone">
+                <div class="contact-card">
                     <i class="ti ti-phone contact-card-icon"></i>
                     <h3>Phone</h3>
                     <p set:html={phoneCardHtml}></p>
                 </div>
-                <div class="contact-card" data-term="~/contact/location">
+                <div class="contact-card">
                     <i class="ti ti-map-pin contact-card-icon"></i>
                     <h3>Location</h3>
                     <p>Area 49, Lilongwe<br>Malawi</p>

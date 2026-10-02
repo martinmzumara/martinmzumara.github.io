@@ -23,7 +23,6 @@ interface Props {
   preloader?: boolean;
   /** External scripts (root-relative or absolute), loaded with defer, in order */
   scripts: string[];
-  showTermHint?: boolean;
 }
 
 const {
@@ -42,7 +41,6 @@ const {
   preloadHero = false,
   preloader = false,
   scripts,
-  showTermHint = true,
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -51,7 +49,7 @@ const {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
-    <script is:inline data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||"dark")})();</script>
+    <script is:inline data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||"light")})();</script>
     <!-- Page-specific early head content (preloader failsafe, noscript styles) -->
     <slot name="head-start" />
     <title>{title}</title>
@@ -96,9 +94,10 @@ const {
 
     <link rel="stylesheet" href="/css/style.css">
 
-    <!-- Self-hosted fonts: Inter + JetBrains Mono (woff2, variable weights) -->
+    <!-- Self-hosted fonts: Inter + JetBrains Mono + Bricolage Grotesque (woff2, variable weights) -->
     <link rel="preload" href="/assets/fonts/inter/inter-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/bricolage/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Page-specific late head content (JSON-LD) -->
     <slot name="head-end" />
@@ -123,7 +122,7 @@ const {
     <!-- Page content: navbar, main, modals -->
     <slot />
 
-    <Footer showTermHint={showTermHint} />
+    <Footer />
 
     {scripts.map((src) => <script is:inline src={src} defer></script>)}
 </body>

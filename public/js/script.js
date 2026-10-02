@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Follow system theme changes while the user has no saved preference.
-    // Dark-first: with no saved choice, the canonical phosphor experience wins.
+    // Light-first (Resend style): with no saved choice, the clean white base wins.
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleSystemChange = () => {
         let saved = null;
         try { saved = localStorage.getItem("theme"); } catch (e) {}
         if (!saved) {
-            document.documentElement.setAttribute("data-theme", "dark");
+            document.documentElement.setAttribute("data-theme", "light");
             updateThemeToggleLabel();
         }
     };
@@ -448,9 +448,6 @@ document.addEventListener("DOMContentLoaded", () => {
         finishPreload();
     }
 
-    // NOTE: the hero command-line typewriter lives in section 14 below - it
-    // reads its text from the HTML and types after the preloader lifts.
-
     // =============== 7. Scroll progress bar ===============
     const progressBar = document.getElementById('scroll-progress');
     if (progressBar) {
@@ -492,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =============== 10. Scroll-reveal system ===============
-    const REVEAL_SEL = '.system-label, .section-title, .section-lead, .section-head, .card, .project-card, .timeline-item, .cred-card, .showcase-item';
+    const REVEAL_SEL = '.system-label, .section-title, .section-lead, .section-head, .work-row, .skills-col, .card, .timeline-item, .cred-strip-item, .showcase-item, .tools-grid, .contact-grid';
     const revealEls = document.querySelectorAll(REVEAL_SEL);
     if (revealEls.length && 'IntersectionObserver' in window && !reduceMotion) {
         revealEls.forEach(el => el.classList.add('reveal-el'));
@@ -593,25 +590,44 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =============== 14. Hero command-line typewriter ===============
-    const heroTerm = document.getElementById('hero-term');
-    if (heroTerm) {
-        const fullText = heroTerm.textContent;
-        if (reduceMotion) {
-            // Static text, caret still blinks via CSS
-        } else {
-            heroTerm.textContent = '';
-            heroTerm.setAttribute('aria-label', fullText);
-            let ti = 0;
-            const typeStep = () => {
-                if (ti <= fullText.length) {
-                    heroTerm.textContent = fullText.slice(0, ti);
-                    ti++;
-                    setTimeout(typeStep, 55 + Math.random() * 45);
-                }
-            };
-            setTimeout(typeStep, 700);
-        }
+    // =============== 14. Work index cursor-following preview ===============
+    const workPreview = document.getElementById('work-preview');
+    if (workPreview && finePointer) {
+        const previewImg = workPreview.querySelector('img');
+        const rows = document.querySelectorAll('.work-row[data-preview]');
+        let rafId = null;
+        let targetX = 0, targetY = 0, curX = 0, curY = 0;
+
+        const tick = () => {
+            curX += (targetX - curX) * 0.18;
+            curY += (targetY - curY) * 0.18;
+            workPreview.style.left = curX + 'px';
+            workPreview.style.top = curY + 'px';
+            if (Math.abs(targetX - curX) > 0.5 || Math.abs(targetY - curY) > 0.5) {
+                rafId = requestAnimationFrame(tick);
+            } else {
+                rafId = null;
+            }
+        };
+
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                const src = row.getAttribute('data-preview');
+                if (src && previewImg.getAttribute('src') !== src) previewImg.setAttribute('src', src);
+                workPreview.classList.add('visible');
+                if (!rafId) rafId = requestAnimationFrame(tick);
+            });
+            row.addEventListener('mousemove', (e) => {
+                // keep the card near the cursor, offset up-right, inside the viewport
+                const w = 340, h = 226, pad = 24;
+                targetX = Math.min(e.clientX + 28, window.innerWidth - w - pad);
+                targetY = Math.min(Math.max(e.clientY - h / 2, pad), window.innerHeight - h - pad);
+                if (!rafId) rafId = requestAnimationFrame(tick);
+            });
+            row.addEventListener('mouseleave', () => {
+                workPreview.classList.remove('visible');
+            });
+        });
     }
 
 });

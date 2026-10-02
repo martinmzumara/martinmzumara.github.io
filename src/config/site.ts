@@ -16,7 +16,7 @@ export const SITE = {
   ogImage: `${SITE_URL}/assets/images/og-cover.jpg?v=2`,
   ogImageAlt: 'Martin Mzumara - Software Developer & IT Technician',
   locale: 'en_US',
-  themeColor: '#238636',
+  themeColor: '#ffffff',
 } as const;
 
 /** Absolute URL for a root-relative path ("/leaksafe/" -> "https://…/leaksafe/"). */
