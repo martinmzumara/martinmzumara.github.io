@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { SITE_URL } from '../config/site';
 
-// Sitemap generated at build time from src/config/site.ts — the only place
+// Sitemap generated at build time from src/config/site.ts - the only place
 // the public URL lives. lastmod reflects real content edits (migration day
 // for pages whose markup/SEO changed; original dates kept elsewhere).
 const PAGES = [

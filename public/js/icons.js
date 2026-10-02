@@ -108,7 +108,7 @@
                 swapAll();
             })
             .catch(function () {
-                // Sprite unavailable (e.g. opened via file://) — fall back to the
+                // Sprite unavailable (e.g. opened via file://) - fall back to the
                 // Tabler webfont, loaded on demand instead of blocking page render.
                 ready = true;
                 var link = document.createElement("link");

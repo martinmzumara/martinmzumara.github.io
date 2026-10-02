@@ -1,5 +1,5 @@
 // ============================================================
-// Tools & Software articles data — SINGLE SOURCE OF TRUTH.
+// Tools & Software articles data - SINGLE SOURCE OF TRUTH.
 // Rendered at build time into the homepage grid (src/pages/index.astro)
 // and embedded as JSON in the page so the reading modal works without
 // loading a second data file.
@@ -28,7 +28,7 @@ export const SITE_TOOLS: Tool[] = [
     icon: 'ti-brand-vscode',
     featured: true,
     summary: 'My daily driver for writing, debugging, and refactoring code across web, mobile, and embedded projects.',
-    intro: 'VS Code is the center of my development workflow — lightweight, fast, and endlessly extensible.',
+    intro: 'VS Code is the center of my development workflow - lightweight, fast, and endlessly extensible.',
     body: 'I lean on it for Flutter/Dart, HTML/CSS/JS, and ESP32 firmware. The integrated terminal, Git panel, and Remote-SSH let me move between laptop and server work without switching tools.',
     bullets: [
       'Integrated Git and source control',
@@ -73,7 +73,7 @@ export const SITE_TOOLS: Tool[] = [
     tag: 'Version Control',
     icon: 'ti-git-branch',
     summary: 'Every project lives in Git, with GitHub for hosting, collaboration, and this very site.',
-    intro: 'Git is non-negotiable in my workflow — every project is versioned from day one.',
+    intro: 'Git is non-negotiable in my workflow - every project is versioned from day one.',
     body: 'I use Git for branching, feature work, and clean history, and GitHub for remote backups, issues, and deploying this portfolio on GitHub Pages.',
     bullets: [
       'Feature branches and pull requests',
@@ -114,7 +114,7 @@ export const SITE_TOOLS: Tool[] = [
     dev: 'phone',
     tag: 'Terminal',
     icon: 'ti-terminal-2',
-    summary: 'A full Linux terminal on Android — for quick edits, Git, and SSH from my phone.',
+    summary: 'A full Linux terminal on Android - for quick edits, Git, and SSH from my phone.',
     intro: 'Termux turns my phone into a pocket Linux box.',
     body: 'When I am away from the laptop I still commit code, run scripts, and SSH into servers straight from Termux. It is surprisingly capable for a terminal app.',
     bullets: ['Run Git, SSH, and shell scripts', 'Install packages via apt', 'Access servers on the go'],
@@ -145,7 +145,7 @@ export const SITE_TOOLS: Tool[] = [
     dev: 'phone',
     tag: 'Automation',
     icon: 'ti-settings',
-    summary: 'Automating the repetitive bits of my phone — from connectivity to quick actions.',
+    summary: 'Automating the repetitive bits of my phone - from connectivity to quick actions.',
     intro: 'Tasker automates the little things that save time every day.',
     body: 'I use Tasker for profiles that toggle Wi-Fi, run quick scripts, and trigger actions based on time and location.',
     bullets: ['Location and time-based profiles', 'Trigger Termux scripts', 'Automate connectivity and notifications'],

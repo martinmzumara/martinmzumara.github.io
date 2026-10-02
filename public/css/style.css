@@ -1,5 +1,5 @@
 /* ============================================================
-   Glassmorphism Redesign — Martin Mzumara Portfolio
+   Glassmorphism Redesign - Martin Mzumara Portfolio
    Inspired by the bold, image-led Manchester United aesthetic
    with a full glassmorphism treatment throughout.
    ============================================================ */
@@ -27,7 +27,7 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
-    /* Primary brand accent — phosphor green (terminal) */
+    /* Primary brand accent - phosphor green (terminal) */
     --accent-blue: #3fb950;
     --accent-blue-hover: #2ea043;
     --accent-blue-deep: #238636;
@@ -37,7 +37,7 @@
     --accent-amber-soft: rgba(227, 179, 65, 0.15);
     --accent-violet: #e3b341;
 
-    /* Spacing rhythm — 8px-based scale */
+    /* Spacing rhythm - 8px-based scale */
     --space-1: 0.5rem;
     --space-2: 1rem;
     --space-3: 1.5rem;
@@ -56,7 +56,7 @@
     --term-line: rgba(255,255,255,0.10);
     --glass-border-strong: rgba(63,185,80,0.45);
     --glass-highlight: rgba(255,255,255,0.04);
-    /* Elevation scale — 3 levels (chips / cards / focal) */
+    /* Elevation scale - 3 levels (chips / cards / focal) */
     --elev-1: 0 2px 8px rgba(0,0,0,0.30);
     --elev-2: 0 6px 16px rgba(0,0,0,0.35);
     --elev-3: 0 14px 34px rgba(0,0,0,0.50);
@@ -89,7 +89,7 @@
     --term-line: rgba(27,31,35,0.14);
     --glass-border-strong: rgba(26,127,55,0.5);
     --glass-highlight: rgba(255,255,255,0.6);
-    /* Elevation scale — softer for paper mode */
+    /* Elevation scale - softer for paper mode */
     --elev-1: 0 2px 5px rgba(27,31,35,0.10);
     --elev-2: 0 4px 12px rgba(27,31,35,0.08);
     --elev-3: 0 10px 24px rgba(27,31,35,0.12);
@@ -141,14 +141,14 @@ body {
     position: relative;
 }
 
-/* Terminal aesthetic — monospace display type for headings */
+/* Terminal aesthetic - monospace display type for headings */
 h1, h2, .section-title, .logo, .footer-brand h2 {
     font-family: var(--font-mono);
     letter-spacing: -0.01em;
 }
 
 /* ============================================================
-   Terminal theme — structural elements
+   Terminal theme - structural elements
    ============================================================ */
 
 /* Fake window title bars on cards (label from data-term attr) */
@@ -227,7 +227,7 @@ h1, h2, .section-title, .logo, .footer-brand h2 {
     margin-left: 0.15rem;
 }
 
-/* Terminal backdrop — flat black; the CRT scanline layer was removed.
+/* Terminal backdrop - flat black; the CRT scanline layer was removed.
    (The soft vignette on body::after below still carries the depth.) */
 
 /* Soft vignette */
@@ -241,8 +241,8 @@ body::after {
         radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(0,0,0,0.4));
 }
 
-/* Light theme keeps the same flat backdrop — no scanline layer. */
-/* Light vignette — paper ink at elevation-scale alpha. The dark theme's
+/* Light theme keeps the same flat backdrop - no scanline layer. */
+/* Light vignette - paper ink at elevation-scale alpha. The dark theme's
    pure black at 0.4 reads as a gray smudge on the cream background. */
 [data-theme="light"] body::after {
     background:
@@ -354,7 +354,7 @@ body::after {
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Frosted glass — on a ::before pseudo at ALL widths, so the mobile panel's own
+/* Frosted glass - on a ::before pseudo at ALL widths, so the mobile panel's own
    backdrop-filter is not cancelled by a nested backdrop root. */
 .navbar::before {
     content: '';
@@ -622,7 +622,7 @@ body::after {
     max-width: 820px;
 }
 
-/* Hero portrait — glass frame with gradient glow */
+/* Hero portrait - glass frame with gradient glow */
 .hero-visual {
     flex: 0 0 320px;
     position: relative;
@@ -1175,7 +1175,7 @@ body::after {
 }
 
 /* ---------- Identity & Fieldwork Showcase ---------- */
-/* ---------- Showcase carousel — centred head, borderless glass rail ---------- */
+/* ---------- Showcase carousel - centred head, borderless glass rail ---------- */
 .showcase-head {
     text-align: center;
 }
@@ -1254,7 +1254,7 @@ body::after {
     scroll-snap-align: start;
 }
 
-/* Borderless glass card — definition comes from elevation + a top rim light,
+/* Borderless glass card - definition comes from elevation + a top rim light,
    never from a border (matches the site's borderless surface system). */
 .showcase-item {
     position: relative;
@@ -1295,7 +1295,7 @@ body::after {
     display: block;
     transition: transform 0.5s ease;
 }
-/* Hover effects only where a real pointing device exists — prevents
+/* Hover effects only where a real pointing device exists - prevents
    sticky hover (permanently zoomed cards) on touch devices */
 @media (hover: hover) and (pointer: fine) {
     .showcase-item:hover {
@@ -1535,7 +1535,7 @@ body.lightbox-open {
 /* Project Stats */
 .stats-grid {
     display: grid;
-    /* Every case study has exactly 4 metric cards — explicit equal columns keep the
+    /* Every case study has exactly 4 metric cards - explicit equal columns keep the
        rows balanced (auto-fit left an orphaned card / a trailing empty track). */
     grid-template-columns: repeat(4, 1fr);
     gap: 1.25rem;
@@ -1840,7 +1840,7 @@ body.lightbox-open {
     margin-bottom: 0.75rem;
 }
 
-/* CV page — framed PDF preview */
+/* CV page - framed PDF preview */
 .cv-frame {
     margin-top: 2rem;
     background: var(--glass-bg);
@@ -2250,7 +2250,7 @@ body.lightbox-open {
     font-size: 48px;
 }
 
-/* Networking section — reserved slot for a network topology diagram.
+/* Networking section - reserved slot for a network topology diagram.
    Reuses the existing placeholder surfaces so the design language is unchanged. */
 .network-diagram {
     margin: var(--space-4) 0 0;
@@ -2573,7 +2573,7 @@ body.lightbox-open {
 }
 
 /* ============================================================
-   REDESIGN v2 — Editorial glassmorphism + motion
+   REDESIGN v2 - Editorial glassmorphism + motion
    ============================================================ */
 
 :root {
@@ -3202,7 +3202,7 @@ section[id] { scroll-margin-top: 90px; }
     display: flex; align-items: center; justify-content: center;
     background: rgba(0,0,0,0.65);
     /* visibility:hidden (not just opacity) keeps the closed overlay's focusable
-       children out of the tab order / a11y tree — required by Lighthouse's
+       children out of the tab order / a11y tree - required by Lighthouse's
        aria-hidden-focus audit since the overlay carries aria-hidden="true". */
     opacity: 0; pointer-events: none; visibility: hidden; transition: opacity 0.18s ease;
 }
@@ -3246,7 +3246,7 @@ section[id] { scroll-margin-top: 90px; }
 
 /* ---------- Phosphor Terminal pass (redesign-lab) ---------- */
 
-/* 1. Phosphor grain — ultra-faint CRT noise over the whole viewport.
+/* 1. Phosphor grain - ultra-faint CRT noise over the whole viewport.
    Lives on html::before because body::after already carries the vignette
    (see ~line 233). Keep it intact.
    Noise is desaturated via feColorMatrix so the grain only adds luminance,
@@ -3262,12 +3262,12 @@ html::before {
     background-repeat: repeat;
     opacity: 0.035;
 }
-/* Paper mode stays clean — no grain. (html can't be its own descendant,
+/* Paper mode stays clean - no grain. (html can't be its own descendant,
    so this must be a compound selector on html itself.) */
 html[data-theme="light"]::before { display: none; }
 @media print { html::before { display: none; } }
 
-/* 2. Terminal tag chips — mono labels framed as [tech] brackets.
+/* 2. Terminal tag chips - mono labels framed as [tech] brackets.
    Borderless system stays: definition comes from --chip-shadow, and hover
    lifts the chip one elevation instead of drawing an outline. */
 .tag::before,
@@ -3284,11 +3284,11 @@ html[data-theme="light"]::before { display: none; }
     box-shadow: var(--elev-2);
 }
 
-/* 3. Hero command line — no width reservation needed.
+/* 3. Hero command line - no width reservation needed.
    .system-label is already display:block inside .hero-content, which is a
    flex item (flex: 1 1 520px) of fixed width, so the typewriter in
    js/script.js (section 14) cannot shift any surrounding layout. Verified
    by measurement: hero left/width and document height are identical with
    the prompt empty and fully typed. Do NOT re-add a min-width or change
-   display here — it would only narrow the label without preventing shift. */
+   display here - it would only narrow the label without preventing shift. */
 

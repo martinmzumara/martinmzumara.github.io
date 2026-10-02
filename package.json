@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "Personal portfolio of Martin Mzumara — Software Developer & IT Technician",
+  "description": "Personal portfolio of Martin Mzumara - Software Developer & IT Technician",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/check.mjs",

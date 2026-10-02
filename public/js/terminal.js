@@ -8,7 +8,7 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Contact address assembled at runtime so it never appears as plain text in
-    // the served source (the HTML side is entity-encoded — see utils/obfuscate.ts).
+    // the served source (the HTML side is entity-encoded - see utils/obfuscate.ts).
     const CONTACT_EMAIL = ['martin', 'martinmzumara.com'].join('@');
 
     /* ---- Build the overlay ---- */
@@ -77,7 +77,7 @@
             '  clear           clear the screen',
             '  exit            close terminal'
         ],
-        whoami: () => ['martin mzumara — software developer & it technician, lilongwe malawi'],
+        whoami: () => ['martin mzumara - software developer & it technician, lilongwe malawi'],
         ls: () => ['leaksafe/  encplus/  manguzi/  lah-cctv/  blog/'],
         open: (arg) => {
             const routes = {
@@ -86,7 +86,7 @@
             };
             const r = routes[(arg || '').toLowerCase()];
             if (r) { print('opening ' + arg + ' …', 'term-egg-ok'); setTimeout(() => { location.href = r; }, 500); return null; }
-            return ['open: unknown target "' + arg + '" — try: ' + Object.keys(routes).join(', ')];
+            return ['open: unknown target "' + arg + '" - try: ' + Object.keys(routes).join(', ')];
         },
         contact: () => [
             'email:  ' + CONTACT_EMAIL,
@@ -121,7 +121,7 @@
         histIdx = history.length;
         const parts = trimmed.split(/\s+/);
         const cmd = CMDS[parts[0].toLowerCase()];
-        if (!cmd) { print('bash: ' + parts[0] + ': command not found — try "help"', 'term-egg-err'); return; }
+        if (!cmd) { print('bash: ' + parts[0] + ': command not found - try "help"', 'term-egg-err'); return; }
         const result = cmd(parts.slice(1).join(' '));
         if (Array.isArray(result)) result.forEach(l => print(l));
     }
@@ -132,7 +132,7 @@
         overlay.setAttribute('aria-hidden', 'false');
         overlay.inert = false;
         if (!out.childElementCount) {
-            typeLine('// martin@portfolio — v1.0. type "help" for commands.', 'term-egg-ok');
+            typeLine('// martin@portfolio - v1.0. type "help" for commands.', 'term-egg-ok');
         }
         setTimeout(() => input.focus(), reduceMotion ? 0 : 120);
     }

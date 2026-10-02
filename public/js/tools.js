@@ -1,7 +1,7 @@
 // ============================================================
 // Tools & Software articles modal/filter wiring.
 // The homepage cards are PRE-RENDERED at build time from
-// src/data/tools.ts — this file only:
+// src/data/tools.ts - this file only:
 //  - reads the embedded JSON (#site-tools-data) for modal content
 //  - wires the reading modal open/close/Escape
 //  - (articles page only) wires the Laptop/Phone/All filter and
@@ -30,8 +30,8 @@
             return;
         }
         if (!tools || !tools.length) {
-            console.error('[tools] tools data is missing or empty — check #site-tools-data (View Source).');
-            toolsGrid.innerHTML = '<p style="color:tomato;font-family:monospace">[tools] Data failed to load — open DevTools Console for details.</p>';
+            console.error('[tools] tools data is missing or empty - check #site-tools-data (View Source).');
+            toolsGrid.innerHTML = '<p style="color:tomato;font-family:monospace">[tools] Data failed to load - open DevTools Console for details.</p>';
             return;
         }
         var toolsModal = document.getElementById('tools-modal');
@@ -62,11 +62,11 @@
             }).join('');
         };
 
-        // Homepage cards are pre-rendered at build time — don't re-render them
+        // Homepage cards are pre-rendered at build time - don't re-render them
         // (only the retired /articles/ archive, if it ever returns, needs it).
         var preRendered = !hasFilters && toolsGrid.querySelector('.tool-card');
         if (!preRendered) renderTools(hasFilters ? 'all' : 'featured');
-        // Filter buttons (Laptop / Phone / All) — articles page only
+        // Filter buttons (Laptop / Phone / All) - articles page only
         if (hasFilters) {
             document.querySelectorAll('.filter-btn').forEach(function (btn) {
                 btn.addEventListener('click', function () {
@@ -127,7 +127,7 @@
         });
     };
 
-    // Run as soon as the DOM is ready — even if other scripts errored.
+    // Run as soon as the DOM is ready - even if other scripts errored.
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
     } else {
