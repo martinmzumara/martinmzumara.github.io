@@ -51,7 +51,7 @@ const {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Inline theme init: applies saved/system theme before first paint to avoid flash -->
-    <script is:inline data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||"dark")})();</script>
+    <script is:inline data-theme-inline>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t||"light")})();</script>
     <!-- Page-specific early head content (preloader failsafe, noscript styles) -->
     <slot name="head-start" />
     <title>{title}</title>

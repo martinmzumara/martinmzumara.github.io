@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Follow system theme changes while the user has no saved preference.
-    // Dark-first: with no saved choice, the canonical phosphor experience wins.
+    // Light-first (Resend style): with no saved choice, the clean white base wins.
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleSystemChange = () => {
         let saved = null;
         try { saved = localStorage.getItem("theme"); } catch (e) {}
         if (!saved) {
-            document.documentElement.setAttribute("data-theme", "dark");
+            document.documentElement.setAttribute("data-theme", "light");
             updateThemeToggleLabel();
         }
     };
