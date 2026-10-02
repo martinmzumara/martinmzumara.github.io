@@ -9,7 +9,7 @@
 
     // Contact address assembled at runtime so it never appears as plain text in
     // the served source (the HTML side is entity-encoded — see utils/obfuscate.ts).
-    const CONTACT_EMAIL = ['martinmzumara08', 'gmail.com'].join('@');
+    const CONTACT_EMAIL = ['martin', 'martinmzumara.com'].join('@');
 
     /* ---- Build the overlay ---- */
     const overlay = document.createElement('div');

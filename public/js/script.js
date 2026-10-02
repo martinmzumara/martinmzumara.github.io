@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (copyEmailBtn) {
         // Assembled at runtime so the address never appears as plain text in
         // the served source (see src/utils/obfuscate.ts for the HTML side).
-        const EMAIL = ["martinmzumara08", "gmail.com"].join("@");
+        const EMAIL = ["martin", "martinmzumara.com"].join("@");
         const setCopied = (ok) => {
             copyEmailBtn.innerHTML = ok
                 ? '<i class="ti ti-check"></i> COPIED!'
