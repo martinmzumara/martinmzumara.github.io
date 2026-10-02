@@ -294,22 +294,7 @@ body::after {
     max-width: var(--measure);
 }
 
-.section-title.underline {
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.section-title.underline::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 45px;
-    height: 3px;
-    background: var(--accent-blue);
-    border-radius: 3px;
-}
-
+/* Section padding */
 .section-padding {
     padding-top: var(--space-6);
     padding-bottom: var(--space-6);
@@ -1193,10 +1178,6 @@ body::after {
 .chapter .showcase-head .system-label::after {
     display: none;
 }
-.showcase-head .section-title.underline::after {
-    left: 50%;
-    transform: translateX(-50%);
-}
 .showcase-head .section-lead {
     margin: 0 auto;
 }
@@ -1824,10 +1805,15 @@ body.lightbox-open {
     position: relative;
 }
 
-.main-title {
-    font-size: 2.4rem;
-    line-height: 1.2;
-    margin: 0.5rem 0 1rem;
+.main-title,
+.page-title {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    max-width: 20ch;
+    margin: 0.5rem 0 1.25rem;
 }
 
 /* Lead paragraph under a page title. NOTE: this rule was accidentally dropped when the
@@ -1835,9 +1821,11 @@ body.lightbox-open {
 .lead-text {
     font-family: var(--font-primary);
     font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: 500;
+    color: var(--text-secondary);
     margin-bottom: 0.75rem;
+    max-width: var(--measure);
+    line-height: 1.6;
 }
 
 /* CV page - framed PDF preview */
@@ -1954,7 +1942,7 @@ body.lightbox-open {
     height: auto;
     border-radius: 10px;
     margin-bottom: 1rem;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    box-shadow: var(--elev-2);
 }
 
 .gallery-placeholder {
@@ -2135,7 +2123,7 @@ body.lightbox-open {
 }
 
 .social-link:hover {
-    color: #fff;
+    color: var(--accent-blue);
     border-color: var(--accent-blue);
     background: var(--accent-blue-glow);
     transform: translateY(-3px);
@@ -3043,7 +3031,7 @@ a.project-link-btn:hover .ci {
 /* ---------- Contact Section ---------- */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-top: 2.5rem;
 }
@@ -3597,7 +3585,7 @@ section[id] { scroll-margin-top: 90px; }
     .grid-cards { grid-template-columns: repeat(2, 1fr); }
     .projects-grid { grid-template-columns: repeat(2, 1fr); }
     .tools-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: repeat(3, 1fr); }
     .specs-grid { grid-template-columns: repeat(3, 1fr); }
     .specs-grid--five { grid-template-columns: repeat(3, 1fr); }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
