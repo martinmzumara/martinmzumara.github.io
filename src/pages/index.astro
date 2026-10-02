@@ -209,123 +209,54 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
             <span class="system-label">Featured</span>
             <h2 class="section-title underline">Selected Work</h2>
             
-            <div class="projects-grid">
-                <!-- LeakSAFE Project Card -->
-                <div class="project-card">
-                    <a href="/leaksafe/" class="project-thumb-link" aria-label="Read the LeakSAFE case study">
-                        <div class="project-thumb">
-                            <picture>
-                                <source type="image/webp" srcset="/assets/images/optimized/leaksafe-wireframes.webp">
-                                <img src="/assets/images/optimized/leaksafe-wireframes.jpg" alt="LeakSAFE Gas Detection System Dashboard" loading="lazy" width="600" height="400">
-                            </picture>
-                            <div class="project-badge">CASE STUDY</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <h3><a href="/leaksafe/">LeakSAFE - Smart Gas Leakage Detection</a></h3>
-                        <p>An end-to-end hazardous gas detection system built with Flutter and ESP32 hardware for real-time telemetry, mapping, and instant safety alerts.</p>
-                        <div class="project-meta">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Dart</span>
-                            <span class="tag">ESP32</span>
-                            <span class="tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/leaksafe/" class="project-link-btn">
-                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
-                            </a>
-                            <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                                <i class="ti ti-brand-github"></i> SOURCE
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="work-index">
+                <a href="/leaksafe/" class="work-row" data-preview="/assets/images/optimized/leaksafe-wireframes.jpg">
+                    <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/leaksafe-wireframes.webp" alt="" loading="lazy" width="600" height="400"></span>
+                    <span class="work-row-num">01</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">LeakSAFE</span>
+                        <span class="work-row-desc">Smart Gas Leakage Detection &middot; Flutter, Dart, ESP32, Firebase</span>
+                    </span>
+                    <span class="work-row-meta">Case Study</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
 
-                <!-- EncPlus Project Card -->
-                <div class="project-card">
-                    <a href="/encplus/" class="project-thumb-link" aria-label="Read the EncPlus project details">
-                        <div class="project-thumb placeholder-thumb">
-                            <i class="ti ti-lock placeholder-icon"></i>
-                            <div class="project-badge muted">IN DEVELOPMENT</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <h3><a href="/encplus/">EncPlus - AES File Encryption</a></h3>
-                        <p>A cross-platform mobile application for encrypting and decrypting files using AES-256 encryption, with Firebase authentication and secure file management.</p>
-                        <p class="project-note"><i class="ti ti-info-circle"></i> Currently in development.</p>
-                        <div class="project-meta">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Dart</span>
-                            <span class="tag">AES</span>
-                            <span class="tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/encplus/" class="project-link-btn">
-                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
-                            </a>
-                            <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                                <i class="ti ti-brand-github"></i> SOURCE
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <a href="/encplus/" class="work-row">
+                    <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-lock placeholder-icon"></i></span>
+                    <span class="work-row-num">02</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">EncPlus</span>
+                        <span class="work-row-desc">AES-256 file encryption app &middot; Flutter, Dart, Firebase</span>
+                    </span>
+                    <span class="work-row-meta">In Development</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
 
-                <!-- Manguzi Executive Lodge Project Card -->
-                <div class="project-card">
-                    <a href="/manguzi/" class="project-thumb-link" aria-label="Read the Manguzi Executive Lodge project details">
-                        <div class="project-thumb placeholder-thumb">
-                            <i class="ti ti-building-skyscraper placeholder-icon"></i>
-                            <div class="project-badge">CLIENT PROJECT</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <h3><a href="/manguzi/">Manguzi Executive Lodge</a></h3>
-                        <p>A premium hospitality website for an executive lodge in Karonga, Malawi - featuring accommodation, restaurant, and conference services with online booking.</p>
-                        <div class="project-meta">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/manguzi/" class="project-link-btn">
-                                VIEW DETAILS <i class="ti ti-arrow-right"></i>
-                            </a>
-                            <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                                <i class="ti ti-external-link"></i> LIVE SITE
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <a href="/manguzi/" class="work-row">
+                    <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-building-skyscraper placeholder-icon"></i></span>
+                    <span class="work-row-num">03</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">Manguzi Executive Lodge</span>
+                        <span class="work-row-desc">Hospitality website with online booking &middot; HTML, CSS, JS, Firebase</span>
+                    </span>
+                    <span class="work-row-meta">Client Project</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
 
-                <!-- LAH CCTV Project Card -->
-                <div class="project-card">
-                    <a href="/lah-cctv/" class="project-thumb-link" aria-label="Read the LAH CCTV case study">
-                        <div class="project-thumb">
-                            <picture>
-                                <source type="image/webp" srcset="/assets/images/optimized/lah-indoor-camera-1-400w.webp">
-                                <img src="/assets/images/lah-indoor-camera-1.jpg" alt="Indoor HD dome camera installed at Lilongwe Adventist Hospital" loading="lazy" width="600" height="400">
-                            </picture>
-                            <div class="project-badge">CLIENT PROJECT</div>
-                        </div>
-                    </a>
-                    <div class="project-body">
-                        <h3><a href="/lah-cctv/">LAH CCTV - Hospital Surveillance System</a></h3>
-                        <p>A 10+ camera HD surveillance installation for Lilongwe Adventist Hospital - multi-channel NVR, high-capacity storage, UPS backup, and secure remote viewing.</p>
-                        <div class="project-meta">
-                            <span class="tag">CCTV</span>
-                            <span class="tag">NVR</span>
-                            <span class="tag">Remote Viewing</span>
-                            <span class="tag">Infrastructure</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/lah-cctv/" class="project-link-btn">
-                                VIEW CASE STUDY <i class="ti ti-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <a href="/lah-cctv/" class="work-row" data-preview="/assets/images/lah-indoor-camera-1.jpg">
+                    <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/lah-indoor-camera-1-400w.webp" alt="" loading="lazy" width="600" height="400"></span>
+                    <span class="work-row-num">04</span>
+                    <span class="work-row-main">
+                        <span class="work-row-title">LAH CCTV</span>
+                        <span class="work-row-desc">Hospital surveillance system, 10+ HD cameras &middot; CCTV, NVR, Remote Viewing</span>
+                    </span>
+                    <span class="work-row-meta">Client Project</span>
+                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                </a>
             </div>
+
+            <!-- Floating preview for the work index (desktop hover) -->
+            <div class="work-preview" id="work-preview" aria-hidden="true"><img alt="" decoding="async"></div>
         </section>
 
         <!-- Experience & Education Section -->

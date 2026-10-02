@@ -590,4 +590,44 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // =============== 14. Work index cursor-following preview ===============
+    const workPreview = document.getElementById('work-preview');
+    if (workPreview && finePointer) {
+        const previewImg = workPreview.querySelector('img');
+        const rows = document.querySelectorAll('.work-row[data-preview]');
+        let rafId = null;
+        let targetX = 0, targetY = 0, curX = 0, curY = 0;
+
+        const tick = () => {
+            curX += (targetX - curX) * 0.18;
+            curY += (targetY - curY) * 0.18;
+            workPreview.style.left = curX + 'px';
+            workPreview.style.top = curY + 'px';
+            if (Math.abs(targetX - curX) > 0.5 || Math.abs(targetY - curY) > 0.5) {
+                rafId = requestAnimationFrame(tick);
+            } else {
+                rafId = null;
+            }
+        };
+
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                const src = row.getAttribute('data-preview');
+                if (src && previewImg.getAttribute('src') !== src) previewImg.setAttribute('src', src);
+                workPreview.classList.add('visible');
+                if (!rafId) rafId = requestAnimationFrame(tick);
+            });
+            row.addEventListener('mousemove', (e) => {
+                // keep the card near the cursor, offset up-right, inside the viewport
+                const w = 340, h = 226, pad = 24;
+                targetX = Math.min(e.clientX + 28, window.innerWidth - w - pad);
+                targetY = Math.min(Math.max(e.clientY - h / 2, pad), window.innerHeight - h - pad);
+                if (!rafId) rafId = requestAnimationFrame(tick);
+            });
+            row.addEventListener('mouseleave', () => {
+                workPreview.classList.remove('visible');
+            });
+        });
+    }
+
 });
