@@ -489,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =============== 10. Scroll-reveal system ===============
-    const REVEAL_SEL = '.system-label, .section-title, .section-lead, .section-head, .card, .project-card, .timeline-item, .cred-card, .showcase-item';
+    const REVEAL_SEL = '.system-label, .section-title, .section-lead, .section-head, .work-row, .skills-col, .card, .timeline-item, .cred-strip-item, .showcase-item, .tools-grid, .contact-grid';
     const revealEls = document.querySelectorAll(REVEAL_SEL);
     if (revealEls.length && 'IntersectionObserver' in window && !reduceMotion) {
         revealEls.forEach(el => el.classList.add('reveal-el'));
