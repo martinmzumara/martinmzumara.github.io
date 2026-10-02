@@ -46,12 +46,10 @@ const FIELD_PHOTOS = [
 const IMG_SIZES = '(min-width: 620px) 268px, (max-width: 333px) 72vw, 240px';
 
 const navLinks = [
-  { href: '#expertise', label: 'EXPERTISE' },
-  { href: '#projects', label: 'PROJECTS' },
-  { href: '#experience', label: 'EXPERIENCE' },
-  { href: '#tools', label: 'TOOLS' },
-  { href: abs('/blog/'), label: 'BLOG', external: true },
-  { href: '#contact', label: 'CONTACT' },
+  { href: '#projects', label: 'Work' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#showcase', label: 'Field' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 const personLd = {
@@ -113,8 +111,9 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                     <span class="status-badge"><span class="status-dot"></span> Available for work</span>
                     <span class="status-time"><i class="ti ti-clock"></i> <span id="local-time">--:--</span> · GMT+2</span>
                 </div>
-                <h1><span class="sr-only">Martin Mzumara – </span>Software Developer<br><span>&amp; IT Technician</span></h1>
-                <p>Providing goal-oriented technical solutions, blending software engineering with robust network infrastructure.</p>
+                <span class="system-label">Software · Infrastructure · Networks</span>
+                <h1><span class="sr-only">Martin Mzumara – </span>Building software &amp; the networks it runs on<span class="accent-dot">.</span></h1>
+                <p>I'm Martin, a software developer and IT technician in Lilongwe, Malawi. I ship cross-platform apps and design, install, and maintain the network infrastructure behind them.</p>
                 <div class="hero-stats" aria-label="Highlights">
                     <div class="stat"><span class="stat-value" data-count="5">5</span><span class="stat-label">Years in Tech</span></div>
                     <div class="stat"><span class="stat-value" data-count="4">4</span><span class="stat-label">Projects Delivered</span></div>

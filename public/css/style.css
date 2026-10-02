@@ -391,11 +391,10 @@ body::after {
 .nav-link {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.4rem 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    padding: 0.4rem 0.25rem;
     position: relative;
     transition: color 0.2s ease;
 }
@@ -640,9 +639,9 @@ body::after {
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
     backdrop-filter: blur(var(--glass-blur)) saturate(160%);
     border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
     border-radius: 16px;
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-    transform: translateY(-1rem) rotate(1.2deg);
+    overflow: hidden;
 }
 
 .hero-img {
@@ -675,7 +674,6 @@ body::after {
     color: var(--text-faint);
     width: fit-content;
     max-width: 100%;
-    transform: translateY(0.5rem) rotate(-0.5deg);
     margin-left: -0.5rem;
 }
 .hero-visual-caption i {
@@ -705,10 +703,18 @@ body::after {
     color: transparent;
 }
 
+.hero-content h1 span.accent-dot {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    color: var(--accent-blue);
+}
+
 .hero-content p {
     color: var(--text-secondary);
     font-size: 1.15rem;
-    max-width: 650px;
+    max-width: 52ch;
+    line-height: 1.65;
 }
 
 .hero-footer {
