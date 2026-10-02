@@ -448,9 +448,6 @@ document.addEventListener("DOMContentLoaded", () => {
         finishPreload();
     }
 
-    // NOTE: the hero command-line typewriter lives in section 14 below - it
-    // reads its text from the HTML and types after the preloader lifts.
-
     // =============== 7. Scroll progress bar ===============
     const progressBar = document.getElementById('scroll-progress');
     if (progressBar) {
@@ -591,27 +588,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
         });
-    }
-
-    // =============== 14. Hero command-line typewriter ===============
-    const heroTerm = document.getElementById('hero-term');
-    if (heroTerm) {
-        const fullText = heroTerm.textContent;
-        if (reduceMotion) {
-            // Static text, caret still blinks via CSS
-        } else {
-            heroTerm.textContent = '';
-            heroTerm.setAttribute('aria-label', fullText);
-            let ti = 0;
-            const typeStep = () => {
-                if (ti <= fullText.length) {
-                    heroTerm.textContent = fullText.slice(0, ti);
-                    ti++;
-                    setTimeout(typeStep, 55 + Math.random() * 45);
-                }
-            };
-            setTimeout(typeStep, 700);
-        }
     }
 
 });

@@ -23,7 +23,6 @@ interface Props {
   preloader?: boolean;
   /** External scripts (root-relative or absolute), loaded with defer, in order */
   scripts: string[];
-  showTermHint?: boolean;
 }
 
 const {
@@ -42,7 +41,6 @@ const {
   preloadHero = false,
   preloader = false,
   scripts,
-  showTermHint = true,
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -123,7 +121,7 @@ const {
     <!-- Page content: navbar, main, modals -->
     <slot />
 
-    <Footer showTermHint={showTermHint} />
+    <Footer />
 
     {scripts.map((src) => <script is:inline src={src} defer></script>)}
 </body>

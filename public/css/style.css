@@ -169,70 +169,19 @@ body {
 }
 
 /* Display type - Inter with tight tracking (Resend/ABC Favorit stand-in).
-   Monospace stays reserved for terminal surfaces: the logo prompt, system
-   labels, data-term bars, code and the easter-egg shell. */
+   Monospace stays reserved for code blocks and the easter-egg shell. */
 h1, h2, .section-title, .footer-brand h2 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
 }
 
 /* ============================================================
-   Terminal theme - structural elements
+   Structural elements
    ============================================================ */
 
-/* Fake window title bars on cards (label from data-term attr) */
-.card::before,
-.project-card::before,
-.cred-card::before,
-.contact-card::before,
-.stat-card::before,
-.spec-card::before,
-.gallery-card::before,
-.cv-frame::before {
-    content: '● ● ●   ' attr(data-term);
-    display: block;
-    /* No-op in block layout; stretches the bar to full width inside the flex
-       column that .gallery-card uses for its thumbnail + caption. */
-    align-self: stretch;
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
-    color: var(--text-faint);
-    padding-bottom: 0.7rem;
-    margin-bottom: 1.1rem;
-    border-bottom: 1px solid var(--term-line);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+/* Section dividers - plain hairline (defined below, with .section-title) */
 
-/* .stat-card centers its text; keep its title bar left-aligned like the rest */
-.stat-card::before { text-align: left; }
-
-/* Project cards are full-bleed: bar spans the top edge */
-.project-card::before {
-    margin: 0;
-    padding: 0.75rem 1.2rem;
-}
-
-/* Dashed terminal dividers */
-.section-divider {
-    background: repeating-linear-gradient(
-        90deg,
-        var(--term-line) 0 10px,
-        transparent 10px 18px
-    );
-}
-
-/* Nav links as paths; logo prompt already in markup */
-.nav-link::before {
-    content: './';
-    color: var(--accent-blue);
-    font-family: var(--font-mono);
-    font-size: 0.85em;
-    margin-right: 0.15rem;
-}
-
+/* Nav links */
 /* Flat terminal buttons - black pill primary (Resend), green on hover */
 .btn-primary,
 .project-cta-box .btn-primary {
@@ -244,20 +193,6 @@ h1, h2, .section-title, .footer-brand h2 {
     background: var(--btn-hover-bg);
     box-shadow: none;
 }
-
-/* Typewriter caret on the hero command line */
-@keyframes cursor-blink {
-    to { visibility: hidden; }
-}
-#hero-term::after {
-    content: '▌';
-    color: var(--accent-blue);
-    animation: cursor-blink 1s steps(2, start) infinite;
-    margin-left: 0.15rem;
-}
-
-/* Terminal backdrop - flat black; the CRT scanline layer was removed.
-   (The soft vignette on body::after below still carries the depth.) */
 
 /* Soft vignette - faint ink on white (light default) */
 body::after {
@@ -321,13 +256,13 @@ body::after {
     padding: 0 1.5rem;
 }
 
-/* System Monospace Labels */
+/* Section eyebrow labels (Resend-style small caps, no terminal chrome) */
 .system-label {
-    font-family: var(--font-mono);
-    color: var(--system-label-color);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    font-weight: 700;
+    font-family: var(--font-primary);
+    color: var(--text-faint);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    font-weight: 600;
     text-transform: uppercase;
     display: block;
     margin-bottom: 0.5rem;
@@ -411,12 +346,12 @@ body::after {
 }
 
 .logo {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.05rem;
     color: var(--text-primary);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.01em;
     flex-shrink: 0;
 }
 
@@ -516,14 +451,8 @@ body::after {
     border: 1px solid var(--border-color);
     border-radius: 4px;
     cursor: pointer;
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.footer-theme-toggle::before {
-    content: '$';
-    color: var(--accent-blue);
-    font-weight: 700;
 }
 
 .footer-theme-toggle:hover {
@@ -539,7 +468,7 @@ body::after {
 }
 
 .theme-toggle-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -722,7 +651,7 @@ body::after {
     border: 1px solid var(--glass-border);
     border-radius: 999px;
     box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.72rem;
     letter-spacing: 0.06em;
     color: var(--text-faint);
@@ -856,9 +785,8 @@ body::after {
     box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
 }
 
-/* Colorful hover sheen removed (Resend pass). The empty content keeps the
-   data-term title-bar rule above from applying to .card - preserves the
-   pre-existing behaviour where .card::before is a sheen, not a title bar. */
+/* Colorful hover sheen removed (Resend pass). The empty content keeps this
+   pseudo-element inert (no title-bar rule applies to .card any more). */
 .card:hover::before {
     opacity: 0;
 }
@@ -944,7 +872,7 @@ body::after {
     background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
     color: #fff;
     font-size: 0.7rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-weight: 700;
     padding: 0.3rem 0.7rem;
     border-radius: 6px;
@@ -1388,7 +1316,7 @@ body::after {
     gap: 0.4rem;
     padding: 0.45rem 0.6rem;
     border-radius: 11px;
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.72rem;
     letter-spacing: 0.01em;
     color: #fff;
@@ -1622,7 +1550,7 @@ body.lightbox-open {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     margin-bottom: 0.25rem;
 }
 
@@ -2078,7 +2006,7 @@ body.lightbox-open {
 }
 
 .footer-brand h2 {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
@@ -2107,7 +2035,7 @@ body.lightbox-open {
 }
 
 .footer-connect h3 {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.85rem;
     color: var(--accent-blue);
     margin-bottom: 0.75rem;
@@ -2662,7 +2590,7 @@ main { counter-reset: chapter; }
 
 /* Condensed value-proposition line under the contact lead */
 .contact-principles {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.82rem;
     letter-spacing: 0.02em;
     color: var(--text-secondary);
@@ -2853,10 +2781,16 @@ body.loaded .hero-visual {
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.35s ease;
-    background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(77, 155, 255, 0.16), transparent 60%);
-    mix-blend-mode: screen;
+    background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.10), transparent 60%);
 }
 .card:hover::after, .project-card:hover::after, .tool-card:hover::after { opacity: 1; }
+
+[data-theme="dark"] .card::after,
+[data-theme="dark"] .project-card::after,
+[data-theme="dark"] .tool-card::after {
+    background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(63, 185, 80, 0.16), transparent 60%);
+    mix-blend-mode: screen;
+}
 
 /* ---------- Tools section: filters + grid + cards ---------- */
 .tools-filter { display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; }
@@ -2915,8 +2849,8 @@ body.loaded .hero-visual {
 .tool-icon { width: 46px; height: 46px; flex-shrink: 0; border-radius: 13px; background: var(--glass-bg-strong); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: var(--accent-blue); font-size: 22px; box-shadow: inset 0 1px 0 var(--glass-highlight); }
 .tool-device { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.65rem; border-radius: 999px; border: 1px solid var(--glass-border); background: var(--glass-bg-soft); color: var(--text-faint); display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; }
 .tool-device i { width: 14px; height: 14px; }
-.tool-device.laptop { color: var(--accent-blue); border-color: rgba(77, 155, 255, 0.45); }
-.tool-device.phone { color: var(--accent-violet); border-color: rgba(167, 139, 250, 0.45); }
+.tool-device.laptop { color: var(--accent-blue); border-color: var(--glass-border-strong); }
+.tool-device.phone { color: var(--accent-violet); border-color: var(--glass-border-strong); }
 .tool-tag { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan); }
 .tool-card h3 { font-family: var(--font-display); font-size: 1.25rem; margin: 0.1rem 0 0; }
 .tool-summary { color: var(--text-secondary); font-size: 0.9rem; flex: 1; }
@@ -3275,63 +3209,76 @@ section[id] { scroll-margin-top: 90px; }
     .term-egg, .term-egg-window { transition: none; }
 }
 
-.term-hint { margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-mono); }
-.term-hint kbd { border: 1px solid var(--glass-border); border-radius: 4px; padding: 0 0.35em; font-family: inherit; }
+/* ---------- Chips pass ---------- */
 
-/* Borderless pass: ALL borders off (--glass-border + --chip-border transparent);
-   chips/badges keep definition via --chip-shadow instead of outlines. */
-.tag, .skill-tags span, .project-badge.muted, .filter-btn,
-.tool-icon, .tool-device, .tools-modal-close, .term-hint kbd {
-    border-color: var(--chip-border);
-    box-shadow: var(--chip-shadow);
-}
-
-/* ---------- Phosphor Terminal pass (redesign-lab) ---------- */
-
-/* 1. Phosphor grain - ultra-faint CRT noise over the whole viewport.
-   Lives on html::before because body::after already carries the vignette
-   (see ~line 233). Keep it intact.
-   Noise is desaturated via feColorMatrix so the grain only adds luminance,
-   never colour, and no blend mode is used (a plain composited layer is
-   far cheaper to scroll than mix-blend-mode: screen). */
-html::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 2147483647;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    opacity: 0.035;
-}
-/* Clean white default - no grain. Dark theme gets the CRT grain.
-   (html can't be its own descendant, so this must be a compound selector.) */
-html::before { display: none; }
-html[data-theme="dark"]::before { display: block; }
-@media print { html::before { display: none; } }
-
-/* 2. Terminal tag chips - mono labels framed as [tech] brackets.
-   Borderless system stays: definition comes from --chip-shadow, and hover
-   lifts the chip one elevation instead of drawing an outline. */
-.tag::before,
-.tag::after {
-    font-family: var(--font-mono);
-    color: var(--accent-blue);
-    opacity: 0.8;
-}
-.tag::before { content: "["; margin-right: 0.2rem; }
-.tag::after { content: "]"; margin-left: 0.2rem; }
+/* Chips/badges keep definition via --chip-shadow; hover lifts the chip
+   one elevation instead of drawing a heavier outline. */
 .tag:hover {
     color: var(--accent-blue);
     border-color: transparent;
     box-shadow: var(--elev-2);
 }
 
-/* 3. Hero command line - no width reservation needed.
-   .system-label is already display:block inside .hero-content, which is a
-   flex item (flex: 1 1 520px) of fixed width, so the typewriter in
-   js/script.js (section 14) cannot shift any surrounding layout. Verified
-   by measurement: hero left/width and document height are identical with
-   the prompt empty and fully typed. Do NOT re-add a min-width or change
-   display here - it would only narrow the label without preventing shift. */
 
+
+/* ============================================================
+   Even-row grids (design-lab) - explicit column counts so a row
+   never forms a partial line (no 3+1 / 2+2+1 orphans).
+   Counts: grid-cards 4 · projects 4 · contact 6 · tools 3 ·
+   specs 6 (--five: 5) · features 6 (--three: 3) · stack 4
+   (--three: 3) · challenge 3 (--four: 4) · gallery 4 (--three: 3)
+   ============================================================ */
+
+/* -- Desktop >= 1200px: full lines (4 / 3 per row) -- */
+@media (min-width: 1200px) {
+    .grid-cards { grid-template-columns: repeat(4, 1fr); }
+    .projects-grid { grid-template-columns: repeat(4, 1fr); }
+    .tools-grid { grid-template-columns: repeat(3, 1fr); }
+    .contact-grid { grid-template-columns: repeat(3, 1fr); }
+    .specs-grid { grid-template-columns: repeat(3, 1fr); }
+    .specs-grid--five { grid-template-columns: repeat(5, 1fr); }
+    .features-grid { grid-template-columns: repeat(3, 1fr); }
+    .features-grid--three { grid-template-columns: repeat(3, 1fr); }
+    .stack-categories { grid-template-columns: repeat(4, 1fr); }
+    .stack-categories--three { grid-template-columns: repeat(3, 1fr); }
+    .challenge-grid { grid-template-columns: repeat(3, 1fr); }
+    .challenge-grid--four { grid-template-columns: repeat(4, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+    .gallery-grid--three { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* -- Tablet 769-1199px: even splits only (2+2 / 3+3 / one line) -- */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .grid-cards { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .tools-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: repeat(2, 1fr); }
+    .specs-grid { grid-template-columns: repeat(3, 1fr); }
+    .specs-grid--five { grid-template-columns: repeat(3, 1fr); }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-grid--three { grid-template-columns: repeat(3, 1fr); }
+    .stack-categories { grid-template-columns: repeat(2, 1fr); }
+    .stack-categories--three { grid-template-columns: repeat(3, 1fr); }
+    .challenge-grid { grid-template-columns: 1fr; }
+    .challenge-grid--four { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid--three { grid-template-columns: repeat(3, 1fr); }
+}
+/* 1000-1199: give 3-item rows their full line back (must come after) */
+@media (min-width: 1000px) and (max-width: 1199px) {
+    .tools-grid { grid-template-columns: repeat(3, 1fr); }
+    .challenge-grid { grid-template-columns: repeat(3, 1fr); }
+    .challenge-grid--four { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* -- <=768px: force counts that can't orphan (odd item totals -> 1 col) -- */
+@media (max-width: 768px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .challenge-grid { grid-template-columns: 1fr; }
+    .challenge-grid--four { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .gallery-grid--three { grid-template-columns: 1fr; }
+    .specs-grid--five { grid-template-columns: 1fr; }
+    .features-grid--three { grid-template-columns: 1fr; }
+    .stack-categories--three { grid-template-columns: 1fr; }
+}
