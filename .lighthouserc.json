@@ -2,6 +2,7 @@
   "ci": {
     "collect": {
       "staticDistDir": "dist",
+      "settings": { "chromeFlags": "--disable-dev-shm-usage" },
       "url": [
         "http://localhost/",
         "http://localhost/leaksafe/",
