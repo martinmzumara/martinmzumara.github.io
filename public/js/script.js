@@ -448,7 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
         finishPreload();
     }
 
-    // NOTE: the hero command-line typewriter lives in section 14 below — it
+    // NOTE: the hero command-line typewriter lives in section 14 below - it
     // reads its text from the HTML and types after the preloader lifts.
 
     // =============== 7. Scroll progress bar ===============

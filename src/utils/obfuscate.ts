@@ -3,12 +3,12 @@
 //
 // `ent()` converts a string to numeric HTML character references. Browsers
 // decode entities in both text and attribute values, so the rendered result is
-// byte-identical for visitors — but the served HTML contains no plain e-mail
+// byte-identical for visitors - but the served HTML contains no plain e-mail
 // address or phone number, which defeats naive address-harvesting scrapers.
 //
 // NOTE: the built markup must be injected with `set:html` (Astro preserves it
 // verbatim). Writing entities directly in a template, or via a normal
-// expression, gets normalised/escaped back to plain text by the compiler —
+// expression, gets normalised/escaped back to plain text by the compiler -
 // verified with a build probe during the domain migration.
 // ============================================================================
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // ============================================================================
 // Post-build verification (zero dependencies):
-//   1. Internal link check  — every root-relative href/src/srcset/data-full in
+//   1. Internal link check  - every root-relative href/src/srcset/data-full in
 //      dist/ must resolve to a real file; #fragments must match an id on the
 //      target page (mirrors the lychee --offline --include-fragments CI rules).
-//   2. Stale-domain guard   — fails if the old github.io domain appears in any
+//   2. Stale-domain guard   - fails if the old github.io domain appears in any
 //      built text file (HTML/CSS/JS/TXT/XML/JSON), i.e. every absolute URL is
 //      driven by src/config/site.ts.
 // Usage: node scripts/check.mjs   (expects `astro build` to have run first)
@@ -19,7 +19,7 @@ const TEXT_EXTS = new Set(['.html', '.css', '.js', '.mjs', '.txt', '.xml', '.jso
 const ATTR_RE = /(?:href|src|data-full|srcset|imagesrcset)\s*=\s*"([^"]+)"/g;
 
 if (!existsSync(DIST)) {
-  console.error('check: dist/ not found — run `astro build` first.');
+  console.error('check: dist/ not found - run `astro build` first.');
   process.exit(1);
 }
 
@@ -51,7 +51,7 @@ function resolveLocal(url, fromFile) {
   const [pathPart] = url.split(/(?=[?#])/);
   const [path, fragment] = [pathPart.split(/[?#]/)[0], (url.split('#')[1] || null)];
   if (path === '' ) return fragment ? { file: fromFile, fragment } : null; // pure "#frag"
-  if (!path.startsWith('/')) return null; // relative — skip (all links are root-relative)
+  if (!path.startsWith('/')) return null; // relative - skip (all links are root-relative)
   let target = join(DIST, path);
   if (path.endsWith('/')) target = join(target, 'index.html');
   return { file: target, fragment };
@@ -104,8 +104,8 @@ for (const file of files) {
 
 // --- report ----------------------------------------------------------------
 if (errors.length) {
-  console.error(`\ncheck: FAILED — ${errors.length} problem(s):`);
+  console.error(`\ncheck: FAILED - ${errors.length} problem(s):`);
   for (const e of errors) console.error(`  ✗ ${e}`);
   process.exit(1);
 }
-console.log(`check: OK — ${htmlFiles.length} pages, all internal links/fragments resolve, no stale domain references.`);
+console.log(`check: OK - ${htmlFiles.length} pages, all internal links/fragments resolve, no stale domain references.`);
