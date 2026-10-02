@@ -25,6 +25,16 @@
     src: url('../assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2') format('woff2');
 }
 
+/* Bricolage Grotesque - display type (OFL, latin subset, wght axis only;
+   opsz/wdth pinned at build. See OFL.txt beside the file.) */
+@font-face {
+    font-family: 'Bricolage Grotesque';
+    font-style: normal;
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('../assets/fonts/bricolage/bricolage-var.woff2') format('woff2');
+}
+
 /* ---------- Design Tokens (Resend-inspired light-first) ----------
    Light is the DEFAULT (no attribute needed); [data-theme="dark"] overrides.
    Structure comes from hairline borders, not glows: green is a sparse accent. */
@@ -94,7 +104,13 @@
 
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Bricolage Grotesque', 'Inter', -apple-system, sans-serif;
+
+    /* Type scale - editorial (huge display, 65ch measure) */
+    --text-hero: clamp(2.75rem, 6.5vw, 5rem);
+    --text-section: clamp(2rem, 4vw, 3.25rem);
+    --text-row: clamp(1.35rem, 2.4vw, 2rem);
+    --measure: 65ch;
 }
 
 /* ---------- Dark Theme Tokens (terminal night mode) ---------- */
@@ -256,24 +272,26 @@ body::after {
     padding: 0 1.5rem;
 }
 
-/* Section eyebrow labels (Resend-style small caps, no terminal chrome) */
+/* Section micro-labels - mono engineering marks (// 01 - LABEL) */
 .system-label {
-    font-family: var(--font-primary);
+    font-family: var(--font-mono);
     color: var(--text-faint);
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    font-weight: 500;
     text-transform: uppercase;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
-/* Section Headings */
+/* Section Headings - editorial scale */
 .section-title {
-    font-size: 1.85rem;
-    font-weight: 700;
+    font-size: var(--text-section);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
     margin-bottom: 2rem;
-    line-height: 1.25;
+    max-width: var(--measure);
 }
 
 .section-title.underline {
@@ -672,11 +690,12 @@ body::after {
 }
 
 .hero-content h1 {
-    font-size: 3.4rem;
-    line-height: 1.1;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
+    font-size: var(--text-hero);
+    line-height: 1.02;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.035em;
+    max-width: 14ch;
 }
 
 .hero-content h1 span {
@@ -2554,22 +2573,22 @@ body.lightbox-open {
 main { counter-reset: chapter; }
 .chapter { counter-increment: chapter; }
 
-.chapter .system-label { position: relative; padding-left: 2.2rem; }
+.chapter .system-label { position: relative; padding-left: 2.6rem; }
 .chapter .system-label::before {
     content: counter(chapter, decimal-leading-zero);
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
     color: var(--accent-blue);
 }
 .chapter .system-label::after {
     content: '';
     position: absolute;
-    left: 2rem;
+    left: 1.9rem;
     top: 50%;
     transform: translateY(-50%);
     width: 0.9rem;
