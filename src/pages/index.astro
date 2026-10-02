@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
+import ChapterHead from '../components/ChapterHead.astro';
 import { SITE, abs } from '../config/site';
 import { SITE_TOOLS } from '../data/tools';
 import { emailLink, phoneLink } from '../utils/obfuscate';
@@ -41,9 +42,9 @@ const FIELD_PHOTOS = [
   { base: 'field-rooftop-dish', w2: 800, full: '/assets/images/field-rooftop-dish.jpg', alt: 'Starlink installation on rooftop', caption: 'Starlink install' },
   { base: 'field-container-yard', w2: 800, full: '/assets/images/field-container-yard.jpg', alt: 'CCTV installation on rooftop over container yard', caption: 'Rooftop CCTV install' },
 ];
-// Matches the rendered card width exactly: 268px from 620px up, otherwise the
-// 240px cap below 620px (the cap stops binding under ~333px, where 72vw wins).
-const IMG_SIZES = '(min-width: 620px) 268px, (max-width: 333px) 72vw, 240px';
+// Phase 7 - the field band is now full-bleed and immersive, so photo widths
+// are larger. Keep this in sync with .showcase-item widths in style.css.
+const IMG_SIZES = '(min-width: 1100px) 420px, (min-width: 700px) 340px, 78vw';
 
 const navLinks = [
   { href: '#projects', label: 'Work' },
@@ -90,7 +91,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <noscript>
             <style is:inline>
                 .preloader { display: none !important; }
-                .hero-content, .hero-visual { opacity: 1 !important; transform: none !important; }
+                .hero-title, .hero-lede, .hero-cta { opacity: 1 !important; transform: none !important; }
             </style>
         </noscript>
     </Fragment>
@@ -102,179 +103,182 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
 
     <Navbar links={navLinks} action={{ href: '/cv/', label: 'VIEW RESUME' }} />
 
-    <main id="main-content">
+    <main id="main-content" class="page-home">
 
-        <!-- Hero Section -->
-        <section class="hero container">
-            <div class="hero-content">
-                <div class="hero-status">
-                    <span class="status-badge"><span class="status-dot"></span> Available for work</span>
-                    <span class="status-time"><i class="ti ti-clock"></i> <span id="local-time">--:--</span> · GMT+2</span>
-                </div>
-                <span class="system-label">Software · Infrastructure · Networks</span>
-                <h1><span class="sr-only">Martin Mzumara – </span>Building software &amp; the networks it runs on<span class="accent-dot">.</span></h1>
-                <p>I'm Martin, a software developer and IT technician in Lilongwe, Malawi. I ship cross-platform apps and design, install, and maintain the network infrastructure behind them.</p>
-                <div class="hero-stats" aria-label="Highlights">
-                    <div class="stat"><span class="stat-value" data-count="5">5</span><span class="stat-label">Years in Tech</span></div>
-                    <div class="stat"><span class="stat-value" data-count="4">4</span><span class="stat-label">Projects Delivered</span></div>
-                    <div class="stat"><span class="stat-value" data-count="3">3</span><span class="stat-label">CCNA Courses</span></div>
-                </div>
+        <!-- ============================================================
+             HERO - full-bleed, 90vh+, deliberately minimal.
+             Separation from the next section: 8px rule + colour shift + gap.
+             ============================================================ -->
+        <section class="hero-full">
+            <div class="hero-full-inner">
+                <span class="system-label hero-label">Software &middot; Infrastructure &middot; Networks</span>
+                <h1 class="hero-title"><span class="sr-only">Martin Mzumara - </span>Building software &amp; the networks it runs on<span class="accent-dot">.</span></h1>
+                <p class="hero-lede">Software developer &amp; IT technician in Lilongwe, Malawi.</p>
                 <div class="hero-cta">
                     <a href="#projects" class="btn-primary">VIEW MY WORK</a>
                     <a href="#contact" class="btn-secondary">GET IN TOUCH</a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <picture>
-                    <source type="image/webp"
-                            srcset="/assets/images/optimized/profile-graduation-400w.webp 400w, /assets/images/optimized/profile-graduation-800w.webp 800w"
-                            sizes="(max-width: 768px) min(280px, 70vw), 320px">
-                    <img src="/assets/images/optimized/profile-graduation-800w.jpg"
-                         alt="Martin Mzumara celebrating graduation"
-                         class="hero-img" width="400" height="600"
-                         fetchpriority="high" decoding="async">
-                </picture>
-                <span class="hero-visual-caption">
-                    <i class="ti ti-map-pin"></i>
-                    <span>Lilongwe, Malawi</span>
-                </span>
-            </div>
-            <div class="scroll-cue" aria-hidden="true">
-                <span>SCROLL</span>
-                <span class="scroll-cue-line"></span>
-            </div>
+            <div class="hero-rule" aria-hidden="true"></div>
         </section>
-        
-        <!-- Hero Footer / Highlights -->
-        <div class="hero-footer">
-            <div class="highlight-item">
-                <i class="ti ti-target-arrow icon-blue"></i>
-                <span>Goal-oriented</span>
-            </div>
-            <div class="highlight-item">
-                <i class="ti ti-users icon-blue"></i>
-                <span>Teamwork</span>
-            </div>
-            <div class="highlight-item">
-                <i class="ti ti-book icon-blue"></i>
-                <span>Continuous Learning</span>
-            </div>
-        </div>
 
-        <hr class="section-divider container">
+        <!-- ============ 01 - PROFILE ============ -->
+        <section id="profile" class="chapter-section surface-b">
+            <div class="container">
+                <ChapterHead num="01" label="Profile" title="Software and infrastructure, end to end." />
 
-        <!-- Expertise Section -->
-        <section id="expertise" class="container section-padding chapter">
-            <span class="system-label">Expertise</span>
-            <h2 class="section-title">What I do</h2>
+                <div class="profile-layout">
+                    <figure class="profile-figure">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="/assets/images/optimized/profile-graduation-400w.webp 400w, /assets/images/optimized/profile-graduation-800w.webp 800w"
+                                    sizes="(max-width: 900px) 78vw, 420px">
+                            <img src="/assets/images/optimized/profile-graduation-800w.jpg"
+                                 alt="Martin Mzumara celebrating graduation"
+                                 class="profile-img" width="400" height="600"
+                                 fetchpriority="high" decoding="async">
+                        </picture>
+                        <figcaption>Graduation &middot; BSc Computer Science, 2024</figcaption>
+                    </figure>
 
-            <div class="skills-matrix">
-                <div class="skills-col">
-                    <h3 class="skills-col-title"><i class="ti ti-code"></i> Software</h3>
-                    <ul class="skills-list">
-                        <li>Mobile apps <span>Flutter, Dart, Firebase</span></li>
-                        <li>Backend &amp; APIs <span>Java, C#, REST</span></li>
-                        <li>Web development <span>HTML, CSS, JavaScript, Astro</span></li>
-                        <li>IoT systems <span>ESP32, sensors, telemetry</span></li>
-                        <li>Cryptography <span>AES-256, secure storage</span></li>
-                    </ul>
-                </div>
-                <div class="skills-col">
-                    <h3 class="skills-col-title"><i class="ti ti-network"></i> Infrastructure &amp; Networks</h3>
-                    <ul class="skills-list">
-                        <li>Network installation <span>switches, routers, WAPs, structured cabling</span></li>
-                        <li>CCTV &amp; surveillance <span>NVR, multi-channel, remote viewing</span></li>
-                        <li>Systems administration <span>Windows, Linux, MySQL</span></li>
-                        <li>Wireless &amp; satellite <span>Starlink, wireless links</span></li>
-                        <li>IT support <span>diagnostics, deployment, maintenance</span></li>
-                    </ul>
+                    <div class="profile-body">
+                        <p class="profile-lede">I'm Martin, a software developer and IT technician in Lilongwe, Malawi. I ship cross-platform apps and design, install, and maintain the network infrastructure behind them.</p>
+
+                        <div class="hero-status">
+                            <span class="status-badge"><span class="status-dot"></span> Available for work</span>
+                            <span class="status-time"><i class="ti ti-clock"></i> <span id="local-time">--:--</span> &middot; GMT+2</span>
+                        </div>
+
+                        <div class="hero-stats" aria-label="Highlights">
+                            <div class="stat"><span class="stat-value" data-count="5">5</span><span class="stat-label">Years in Tech</span></div>
+                            <div class="stat"><span class="stat-value" data-count="4">4</span><span class="stat-label">Projects Delivered</span></div>
+                            <div class="stat"><span class="stat-value" data-count="3">3</span><span class="stat-label">CCNA Courses</span></div>
+                        </div>
+
+                        <ul class="profile-highlights">
+                            <li><i class="ti ti-target-arrow" aria-hidden="true"></i> Goal-oriented</li>
+                            <li><i class="ti ti-users" aria-hidden="true"></i> Teamwork</li>
+                            <li><i class="ti ti-book" aria-hidden="true"></i> Continuous Learning</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills marquee -->
-        <div class="marquee" aria-hidden="true">
-            <div class="marquee-track" id="marquee-track">
-                <span>SOFTWARE ENGINEERING</span><i class="ti ti-diamond"></i>
-                <span>WEB DEVELOPMENT</span><i class="ti ti-diamond"></i>
-                <span>IOT SYSTEMS</span><i class="ti ti-diamond"></i>
-                <span>NETWORK INFRASTRUCTURE</span><i class="ti ti-diamond"></i>
-                <span>MOBILE APPS</span><i class="ti ti-diamond"></i>
-                <span>CCTV &amp; SECURITY</span><i class="ti ti-diamond"></i>
+        <!-- ============ 02 - EXPERTISE ============ -->
+        <section id="expertise" class="chapter-section surface-a">
+            <div class="container">
+                <ChapterHead num="02" label="Expertise" title="What I do" />
+
+                <div class="skills-matrix">
+                    <div class="skills-col">
+                        <h3 class="skills-col-title"><i class="ti ti-code" aria-hidden="true"></i> Software</h3>
+                        <ul class="skills-list">
+                            <li>Mobile apps <span>Flutter, Dart, Firebase</span></li>
+                            <li>Backend &amp; APIs <span>Java, C#, REST</span></li>
+                            <li>Web development <span>HTML, CSS, JavaScript, Astro</span></li>
+                            <li>IoT systems <span>ESP32, sensors, telemetry</span></li>
+                            <li>Cryptography <span>AES-256, secure storage</span></li>
+                        </ul>
+                    </div>
+                    <div class="skills-col">
+                        <h3 class="skills-col-title"><i class="ti ti-network" aria-hidden="true"></i> Infrastructure &amp; Networks</h3>
+                        <ul class="skills-list">
+                            <li>Network installation <span>switches, routers, WAPs, structured cabling</span></li>
+                            <li>CCTV &amp; surveillance <span>NVR, multi-channel, remote viewing</span></li>
+                            <li>Systems administration <span>Windows, Linux, MySQL</span></li>
+                            <li>Wireless &amp; satellite <span>Starlink, wireless links</span></li>
+                            <li>IT support <span>diagnostics, deployment, maintenance</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transition band: oversized type marquee (decorative) -->
+        <div class="band-marquee surface-b">
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee-track" id="marquee-track">
+                    <span>SOFTWARE ENGINEERING</span><i class="ti ti-diamond"></i>
+                    <span>WEB DEVELOPMENT</span><i class="ti ti-diamond"></i>
+                    <span>IOT SYSTEMS</span><i class="ti ti-diamond"></i>
+                    <span>NETWORK INFRASTRUCTURE</span><i class="ti ti-diamond"></i>
+                    <span>MOBILE APPS</span><i class="ti ti-diamond"></i>
+                    <span>CCTV &amp; SECURITY</span><i class="ti ti-diamond"></i>
+                </div>
             </div>
         </div>
 
-        <!-- Projects Section -->
-        <section id="projects" class="container section-padding chapter">
-            <span class="system-label">Featured</span>
-            <h2 class="section-title">Selected Work</h2>
-            
-            <div class="work-index">
-                <a href="/leaksafe/" class="work-row" data-preview="/assets/images/optimized/leaksafe-wireframes.jpg">
-                    <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/leaksafe-wireframes.webp" alt="" loading="lazy" width="600" height="400"></span>
-                    <span class="work-row-num">01</span>
-                    <span class="work-row-main">
-                        <span class="work-row-title">LeakSAFE</span>
-                        <span class="work-row-desc">Smart Gas Leakage Detection &middot; Flutter, Dart, ESP32, Firebase</span>
-                    </span>
-                    <span class="work-row-meta">Case Study</span>
-                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
-                </a>
+        <!-- ============ 03 - WORK ============ -->
+        <section id="projects" class="chapter-section surface-a">
+            <div class="container">
+                <ChapterHead num="03" label="Featured" title="Selected Work" />
 
-                <a href="/encplus/" class="work-row">
-                    <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-lock placeholder-icon"></i></span>
-                    <span class="work-row-num">02</span>
-                    <span class="work-row-main">
-                        <span class="work-row-title">EncPlus</span>
-                        <span class="work-row-desc">AES-256 file encryption app &middot; Flutter, Dart, Firebase</span>
-                    </span>
-                    <span class="work-row-meta">In Development</span>
-                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
-                </a>
+                <div class="work-index">
+                    <a href="/leaksafe/" class="work-row" data-preview="/assets/images/optimized/leaksafe-wireframes.jpg">
+                        <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/leaksafe-wireframes.webp" alt="" loading="lazy" width="600" height="400"></span>
+                        <span class="work-row-num">01</span>
+                        <span class="work-row-main">
+                            <span class="work-row-title">LeakSAFE</span>
+                            <span class="work-row-desc">Smart Gas Leakage Detection &middot; Flutter, Dart, ESP32, Firebase</span>
+                        </span>
+                        <span class="work-row-meta">Case Study</span>
+                        <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
 
-                <a href="/manguzi/" class="work-row">
-                    <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-building-skyscraper placeholder-icon"></i></span>
-                    <span class="work-row-num">03</span>
-                    <span class="work-row-main">
-                        <span class="work-row-title">Manguzi Executive Lodge</span>
-                        <span class="work-row-desc">Hospitality website with online booking &middot; HTML, CSS, JS, Firebase</span>
-                    </span>
-                    <span class="work-row-meta">Client Project</span>
-                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
-                </a>
+                    <a href="/encplus/" class="work-row">
+                        <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-lock placeholder-icon"></i></span>
+                        <span class="work-row-num">02</span>
+                        <span class="work-row-main">
+                            <span class="work-row-title">EncPlus</span>
+                            <span class="work-row-desc">AES-256 file encryption app &middot; Flutter, Dart, Firebase</span>
+                        </span>
+                        <span class="work-row-meta">In Development</span>
+                        <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
 
-                <a href="/lah-cctv/" class="work-row" data-preview="/assets/images/lah-indoor-camera-1.jpg">
-                    <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/lah-indoor-camera-1-400w.webp" alt="" loading="lazy" width="600" height="400"></span>
-                    <span class="work-row-num">04</span>
-                    <span class="work-row-main">
-                        <span class="work-row-title">LAH CCTV</span>
-                        <span class="work-row-desc">Hospital surveillance system, 10+ HD cameras &middot; CCTV, NVR, Remote Viewing</span>
-                    </span>
-                    <span class="work-row-meta">Client Project</span>
-                    <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
-                </a>
+                    <a href="/manguzi/" class="work-row">
+                        <span class="work-row-thumb placeholder-thumb" aria-hidden="true"><i class="ti ti-building-skyscraper placeholder-icon"></i></span>
+                        <span class="work-row-num">03</span>
+                        <span class="work-row-main">
+                            <span class="work-row-title">Manguzi Executive Lodge</span>
+                            <span class="work-row-desc">Hospitality website with online booking &middot; HTML, CSS, JS, Firebase</span>
+                        </span>
+                        <span class="work-row-meta">Client Project</span>
+                        <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+
+                    <a href="/lah-cctv/" class="work-row" data-preview="/assets/images/lah-indoor-camera-1.jpg">
+                        <span class="work-row-thumb" aria-hidden="true"><img src="/assets/images/optimized/lah-indoor-camera-1-400w.webp" alt="" loading="lazy" width="600" height="400"></span>
+                        <span class="work-row-num">04</span>
+                        <span class="work-row-main">
+                            <span class="work-row-title">LAH CCTV</span>
+                            <span class="work-row-desc">Hospital surveillance system, 10+ HD cameras &middot; CCTV, NVR, Remote Viewing</span>
+                        </span>
+                        <span class="work-row-meta">Client Project</span>
+                        <span class="work-row-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Floating preview for the work index (desktop hover) -->
+                <div class="work-preview" id="work-preview" aria-hidden="true"><img alt="" decoding="async"></div>
             </div>
-
-            <!-- Floating preview for the work index (desktop hover) -->
-            <div class="work-preview" id="work-preview" aria-hidden="true"><img alt="" decoding="async"></div>
         </section>
 
-        <!-- Experience & Education Section -->
-        <section id="experience" class="container section-padding chapter">
-            <span class="system-label">Experience</span>
-            <h2 class="section-title">Experience & Qualifications</h2>
-            
-            <div class="experience-grid">
-                <!-- Work History Timeline -->
+        <!-- ============ 04 - EXPERIENCE ============ -->
+        <section id="experience" class="chapter-section surface-b">
+            <div class="container">
+                <ChapterHead num="04" label="Experience" title="Experience &amp; Qualifications" />
+
                 <div class="timeline-column">
-                    <h3 class="column-title"><i class="ti ti-briefcase icon-blue"></i> Work Experience</h3>
-                    
+                    <h3 class="column-title"><i class="ti ti-briefcase" aria-hidden="true"></i> Work Experience</h3>
+
                     <div class="timeline-item">
                         <div class="timeline-header">
                             <h4>IT Technician</h4>
                             <span class="timeline-date">Jan 2026 - Present</span>
                         </div>
-                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-org">Bits &amp; Bytes Computers | Lilongwe</p>
                         <p class="timeline-desc">Coordinating network infrastructure projects including switches, routers, wireless, and cabling while managing concurrent client service requests.</p>
                     </div>
 
@@ -292,7 +296,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                             <h4>IT Technician (Full-Time)</h4>
                             <span class="timeline-date">Sep 2023 - Dec 2024</span>
                         </div>
-                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-org">Bits &amp; Bytes Computers | Lilongwe</p>
                         <p class="timeline-desc">Performed hardware diagnostics and repairs, OS and Microsoft Office deployments, network installation (switches, routers, WAPs, structured cabling), and CCTV surveillance system configurations for small to medium-sized organizations.</p>
                     </div>
 
@@ -301,71 +305,65 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                             <h4>IT Technician Intern</h4>
                             <span class="timeline-date">Nov 2021 - Aug 2023</span>
                         </div>
-                        <p class="timeline-org">Bits & Bytes Computers | Lilongwe</p>
+                        <p class="timeline-org">Bits &amp; Bytes Computers | Lilongwe</p>
                         <p class="timeline-desc">Assisted with hardware troubleshooting, OS and Microsoft Office installations, network cabling, and CCTV system deployments during university holiday periods.</p>
                     </div>
                 </div>
 
-            </div>
-
-            <!-- Compact credentials strip -->
-            <div class="cred-strip">
-                <div class="cred-strip-item">
-                    <span class="cred-strip-label">Education</span>
-                    <span class="cred-strip-value">BSc Computer Science, DMI St. John the Baptist University (2024)</span>
-                </div>
-                <div class="cred-strip-item">
-                    <span class="cred-strip-label">Certification</span>
-                    <span class="cred-strip-value">CCNA - Introduction to Networks; Switching, Routing &amp; Wireless Essentials; Enterprise Networking, Security &amp; Automation</span>
-                </div>
-                <div class="cred-strip-item">
-                    <span class="cred-strip-label">Core stack</span>
-                    <span class="cred-strip-value">Flutter, Dart, Java, C#, ESP32, Linux, MySQL/Firebase, CCTV/NVR, structured cabling</span>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Tools & Software Section -->
-        <section id="tools" class="container section-padding chapter">
-            <div class="section-head">
-                <span class="system-label">Tools</span>
-                <h2 class="section-title">Tools &amp; Software I Use</h2>
-                <p class="section-lead">The apps and services I rely on daily - for development, IT work, and getting things done - on both my laptop and my phone.</p>
-            </div>
-
-
-            <div class="tools-grid" id="tools-grid">{featuredTools.map((t, i) => (
-                <button class="tool-card" data-id={t.name} style={`animation-delay:${i * 70}ms`}>
-                    <div class="tool-card-top">
-                        <span class="tool-icon"><i class={`ti ${t.icon}`}></i></span>
-                        <span class={`tool-device ${t.dev}`}><i class={`ti ${deviceIcon(t.dev)}`}></i> {deviceLabel(t.dev)}</span>
+                <div class="cred-strip">
+                    <div class="cred-strip-item">
+                        <span class="cred-strip-label">Education</span>
+                        <span class="cred-strip-value">BSc Computer Science, DMI St. John the Baptist University (2024)</span>
                     </div>
-                    <span class="tool-tag">{t.tag}</span>
-                    <h3>{t.name}</h3>
-                    <p class="tool-summary">{t.summary}</p>
-                    <span class="tool-arrow">Read more <i class="ti ti-arrow-right"></i></span>
-                </button>
-            ))}</div>
-            <!-- Full tools data for the reading modal (tools.js) - replaces js/tools-data.js -->
-            <script type="application/json" id="site-tools-data" set:html={JSON.stringify(SITE_TOOLS).replace(/</g, '\\u003c')}></script>
-
-            <div class="tools-cta">
-                <a href={abs('/blog/')} target="_blank" rel="noopener noreferrer" class="tools-view-all">
-                    VIEW ALL POSTS <i class="ti ti-arrow-right"></i>
-                </a>
+                    <div class="cred-strip-item">
+                        <span class="cred-strip-label">Certification</span>
+                        <span class="cred-strip-value">CCNA - Introduction to Networks; Switching, Routing &amp; Wireless Essentials; Enterprise Networking, Security &amp; Automation</span>
+                    </div>
+                    <div class="cred-strip-item">
+                        <span class="cred-strip-label">Core stack</span>
+                        <span class="cred-strip-value">Flutter, Dart, Java, C#, ESP32, Linux, MySQL/Firebase, CCTV/NVR, structured cabling</span>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Showcase Section -->
-        <section id="showcase" class="container section-padding chapter">
-            <div class="section-head showcase-head">
-                <span class="system-label">Showcase</span>
-                <h2 class="section-title">Identity &amp; Field Work</h2>
-                <p class="section-lead">Rack installs, cabling and rooftop work - the field side of the job, alongside the code.</p>
+        <!-- ============ 05 - TOOLS ============ -->
+        <section id="tools" class="chapter-section surface-a">
+            <div class="container">
+                <ChapterHead num="05" label="Tools" title="Tools &amp; Software I Use"
+                    lead="The apps and services I rely on daily - for development, IT work, and getting things done - on both my laptop and my phone." />
+
+                <div class="tools-grid" id="tools-grid">{featuredTools.map((t, i) => (
+                    <button class="tool-card" data-id={t.name} style={`animation-delay:${i * 70}ms`}>
+                        <div class="tool-card-top">
+                            <span class="tool-icon"><i class={`ti ${t.icon}`}></i></span>
+                            <span class={`tool-device ${t.dev}`}><i class={`ti ${deviceIcon(t.dev)}`}></i> {deviceLabel(t.dev)}</span>
+                        </div>
+                        <span class="tool-tag">{t.tag}</span>
+                        <h3>{t.name}</h3>
+                        <p class="tool-summary">{t.summary}</p>
+                        <span class="tool-arrow">Read more <i class="ti ti-arrow-right"></i></span>
+                    </button>
+                ))}</div>
+                <!-- Full tools data for the reading modal (tools.js) - replaces js/tools-data.js -->
+                <script type="application/json" id="site-tools-data" set:html={JSON.stringify(SITE_TOOLS).replace(/</g, '\\u003c')}></script>
+
+                <div class="tools-cta">
+                    <a href={abs('/blog/')} target="_blank" rel="noopener noreferrer" class="tools-view-all">
+                        VIEW ALL POSTS <i class="ti ti-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 06 - FIELD (full-bleed) ============ -->
+        <section id="showcase" class="chapter-section surface-b">
+            <div class="container">
+                <ChapterHead num="06" label="Showcase" title="Identity &amp; Field Work"
+                    lead="Rack installs, cabling and rooftop work - the field side of the job, alongside the code." />
             </div>
 
-            <div class="showcase-carousel" data-carousel role="group" aria-label="Field work photos">
+            <div class="showcase-carousel showcase-carousel--full" data-carousel role="group" aria-label="Field work photos">
                 <div class="carousel-rail">
                     <div class="carousel-viewport" data-carousel-viewport tabindex="0" role="group" aria-label="Photo rail - scroll, swipe or use the arrow keys">
                         <div class="carousel-track" data-carousel-track>
@@ -389,39 +387,48 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                 </div>
             </div>
         </section>
-        <!-- Contact Section -->
-        <section id="contact" class="container section-padding chapter">
-            <span class="system-label">Contact</span>
-            <h2 class="section-title contact-title">Have a project, a network to build, or a role to fill? Let's talk<span class="accent-dot">.</span></h2>
-            <p class="section-lead">Reach out by email or phone - I usually reply within a day.</p>
-            <p class="contact-principles"><span class="principle"><i class="ti ti-check"></i> Fair, local-friendly pricing</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Work delivered in reviewable stages</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Modern design, rigorous engineering</span></p>
 
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <i class="ti ti-mail contact-card-icon"></i>
-                    <h3>Email</h3>
-                    <p set:html={emailCardHtml}></p>
-                    <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard">
-                        <i class="ti ti-copy"></i> COPY EMAIL
-                    </button>
-                </div>
-                <div class="contact-card">
-                    <i class="ti ti-phone contact-card-icon"></i>
-                    <h3>Phone</h3>
-                    <p set:html={phoneCardHtml}></p>
-                </div>
-                <div class="contact-card">
-                    <i class="ti ti-map-pin contact-card-icon"></i>
-                    <h3>Location</h3>
-                    <p>Area 49, Lilongwe<br>Malawi</p>
-                </div>
-            </div>
+        <!-- ============ 07 - CONTACT (ink, most dramatic) ============ -->
+        <section id="contact" class="chapter-section surface-ink">
+            <div class="container">
+                <header class="chapter-head chapter-head--ink">
+                    <span class="chapter-num" aria-hidden="true">07</span>
+                    <div class="chapter-head-body">
+                        <span class="system-label">Contact</span>
+                        <h2 class="section-title contact-title">Have a project, a network to build, or a role to fill? Let's talk<span class="accent-dot">.</span></h2>
+                        <p class="section-lead">Reach out by email or phone - I usually reply within a day.</p>
+                    </div>
+                </header>
 
-            <div class="contact-cta">
-                <Fragment set:html={emailCtaHtml} />
-                <a href="/cv/" class="btn-secondary">
-                    <i class="ti ti-file-text"></i> VIEW RESUME
-                </a>
+                <p class="contact-principles"><span class="principle"><i class="ti ti-check" aria-hidden="true"></i> Fair, local-friendly pricing</span><span class="principle-sep" aria-hidden="true">&middot;</span><span class="principle"><i class="ti ti-check" aria-hidden="true"></i> Work delivered in reviewable stages</span><span class="principle-sep" aria-hidden="true">&middot;</span><span class="principle"><i class="ti ti-check" aria-hidden="true"></i> Modern design, rigorous engineering</span></p>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <i class="ti ti-mail contact-card-icon" aria-hidden="true"></i>
+                        <h3>Email</h3>
+                        <p set:html={emailCardHtml}></p>
+                        <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard">
+                            <i class="ti ti-copy"></i> COPY EMAIL
+                        </button>
+                    </div>
+                    <div class="contact-card">
+                        <i class="ti ti-phone contact-card-icon" aria-hidden="true"></i>
+                        <h3>Phone</h3>
+                        <p set:html={phoneCardHtml}></p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="ti ti-map-pin contact-card-icon" aria-hidden="true"></i>
+                        <h3>Location</h3>
+                        <p>Area 49, Lilongwe<br>Malawi</p>
+                    </div>
+                </div>
+
+                <div class="contact-cta">
+                    <Fragment set:html={emailCtaHtml} />
+                    <a href="/cv/" class="btn-secondary">
+                        <i class="ti ti-file-text" aria-hidden="true"></i> VIEW RESUME
+                    </a>
+                </div>
             </div>
         </section>
     </main>
