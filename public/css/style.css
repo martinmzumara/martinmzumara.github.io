@@ -703,7 +703,8 @@ body::after {
     color: transparent;
 }
 
-.hero-content h1 span.accent-dot {
+.hero-content h1 span.accent-dot,
+.section-title .accent-dot {
     background: none;
     -webkit-background-clip: initial;
     background-clip: initial;
@@ -1039,7 +1040,7 @@ body::after {
 /* ---------- Experience & Credentials ---------- */
 .experience-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2.5rem;
 }
 
@@ -3421,6 +3422,151 @@ section[id] { scroll-margin-top: 90px; }
 
 
 /* ============================================================
+/* ============================================================
+   Phase 4 - skills matrix, credential strip, field band
+   ============================================================ */
+
+/* Skills matrix - two editorial columns */
+.skills-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 2rem;
+}
+
+.skills-col-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 1.25rem;
+}
+
+.skills-col-title i {
+    width: 18px;
+    height: 18px;
+}
+
+.skills-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.skills-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.skills-list li span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .skills-matrix {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .skills-list li {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    .skills-list li span {
+        text-align: left;
+        white-space: normal;
+    }
+}
+
+/* Credential strip - full-width rows under the timeline */
+.cred-strip {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+.cred-strip-item {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 1.5rem;
+    padding: 1.1rem 0.25rem;
+    border-bottom: 1px solid var(--glass-border);
+    align-items: baseline;
+}
+
+.cred-strip-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+.cred-strip-value {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+@media (max-width: 600px) {
+    .cred-strip-item {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+    }
+}
+
+/* Field band - full-bleed showcase strip */
+#showcase {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#showcase .section-head {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+#showcase .showcase-carousel {
+    margin-top: 0.5rem;
+}
+
+#showcase .carousel-viewport {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+#showcase .showcase-item {
+    scroll-snap-align: start;
+}
+
+#showcase .showcase-caption {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+}
+
+
    Even-row grids (design-lab) - explicit column counts so a row
    never forms a partial line (no 3+1 / 2+2+1 orphans).
    Counts: grid-cards 4 · projects 4 · contact 6 · tools 3 ·

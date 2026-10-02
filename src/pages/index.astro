@@ -166,28 +166,28 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <!-- Expertise Section -->
         <section id="expertise" class="container section-padding chapter">
             <span class="system-label">Expertise</span>
-            <h2 class="section-title underline">Technical Expertise</h2>
-            
-            <div class="grid-cards">
-                <div class="card">
-                    <i class="ti ti-code icon-large"></i>
-                    <h3>Software Development</h3>
-                    <p>Development of software applications using programming languages such as Dart, Java, and C#.</p>
+            <h2 class="section-title">What I do</h2>
+
+            <div class="skills-matrix">
+                <div class="skills-col">
+                    <h3 class="skills-col-title"><i class="ti ti-code"></i> Software</h3>
+                    <ul class="skills-list">
+                        <li>Mobile apps <span>Flutter, Dart, Firebase</span></li>
+                        <li>Backend &amp; APIs <span>Java, C#, REST</span></li>
+                        <li>Web development <span>HTML, CSS, JavaScript, Astro</span></li>
+                        <li>IoT systems <span>ESP32, sensors, telemetry</span></li>
+                        <li>Cryptography <span>AES-256, secure storage</span></li>
+                    </ul>
                 </div>
-                <div class="card">
-                    <i class="ti ti-device-desktop icon-large"></i>
-                    <h3>Web Development</h3>
-                    <p>Designing and building websites and web applications using HTML, CSS, and JavaScript.</p>
-                </div>
-                <div class="card">
-                    <i class="ti ti-server icon-large"></i>
-                    <h3>IT Technical Support</h3>
-                    <p>Providing technical assistance including Windows and Microsoft Office installation and general IT maintenance.</p>
-                </div>
-                <div class="card">
-                    <i class="ti ti-cpu icon-large"></i>
-                    <h3>IoT System Design</h3>
-                    <p>Designing and developing IoT-based systems with hardware integration and mobile application alerts.</p>
+                <div class="skills-col">
+                    <h3 class="skills-col-title"><i class="ti ti-network"></i> Infrastructure &amp; Networks</h3>
+                    <ul class="skills-list">
+                        <li>Network installation <span>switches, routers, WAPs, structured cabling</span></li>
+                        <li>CCTV &amp; surveillance <span>NVR, multi-channel, remote viewing</span></li>
+                        <li>Systems administration <span>Windows, Linux, MySQL</span></li>
+                        <li>Wireless &amp; satellite <span>Starlink, wireless links</span></li>
+                        <li>IT support <span>diagnostics, deployment, maintenance</span></li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -207,7 +207,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <!-- Projects Section -->
         <section id="projects" class="container section-padding chapter">
             <span class="system-label">Featured</span>
-            <h2 class="section-title underline">Selected Work</h2>
+            <h2 class="section-title">Selected Work</h2>
             
             <div class="work-index">
                 <a href="/leaksafe/" class="work-row" data-preview="/assets/images/optimized/leaksafe-wireframes.jpg">
@@ -262,7 +262,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <!-- Experience & Education Section -->
         <section id="experience" class="container section-padding chapter">
             <span class="system-label">Experience</span>
-            <h2 class="section-title underline">Experience & Qualifications</h2>
+            <h2 class="section-title">Experience & Qualifications</h2>
             
             <div class="experience-grid">
                 <!-- Work History Timeline -->
@@ -306,46 +306,21 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                     </div>
                 </div>
 
-                <!-- Education & Certifications -->
-                <div class="credentials-column">
-                    <h3 class="column-title"><i class="ti ti-award icon-blue"></i> Education & Certifications</h3>
-                    
-                    <div class="cred-card">
-                        <h4>Bachelor of Science in Computer Science</h4>
-                        <p class="cred-org">DMI St. John the Baptist University | Graduated 2024</p>
-                    </div>
+            </div>
 
-                    <div class="cred-card">
-                        <h4>Cisco Certified Network Associate (CCNA)</h4>
-                        <p class="cred-org">Lilongwe Technical College</p>
-                        <ul class="cred-list">
-                            <li><i class="ti ti-check check-icon"></i> CCNA: Introduction to Networks</li>
-                            <li><i class="ti ti-check check-icon"></i> CCNA: Switching, Routing & Wireless Essentials</li>
-                            <li><i class="ti ti-check check-icon"></i> CCNA: Enterprise Networking, Security & Automation</li>
-                        </ul>
-                    </div>
-
-                    <div class="cred-card">
-                        <h4>Specialized Capabilities</h4>
-                        <div class="skill-tags">
-                            <span>CCTV Deployment</span>
-                            <span>Structured Cabling</span>
-                            <span>Linux Admin</span>
-                            <span>MySQL / Firebase</span>
-                            <span>Git</span>
-                            <span>C++</span>
-                            <span>C#</span>
-                            <span>Java</span>
-                            <span>Flutter</span>
-                            <span>Dart</span>
-                            <span>Xamarin</span>
-                            <span>ESP32 IoT</span>
-                            <span>AES-256 Encryption</span>
-                            <span>HTML5 / CSS3</span>
-                            <span>JavaScript</span>
-                            <span>Web Design</span>
-                        </div>
-                    </div>
+            <!-- Compact credentials strip -->
+            <div class="cred-strip">
+                <div class="cred-strip-item">
+                    <span class="cred-strip-label">Education</span>
+                    <span class="cred-strip-value">BSc Computer Science, DMI St. John the Baptist University (2024)</span>
+                </div>
+                <div class="cred-strip-item">
+                    <span class="cred-strip-label">Certification</span>
+                    <span class="cred-strip-value">CCNA - Introduction to Networks; Switching, Routing &amp; Wireless Essentials; Enterprise Networking, Security &amp; Automation</span>
+                </div>
+                <div class="cred-strip-item">
+                    <span class="cred-strip-label">Core stack</span>
+                    <span class="cred-strip-value">Flutter, Dart, Java, C#, ESP32, Linux, MySQL/Firebase, CCTV/NVR, structured cabling</span>
                 </div>
             </div>
         </section>
@@ -354,7 +329,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <!-- Networking Section -->
         <section id="networking" class="container section-padding chapter">
             <span class="system-label">Field Work</span>
-            <h2 class="section-title underline">Networking &amp; Field Work</h2>
+            <h2 class="section-title">Networking &amp; Field Work</h2>
 
             <div class="grid-cards">
                 <div class="card">
@@ -394,7 +369,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <section id="tools" class="container section-padding chapter">
             <div class="section-head">
                 <span class="system-label">Tools</span>
-                <h2 class="section-title underline">Tools &amp; Software I Use</h2>
+                <h2 class="section-title">Tools &amp; Software I Use</h2>
                 <p class="section-lead">The apps and services I rely on daily - for development, IT work, and getting things done - on both my laptop and my phone.</p>
             </div>
 
@@ -425,7 +400,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <section id="showcase" class="container section-padding chapter">
             <div class="section-head showcase-head">
                 <span class="system-label">Showcase</span>
-                <h2 class="section-title underline">Identity &amp; Field Work</h2>
+                <h2 class="section-title">Identity &amp; Field Work</h2>
                 <p class="section-lead">Rack installs, cabling and rooftop work - the field side of the job, alongside the code.</p>
             </div>
 
@@ -456,8 +431,8 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
         <!-- Contact Section -->
         <section id="contact" class="container section-padding chapter">
             <span class="system-label">Contact</span>
-            <h2 class="section-title underline">Let's Work Together</h2>
-            <p class="section-lead">Have a project in mind, need IT support, or want to discuss an opportunity? Reach out - I usually reply within a day.</p>
+            <h2 class="section-title contact-title">Have a project, a network to build, or a role to fill? Let's talk<span class="accent-dot">.</span></h2>
+            <p class="section-lead">Reach out by email or phone - I usually reply within a day.</p>
             <p class="contact-principles"><span class="principle"><i class="ti ti-check"></i> Fair, local-friendly pricing</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Work delivered in reviewable stages</span><span class="principle-sep" aria-hidden="true">·</span><span class="principle"><i class="ti ti-check"></i> Modern design, rigorous engineering</span></p>
 
             <div class="contact-grid">
