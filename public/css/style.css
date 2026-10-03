@@ -66,6 +66,8 @@
     --radius-lg: 12px;
     --radius-xl: 16px;
     --radius-pill: 9999px;
+    /* Gentle button curve - matches .theme-toggle-btn, never a pill */
+    --radius-btn: 4px;
 
     /* Surfaces - white cards on white page; hairlines carry the structure */
     --glass-bg: #ffffff;
@@ -640,12 +642,8 @@ body::after {
     margin-bottom: 2.5rem;
 }
 
-/* The hero''s single strong separation: a thick full-bleed rule */
-.hero-rule {
-    width: 100%;
-    height: 8px;
-    background: var(--text-primary);
-}
+/* (Phase 7 fix: the full-bleed .hero-rule separator was removed - the gap
+   between the hero and the first chapter now carries the break on its own.) */
 
 .icon-blue {
     color: var(--accent-blue);
@@ -3386,6 +3384,7 @@ section[id] { scroll-margin-top: 90px; }
 }
 
 
+   /* ============================================================
    Even-row grids (design-lab) - explicit column counts so a row
    never forms a partial line (no 3+1 / 2+2+1 orphans).
    Counts: grid-cards 4 · projects 4 · contact 6 · tools 3 ·
@@ -3901,7 +3900,23 @@ section[id] { scroll-margin-top: 90px; }
     box-shadow: none;
 }
 
-.page-home .surface-ink .contact-card-icon { color: var(--ink-fg-muted); }
+/* Contact glyphs are inlined at build time so they survive JS being off. The
+   old .contact-card-icon rule painted a white glass tile (--glass-bg-strong on
+   an ink panel) and Phase 7 then coloured the glyph near-white - white on
+   white, so the marks vanished. They are plain light glyphs now. */
+.page-home .contact-card-icon {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: var(--ink-fg-muted);
+}
+
+/* Icon sitting inside a button label (e-mail CTA send arrow) */
+.page-home .btn-icon { width: 1.05em; height: 1.05em; }
 
 .page-home .surface-ink .contact-card h3 {
     font-family: var(--font-mono);
@@ -3982,6 +3997,17 @@ section[id] { scroll-margin-top: 90px; }
     .page-home .tool-card { animation: none; }
 }
 
+/* ---------- Phase 7 fix: button curvature ----------
+   Every button on the page takes the theme toggle's gentle 4px curve instead
+   of a pill (CTAs, contact buttons, tools link, carousel arrows). Keyed off
+   the page rather than `.page-home` because the navbar and footer buttons live
+   outside <main>; other pages keep their pills until their own pass. */
+body:has(main.page-home) .btn-primary,
+body:has(main.page-home) .btn-secondary,
+body:has(main.page-home) .copy-btn,
+body:has(main.page-home) .tools-view-all,
+body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
+
 /* ---------- Phase 7 responsive ---------- */
 @media (max-width: 1099px) {
     .page-home .showcase-carousel--full { --card-w: 340px; }
@@ -3990,15 +4016,35 @@ section[id] { scroll-margin-top: 90px; }
 @media (max-width: 899px) {
     .page-home .profile-layout { grid-template-columns: minmax(0, 1fr); }
     .page-home .profile-figure { max-width: 340px; }
+
+    /* Mobile work rows keep the base grid-template-areas (thumb | main | meta
+       over thumb | desc | arrow). Only the track SIZES may change here -
+       overriding grid-template-columns alone desynced the tracks from the named
+       areas and let the thumbnail overlap the title and description. */
+    .page-home .work-row {
+        grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+        gap: 0.4rem 1rem;
+        padding-block: clamp(1.25rem, 3vw, 1.75rem);
+    }
+    .page-home .work-row-thumb { width: 84px; height: 60px; }
 }
 
 @media (max-width: 768px) {
-    .page-home .chapter-head { gap: 0.75rem 1.25rem; }
-    .page-home .work-row {
-        grid-template-columns: 4.5rem minmax(0, 1fr) auto;
-        row-gap: 0.75rem;
-        padding-block: 1.75rem;
+    /* Hero: at 90vh the bottom-anchored block started ~370px down and pushed
+       the CTAs past the visible viewport on a phone (mobile `vh` is the large
+       viewport, so the real fold sits well above it). The content is anchored
+       to the top with a much smaller padding-top instead - type scale, the
+       90vh minimum and all copy are unchanged. */
+    .page-home .hero-full {
+        justify-content: flex-start;
+        padding-top: clamp(4rem, 9vh, 6rem);
+        padding-bottom: clamp(3rem, 7vh, 4.5rem);
     }
+    .page-home .hero-label { margin-bottom: 1rem; }
+    .page-home .hero-title { margin-bottom: 1.25rem; }
+    .page-home .hero-lede { margin-bottom: 1.75rem; }
+
+    .page-home .chapter-head { gap: 0.75rem 1.25rem; }
     .page-home .tools-grid { grid-template-columns: minmax(0, 1fr); }
     .page-home .skills-list li,
     .page-home .cred-strip-value { font-size: 1.05rem; }
@@ -4011,7 +4057,10 @@ section[id] { scroll-margin-top: 90px; }
 @media (max-width: 600px) {
     .page-home .chapter-head { grid-template-columns: minmax(0, 1fr); }
     .page-home .profile-figure { max-width: none; }
-    .page-home .work-row { grid-template-columns: minmax(0, 1fr) auto; }
-    .page-home .work-row-num { display: none; }
+    .page-home .work-row {
+        grid-template-columns: 4rem minmax(0, 1fr) auto;
+        gap: 0.3rem 0.75rem;
+    }
+    .page-home .work-row-thumb { width: 60px; height: 46px; }
     .page-home .cred-strip-item { grid-template-columns: minmax(0, 1fr); }
 }

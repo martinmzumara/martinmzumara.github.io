@@ -5,6 +5,26 @@ import ChapterHead from '../components/ChapterHead.astro';
 import { SITE, abs } from '../config/site';
 import { SITE_TOOLS } from '../data/tools';
 import { emailLink, phoneLink } from '../utils/obfuscate';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+// ---- Server-rendered icons -------------------------------------------------
+// js/icons.js swaps every <i class="ti ti-NAME"> for a sprite <symbol> only
+// after it has fetched /assets/icons/icons.svg, so with JS off those icons
+// render as nothing. The three contact glyphs and the e-mail CTA's send arrow
+// are the icons that carry meaning, so their paths are lifted out of the very
+// same sprite at build time and inlined as plain <svg> - which paints with or
+// without JS and needs no extra request.
+const ICON_SPRITE = readFileSync(
+  fileURLToPath(new URL('../../public/assets/icons/icons.svg', import.meta.url)),
+  'utf8'
+);
+const spritePath = (id: string): string => {
+  const match = ICON_SPRITE.match(new RegExp(`<symbol id="${id}"[\\s\\S]*?<path d="([^"]+)"`));
+  return match ? match[1] : '';
+};
+const inlineIcon = (id: string, className: string): string =>
+  `<svg class="ci ${className}" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="${spritePath(id)}"/></svg>`;
 
 // Contact details - entity-encoded at build time (see utils/obfuscate.ts), so
 // the served HTML holds no plain e-mail address or phone number.
@@ -15,7 +35,14 @@ const PHONES = [
 ];
 const emailCardHtml = emailLink(EMAIL);
 const phoneCardHtml = PHONES.map((p) => phoneLink(p.display, p.e164)).join('<br>\n                        ');
-const emailCtaHtml = emailLink(EMAIL, 'btn-primary', '<i class="ti ti-send"></i> EMAIL&nbsp;ME ');
+// CTA label is "EMAIL ME" only - the full address stays in the obfuscated
+// href (showAddress:false), so the button reads cleanly but still decodes.
+const emailCtaHtml = emailLink(
+  EMAIL,
+  'btn-primary',
+  `${inlineIcon('ic-send', 'btn-icon')} EMAIL&nbsp;ME`,
+  { showAddress: false }
+);
 
 // Featured tools are pre-rendered into static HTML at build time (no JS needed
 // to see them); the full list is embedded as JSON below for the reading modal.
@@ -107,7 +134,8 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
 
         <!-- ============================================================
              HERO - full-bleed, 90vh+, deliberately minimal.
-             Separation from the next section: 8px rule + colour shift + gap.
+             No rule or band separates it from the next section: the
+             section spacing alone carries the break.
              ============================================================ -->
         <section class="hero-full">
             <div class="hero-full-inner">
@@ -119,7 +147,6 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                     <a href="#contact" class="btn-secondary">GET IN TOUCH</a>
                 </div>
             </div>
-            <div class="hero-rule" aria-hidden="true"></div>
         </section>
 
         <!-- ============ 01 - PROFILE ============ -->
@@ -185,7 +212,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                         <h3 class="skills-col-title"><i class="ti ti-network" aria-hidden="true"></i> Infrastructure &amp; Networks</h3>
                         <ul class="skills-list">
                             <li>Network installation <span>switches, routers, WAPs, structured cabling</span></li>
-                            <li>CCTV &amp; surveillance <span>NVR, multi-channel, remote viewing</span></li>
+                            <li>CCTV &amp; surveillance <span>NVR, UPS Backup, remote viewing</span></li>
                             <li>Systems administration <span>Windows, Linux, MySQL</span></li>
                             <li>Wireless &amp; satellite <span>Starlink, wireless links</span></li>
                             <li>IT support <span>diagnostics, deployment, maintenance</span></li>
@@ -404,7 +431,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
 
                 <div class="contact-grid">
                     <div class="contact-card">
-                        <i class="ti ti-mail contact-card-icon" aria-hidden="true"></i>
+                        <Fragment set:html={inlineIcon('ic-mail', 'contact-card-icon')} />
                         <h3>Email</h3>
                         <p set:html={emailCardHtml}></p>
                         <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard">
@@ -412,12 +439,12 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                         </button>
                     </div>
                     <div class="contact-card">
-                        <i class="ti ti-phone contact-card-icon" aria-hidden="true"></i>
+                        <Fragment set:html={inlineIcon('ic-phone', 'contact-card-icon')} />
                         <h3>Phone</h3>
                         <p set:html={phoneCardHtml}></p>
                     </div>
                     <div class="contact-card">
-                        <i class="ti ti-map-pin contact-card-icon" aria-hidden="true"></i>
+                        <Fragment set:html={inlineIcon('ic-map-pin', 'contact-card-icon')} />
                         <h3>Location</h3>
                         <p>Area 49, Lilongwe<br>Malawi</p>
                     </div>
