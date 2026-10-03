@@ -1707,13 +1707,16 @@ body.lightbox-open {
     flex-shrink: 0;
 }
 
+/* Contact links read as plain text: the underline is a hover/focus affordance
+   only, so the address stays clean until someone reaches for it. */
 .contact-list a {
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.contact-list a:hover {
+.contact-list a:hover,
+.contact-list a:focus-visible {
     color: var(--accent-blue);
     text-decoration: underline;
 }
@@ -2532,7 +2535,8 @@ body.tools-open { overflow: hidden; }
     transition: color 0.2s ease;
 }
 
-.contact-card p a:hover {
+.contact-card p a:hover,
+.contact-card p a:focus-visible {
     color: var(--accent-blue);
     text-decoration: underline;
 }
@@ -3545,10 +3549,17 @@ section > .section-lead {
     color: var(--ink-fg);
 }
 
+/* On ink the address is display-sized type, so it must not carry a standing
+   underline - the rule arrives on hover / keyboard focus instead. */
 .page-home .surface-ink .contact-card p a {
     color: var(--ink-fg);
-    text-decoration: underline;
+    text-decoration: none;
     text-underline-offset: 3px;
+}
+
+.page-home .surface-ink .contact-card p a:hover,
+.page-home .surface-ink .contact-card p a:focus-visible {
+    text-decoration: underline;
 }
 
 .page-home .surface-ink .copy-btn {
