@@ -3610,26 +3610,10 @@ section[id] { scroll-margin-top: 90px; }
     color: var(--text-faint);
 }
 
-/* Availability badge - flat, no glass */
-.page-home .status-badge {
-    background: none;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    border: none;
-    padding: 0;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-}
+/* (Badge restored: the Phase 7 ".page-home .status-badge / .status-time"
+   flattening overrides were removed so the "Available for work" pill uses the
+   exact pre-Phase-7 styling from .status-badge / .status-time below.) */
 
-.page-home .status-time {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    color: var(--text-faint);
-}
 /* ---------- 02 Expertise ---------- */
 .page-home .skills-matrix {
     gap: clamp(2.5rem, 6vw, 4.5rem);
@@ -4042,19 +4026,28 @@ body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
 }
 
 @media (max-width: 768px) {
-    /* Hero: at 90vh the bottom-anchored block started ~370px down and pushed
-       the CTAs past the visible viewport on a phone (mobile `vh` is the large
-       viewport, so the real fold sits well above it). The content is anchored
-       to the top with a much smaller padding-top instead - type scale, the
-       90vh minimum and all copy are unchanged. */
+    /* Hero: centred in the viewport again (pre-Phase-7 the hero used
+       align-items:center). A slightly larger top than bottom padding biases the
+       block into the lower half so the headline and CTAs feel grounded rather
+       than pinned to the top. The 90vh minimum and the type scale are
+       unchanged. */
     .page-home .hero-full {
-        justify-content: flex-start;
-        padding-top: clamp(4rem, 9vh, 6rem);
-        padding-bottom: clamp(3rem, 7vh, 4.5rem);
+        justify-content: center;
+        padding-top: clamp(4rem, 11vh, 7rem);
+        padding-bottom: clamp(2.5rem, 6vh, 4rem);
     }
     .page-home .hero-label { margin-bottom: 1rem; }
     .page-home .hero-title { margin-bottom: 1.25rem; }
     .page-home .hero-lede { margin-bottom: 1.75rem; }
+
+    /* Project thumbnails are a desktop/tablet affordance - mobile rows are text
+       only. The named areas drop the thumb track so the text is not indented by
+       an empty column. */
+    .page-home .work-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: 'main meta' 'desc arrow';
+    }
+    .page-home .work-row-thumb { display: none; }
 
     .page-home .chapter-head { gap: 0.75rem 1.25rem; }
     .page-home .tools-grid { grid-template-columns: minmax(0, 1fr); }
@@ -4069,10 +4062,6 @@ body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
 @media (max-width: 600px) {
     .page-home .chapter-head { grid-template-columns: minmax(0, 1fr); }
     .page-home .profile-figure { max-width: none; }
-    .page-home .work-row {
-        grid-template-columns: 4rem minmax(0, 1fr) auto;
-        gap: 0.3rem 0.75rem;
-    }
-    .page-home .work-row-thumb { width: 60px; height: 46px; }
+    .page-home .work-row { gap: 0.3rem 0.75rem; }
     .page-home .cred-strip-item { grid-template-columns: minmax(0, 1fr); }
 }
