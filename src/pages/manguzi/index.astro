@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
+import ChapterHead from '../../components/ChapterHead.astro';
 
 const navLinks = [
   { href: '#overview', label: 'OVERVIEW' },
@@ -23,7 +24,7 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
 >
     <Navbar ariaLabel='Case study navigation' links={navLinks} action={{ href: '/#projects', label: 'BACK TO PROJECTS', icon: 'ti-arrow-left' }} />
 
-    <main id="main-content" class="container project-detail-container">
+    <main id="main-content" class="container project-detail-container detail-page">
 
         <!-- Hero Title Section -->
         <div class="project-detail-header">
@@ -66,9 +67,8 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
         </div>
 
         <!-- Project Stats -->
-        <section class="section-padding" id="overview">
-            <span class="system-label">Key Metrics</span>
-            <h2 class="section-title">At A Glance</h2>
+        <section class="chapter-section surface-b" id="overview">
+            <ChapterHead num="01" label="Key Metrics" title="At A Glance" />
             
             <div class="stats-grid">
                 <div class="stat-card">
@@ -91,9 +91,8 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
         </section>
 
         <!-- Architecture Overview -->
-        <section class="section-padding">
-            <span class="system-label">Architecture</span>
-            <h2 class="section-title">Site Structure</h2>
+        <section class="chapter-section surface-a">
+            <ChapterHead num="02" label="Architecture" title="Site Structure" />
             
             <div class="architecture-flow">
                 <div class="arch-node">
@@ -129,9 +128,8 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
         </section>
 
         <!-- Key Features -->
-        <section class="section-padding" id="functionality">
-            <span class="system-label">Features</span>
-            <h2 class="section-title">Key Features</h2>
+        <section class="chapter-section surface-b" id="functionality">
+            <ChapterHead num="03" label="Features" title="Key Features" />
             
             <div class="features-grid">
                 <div class="feature-card">
@@ -168,9 +166,8 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
         </section>
 
         <!-- Technical Overview -->
-        <section class="section-padding">
-            <span class="system-label">Build Notes</span>
-            <h2 class="section-title">Design & Development</h2>
+        <section class="chapter-section surface-a">
+            <ChapterHead num="04" label="Build Notes" title="Design &amp; Development" />
             
             <ul class="custom-list">
                 <li><i class="ti ti-player-play list-icon"></i> Custom-designed hero section with Abril Fatface display typography for an elegant, premium brand presence.</li>
@@ -181,9 +178,8 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
         </section>
 
         <!-- Tech Stack -->
-        <section class="section-padding" id="stack">
-            <span class="system-label">Tech Stack</span>
-            <h2 class="section-title">Tools & Technologies</h2>
+        <section class="chapter-section surface-b" id="stack">
+            <ChapterHead num="05" label="Tech Stack" title="Tools &amp; Technologies" />
             
             <div class="stack-categories">
                 <div class="stack-category">
@@ -221,9 +217,8 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
         </section>
 
         <!-- Challenges & Solutions -->
-        <section class="section-padding" id="insights">
-            <span class="system-label">Lessons</span>
-            <h2 class="section-title">Challenges & Solutions</h2>
+        <section class="chapter-section surface-a" id="insights">
+            <ChapterHead num="06" label="Lessons" title="Challenges &amp; Solutions" />
             
             <div class="challenge-grid">
                 <div class="challenge-card">
@@ -248,9 +243,8 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
         </section>
 
         <!-- Image Gallery Showcase -->
-        <section class="section-padding">
-            <span class="system-label">Screenshots</span>
-            <h2 class="section-title">Website Highlights</h2>
+        <section class="chapter-section surface-b">
+            <ChapterHead num="07" label="Screenshots" title="Website Highlights" />
 
             <div class="gallery-grid">
                 <div class="gallery-card">
@@ -293,16 +287,15 @@ const description = 'Website for Manguzi Executive Lodge, Karonga & Rumphi Malaw
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Live Site CTA -->
-            <div class="project-cta-box">
-                <h3>Experience the live website</h3>
-                <p>Visit Manguzi Executive Lodge's live site to explore the full hospitality experience - from premium accommodation to conference facilities.</p>
-                <div class="hero-cta" style="justify-content: center;">
-                    <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                        <i class="ti ti-external-link"></i> VISIT LIVE SITE
-                    </a>
-                </div>
+        <!-- Closing CTA (ink chapter) -->
+        <section class="chapter-section surface-ink detail-cta">
+            <ChapterHead num="08" tone="ink" label="Live Site" title="Experience the live website" lead="Visit Manguzi Executive Lodge's live site to explore the full hospitality experience - from premium accommodation to conference facilities." />
+            <div class="hero-cta">
+                <a href="https://manguzi-executive-lodge.web.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <i class="ti ti-external-link"></i> VISIT LIVE SITE
+                </a>
             </div>
         </section>
     </main>

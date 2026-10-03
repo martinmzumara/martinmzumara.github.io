@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
+import ChapterHead from '../../components/ChapterHead.astro';
 
 const navLinks = [
   { href: '#overview', label: 'OVERVIEW' },
@@ -23,7 +24,7 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
 >
     <Navbar ariaLabel='Case study navigation' links={navLinks} action={{ href: '/#projects', label: 'BACK TO PROJECTS', icon: 'ti-arrow-left' }} />
 
-    <main id="main-content" class="container project-detail-container">
+    <main id="main-content" class="container project-detail-container detail-page">
 
         <!-- Hero Title Section -->
         <div class="project-detail-header">
@@ -69,9 +70,8 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
         </div>
 
         <!-- Project Stats -->
-        <section class="section-padding" id="overview">
-            <span class="system-label">Key Metrics</span>
-            <h2 class="section-title">At A Glance</h2>
+        <section class="chapter-section surface-b" id="overview">
+            <ChapterHead num="01" label="Key Metrics" title="At A Glance" />
             
             <div class="stats-grid">
                 <div class="stat-card">
@@ -94,9 +94,8 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
         </section>
 
         <!-- Architecture Overview -->
-        <section class="section-padding">
-            <span class="system-label">Architecture</span>
-            <h2 class="section-title">System Data Flow</h2>
+        <section class="chapter-section surface-a">
+            <ChapterHead num="02" label="Architecture" title="System Data Flow" />
             
             <div class="architecture-flow">
                 <div class="arch-node">
@@ -132,9 +131,8 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
         </section>
 
         <!-- Key Features -->
-        <section class="section-padding" id="functionality">
-            <span class="system-label">Features</span>
-            <h2 class="section-title">Key Features</h2>
+        <section class="chapter-section surface-b" id="functionality">
+            <ChapterHead num="03" label="Features" title="Key Features" />
             
             <div class="features-grid">
                 <div class="feature-card">
@@ -171,9 +169,8 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
         </section>
 
         <!-- Technical Overview -->
-        <section class="section-padding">
-            <span class="system-label">How It Works</span>
-            <h2 class="section-title">System Mechanics</h2>
+        <section class="chapter-section surface-a">
+            <ChapterHead num="04" label="How It Works" title="System Mechanics" />
             
             <ul class="custom-list">
                 <li><i class="ti ti-player-play list-icon"></i> Continuous atmospheric monitoring via calibrated MQ gas sensor modules connected to an ESP32 microcontroller node.</li>
@@ -184,9 +181,8 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
         </section>
 
         <!-- Tech Stack -->
-        <section class="section-padding" id="stack">
-            <span class="system-label">Tech Stack</span>
-            <h2 class="section-title">Tools & Technologies</h2>
+        <section class="chapter-section surface-b" id="stack">
+            <ChapterHead num="05" label="Tech Stack" title="Tools &amp; Technologies" />
             
             <div class="stack-categories">
                 <div class="stack-category">
@@ -227,9 +223,8 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
         </section>
 
         <!-- Challenges & Solutions -->
-        <section class="section-padding" id="insights">
-            <span class="system-label">Lessons</span>
-            <h2 class="section-title">Challenges & Solutions</h2>
+        <section class="chapter-section surface-a" id="insights">
+            <ChapterHead num="06" label="Lessons" title="Challenges &amp; Solutions" />
             
             <div class="challenge-grid">
                 <div class="challenge-card">
@@ -254,9 +249,8 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
         </section>
 
         <!-- Image Gallery Showcase -->
-        <section class="section-padding">
-            <span class="system-label">Screenshots</span>
-            <h2 class="section-title">Application Screenshots</h2>
+        <section class="chapter-section surface-b">
+            <ChapterHead num="07" label="Screenshots" title="Application Screenshots" />
 
             <div class="gallery-grid">
                 <div class="gallery-card">
@@ -303,19 +297,18 @@ const description = 'LeakSAFE: real-time gas leak detection with Flutter, Fireba
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- GitHub CTA -->
-            <div class="project-cta-box">
-                <h3>Interested in the full implementation?</h3>
-                <p>Explore the complete source code on GitHub - including the Flutter mobile application and the ESP32 Arduino hardware firmware.</p>
-                <div class="hero-cta" style="justify-content: center;">
-                    <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                        <i class="ti ti-brand-github"></i> VIEW APP CODE
-                    </a>
-                    <a href="https://github.com/martinmzumara/leaksafe-firmware" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-                        <i class="ti ti-cpu"></i> HARDWARE FIRMWARE
-                    </a>
-                </div>
+        <!-- Closing CTA (ink chapter) -->
+        <section class="chapter-section surface-ink detail-cta">
+            <ChapterHead num="08" tone="ink" label="Source" title="Interested in the full implementation?" lead="Explore the complete source code on GitHub - including the Flutter mobile application and the ESP32 Arduino hardware firmware." />
+            <div class="hero-cta">
+                <a href="https://github.com/martinmzumara/leaksafe-app" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <i class="ti ti-brand-github"></i> VIEW APP CODE
+                </a>
+                <a href="https://github.com/martinmzumara/leaksafe-firmware" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                    <i class="ti ti-cpu"></i> HARDWARE FIRMWARE
+                </a>
             </div>
         </section>
     </main>

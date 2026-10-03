@@ -4065,3 +4065,376 @@ body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
     .page-home .work-row { gap: 0.3rem 0.75rem; }
     .page-home .cred-strip-item { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ============================================================
+   Phase 7 - design-lab applied to the case-study detail pages
+   (leaksafe, encplus, manguzi, lah-cctv).
+
+   Same tokens as the homepage: display type, --space-section
+   rhythm, --surface-a/b bands, an ink closing chapter, hairline
+   rules and the 4px button radius. The content of each case
+   study is unchanged - only its type, spacing, colour and chrome
+   (the old glass cards, blurs and shadows are gone).
+
+   Markup contract: <main class="container project-detail-container
+   detail-page">, a header + spec strip on the page background,
+   then <section class="chapter-section surface-a|b|ink"> bands
+   each holding a <ChapterHead>.
+   ============================================================ */
+
+/* The chapter bands break out to the viewport edge on their own, so the root
+   has to stop the horizontal overflow that vw-based breakouts create. Applied
+   to the root element it propagates to the viewport, so sticky nav is safe. */
+html:has(main.detail-page) { overflow-x: clip; }
+
+/* Reuses the existing markers so the old .container / .project-detail-container
+   rules stay meaningful: narrower measure + the section gutter, and the top
+   padding that clears the fixed navbar. */
+.detail-page.container {
+    max-width: var(--content-max);
+    padding-inline: var(--gutter);
+}
+
+.detail-page.project-detail-container {
+    padding-top: clamp(7rem, 13vh, 10rem);
+    padding-bottom: 0;
+    background: var(--surface-a);
+}
+
+/* ---------- Hero ---------- */
+.detail-page .project-detail-header { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+
+.detail-page .main-title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: var(--tracking-display);
+    max-width: 22ch;
+    margin: 1rem 0 1.5rem;
+    overflow-wrap: break-word;
+}
+
+.detail-page .main-title .accent-dot { color: var(--accent-blue); }
+
+.detail-page .lead-text {
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    line-height: 1.55;
+    color: var(--text-secondary);
+    max-width: 58ch;
+    margin-bottom: 0;
+}
+
+.detail-page .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    align-items: center;
+}
+
+.detail-page .project-actions { margin-top: clamp(1.75rem, 3vw, 2.5rem); }
+
+/* ---------- Spec strip (hairline-separated facts, no cards) ---------- */
+.detail-page .specs-grid {
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--glass-border);
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.detail-page .spec-card {
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 0;
+    border-top: 1px solid var(--glass-border);
+    border-radius: 0;
+    box-shadow: none;
+    padding: clamp(1rem, 2vw, 1.5rem) 0 0;
+    transition: border-color 0.25s ease;
+}
+
+.detail-page .spec-card:hover {
+    transform: none;
+    border-color: transparent;
+    border-top-color: var(--text-primary);
+}
+
+.detail-page .spec-label { margin-bottom: 0.5rem; }
+
+.detail-page .spec-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    color: var(--text-primary);
+}
+
+/* ---------- Chapter bands (full-bleed alternating surfaces) ---------- */
+.detail-page .chapter-section {
+    padding-block: var(--space-section);
+    padding-inline: calc(50vw - 50%);
+    margin-inline: calc(50% - 50vw);
+    background: var(--surface-a);
+}
+
+.detail-page .surface-a { background: var(--surface-a); }
+.detail-page .surface-b { background: var(--surface-b); }
+.detail-page .surface-ink { background: var(--ink-bg); color: var(--ink-fg); }
+
+/* ---------- Chapter entry (mirrors the homepage ChapterHead) ---------- */
+.detail-page .chapter-head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.25rem clamp(1.25rem, 3vw, 2rem);
+    align-items: start;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.detail-page .chapter-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-chapter-num);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent-blue);
+    padding-top: 0.2em;
+}
+
+.detail-page .chapter-head .system-label { margin-bottom: 0.85rem; }
+
+.detail-page .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-section-xl);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: var(--tracking-section);
+    color: var(--text-primary);
+    max-width: 22ch;
+    margin-bottom: 0;
+    overflow-wrap: break-word;
+}
+
+.detail-page .chapter-head .section-lead,
+.detail-page section > .section-lead {
+    margin-top: 1.35rem;
+    max-width: 62ch;
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* ---------- Flat editorial cards (no glass, no shadow, hairline rule) ---------- */
+.detail-page .stat-card,
+.detail-page .feature-card,
+.detail-page .challenge-card,
+.detail-page .arch-node,
+.detail-page .stack-category,
+.detail-page .gallery-card {
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 0;
+    border-top: 1px solid var(--glass-border);
+    border-radius: 0;
+    box-shadow: none;
+    padding: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+    transition: border-color 0.25s ease;
+}
+
+.detail-page .stat-card:hover,
+.detail-page .feature-card:hover,
+.detail-page .challenge-card:hover,
+.detail-page .arch-node:hover,
+.detail-page .stack-category:hover,
+.detail-page .gallery-card:hover {
+    transform: none;
+    border-color: transparent;
+    border-top-color: var(--text-primary);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Metric cards read as a left-aligned stat row, like the homepage counters */
+.detail-page .stat-card { text-align: left; }
+
+.detail-page .stat-value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    color: var(--text-primary);
+    width: auto;
+    margin: 0 0 0.35rem;
+}
+
+/* ---------- Card typography ---------- */
+.detail-page .feature-card h3,
+.detail-page .challenge-card h3,
+.detail-page .arch-node h3,
+.detail-page .gallery-info h3,
+.detail-page .stack-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text-primary);
+}
+
+.detail-page .feature-card h3,
+.detail-page .challenge-card h3 { margin-bottom: 0.75rem; }
+
+.detail-page .feature-card p,
+.detail-page .challenge-card p,
+.detail-page .arch-node p,
+.detail-page .gallery-info p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.detail-page .challenge-card p:last-child { margin-bottom: 0; }
+
+.detail-page .arch-node p { font-size: 0.9rem; }
+
+/* The arch arrows were glowed; a plain accent mark matches the flat grid */
+.detail-page .arch-arrow i {
+    filter: none;
+    color: var(--accent-blue);
+}
+
+/* ---------- Tags (hairline chips, not glass pills) ---------- */
+.detail-page .tag {
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 1px solid var(--chip-border);
+    border-radius: var(--radius-btn);
+    color: var(--text-secondary);
+    padding: 0.3rem 0.6rem;
+}
+
+.detail-page .challenge-tag {
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+}
+
+/* ---------- Galleries (flat frames, sharp corners) ---------- */
+.detail-page .gallery-card { align-items: flex-start; }
+
+.detail-page .gallery-card img {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.detail-page .gallery-grid--uniform .gallery-card picture {
+    max-width: 100%;
+    border-radius: 0;
+    background: none;
+}
+
+.detail-page .gallery-grid--uniform .gallery-card picture img { border-radius: 0; }
+
+.detail-page .gallery-placeholder {
+    max-width: 100%;
+    height: 180px;
+    background: none;
+    border: 1px solid var(--chip-border);
+    border-radius: 0;
+}
+
+/* ---------- Lists ---------- */
+.detail-page .custom-list li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.detail-page .custom-list .list-icon { color: var(--accent-blue); }
+
+
+
+/* ---------- Ink closing chapter (mirrors the homepage contact closer) ---------- */
+.detail-page .surface-ink .chapter-head .system-label { color: var(--ink-fg-muted); }
+.detail-page .surface-ink .section-title { color: var(--ink-fg); }
+.detail-page .surface-ink .chapter-head .section-lead,
+.detail-page .surface-ink section > .section-lead { color: var(--ink-fg-muted); }
+
+.detail-page .detail-cta .hero-cta { margin-top: clamp(2rem, 4vw, 3rem); }
+
+.detail-page .surface-ink .btn-primary {
+    background: var(--ink-fg);
+    color: var(--ink-bg);
+}
+
+.detail-page .surface-ink .btn-primary:hover {
+    background: rgba(250, 250, 250, 0.82);
+    color: var(--ink-bg);
+}
+
+.detail-page .surface-ink .btn-secondary {
+    border-color: var(--ink-line);
+    color: var(--ink-fg);
+}
+
+.detail-page .surface-ink .btn-secondary:hover { border-color: var(--ink-fg); }
+
+/* ---------- Buttons: monochrome + the theme toggle's 4px curve ---------- */
+.detail-page .btn-primary,
+body:has(main.detail-page) .btn-primary {
+    background: var(--text-primary);
+    color: var(--surface-a);
+    border-radius: var(--radius-btn);
+}
+
+.detail-page .btn-primary:hover,
+body:has(main.detail-page) .btn-primary:hover {
+    background: var(--text-secondary);
+    color: var(--surface-a);
+}
+
+.detail-page .btn-secondary,
+body:has(main.detail-page) .btn-secondary { border-radius: var(--radius-btn); }
+
+/* ---------- Detail-page responsive ---------- */
+@media (max-width: 899px) {
+    .detail-page .chapter-head { gap: 1rem 1.25rem; }
+}
+
+@media (max-width: 768px) {
+    .detail-page.project-detail-container { padding-top: clamp(6rem, 12vh, 8rem); }
+    .detail-page .chapter-head { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+    .detail-page .chapter-num { padding-top: 0; }
+    .detail-page .stat-value { font-size: clamp(2.25rem, 12vw, 3rem); }
+    .detail-page .specs-grid { gap: 1.25rem; }
+    .detail-page .spec-card { padding-top: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .detail-page .spec-card,
+    .detail-page .stat-card,
+    .detail-page .feature-card,
+    .detail-page .challenge-card,
+    .detail-page .arch-node,
+    .detail-page .stack-category,
+    .detail-page .gallery-card { transition: none; }
+}
+
