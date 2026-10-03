@@ -1,13 +1,13 @@
 # Personal Portfolio - Martin Mzumara
 
-A responsive portfolio website with a terminal aesthetic, built with **Astro 5** (static output, no client framework) plus vanilla CSS/JS for interactivity. Deployed via **GitHub Pages** at `martinmzumara.com` (custom domain; see Deployment).
+A responsive portfolio site built with **Astro 5** (static output, no client framework) plus vanilla CSS/JS for interactivity. The homepage reads as a sequence of numbered chapters on alternating surfaces, with hairline borders, a display/body/label type pairing (Bricolage Grotesque / Inter / JetBrains Mono) and a light / dark theme pair. Deployed via **GitHub Pages** at `martinmzumara.com` (custom domain; see Deployment).
 
 Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SVG sprite.
 
 ## Current Features
 
-- **Terminal aesthetic** - flat near-black console with phosphor-green accent, monospace headings, fake window title bars on cards, shell-command section labels (`$ ls ~/projects/`), prompt-style logo and nav, typewriter effect on the hero command line, light "paper console" second theme.
-- **Animated, non-static experience** - preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, 3D tilt/spotlight cards, and an auto-hiding navbar that slides away as you scroll down and reveals on any scroll up.
+- **Editorial chapter design system** - the homepage is split into numbered chapters, each headed by `src/components/ChapterHead.astro` (`num`, `label`, `title`) and sitting on an alternating surface (`surface-a`, `surface-b`, `surface-ink` in `src/pages/index.astro`); glass pills are replaced by hairline borders and a `4px` button radius; Bricolage Grotesque carries display type, Inter the body, JetBrains Mono the uppercase `system-label` eyebrows; two themes (light / dark) are selected with `data-theme` via the footer toggle.
+- **Animated, non-static experience** - preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, a cursor-following work-index preview, and an auto-hiding navbar (`.nav-hidden`) that slides away as you scroll down and reveals on any scroll up.
 - **Liquid-glass surfaces** - iOS-style frosted materials: the sticky navbar (all widths) and the mobile dropdown panel (floating rounded card with rim lighting and an opening sheen pulse) blur the page behind them; built with `backdrop-filter` on sibling pseudo-elements so nested filters never cancel each other.
 - **Articles & Tools** - the homepage shows a few featured posts with glass reading modals (data in `src/data/tools.ts`); a **"View All Posts"** button links to the separate blog at [martinmzumara.com/blog](https://martinmzumara.com/blog/), built with Astro in its own repo.
 - **Testimonials / social proof** - intentionally omitted for now (see "Adding Testimonials Later").
@@ -16,8 +16,9 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - **Case study & client project pages** - LeakSAFE and EncPlus case studies plus the Manguzi Executive Lodge client project and the LAH CCTV surveillance installation, each with image galleries and lightbox.
 - **Project cards** - the homepage cards expose individually clickable links: case study / details, GitHub source (LeakSAFE, EncPlus), the live Manguzi site, and the LAH CCTV case study.
 - **SEO basics** - `sitemap.xml` and `robots.txt`, plus a custom `404.html` (GitHub Pages serves it automatically).
-- **Performance** - responsive images: the hero and showcase photos ship `400w`/`800w` WebP candidates with `srcset`/`sizes` (plus a same-size JPEG fallback), and the lightbox loads a separate 1600px-capped `-full.jpg` only when opened; the LeakSAFE gallery screenshots use `400w` WebP variants. Fonts are self-hosted (no third-party font requests); images carry explicit `width`/`height` (no layout shift); the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render.
-- **Resilient hero (no-JS / script-failure safe)** - the preloader overlay and the hero's `opacity: 0` base state are cleared from `js/script.js`. Two safeguards in `index.html` prevent a permanently blank page if that file never runs: a `<noscript>` style block that hides the preloader and reveals the hero, and an inline head failsafe that force-adds `.loaded` after 4.5 s (cancelled by `finishPreload()` on the normal path). Verified with JavaScript disabled and with `/js/script.js` blocked.
+- **Performance** - responsive images: the hero and showcase photos ship `400w`/`800w` WebP candidates with `srcset`/`sizes` (plus a same-size JPEG fallback), and the lightbox loads a separate 1600px-capped `-full.jpg` only when opened; the LeakSAFE gallery screenshots use `400w` WebP variants. Fonts are self-hosted (no third-party font requests); images carry explicit `width`/`height` (no layout shift); the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render. The Manguzi page ships five live-site captures (`manguzi-live-*.webp`, including a mobile-width variant) with explicit dimensions, and the social/link-preview card is a progressive JPEG (`og-cover.jpg`, 1200x630).
+- **Accessibility** - skip link to `#main-content`, focus-trapped lightbox and tools reading modal (Escape closes, focus returns to the opener), visible `:focus-visible` styles, `aria-label` on icon-only controls, and `prefers-reduced-motion` fallbacks that freeze every animation. Lighthouse accessibility scores **100** on all six pages CI audits; CI itself asserts a floor of 0.9.
+- **Resilient hero (no-JS / script-failure safe)** - the preloader overlay and the hero's `opacity: 0` base state are cleared from `js/script.js`. Two safeguards prevent a permanently blank page if that file never runs: `src/layouts/BaseLayout.astro` ships a `<noscript>` style block that hides the preloader and reveals the hero, and `src/pages/index.astro` carries an inline head failsafe that force-adds `.loaded` after 4.5 s (cancelled by `finishPreload()` on the normal path). Verified with JavaScript disabled and with `/js/script.js` blocked.
 
 ## Project Structure
 
@@ -38,12 +39,12 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - `scripts/check.mjs`: Post-build check - internal link/fragment audit plus a stale-domain guard that fails the build if the old `github.io` domain appears in any built text file.
 - `public/css/style.css`: Custom styles - CSS variables, liquid-glass navbar and mobile panel, responsive breakpoints, `prefers-reduced-motion` fallbacks. Note: the page uses `overflow-x: clip` (not `hidden`) - `hidden` on `html`/`body` silently breaks the navbar's `position: sticky`.
 - `public/js/tools.js`: Wires the tools reading modal from the embedded page JSON; skips re-rendering because the cards already exist as static HTML.
-- `public/js/script.js`: All other interactivity - preloader, scroll reveal, counters, marquee, tilt/spotlight, live clock, theme toggle, lightbox, copy-email button.
+- `public/js/script.js`: All other interactivity - preloader (`finishPreload`), scroll reveal, counters, marquee, auto-hiding navbar, live clock, theme toggle, focus-trapped lightbox, copy-email button, and the cursor-following work-index preview.
 - `public/js/terminal.js`: The hidden terminal easter egg (press <kbd>`</kbd> on any page) - a fake shell with `help`, `whoami`, `ls`, `open <project>`, `contact`, `theme`, `uptime`, `clear`, `exit` and `sudo hire-me`, plus command history; honours `prefers-reduced-motion`.
 - `public/js/icons.js`: Swaps `ti-…` icon classes for the matching `<svg><use>` from the sprite; if the sprite can't be fetched (e.g. `file://`), it injects the Tabler webfont stylesheet on demand as a fallback - the font is never loaded on normal page views.
 - `public/assets/icons/icons.svg`: SVG icon sprite (Phosphor regular icons rendered with `currentColor`; `icons.backup.svg` holds the previous Iconoir set).
 - `public/assets/images/`: optimised images. Display sizes are suffixed `-400w` / `-800w` (regular) or `-full` (lightbox, capped at 1600px); `leaksafe-*.jpeg` are the LeakSAFE gallery JPEG fallbacks. `logo.png` is the brand mark (its `optimized/logo-96.webp` is used in the footer); `og-cover.jpg` is the social/link-preview card. The full-resolution source photos are not tracked (they live in `~/images-backup/` locally) - regenerate variants from them with `magick <source> -auto-orient -strip -resize <width>x -quality 78 <name>-<width>w.webp`.
-- `public/assets/fonts/`: Self-hosted **Inter** and **JetBrains Mono** variable fonts as latin-subset `.woff2` (~104 KB total, replacing Google Fonts). Regenerate with `pyftsubset <font>.ttf --flavor=woff2 --unicodes=<latin+symbols>`; the OFL licences sit beside each file.
+- `public/assets/fonts/`: Self-hosted **Bricolage Grotesque**, **Inter** and **JetBrains Mono** variable fonts as latin-subset `.woff2` (145 KB total: 44 KB display, 63 KB body, 38 KB mono; replacing Google Fonts). Regenerate with `pyftsubset <font>.ttf --flavor=woff2 --unicodes=<latin+symbols>`; the OFL licences sit beside each file.
 - `public/favicon.ico`, `public/favicon-32.png`, `public/favicon-16.png`, `public/apple-touch-icon.png`, `public/site.webmanifest`: generated from `assets/images/logo.png`.
 - `public/CNAME`: custom domain (`martinmzumara.com`), shipped in the build artifact.
 - `public/google19deb8b21f6153e2.html`: Google Search Console verification file (must stay a bare one-line document).
@@ -53,7 +54,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 ## Local Development
 
 1. Clone the repository and install dependencies: `npm ci`.
-2. `npm run dev` for the local server, `npm run build` for a production build into `dist/` (the build also runs the internal link/fragment check and the stale-domain guard via `scripts/check.mjs`).
+2. `npm run dev` for the local server, `npm run build` for a production build into `dist/` (the build also runs the internal link/fragment check and the stale-domain guard via `scripts/check.mjs`). `npm run check` re-runs that same check against an existing `dist/` without rebuilding.
 3. Preview a production build with `npm run preview`, or serve `dist/` over HTTP (required for the icon sprite to load - `file://` blocks the fetch):
    - `python3 -m http.server 8000 --directory dist` then open `http://localhost:8000`.
 
@@ -123,6 +124,25 @@ copy-to-clipboard button assembles the same address at runtime from
 `public/js/script.js` (search for `copy-email`); keep all three in sync if the
 address ever changes. The shared footer contact list is generated the same way
 in `src/components/Footer.astro`.
+
+## Accessibility
+
+Lighthouse accessibility scores **100** on every page CI audits (`/`,
+`/leaksafe/`, `/encplus/`, `/manguzi/`, `/lah-cctv/`, `/cv/`). `.lighthouserc.json`
+runs Lighthouse three times per URL and fails the build below 0.9.
+
+- Skip link to `#main-content` on every page (`src/layouts/BaseLayout.astro`).
+- The lightbox (`public/js/script.js`) and the tools reading modal
+  (`public/js/tools.js`) are focus-trapped: Tab and Shift+Tab cycle inside the
+  dialog, `Escape` closes it, and focus returns to the element that opened it.
+- `prefers-reduced-motion` freezes scroll reveal, the skills marquee, the
+  status dot, smooth scrolling, the navbar slide, carousel scrolling and the
+  terminal animations, so every animated section also works as static content.
+- Visible `:focus-visible` styles, `aria-label` on icon-only controls, semantic
+  headings, and explicit `width`/`height` on images (no layout shift).
+
+To reproduce: `npm run build`, serve `dist/` over HTTP (`file://` blocks the
+icon sprite), then run `npx lighthouse http://localhost:8000/ --only-categories=accessibility`.
 
 ## Deployment
 
