@@ -9,7 +9,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - **Editorial chapter design system** - the homepage is split into numbered chapters, each headed by `src/components/ChapterHead.astro` (`num`, `label`, `title`) and sitting on an alternating surface (`surface-a`, `surface-b`, `surface-ink` in `src/pages/index.astro`); glass pills are replaced by hairline borders and a `4px` button radius; Bricolage Grotesque carries display type, Inter the body, JetBrains Mono the uppercase `system-label` eyebrows; two themes (light / dark) are selected with `data-theme` via the footer toggle.
 - **Animated, non-static experience** - preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, a cursor-following work-index preview, and an auto-hiding navbar (`.nav-hidden`) that slides away as you scroll down and reveals on any scroll up.
 - **Liquid-glass surfaces** - iOS-style frosted materials: the sticky navbar (all widths) and the mobile dropdown panel (floating rounded card with rim lighting and an opening sheen pulse) blur the page behind them; built with `backdrop-filter` on sibling pseudo-elements so nested filters never cancel each other.
-- **Articles & Tools** - the homepage shows a few featured posts with glass reading modals (data in `src/data/tools.ts`); a **"View All Posts"** button links to the separate blog at [martinmzumara.com/blog](https://martinmzumara.com/blog/), built with Astro in its own repo.
+- **Articles & Tools** - the homepage shows a few featured posts with glass reading modals (data in `src/data/tools.ts`); a **"View All Posts"** button and the nav's Blog link point to the blog at [martinmzumara.com/blog](https://martinmzumara.com/blog/), which is merged into this repo (pages in `src/pages/blog/`, posts in `src/content/posts/`).
 - **Testimonials / social proof** - intentionally omitted for now (see "Adding Testimonials Later").
 - **Contact section** - email / phone / location glass cards with a copy-to-clipboard email button, `mailto:` + resume CTAs, and a matching nav link + hero "Get in Touch" button.
 - **Custom icon system** - a single SVG sprite swapped in at runtime; no icon font CDN.
@@ -17,7 +17,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - **Project cards** - the homepage cards expose individually clickable links: case study / details, GitHub source (LeakSAFE, EncPlus), the live Manguzi site, and the LAH CCTV case study.
 - **SEO basics** - `sitemap.xml` and `robots.txt`, plus a custom `404.html` (GitHub Pages serves it automatically).
 - **Performance** - responsive images: the hero and showcase photos ship `400w`/`800w` WebP candidates with `srcset`/`sizes` (plus a same-size JPEG fallback), and the lightbox loads a separate 1600px-capped `-full.jpg` only when opened; the LeakSAFE gallery screenshots use `400w` WebP variants. Fonts are self-hosted (no third-party font requests); images carry explicit `width`/`height` (no layout shift); the Tabler icon webfont is loaded on demand only when the SVG sprite can't be fetched, instead of blocking page render. The Manguzi page ships five live-site captures (`manguzi-live-*.webp`, including a mobile-width variant) with explicit dimensions, and the social/link-preview card is a progressive JPEG (`og-cover.jpg`, 1200x630).
-- **Accessibility** - skip link to `#main-content`, focus-trapped lightbox and tools reading modal (Escape closes, focus returns to the opener), visible `:focus-visible` styles, `aria-label` on icon-only controls, and `prefers-reduced-motion` fallbacks that freeze every animation. Lighthouse accessibility scores **100** on all six pages CI audits; CI itself asserts a floor of 0.9.
+- **Accessibility** - skip link to `#main-content`, focus-trapped lightbox and tools reading modal (Escape closes, focus returns to the opener), visible `:focus-visible` styles, `aria-label` on icon-only controls, and `prefers-reduced-motion` fallbacks that freeze every animation. Lighthouse accessibility scores **100** on all eight pages CI audits; CI itself asserts a floor of 0.9.
 - **Resilient hero (no-JS / script-failure safe)** - the preloader overlay and the hero's `opacity: 0` base state are cleared from `js/script.js`. Two safeguards prevent a permanently blank page if that file never runs: `src/layouts/BaseLayout.astro` ships a `<noscript>` style block that hides the preloader and reveals the hero, and `src/pages/index.astro` carries an inline head failsafe that force-adds `.loaded` after 4.5 s (cancelled by `finishPreload()` on the normal path). Verified with JavaScript disabled and with `/js/script.js` blocked.
 
 ## Project Structure
@@ -33,6 +33,7 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - `src/pages/encplus/index.astro`: EncPlus case study page.
 - `src/pages/cv/index.astro`: Branded CV page at `/cv/`, with a desktop PDF preview and open/download controls on all devices. Replace `public/cv/Martin-Mzumara-CV.pdf` when updating the CV; also refresh `public/assets/Martin_Mzumara_CV.pdf`, retained for previously shared links. Browser PDF support varies; the direct link remains available if embedding fails.
 - `src/pages/404.astro`: Custom error page for missing routes (GitHub Pages serves it automatically; intentionally `noindex`).
+- `src/pages/blog/index.astro`, `src/pages/blog/posts/[...slug].astro`: The blog at `/blog/` - index plus one page per post, migrated from the old standalone blog repo (URLs unchanged). Posts live in `src/content/posts/` behind the `posts` collection in `src/content.config.ts`; `src/layouts/BlogPostLayout.astro` wraps each post in the portfolio shell, and `public/css/blog.css` (loaded per page, `style.css` untouched) carries the blog-specific rules.
 - `src/pages/sitemap.xml.ts`, `src/pages/robots.txt.ts`: Generated at build time from `site.ts`.
 - `src/data/tools.ts`: The posts data array (`SITE_TOOLS`) - the single source for both the pre-rendered homepage cards and the modal bodies (embedded as page JSON; see below).
 - `src/utils/obfuscate.ts`: Build-time entity encoder used for contact details (see below).
@@ -128,7 +129,8 @@ in `src/components/Footer.astro`.
 ## Accessibility
 
 Lighthouse accessibility scores **100** on every page CI audits (`/`,
-`/leaksafe/`, `/encplus/`, `/manguzi/`, `/lah-cctv/`, `/cv/`). `.lighthouserc.json`
+`/leaksafe/`, `/encplus/`, `/manguzi/`, `/lah-cctv/`, `/cv/`, `/blog/`,
+`/blog/posts/2026-09-16-why-i-switched-to-arch-linux/`). `.lighthouserc.json`
 runs Lighthouse three times per URL and fails the build below 0.9.
 
 - Skip link to `#main-content` on every page (`src/layouts/BaseLayout.astro`).

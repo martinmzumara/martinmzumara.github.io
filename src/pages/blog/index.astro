@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ChapterHead from '../../components/ChapterHead.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const description =
+  'Articles on software development, IoT systems, IT field work, and the tools I use daily.';
+
+const navLinks = [
+  { href: '/', label: 'HOME' },
+  { href: '/#projects', label: 'PROJECTS' },
+  { href: '/#experience', label: 'EXPERIENCE' },
+  { href: '/#contact', label: 'CONTACT' },
+];
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const deviceLabel = (device: string) => (device === 'phone' ? 'Phone' : 'Laptop');
+---
+<BaseLayout
+    title='Blog - Martin Mzumara'
+    description={description}
+    path='/blog/'
+    ogType='website'
+    scripts={['/js/icons.js', '/js/script.js']}
+>
+    <Fragment slot='head-end'>
+        <link rel='stylesheet' href='/css/blog.css' />
+    </Fragment>
+
+    <Navbar ariaLabel='Blog navigation' links={navLinks} action={{ href: '/cv/', label: 'VIEW RESUME' }} />
+
+    <main id='main-content'>
+
+        <!-- Single chapter band: flat post cards on hairlines, no glass -->
+        <section class='chapter-section surface-a'>
+            <div class='container'>
+
+                <ChapterHead
+                    num='01'
+                    label='Notes from the field'
+                    title={'Blog & Articles'}
+                    lead={description}
+                    as='h1'
+                    display
+                />
+
+                <ul class='blog-post-list'>
+                    {posts.map((post) => (
+                        <li>
+                            <a class='blog-post-card' href={`/blog/posts/${post.id}/`}>
+                                <div class='blog-post-meta'>
+                                    <span class='blog-meta-tag'>{post.data.tag}</span>
+                                    <span>{formatDate(post.data.date)}</span>
+                                    {post.data.device && (
+                                        <span class='blog-meta-device'>{deviceLabel(post.data.device)}</span>
+                                    )}
+                                </div>
+                                <h2 class='blog-post-title'>{post.data.title}</h2>
+                                <p class='blog-post-excerpt'>{post.data.description}</p>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+
+            </div>
+        </section>
+    </main>
+</BaseLayout>
