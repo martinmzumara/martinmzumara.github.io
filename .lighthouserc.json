@@ -9,7 +9,9 @@
         "http://localhost/encplus/",
         "http://localhost/manguzi/",
         "http://localhost/lah-cctv/",
-        "http://localhost/cv/"
+        "http://localhost/cv/",
+        "http://localhost/blog/",
+        "http://localhost/blog/posts/2026-09-16-why-i-switched-to-arch-linux/"
       ],
       "numberOfRuns": 3,
       "autodiscoverUrlBlocklist": [

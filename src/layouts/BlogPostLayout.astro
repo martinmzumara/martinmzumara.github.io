@@ -1,0 +1,97 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import ChapterHead from '../components/ChapterHead.astro';
+
+interface Props {
+    post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+
+const path = `/blog/posts/${post.id}/`;
+const title = `${post.data.title} - Martin Mzumara`;
+const description = post.data.description;
+
+const navLinks = [
+    { href: '/', label: 'HOME' },
+    { href: '/#projects', label: 'PROJECTS' },
+    { href: '/#experience', label: 'EXPERIENCE' },
+    { href: '/#contact', label: 'CONTACT' },
+];
+
+const formatDate = (date: Date) =>
+    date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const deviceLabel = (device: string) => (device === 'phone' ? 'Phone' : 'Laptop');
+
+// Reading time from the raw markdown body - 200 wpm, never below 1 minute.
+const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
+const readingMinutes = Math.max(1, Math.round(wordCount / 200));
+---
+<BaseLayout
+    title={title}
+    description={description}
+    path={path}
+    ogType='article'
+    ogTitle={post.data.title}
+    ogDescription={description}
+    scripts={['/js/icons.js', '/js/script.js']}
+>
+    <Fragment slot='head-end'>
+        <link rel='stylesheet' href='/css/blog.css' />
+    </Fragment>
+
+    <Navbar ariaLabel='Blog navigation' links={navLinks} action={{ href: '/blog/', label: 'BACK TO BLOG', icon: 'ti-arrow-left' }} />
+
+    <main id='main-content' class='blog-post-main'>
+
+        <!-- Post chapter: flat surface, hairline structure, display-scale title -->
+        <section class='chapter-section surface-a'>
+            <div class='container'>
+
+                <a class='blog-back-link' href='/blog/'>&larr; All posts</a>
+
+                <header class='blog-post-hero'>
+                    <span class='system-label'>Post</span>
+                    <h1 class='main-title'>{post.data.title}</h1>
+                    <p class='lead-text'>{post.data.description}</p>
+                    <div class='blog-post-meta'>
+                        <span class='blog-meta-tag'>{post.data.tag}</span>
+                        <span>{formatDate(post.data.date)}</span>
+                        <span>{readingMinutes} min read</span>
+                        {post.data.device && (
+                            <span class='blog-meta-device'>{deviceLabel(post.data.device)}</span>
+                        )}
+                    </div>
+                </header>
+
+                <article class='blog-prose'>
+                    <slot />
+                </article>
+
+                <a class='blog-back-link blog-back-link--bottom' href='/blog/'>&larr; All posts</a>
+
+            </div>
+        </section>
+
+        <!-- Ink closing section - the homepage contact closer's language -->
+        <section class='chapter-section surface-ink blog-closer'>
+            <div class='container'>
+                <ChapterHead
+                    num='01'
+                    tone='ink'
+                    label='Contact'
+                    title={"Have something to add? Let's talk."}
+                    lead='Reach out by email or phone - I usually reply within a day.'
+                />
+                <div class='hero-cta'>
+                    <a href='/#contact' class='btn-primary'>GET IN TOUCH</a>
+                    <a href='/blog/' class='btn-secondary'>
+                        <i class='ti ti-arrow-left' aria-hidden='true'></i> ALL POSTS
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

@@ -1,0 +1,238 @@
+/* ============================================================================
+   Blog - part of the portfolio, not a separate site.
+   Extends the chapter design system: flat cards, hairline structure, no
+   glass, no shadows, no rounded post cards. Everything here is scoped to
+   .blog-* classes so style.css stays untouched.
+   Loaded only by /blog/ pages (see the head-end slot in BaseLayout usage).
+   ============================================================================ */
+
+/* ---------- Chapter index: the post list ---------- */
+.blog-post-list {
+    list-style: none;
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Flat row cards: one hairline per card, darkening on hover. No shadow,
+   no radius - the same rule language as the detail-page spec cards. */
+.blog-post-card {
+    display: block;
+    border-top: 1px solid var(--term-line);
+    padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.25s ease;
+}
+
+.blog-post-list li:last-child .blog-post-card {
+    border-bottom: 1px solid var(--term-line);
+}
+
+.blog-post-card:hover,
+.blog-post-card:focus-visible {
+    border-top-color: var(--text-primary);
+    text-decoration: none;
+}
+
+/* Date / tag / device - JetBrains Mono micro-label language */
+.blog-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.75rem;
+}
+
+.blog-post-meta .blog-meta-tag { color: var(--accent-blue); }
+
+.blog-post-meta .blog-meta-sep {
+    color: var(--text-faint);
+    opacity: 0.6;
+}
+
+/* Device chip: hairline, flat, 4px curve - the detail-page tag language */
+.blog-post-meta .blog-meta-device {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    padding: 0.15rem 0.5rem;
+    color: var(--text-secondary);
+}
+
+.blog-post-title {
+    font-family: var(--font-display);
+    font-size: var(--text-row);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+    overflow-wrap: break-word;
+}
+
+.blog-post-excerpt {
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: var(--measure);
+    margin: 0;
+}
+
+/* ---------- Post page shell ---------- */
+.blog-post-main { background: var(--surface-a); }
+
+/* Back link: mono micro-label with a hairline underline that darkens */
+.blog-back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    text-decoration: none;
+    border-bottom: 1px solid var(--term-line);
+    padding-bottom: 0.35rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-back-link:hover,
+.blog-back-link:focus-visible {
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
+    text-decoration: none;
+}
+
+.blog-back-link--bottom {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 0;
+}
+
+/* Post header: display-scale title under a system label */
+.blog-post-hero { padding-bottom: clamp(2rem, 4vw, 3rem); }
+
+.blog-post-hero .main-title { margin-top: 0; }
+
+/* Meta line under the lede: date, reading time, tag, device */
+.blog-post-hero .blog-post-meta { margin: 1.5rem 0 0; }
+
+/* ---------- Prose: Inter, 65ch, generous leading ---------- */
+.blog-prose {
+    font-family: var(--font-primary);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 65ch;
+}
+
+.blog-prose > *:first-child { margin-top: 0; }
+
+.blog-prose p { margin: 0 0 1.35rem; }
+
+.blog-prose strong { color: var(--text-primary); font-weight: 600; }
+
+.blog-prose a {
+    color: var(--accent-blue);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.blog-prose h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin: clamp(2.25rem, 5vw, 3rem) 0 0.85rem;
+}
+
+.blog-prose h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+    margin: 0 0 1.35rem;
+    padding-left: 1.4rem;
+}
+
+.blog-prose li { margin-bottom: 0.55rem; }
+
+.blog-prose li::marker { color: var(--accent-blue); }
+
+.blog-prose blockquote {
+    border-left: 2px solid var(--accent-blue);
+    padding-left: 1.2rem;
+    margin: 1.75rem 0;
+    color: var(--text-primary);
+    font-style: italic;
+}
+
+.blog-prose hr {
+    border: 0;
+    border-top: 1px solid var(--term-line);
+    margin: clamp(2rem, 4vw, 2.75rem) 0;
+}
+
+/* Inline code: hairline, flat, mono - no glass */
+.blog-prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--surface-b);
+    border: 1px solid var(--term-line);
+    border-radius: var(--radius-btn);
+    padding: 0.1em 0.4em;
+}
+
+/* Code blocks: flat, always-dark surface, JetBrains Mono, no glass */
+.blog-prose pre {
+    background: var(--ink-bg);
+    color: var(--ink-fg);
+    border: 1px solid var(--ink-line);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    padding: clamp(1rem, 2vw, 1.35rem) clamp(1.1rem, 2vw, 1.5rem);
+    margin: 0 0 1.35rem;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    tab-size: 2;
+}
+
+.blog-prose pre code {
+    font-family: var(--font-mono);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre;
+}
+
+/* ---------- Ink closing section (homepage contact-closer language) ---------- */
+.blog-closer .chapter-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+.blog-closer .hero-cta { margin-top: 0; }
+
+@media (max-width: 768px) {
+    .blog-post-meta { gap: 0.4rem 0.75rem; }
+    .blog-prose pre { font-size: 0.82rem; }
+}
+
+
