@@ -228,17 +228,13 @@ h1, h2, .section-title, .footer-brand h2 {
    Structural elements
    ============================================================ */
 
-/* Section dividers - plain hairline (defined below, with .section-title) */
-
 /* Nav links */
 /* Flat terminal buttons - black pill primary (Resend), green on hover */
-.btn-primary,
-.project-cta-box .btn-primary {
+.btn-primary {
     background: var(--btn-bg);
     box-shadow: none;
 }
-.btn-primary:hover,
-.project-cta-box .btn-primary:hover {
+.btn-primary:hover {
     background: var(--btn-hover-bg);
     box-shadow: none;
 }
@@ -325,19 +321,6 @@ body::after {
     line-height: 1.05;
     margin-bottom: 2rem;
     max-width: var(--measure);
-}
-
-/* Section padding */
-.section-padding {
-    padding-top: var(--space-6);
-    padding-bottom: var(--space-6);
-}
-
-.section-divider {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--glass-border-strong), transparent);
-    margin: 2rem auto;
 }
 
 /* ---------- Navigation (solid bar, hairline border - Resend style) ---------- */
@@ -649,53 +632,9 @@ body::after {
     color: var(--accent-blue);
 }
 
-/* ---------- General Grid & Cards (glass) ---------- */
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 1.5rem;
-}
-
-.card {
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1.6rem;
-    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-/* top-left colorful sheen on cards */
-.card::before {
-    content: '';
-    position: absolute;
-    top: -55%;
-    left: -25%;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-blue-glow), transparent 65%);
-    filter: blur(6px);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    border-color: var(--glass-border-strong);
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-}
-
-/* Colorful hover sheen removed (Resend pass). The empty content keeps this
-   pseudo-element inert (no title-bar rule applies to .card any more). */
-.card:hover::before {
-    opacity: 0;
-}
-
+/* ---------- Cards ----------
+   The generic .card and .grid-cards glass primitives are gone: no markup uses
+   them. .icon-large is kept because it is still referenced. */
 .icon-large {
     color: var(--accent-blue);
     width: 32px;
@@ -703,96 +642,7 @@ body::after {
     margin-bottom: 1rem;
 }
 
-.card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
-.card p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-/* ---------- Projects Section ---------- */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--glass-border-strong);
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-}
-
-.project-thumb {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    background-color: rgba(0,0,0,0.18);
-}
-
-.project-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.9;
-    transition: transform 0.4s ease, opacity 0.3s ease;
-}
-
-.project-card:hover .project-thumb img {
-    opacity: 1;
-    transform: scale(1.05);
-}
-
-.project-thumb::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 45%, rgba(8,9,14,0.55));
-    pointer-events: none;
-}
-
-.project-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-    color: #fff;
-    font-size: 0.7rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    padding: 0.3rem 0.7rem;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px var(--accent-blue-glow);
-}
-
-.project-badge.muted {
-    background: var(--glass-bg-soft);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    color: var(--text-secondary);
-    box-shadow: none;
-}
-
+/* ---------- Placeholder thumbnail (tools modal + gallery fallback) ---------- */
 .placeholder-thumb {
     display: flex;
     align-items: center;
@@ -808,53 +658,6 @@ body::after {
     height: 48px;
     color: var(--text-secondary);
     filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));
-}
-
-.project-body {
-    padding: 1.6rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.project-body h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.6rem;
-}
-
-.project-body p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 1.25rem;
-    flex-grow: 1;
-}
-
-.project-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.45rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    background: var(--glass-bg-soft);
-    border: 1px solid var(--glass-border);
-    border-radius: 6px;
-    padding: 0.55rem 0.7rem;
-    margin: -0.5rem 0 1.25rem;
-}
-
-.project-note i {
-    color: var(--accent-blue);
-    font-size: 15px;
-    line-height: 1.4;
-    flex-shrink: 0;
-}
-
-.project-meta {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
 }
 
 .tag {
@@ -1192,7 +995,8 @@ body::after {
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
 }
 
-/* Glass caption plate floating on the photo */
+/* Caption plate - Inter body copy on the same frosted surface as the arrows
+   (same background token, same 10px blur, no border, same 4px curve). */
 .showcase-caption {
     position: absolute;
     left: 10px;
@@ -1202,12 +1006,19 @@ body::after {
     align-items: center;
     gap: 0.4rem;
     padding: 0.45rem 0.6rem;
-    border-radius: 11px;
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    letter-spacing: 0.01em;
-    color: #fff;
-    background: rgba(6,8,12,0.62);
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-primary);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: var(--elev-2);
     pointer-events: none;
     transition: transform 0.3s ease;
 }
@@ -1638,54 +1449,7 @@ body.lightbox-open {
     color: var(--text-primary);
 }
 
-/* Project CTA Box */
-.project-cta-box {
-    position: relative;
-    margin-top: 3rem;
-    background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 3rem 2.5rem;
-    text-align: center;
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-    overflow: hidden;
-}
-
-.project-cta-box::before {
-    content: '';
-    position: absolute;
-    top: -60%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-blue-glow), transparent 65%);
-    filter: blur(20px);
-}
-
-.project-cta-box h3 {
-    position: relative;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.project-cta-box p {
-    position: relative;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    max-width: 500px;
-    margin: 0 auto 1.5rem;
-}
-
-.project-cta-box .btn-primary {
-    position: relative;
-}
-
-.main-title,
-.page-title {
+.main-title {
     font-family: var(--font-display);
     font-size: var(--text-hero);
     font-weight: 600;
@@ -1707,14 +1471,12 @@ body.lightbox-open {
     line-height: 1.6;
 }
 
-/* CV page - framed PDF preview */
+/* CV page - PDF preview frame. Flat like the case-study cards: a hairline top
+   rule carries the break, no glass panel, no shadow, sharp corners. */
 .cv-frame {
-    margin-top: 2rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1.6rem;
-    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
+    margin-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--glass-border);
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .cv-frame iframe {
@@ -1723,7 +1485,7 @@ body.lightbox-open {
     height: 78vh;
     min-height: 520px;
     border: 0;
-    border-radius: 8px;
+    border-radius: 0;
     background: #ffffff;
 }
 
@@ -1744,8 +1506,8 @@ body.lightbox-open {
     gap: 0.5rem;
     margin-top: 1.5rem;
     padding: 1rem 1.25rem;
-    border: 1px dashed var(--glass-border);
-    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 0;
 }
 
 @media (max-width: 768px) {
@@ -1787,6 +1549,27 @@ body.lightbox-open {
 .spec-value {
     font-weight: 600;
     font-size: 0.95rem;
+}
+
+/* Live-site capture: the full desktop page (1280px wide, whole scroll) framed
+   as a wide window. Fitting 3300px of page into the column would push the
+   gallery three screens down, so the frame crops to the top of the build. */
+.live-shot {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    /* Same rhythm as the gallery gap below it */
+    margin-bottom: 1.5rem;
+}
+
+.live-shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
 }
 
 .gallery-grid {
@@ -1879,15 +1662,18 @@ body.lightbox-open {
     object-position: center;
 }
 
-/* ---------- Footer (glass) ---------- */
+/* Phone-aspect captures (390x844) crop vertically inside the 4:3 frame, so
+   anchor them to the top of the screenshot: the card then shows the mobile
+   nav + hero instead of a centre slice. Landscape sources only crop
+   horizontally, so this is a no-op for them. */
+.gallery-grid--uniform .gallery-card--portrait picture img { object-position: center top; }
+
+/* ---------- Footer (flat surface + hairline top, no glass) ---------- */
 .footer {
     border-top: 1px solid var(--glass-border);
-    background: var(--glass-bg-soft);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    background: var(--surface-b);
     padding: 3rem 0 2rem;
     margin-top: 4rem;
-    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: background-color 0.2s ease;
 }
 
@@ -1956,13 +1742,16 @@ body.lightbox-open {
     flex-shrink: 0;
 }
 
+/* Contact links read as plain text: the underline is a hover/focus affordance
+   only, so the address stays clean until someone reaches for it. */
 .contact-list a {
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.contact-list a:hover {
+.contact-list a:hover,
+.contact-list a:focus-visible {
     color: var(--accent-blue);
     text-decoration: underline;
 }
@@ -2013,56 +1802,9 @@ body.lightbox-open {
     height: 18px;
 }
 
-/* ---------- 404 Error Page ---------- */
-.error-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 62vh;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-    text-align: center;
-}
-
-.error-content {
-    max-width: 620px;
-    padding: 2.5rem 2rem;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-}
-
-.error-code {
-    font-family: var(--font-mono);
-    font-size: 6rem;
-    font-weight: 700;
-    line-height: 1;
-    background: linear-gradient(100deg, var(--accent-blue), var(--accent-cyan) 60%, var(--accent-blue));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin: 1rem 0 0.5rem;
-}
-
-.error-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.error-message {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    max-width: 450px;
-    margin: 0 auto 1.5rem;
-}
-
-.error-actions {
-    justify-content: center;
-}
+/* ---------- 404 Error Page ----------
+   The page now uses the shared chapter system (chapter-section + ChapterHead),
+   so the old centred glass panel and its gradient numerals are gone. */
 
 /* Hero CTA */
 .hero-cta {
@@ -2306,24 +2048,8 @@ body.lightbox-open {
         gap: 0.25rem;
     }
 
-    .project-thumb {
-        height: 160px;
-    }
-
     .showcase-carousel {
         --card-w: min(72vw, 240px);
-    }
-
-    .error-code {
-        font-size: 4rem;
-    }
-
-    .error-title {
-        font-size: 1.4rem;
-    }
-
-    .project-cta-box {
-        padding: 2rem 1.25rem;
     }
 }
 
@@ -2618,56 +2344,12 @@ body.loaded .hero-cta {
 .reveal-el { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
 .reveal-el.revealed { opacity: 1; transform: none; }
 
-/* 3D spotlight on cards */
-.card, .project-card, .tool-card { transform-style: preserve-3d; }
-.card::after, .project-card::after, .tool-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.10), transparent 60%);
-}
-.card:hover::after, .project-card:hover::after, .tool-card:hover::after { opacity: 1; }
+/* Card spotlight removed: the green radial glow tracked by --mx/--my contradicted
+   "structure from borders, not glows". The JS that set those custom properties is
+   gone too - the 3D tilt branch it guarded only ever matched .card/.project-card,
+   which no longer exist, and tool cards already lift via .tool-card:hover. */
 
-[data-theme="dark"] .card::after,
-[data-theme="dark"] .project-card::after,
-[data-theme="dark"] .tool-card::after {
-    background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(63, 185, 80, 0.16), transparent 60%);
-    mix-blend-mode: screen;
-}
-
-/* ---------- Tools section: filters + grid + cards ---------- */
-.tools-filter { display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; }
-.filter-btn {
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(10px) saturate(150%);
-    backdrop-filter: blur(10px) saturate(150%);
-    border: 1px solid var(--glass-border);
-    color: var(--text-secondary);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.1rem;
-    border-radius: 999px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-.filter-btn i { width: 16px; height: 16px; }
-.filter-btn:hover { color: var(--text-primary); border-color: var(--glass-border-strong); transform: translateY(-1px); }
-.filter-btn.active {
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-    color: #fff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px var(--accent-blue-glow), inset 0 1px 0 rgba(255,255,255,0.25);
-}
+/* ---------- Tools section (grid + cards; the old filter chips are gone) ---------- */
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
 .tool-card {
     background: var(--glass-bg);
@@ -2721,31 +2403,56 @@ body.loaded .hero-cta {
 .ci.icon-moon { display: none; }
 
 /* ---------- Tools reading modal ---------- */
-.tools-modal { position: fixed; inset: 0; z-index: 1500; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-.tools-modal.active { visibility: visible; opacity: 1; }
-.tools-modal-backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.tools-modal { position: fixed; inset: 0; z-index: 1500; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+/* visibility flips on the opening frame (so the close button can take focus)
+   and only after the fade on close. */
+.tools-modal.active { visibility: visible; opacity: 1; transition: opacity 0.3s ease, visibility 0s linear 0s; }
+/* Flat scrim - the blur was the last glass layer on the overlay */
+.tools-modal-backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.4); }
 [data-theme="dark"] .tools-modal-backdrop { background: rgba(5, 8, 14, 0.62); }
 .tools-modal-card {
     position: relative;
     width: min(680px, 100%);
     max-height: 86vh;
     overflow-y: auto;
-    background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(30px) saturate(160%);
-    backdrop-filter: blur(30px) saturate(160%);
+    /* Flat chapter surface + hairline + the same 4px curve as every button */
+    background: var(--surface-a);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-    padding: 2.2rem 2rem;
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    padding: var(--space-4);
     transform: translateY(18px) scale(0.98);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .tools-modal.active .tools-modal-card { transform: none; opacity: 1; }
-.tools-modal-close { position: sticky; top: 0; float: right; background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease; }
-.tools-modal-close:hover { background: var(--accent-blue); color: #fff; transform: rotate(90deg); }
-.tools-modal-content h3 { font-family: var(--font-display); font-size: 1.6rem; margin: 0.6rem 0 0.2rem; }
-.tools-modal-content .tool-meta { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 1rem; display: block; }
+.tools-modal-close { position: sticky; top: 0; float: right; background: transparent; border: 1px solid var(--glass-border); color: var(--text-primary); width: 36px; height: 36px; border-radius: var(--radius-btn); cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 1.15rem; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.tools-modal-close:hover { background: var(--surface-b); border-color: var(--accent-blue); color: var(--accent-blue); }
+/* Device chip + category label share one row, spaced with the same 0.5rem
+   rhythm the stack/tag rows use instead of sitting flush against each other. */
+.tools-modal-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.tools-modal-content h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.6rem); letter-spacing: -0.02em; margin: 0.6rem 0 0.2rem; }
+/* Device chip on the detail-page tag language: hairline, flat, 4px curve,
+   Inter, small - not the old glass pill (blur, --glass-bg-soft, 999px radius,
+   accent-tinted glass border). Scoped to the modal so the tool cards keep
+   whatever chip styling their own page gives them. */
+.tools-modal-content .tool-device {
+    font-family: var(--font-primary);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    color: var(--text-secondary);
+}
+/* The lead is a sentence, not a spec line - body font like the card summary */
+.tools-modal-content .tool-meta { font-family: var(--font-primary); font-size: 0.95rem; line-height: 1.6; letter-spacing: 0; color: var(--text-secondary); margin-bottom: 1rem; display: block; }
 .tools-modal-content p { color: var(--text-secondary); margin: 0.75rem 0; line-height: 1.7; }
 .tools-modal-content ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; padding: 0; }
 .tools-modal-content li { display: flex; gap: 0.65rem; align-items: flex-start; color: var(--text-secondary); font-size: 0.93rem; }
@@ -2767,38 +2474,8 @@ body.tools-open { overflow: hidden; }
 }
 
 /* ============================================================
-   Additions: project-card links, testimonials, contact section
+   Additions: testimonials, contact section
    ============================================================ */
-
-/* ---------- Project cards: real link targets ---------- */
-.project-card { position: relative; color: inherit; }
-.project-thumb-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-}
-.project-body h3 a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.project-body h3 a:hover { color: var(--accent-blue); }
-
-a.project-link-btn {
-    text-decoration: none;
-    color: var(--accent-blue);
-}
-a.project-link-btn i,
-a.project-link-btn .ci {
-    transition: transform 0.2s ease;
-}
-a.project-link-btn:hover {
-    color: var(--accent-cyan);
-}
-a.project-link-btn:hover i,
-a.project-link-btn:hover .ci {
-    transform: translateX(3px);
-}
 
 /* ---------- Testimonials ---------- */
 .testimonials-grid {
@@ -2918,7 +2595,8 @@ a.project-link-btn:hover .ci {
     transition: color 0.2s ease;
 }
 
-.contact-card p a:hover {
+.contact-card p a:hover,
+.contact-card p a:focus-visible {
     color: var(--accent-blue);
     text-decoration: underline;
 }
@@ -3377,25 +3055,17 @@ section[id] { scroll-margin-top: 90px; }
     scroll-snap-align: start;
 }
 
-#showcase .showcase-caption {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-}
-
 
    /* ============================================================
    Even-row grids (design-lab) - explicit column counts so a row
    never forms a partial line (no 3+1 / 2+2+1 orphans).
-   Counts: grid-cards 4 · projects 4 · contact 6 · tools 3 ·
+   Counts: contact 6 · tools 3 ·
    specs 6 (--five: 5) · features 6 (--three: 3) · stack 4
    (--three: 3) · challenge 3 (--four: 4) · gallery 4 (--three: 3)
    ============================================================ */
 
 /* -- Desktop >= 1200px: full lines (4 / 3 per row) -- */
 @media (min-width: 1200px) {
-    .grid-cards { grid-template-columns: repeat(4, 1fr); }
-    .projects-grid { grid-template-columns: repeat(4, 1fr); }
     .tools-grid { grid-template-columns: repeat(3, 1fr); }
     .contact-grid { grid-template-columns: repeat(3, 1fr); }
     .specs-grid { grid-template-columns: repeat(3, 1fr); }
@@ -3412,8 +3082,6 @@ section[id] { scroll-margin-top: 90px; }
 
 /* -- Tablet 769-1199px: even splits only (2+2 / 3+3 / one line) -- */
 @media (min-width: 769px) and (max-width: 1199px) {
-    .grid-cards { grid-template-columns: repeat(2, 1fr); }
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
     .tools-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: repeat(3, 1fr); }
     .specs-grid { grid-template-columns: repeat(3, 1fr); }
@@ -3453,7 +3121,7 @@ section[id] { scroll-margin-top: 90px; }
    number; the hero uses it on the headline's full stop).
    ============================================================ */
 
-/* ---------- Page shell: content width + section rhythm ---------- */
+/* ---------- Page shell: homepage hero (homepage-only) ---------- */
 .page-home .hero-title {
     font-family: var(--font-display);
     font-size: var(--text-display);
@@ -3469,24 +3137,38 @@ section[id] { scroll-margin-top: 90px; }
     max-width: 46ch;
 }
 
-.page-home .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; }
+/* ============================================================
+   Chapter system - GLOBAL
+   De-scoped from .page-home / .detail-page so every chaptered page
+   (homepage, the four case studies, 404, CV) shares one band rhythm,
+   heading scale and button treatment. Where a page still needs to
+   differ (detail breakout, tighter chapter gap, 62ch lead) the delta
+   stays scoped further down.
+   ============================================================ */
 
-.page-home .container {
+/* CTA rows */
+.hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; }
+
+/* Content measure. Keyed off <main> so the navbar/footer containers that live
+   outside <main> keep the base .container rules. */
+main .container,
+main.container {
     max-width: var(--content-max);
     padding-inline: var(--gutter);
 }
 
-.page-home .chapter-section {
+/* Full-bleed section bands on the shared --space-section rhythm */
+.chapter-section {
     padding-block: var(--space-section);
     background: var(--surface-a);
 }
 
-.page-home .surface-a { background: var(--surface-a); }
-.page-home .surface-b { background: var(--surface-b); }
-.page-home .surface-ink { background: var(--ink-bg); color: var(--ink-fg); }
+.surface-a { background: var(--surface-a); }
+.surface-b { background: var(--surface-b); }
+.surface-ink { background: var(--ink-bg); color: var(--ink-fg); }
 
 /* ---------- Chapter entry (number / label / oversized heading) ---------- */
-.page-home .chapter-head {
+.chapter-head {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: 1.25rem clamp(1.25rem, 3vw, 2rem);
@@ -3494,7 +3176,7 @@ section[id] { scroll-margin-top: 90px; }
     margin-bottom: clamp(3rem, 6vw, 4.5rem);
 }
 
-.page-home .chapter-num {
+.chapter-num {
     font-family: var(--font-mono);
     font-size: var(--text-chapter-num);
     font-weight: 500;
@@ -3504,9 +3186,12 @@ section[id] { scroll-margin-top: 90px; }
     padding-top: 0.2em;
 }
 
-.page-home .chapter-head .system-label { margin-bottom: 0.85rem; }
+.chapter-head .system-label { margin-bottom: 0.85rem; }
 
-.page-home .section-title {
+/* A display-scale title inside a chapter head keeps the label tight above it */
+.chapter-head .main-title { margin-top: 0; }
+
+.section-title {
     font-family: var(--font-display);
     font-size: var(--text-section-xl);
     font-weight: 600;
@@ -3517,7 +3202,8 @@ section[id] { scroll-margin-top: 90px; }
     margin-bottom: 0;
 }
 
-.page-home .chapter-head .section-lead {
+.chapter-head .section-lead,
+section > .section-lead {
     margin-top: 1.35rem;
     max-width: 60ch;
     font-size: clamp(1rem, 1.3vw, 1.15rem);
@@ -3840,23 +3526,20 @@ section[id] { scroll-margin-top: 90px; }
     box-shadow: none;
 }
 
-.page-home .showcase-carousel--full .showcase-caption {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-}
-
+/* The carousel caption used to be re-set to mono/letter-spaced here - the
+   base .showcase-caption rule carries the editorial treatment now. */
 .page-home .showcase-carousel--full .carousel-foot {
     max-width: var(--content-max);
     margin: 0 auto;
     padding-inline: var(--gutter);
 }
 /* ---------- 07 Contact (ink - the most dramatic block) ---------- */
-.page-home .surface-ink .chapter-head .system-label { color: var(--ink-fg-muted); }
+.surface-ink .chapter-head .system-label { color: var(--ink-fg-muted); }
 
-.page-home .surface-ink .section-title { color: var(--ink-fg); }
+.surface-ink .section-title { color: var(--ink-fg); }
 
-.page-home .surface-ink .chapter-head .section-lead { color: var(--ink-fg-muted); }
+.surface-ink .chapter-head .section-lead,
+.surface-ink section > .section-lead { color: var(--ink-fg-muted); }
 
 /* Green stays on the chapter number only - the dot goes light on ink */
 .page-home .surface-ink .accent-dot { color: var(--ink-fg); }
@@ -3916,10 +3599,17 @@ section[id] { scroll-margin-top: 90px; }
     color: var(--ink-fg);
 }
 
+/* On ink the address is display-sized type, so it must not carry a standing
+   underline - the rule arrives on hover / keyboard focus instead. */
 .page-home .surface-ink .contact-card p a {
     color: var(--ink-fg);
-    text-decoration: underline;
+    text-decoration: none;
     text-underline-offset: 3px;
+}
+
+.page-home .surface-ink .contact-card p a:hover,
+.page-home .surface-ink .contact-card p a:focus-visible {
+    text-decoration: underline;
 }
 
 .page-home .surface-ink .copy-btn {
@@ -3948,34 +3638,44 @@ section[id] { scroll-margin-top: 90px; }
     }
 }
 
-/* Homepage buttons stay monochrome so green reads purely as the accent;
-   the ink section flips them to light-on-ink. */
-.page-home .btn-primary {
+/* Chaptered content uses monochrome buttons so green reads purely as the
+   accent; the ink section flips them to light-on-ink. Keyed off <main>: the
+   navbar action button keeps its own --btn-bg/--btn-hover-bg theme colour. */
+main .btn-primary {
     background: var(--text-primary);
     color: var(--surface-a);
 }
 
-.page-home .btn-primary:hover {
+main .btn-primary:hover {
     background: var(--text-secondary);
     color: var(--surface-a);
 }
 
-.page-home .surface-ink .btn-primary {
+/* Every button takes the theme toggle's gentle 4px curve instead of a pill.
+   Deliberately unqualified so it also covers the navbar action button, which
+   lives outside <main> - scoping this to main was what regressed it to a pill. */
+.btn-primary,
+.btn-secondary,
+.copy-btn,
+.tools-view-all,
+.carousel-btn { border-radius: var(--radius-btn); }
+
+.surface-ink .btn-primary {
     background: var(--ink-fg);
     color: var(--ink-bg);
 }
 
-.page-home .surface-ink .btn-primary:hover {
+.surface-ink .btn-primary:hover {
     background: rgba(250, 250, 250, 0.82);
     color: var(--ink-bg);
 }
 
-.page-home .surface-ink .btn-secondary {
+.surface-ink .btn-secondary {
     border-color: var(--ink-line);
     color: var(--ink-fg);
 }
 
-.page-home .surface-ink .btn-secondary:hover { border-color: var(--ink-fg); }
+.surface-ink .btn-secondary:hover { border-color: var(--ink-fg); }
 
 /* Phase 7: the progress bar was a green/teal/gold gradient - now a single
    ink rule so green stays the only accent on the page. */
@@ -3993,16 +3693,8 @@ section[id] { scroll-margin-top: 90px; }
     .page-home .tool-card { animation: none; }
 }
 
-/* ---------- Phase 7 fix: button curvature ----------
-   Every button on the page takes the theme toggle's gentle 4px curve instead
-   of a pill (CTAs, contact buttons, tools link, carousel arrows). Keyed off
-   the page rather than `.page-home` because the navbar and footer buttons live
-   outside <main>; other pages keep their pills until their own pass. */
-body:has(main.page-home) .btn-primary,
-body:has(main.page-home) .btn-secondary,
-body:has(main.page-home) .copy-btn,
-body:has(main.page-home) .tools-view-all,
-body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
+/* Button curvature (4px --radius-btn) is part of the global button rules in
+   the chapter block above; navbar/footer chrome outside <main> keeps its pill. */
 
 /* ---------- Phase 7 responsive ---------- */
 @media (max-width: 1099px) {
@@ -4087,14 +3779,9 @@ body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
    to the root element it propagates to the viewport, so sticky nav is safe. */
 html:has(main.detail-page) { overflow-x: clip; }
 
-/* Reuses the existing markers so the old .container / .project-detail-container
-   rules stay meaningful: narrower measure + the section gutter, and the top
-   padding that clears the fixed navbar. */
-.detail-page.container {
-    max-width: var(--content-max);
-    padding-inline: var(--gutter);
-}
-
+/* Content measure + section gutter now come from the global chapter block
+   (main .container / main.container). Only the detail shell's own padding and
+   surface stay here: the top padding that clears the fixed navbar. */
 .detail-page.project-detail-container {
     padding-top: clamp(7rem, 13vh, 10rem);
     padding-bottom: 0;
@@ -4104,7 +3791,7 @@ html:has(main.detail-page) { overflow-x: clip; }
 /* ---------- Hero ---------- */
 .detail-page .project-detail-header { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
 
-.detail-page .main-title {
+.main-title {
     font-family: var(--font-display);
     font-size: var(--text-display);
     font-weight: 600;
@@ -4117,19 +3804,12 @@ html:has(main.detail-page) { overflow-x: clip; }
 
 .detail-page .main-title .accent-dot { color: var(--accent-blue); }
 
-.detail-page .lead-text {
+.lead-text {
     font-size: clamp(1.05rem, 1.6vw, 1.35rem);
     line-height: 1.55;
     color: var(--text-secondary);
     max-width: 58ch;
     margin-bottom: 0;
-}
-
-.detail-page .hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-    align-items: center;
 }
 
 .detail-page .project-actions { margin-top: clamp(1.75rem, 3vw, 2.5rem); }
@@ -4171,59 +3851,24 @@ html:has(main.detail-page) { overflow-x: clip; }
     color: var(--text-primary);
 }
 
-/* ---------- Chapter bands (full-bleed alternating surfaces) ---------- */
+/* ---------- Chapter bands (full-bleed alternating surfaces) ----------
+   The shared padding/background/surface rules live in the global chapter
+   block; detail pages only add the viewport-edge breakout, because their
+   <main> is capped at --content-max. */
 .detail-page .chapter-section {
-    padding-block: var(--space-section);
     padding-inline: calc(50vw - 50%);
     margin-inline: calc(50% - 50vw);
-    background: var(--surface-a);
 }
 
-.detail-page .surface-a { background: var(--surface-a); }
-.detail-page .surface-b { background: var(--surface-b); }
-.detail-page .surface-ink { background: var(--ink-bg); color: var(--ink-fg); }
+/* ---------- Chapter entry: detail sits a touch tighter under the hero ---------- */
+.detail-page .chapter-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 
-/* ---------- Chapter entry (mirrors the homepage ChapterHead) ---------- */
-.detail-page .chapter-head {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 1.25rem clamp(1.25rem, 3vw, 2rem);
-    align-items: start;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-.detail-page .chapter-num {
-    font-family: var(--font-mono);
-    font-size: var(--text-chapter-num);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--accent-blue);
-    padding-top: 0.2em;
-}
-
-.detail-page .chapter-head .system-label { margin-bottom: 0.85rem; }
-
-.detail-page .section-title {
-    font-family: var(--font-display);
-    font-size: var(--text-section-xl);
-    font-weight: 600;
-    line-height: 1.02;
-    letter-spacing: var(--tracking-section);
-    color: var(--text-primary);
-    max-width: 22ch;
-    margin-bottom: 0;
-    overflow-wrap: break-word;
-}
+/* The shared section-title lives in the global chapter block; detail pages
+   only add the break-word guard for long case-study titles. */
+.detail-page .section-title { overflow-wrap: break-word; }
 
 .detail-page .chapter-head .section-lead,
-.detail-page section > .section-lead {
-    margin-top: 1.35rem;
-    max-width: 62ch;
-    font-size: clamp(1rem, 1.3vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--text-secondary);
-}
+.detail-page section > .section-lead { max-width: 62ch; }
 
 /* ---------- Flat editorial cards (no glass, no shadow, hairline rule) ---------- */
 .detail-page .stat-card,
@@ -4372,47 +4017,9 @@ html:has(main.detail-page) { overflow-x: clip; }
 
 
 
-/* ---------- Ink closing chapter (mirrors the homepage contact closer) ---------- */
-.detail-page .surface-ink .chapter-head .system-label { color: var(--ink-fg-muted); }
-.detail-page .surface-ink .section-title { color: var(--ink-fg); }
-.detail-page .surface-ink .chapter-head .section-lead,
-.detail-page .surface-ink section > .section-lead { color: var(--ink-fg-muted); }
-
+/* ---------- Ink closing chapter ----------
+   The surface-ink heading/button rules live in the global chapter block. */
 .detail-page .detail-cta .hero-cta { margin-top: clamp(2rem, 4vw, 3rem); }
-
-.detail-page .surface-ink .btn-primary {
-    background: var(--ink-fg);
-    color: var(--ink-bg);
-}
-
-.detail-page .surface-ink .btn-primary:hover {
-    background: rgba(250, 250, 250, 0.82);
-    color: var(--ink-bg);
-}
-
-.detail-page .surface-ink .btn-secondary {
-    border-color: var(--ink-line);
-    color: var(--ink-fg);
-}
-
-.detail-page .surface-ink .btn-secondary:hover { border-color: var(--ink-fg); }
-
-/* ---------- Buttons: monochrome + the theme toggle's 4px curve ---------- */
-.detail-page .btn-primary,
-body:has(main.detail-page) .btn-primary {
-    background: var(--text-primary);
-    color: var(--surface-a);
-    border-radius: var(--radius-btn);
-}
-
-.detail-page .btn-primary:hover,
-body:has(main.detail-page) .btn-primary:hover {
-    background: var(--text-secondary);
-    color: var(--surface-a);
-}
-
-.detail-page .btn-secondary,
-body:has(main.detail-page) .btn-secondary { border-radius: var(--radius-btn); }
 
 /* ---------- Detail-page responsive ---------- */
 @media (max-width: 899px) {

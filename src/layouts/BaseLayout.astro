@@ -99,6 +99,18 @@ const {
     <link rel="preload" href="/assets/fonts/jetbrains-mono/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/bricolage/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
 
+    <!-- The preloader overlay and the hero's opacity:0 base state are both cleared only from
+         js/script.js. With JS disabled, or if that file fails to load or throws, .hero-title,
+         .hero-lede and .hero-cta would stay invisible, so force them visible here. This lives in
+         BaseLayout rather than index.astro because the opacity:0 base state is global - without
+         it the hero CTA is invisible on 6 of the 7 pages when JS is off. -->
+    <noscript>
+        <style is:inline>
+            .preloader { display: none !important; }
+            .hero-title, .hero-lede, .hero-cta { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
+
     <!-- Page-specific late head content (JSON-LD) -->
     <slot name="head-end" />
 </head>

@@ -86,8 +86,10 @@
         var openToolModal = function (tool) {
             if (!toolsModal || !toolsModalContent) return;
             toolsModalContent.innerHTML =
-                '<span class="tool-device ' + tool.dev + '"><i class="ti ' + deviceIcon(tool.dev) + '"></i> ' + deviceLabel(tool.dev) + '</span>' +
-                '<span class="tool-tag">' + tool.tag + '</span>' +
+                '<div class="tools-modal-kicker">' +
+                    '<span class="tool-device ' + tool.dev + '"><i class="ti ' + deviceIcon(tool.dev) + '"></i> ' + deviceLabel(tool.dev) + '</span>' +
+                    '<span class="tool-tag">' + tool.tag + '</span>' +
+                '</div>' +
                 '<h3>' + tool.name + '</h3>' +
                 '<span class="tool-meta">' + tool.summary + '</span>' +
                 '<p>' + tool.intro + '</p>' +
@@ -96,7 +98,22 @@
             toolsModal.classList.add('active');
             toolsModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('tools-open');
-            if (toolsModalClose) toolsModalClose.focus();
+            // The dialog only becomes focusable once the style tick that starts
+            // its open transition has run - a focus() issued there is dropped.
+            // That tick usually lands within two frames, but while the main
+            // thread is busy (theme repaint, image decode) visibility can stay
+            // hidden for a few hundred ms, so retry on the next frames until
+            // keyboard focus actually lands on the close button.
+            var focusAttempts = 0;
+            var focusClose = function () {
+                if (!toolsModal || !toolsModalClose) return;
+                if (!toolsModal.classList.contains('active')) return;
+                if (document.activeElement === toolsModalClose) return;
+                if (focusAttempts++ >= 40) return;
+                toolsModalClose.focus();
+                if (document.activeElement !== toolsModalClose) requestAnimationFrame(focusClose);
+            };
+            requestAnimationFrame(function () { requestAnimationFrame(focusClose); });
         };
 
         var closeToolModal = function () {
@@ -121,8 +138,29 @@
         if (toolsModalClose) toolsModalClose.addEventListener('click', closeToolModal);
         if (toolsModalBackdrop) toolsModalBackdrop.addEventListener('click', closeToolModal);
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && toolsModal && toolsModal.classList.contains('active')) {
+            if (!toolsModal || !toolsModal.classList.contains('active')) return;
+            if (e.key === 'Escape') {
                 closeToolModal();
+                return;
+            }
+            // Same tab cycle the lightbox uses: with the dialog open, Tab and
+            // Shift+Tab wrap on the close button instead of walking the page
+            // behind it.
+            if (e.key === 'Tab') {
+                // a[href], not [href]: the sprite's <use href="#ic-..."> nodes
+                // match [href] but are never focusable, which would put the
+                // wrap point on an element that can never be activeElement.
+                var focusable = toolsModal.querySelectorAll(
+                    'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                if (focusable.length === 0) return;
+                var firstElem = focusable[0];
+                var lastElem = focusable[focusable.length - 1];
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElem) { e.preventDefault(); lastElem.focus(); }
+                } else {
+                    if (document.activeElement === lastElem) { e.preventDefault(); firstElem.focus(); }
+                }
             }
         });
     };
