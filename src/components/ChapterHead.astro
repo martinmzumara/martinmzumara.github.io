@@ -8,16 +8,24 @@ interface Props {
   lead?: string;
   /** 'ink' inverts the label/lead colours for dark surfaces */
   tone?: 'default' | 'ink';
+  /** Heading level. A page whose only heading is this one passes 'h1'. */
+  as?: 'h1' | 'h2';
+  /** Render the title at the display scale (--text-display) instead of the
+      chapter scale, for a page's sole heading. */
+  display?: boolean;
 }
 
-const { num, label, title, lead, tone = 'default' } = Astro.props;
+const { num, label, title, lead, tone = 'default', as = 'h2', display = false } = Astro.props;
+const titleClass = display ? 'main-title' : 'section-title';
 ---
 
 <header class={`chapter-head chapter-head--${tone}`}>
     <span class="chapter-num" aria-hidden="true">{num}</span>
     <div class="chapter-head-body">
         <span class="system-label">{label}</span>
-        <h2 class="section-title">{title}</h2>
+        {as === 'h1'
+            ? <h1 class={titleClass}>{title}</h1>
+            : <h2 class={titleClass}>{title}</h2>}
         {lead && <p class="section-lead">{lead}</p>}
     </div>
 </header>

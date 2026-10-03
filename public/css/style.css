@@ -1707,14 +1707,12 @@ body.lightbox-open {
     line-height: 1.6;
 }
 
-/* CV page - framed PDF preview */
+/* CV page - PDF preview frame. Flat like the case-study cards: a hairline top
+   rule carries the break, no glass panel, no shadow, sharp corners. */
 .cv-frame {
-    margin-top: 2rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1.6rem;
-    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
+    margin-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--glass-border);
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .cv-frame iframe {
@@ -1723,7 +1721,7 @@ body.lightbox-open {
     height: 78vh;
     min-height: 520px;
     border: 0;
-    border-radius: 8px;
+    border-radius: 0;
     background: #ffffff;
 }
 
@@ -1744,8 +1742,8 @@ body.lightbox-open {
     gap: 0.5rem;
     margin-top: 1.5rem;
     padding: 1rem 1.25rem;
-    border: 1px dashed var(--glass-border);
-    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 0;
 }
 
 @media (max-width: 768px) {
@@ -2013,56 +2011,9 @@ body.lightbox-open {
     height: 18px;
 }
 
-/* ---------- 404 Error Page ---------- */
-.error-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 62vh;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-    text-align: center;
-}
-
-.error-content {
-    max-width: 620px;
-    padding: 2.5rem 2rem;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-}
-
-.error-code {
-    font-family: var(--font-mono);
-    font-size: 6rem;
-    font-weight: 700;
-    line-height: 1;
-    background: linear-gradient(100deg, var(--accent-blue), var(--accent-cyan) 60%, var(--accent-blue));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin: 1rem 0 0.5rem;
-}
-
-.error-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.error-message {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    max-width: 450px;
-    margin: 0 auto 1.5rem;
-}
-
-.error-actions {
-    justify-content: center;
-}
+/* ---------- 404 Error Page ----------
+   The page now uses the shared chapter system (chapter-section + ChapterHead),
+   so the old centred glass panel and its gradient numerals are gone. */
 
 /* Hero CTA */
 .hero-cta {
@@ -3519,6 +3470,9 @@ main.container {
 }
 
 .chapter-head .system-label { margin-bottom: 0.85rem; }
+
+/* A display-scale title inside a chapter head keeps the label tight above it */
+.chapter-head .main-title { margin-top: 0; }
 
 .section-title {
     font-family: var(--font-display);
