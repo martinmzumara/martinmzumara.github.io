@@ -86,8 +86,10 @@
         var openToolModal = function (tool) {
             if (!toolsModal || !toolsModalContent) return;
             toolsModalContent.innerHTML =
-                '<span class="tool-device ' + tool.dev + '"><i class="ti ' + deviceIcon(tool.dev) + '"></i> ' + deviceLabel(tool.dev) + '</span>' +
-                '<span class="tool-tag">' + tool.tag + '</span>' +
+                '<div class="tools-modal-kicker">' +
+                    '<span class="tool-device ' + tool.dev + '"><i class="ti ' + deviceIcon(tool.dev) + '"></i> ' + deviceLabel(tool.dev) + '</span>' +
+                    '<span class="tool-tag">' + tool.tag + '</span>' +
+                '</div>' +
                 '<h3>' + tool.name + '</h3>' +
                 '<span class="tool-meta">' + tool.summary + '</span>' +
                 '<p>' + tool.intro + '</p>' +
@@ -97,14 +99,21 @@
             toolsModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('tools-open');
             // The dialog only becomes focusable once the style tick that starts
-            // its open transition has run - a focus() issued here is dropped,
-            // and one frame later it still is. Two frames puts keyboard users
-            // on the close button instead of the card behind the dialog.
-            requestAnimationFrame(function () {
-                requestAnimationFrame(function () {
-                    if (toolsModal.classList.contains('active') && toolsModalClose) toolsModalClose.focus();
-                });
-            });
+            // its open transition has run - a focus() issued there is dropped.
+            // That tick usually lands within two frames, but while the main
+            // thread is busy (theme repaint, image decode) visibility can stay
+            // hidden for a few hundred ms, so retry on the next frames until
+            // keyboard focus actually lands on the close button.
+            var focusAttempts = 0;
+            var focusClose = function () {
+                if (!toolsModal || !toolsModalClose) return;
+                if (!toolsModal.classList.contains('active')) return;
+                if (document.activeElement === toolsModalClose) return;
+                if (focusAttempts++ >= 40) return;
+                toolsModalClose.focus();
+                if (document.activeElement !== toolsModalClose) requestAnimationFrame(focusClose);
+            };
+            requestAnimationFrame(function () { requestAnimationFrame(focusClose); });
         };
 
         var closeToolModal = function () {

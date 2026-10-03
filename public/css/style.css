@@ -1662,6 +1662,12 @@ body.lightbox-open {
     object-position: center;
 }
 
+/* Phone-aspect captures (390x844) crop vertically inside the 4:3 frame, so
+   anchor them to the top of the screenshot: the card then shows the mobile
+   nav + hero instead of a centre slice. Landscape sources only crop
+   horizontally, so this is a no-op for them. */
+.gallery-grid--uniform .gallery-card--portrait picture img { object-position: center top; }
+
 /* ---------- Footer (flat surface + hairline top, no glass) ---------- */
 .footer {
     border-top: 1px solid var(--glass-border);
@@ -2422,7 +2428,29 @@ body.loaded .hero-cta {
 .tools-modal.active .tools-modal-card { transform: none; opacity: 1; }
 .tools-modal-close { position: sticky; top: 0; float: right; background: transparent; border: 1px solid var(--glass-border); color: var(--text-primary); width: 36px; height: 36px; border-radius: var(--radius-btn); cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 1.15rem; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
 .tools-modal-close:hover { background: var(--surface-b); border-color: var(--accent-blue); color: var(--accent-blue); }
+/* Device chip + category label share one row, spaced with the same 0.5rem
+   rhythm the stack/tag rows use instead of sitting flush against each other. */
+.tools-modal-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
 .tools-modal-content h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.6rem); letter-spacing: -0.02em; margin: 0.6rem 0 0.2rem; }
+/* Device chip on the detail-page tag language: hairline, flat, 4px curve,
+   Inter, small - not the old glass pill (blur, --glass-bg-soft, 999px radius,
+   accent-tinted glass border). Scoped to the modal so the tool cards keep
+   whatever chip styling their own page gives them. */
+.tools-modal-content .tool-device {
+    font-family: var(--font-primary);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    color: var(--text-secondary);
+}
 /* The lead is a sentence, not a spec line - body font like the card summary */
 .tools-modal-content .tool-meta { font-family: var(--font-primary); font-size: 0.95rem; line-height: 1.6; letter-spacing: 0; color: var(--text-secondary); margin-bottom: 1rem; display: block; }
 .tools-modal-content p { color: var(--text-secondary); margin: 0.75rem 0; line-height: 1.7; }
