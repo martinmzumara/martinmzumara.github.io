@@ -3453,7 +3453,7 @@ section[id] { scroll-margin-top: 90px; }
    number; the hero uses it on the headline's full stop).
    ============================================================ */
 
-/* ---------- Page shell: content width + section rhythm ---------- */
+/* ---------- Page shell: homepage hero (homepage-only) ---------- */
 .page-home .hero-title {
     font-family: var(--font-display);
     font-size: var(--text-display);
@@ -3469,24 +3469,38 @@ section[id] { scroll-margin-top: 90px; }
     max-width: 46ch;
 }
 
-.page-home .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; }
+/* ============================================================
+   Chapter system - GLOBAL
+   De-scoped from .page-home / .detail-page so every chaptered page
+   (homepage, the four case studies, 404, CV) shares one band rhythm,
+   heading scale and button treatment. Where a page still needs to
+   differ (detail breakout, tighter chapter gap, 62ch lead) the delta
+   stays scoped further down.
+   ============================================================ */
 
-.page-home .container {
+/* CTA rows */
+.hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; }
+
+/* Content measure. Keyed off <main> so the navbar/footer containers that live
+   outside <main> keep the base .container rules. */
+main .container,
+main.container {
     max-width: var(--content-max);
     padding-inline: var(--gutter);
 }
 
-.page-home .chapter-section {
+/* Full-bleed section bands on the shared --space-section rhythm */
+.chapter-section {
     padding-block: var(--space-section);
     background: var(--surface-a);
 }
 
-.page-home .surface-a { background: var(--surface-a); }
-.page-home .surface-b { background: var(--surface-b); }
-.page-home .surface-ink { background: var(--ink-bg); color: var(--ink-fg); }
+.surface-a { background: var(--surface-a); }
+.surface-b { background: var(--surface-b); }
+.surface-ink { background: var(--ink-bg); color: var(--ink-fg); }
 
 /* ---------- Chapter entry (number / label / oversized heading) ---------- */
-.page-home .chapter-head {
+.chapter-head {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: 1.25rem clamp(1.25rem, 3vw, 2rem);
@@ -3494,7 +3508,7 @@ section[id] { scroll-margin-top: 90px; }
     margin-bottom: clamp(3rem, 6vw, 4.5rem);
 }
 
-.page-home .chapter-num {
+.chapter-num {
     font-family: var(--font-mono);
     font-size: var(--text-chapter-num);
     font-weight: 500;
@@ -3504,9 +3518,9 @@ section[id] { scroll-margin-top: 90px; }
     padding-top: 0.2em;
 }
 
-.page-home .chapter-head .system-label { margin-bottom: 0.85rem; }
+.chapter-head .system-label { margin-bottom: 0.85rem; }
 
-.page-home .section-title {
+.section-title {
     font-family: var(--font-display);
     font-size: var(--text-section-xl);
     font-weight: 600;
@@ -3517,7 +3531,8 @@ section[id] { scroll-margin-top: 90px; }
     margin-bottom: 0;
 }
 
-.page-home .chapter-head .section-lead {
+.chapter-head .section-lead,
+section > .section-lead {
     margin-top: 1.35rem;
     max-width: 60ch;
     font-size: clamp(1rem, 1.3vw, 1.15rem);
@@ -3852,11 +3867,12 @@ section[id] { scroll-margin-top: 90px; }
     padding-inline: var(--gutter);
 }
 /* ---------- 07 Contact (ink - the most dramatic block) ---------- */
-.page-home .surface-ink .chapter-head .system-label { color: var(--ink-fg-muted); }
+.surface-ink .chapter-head .system-label { color: var(--ink-fg-muted); }
 
-.page-home .surface-ink .section-title { color: var(--ink-fg); }
+.surface-ink .section-title { color: var(--ink-fg); }
 
-.page-home .surface-ink .chapter-head .section-lead { color: var(--ink-fg-muted); }
+.surface-ink .chapter-head .section-lead,
+.surface-ink section > .section-lead { color: var(--ink-fg-muted); }
 
 /* Green stays on the chapter number only - the dot goes light on ink */
 .page-home .surface-ink .accent-dot { color: var(--ink-fg); }
@@ -3948,34 +3964,44 @@ section[id] { scroll-margin-top: 90px; }
     }
 }
 
-/* Homepage buttons stay monochrome so green reads purely as the accent;
-   the ink section flips them to light-on-ink. */
-.page-home .btn-primary {
+/* Chaptered content uses monochrome buttons so green reads purely as the
+   accent; the ink section flips them to light-on-ink. Keyed off <main>: the
+   navbar action button keeps its own --btn-bg/--btn-hover-bg theme colour. */
+main .btn-primary {
     background: var(--text-primary);
     color: var(--surface-a);
 }
 
-.page-home .btn-primary:hover {
+main .btn-primary:hover {
     background: var(--text-secondary);
     color: var(--surface-a);
 }
 
-.page-home .surface-ink .btn-primary {
+/* Every button takes the theme toggle's gentle 4px curve instead of a pill.
+   Deliberately unqualified so it also covers the navbar action button, which
+   lives outside <main> - scoping this to main was what regressed it to a pill. */
+.btn-primary,
+.btn-secondary,
+.copy-btn,
+.tools-view-all,
+.carousel-btn { border-radius: var(--radius-btn); }
+
+.surface-ink .btn-primary {
     background: var(--ink-fg);
     color: var(--ink-bg);
 }
 
-.page-home .surface-ink .btn-primary:hover {
+.surface-ink .btn-primary:hover {
     background: rgba(250, 250, 250, 0.82);
     color: var(--ink-bg);
 }
 
-.page-home .surface-ink .btn-secondary {
+.surface-ink .btn-secondary {
     border-color: var(--ink-line);
     color: var(--ink-fg);
 }
 
-.page-home .surface-ink .btn-secondary:hover { border-color: var(--ink-fg); }
+.surface-ink .btn-secondary:hover { border-color: var(--ink-fg); }
 
 /* Phase 7: the progress bar was a green/teal/gold gradient - now a single
    ink rule so green stays the only accent on the page. */
@@ -3993,16 +4019,8 @@ section[id] { scroll-margin-top: 90px; }
     .page-home .tool-card { animation: none; }
 }
 
-/* ---------- Phase 7 fix: button curvature ----------
-   Every button on the page takes the theme toggle's gentle 4px curve instead
-   of a pill (CTAs, contact buttons, tools link, carousel arrows). Keyed off
-   the page rather than `.page-home` because the navbar and footer buttons live
-   outside <main>; other pages keep their pills until their own pass. */
-body:has(main.page-home) .btn-primary,
-body:has(main.page-home) .btn-secondary,
-body:has(main.page-home) .copy-btn,
-body:has(main.page-home) .tools-view-all,
-body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
+/* Button curvature (4px --radius-btn) is part of the global button rules in
+   the chapter block above; navbar/footer chrome outside <main> keeps its pill. */
 
 /* ---------- Phase 7 responsive ---------- */
 @media (max-width: 1099px) {
@@ -4087,14 +4105,9 @@ body:has(main.page-home) .carousel-btn { border-radius: var(--radius-btn); }
    to the root element it propagates to the viewport, so sticky nav is safe. */
 html:has(main.detail-page) { overflow-x: clip; }
 
-/* Reuses the existing markers so the old .container / .project-detail-container
-   rules stay meaningful: narrower measure + the section gutter, and the top
-   padding that clears the fixed navbar. */
-.detail-page.container {
-    max-width: var(--content-max);
-    padding-inline: var(--gutter);
-}
-
+/* Content measure + section gutter now come from the global chapter block
+   (main .container / main.container). Only the detail shell's own padding and
+   surface stay here: the top padding that clears the fixed navbar. */
 .detail-page.project-detail-container {
     padding-top: clamp(7rem, 13vh, 10rem);
     padding-bottom: 0;
@@ -4104,7 +4117,7 @@ html:has(main.detail-page) { overflow-x: clip; }
 /* ---------- Hero ---------- */
 .detail-page .project-detail-header { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
 
-.detail-page .main-title {
+.main-title {
     font-family: var(--font-display);
     font-size: var(--text-display);
     font-weight: 600;
@@ -4117,19 +4130,12 @@ html:has(main.detail-page) { overflow-x: clip; }
 
 .detail-page .main-title .accent-dot { color: var(--accent-blue); }
 
-.detail-page .lead-text {
+.lead-text {
     font-size: clamp(1.05rem, 1.6vw, 1.35rem);
     line-height: 1.55;
     color: var(--text-secondary);
     max-width: 58ch;
     margin-bottom: 0;
-}
-
-.detail-page .hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-    align-items: center;
 }
 
 .detail-page .project-actions { margin-top: clamp(1.75rem, 3vw, 2.5rem); }
@@ -4171,59 +4177,24 @@ html:has(main.detail-page) { overflow-x: clip; }
     color: var(--text-primary);
 }
 
-/* ---------- Chapter bands (full-bleed alternating surfaces) ---------- */
+/* ---------- Chapter bands (full-bleed alternating surfaces) ----------
+   The shared padding/background/surface rules live in the global chapter
+   block; detail pages only add the viewport-edge breakout, because their
+   <main> is capped at --content-max. */
 .detail-page .chapter-section {
-    padding-block: var(--space-section);
     padding-inline: calc(50vw - 50%);
     margin-inline: calc(50% - 50vw);
-    background: var(--surface-a);
 }
 
-.detail-page .surface-a { background: var(--surface-a); }
-.detail-page .surface-b { background: var(--surface-b); }
-.detail-page .surface-ink { background: var(--ink-bg); color: var(--ink-fg); }
+/* ---------- Chapter entry: detail sits a touch tighter under the hero ---------- */
+.detail-page .chapter-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 
-/* ---------- Chapter entry (mirrors the homepage ChapterHead) ---------- */
-.detail-page .chapter-head {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 1.25rem clamp(1.25rem, 3vw, 2rem);
-    align-items: start;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-.detail-page .chapter-num {
-    font-family: var(--font-mono);
-    font-size: var(--text-chapter-num);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--accent-blue);
-    padding-top: 0.2em;
-}
-
-.detail-page .chapter-head .system-label { margin-bottom: 0.85rem; }
-
-.detail-page .section-title {
-    font-family: var(--font-display);
-    font-size: var(--text-section-xl);
-    font-weight: 600;
-    line-height: 1.02;
-    letter-spacing: var(--tracking-section);
-    color: var(--text-primary);
-    max-width: 22ch;
-    margin-bottom: 0;
-    overflow-wrap: break-word;
-}
+/* The shared section-title lives in the global chapter block; detail pages
+   only add the break-word guard for long case-study titles. */
+.detail-page .section-title { overflow-wrap: break-word; }
 
 .detail-page .chapter-head .section-lead,
-.detail-page section > .section-lead {
-    margin-top: 1.35rem;
-    max-width: 62ch;
-    font-size: clamp(1rem, 1.3vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--text-secondary);
-}
+.detail-page section > .section-lead { max-width: 62ch; }
 
 /* ---------- Flat editorial cards (no glass, no shadow, hairline rule) ---------- */
 .detail-page .stat-card,
@@ -4372,47 +4343,9 @@ html:has(main.detail-page) { overflow-x: clip; }
 
 
 
-/* ---------- Ink closing chapter (mirrors the homepage contact closer) ---------- */
-.detail-page .surface-ink .chapter-head .system-label { color: var(--ink-fg-muted); }
-.detail-page .surface-ink .section-title { color: var(--ink-fg); }
-.detail-page .surface-ink .chapter-head .section-lead,
-.detail-page .surface-ink section > .section-lead { color: var(--ink-fg-muted); }
-
+/* ---------- Ink closing chapter ----------
+   The surface-ink heading/button rules live in the global chapter block. */
 .detail-page .detail-cta .hero-cta { margin-top: clamp(2rem, 4vw, 3rem); }
-
-.detail-page .surface-ink .btn-primary {
-    background: var(--ink-fg);
-    color: var(--ink-bg);
-}
-
-.detail-page .surface-ink .btn-primary:hover {
-    background: rgba(250, 250, 250, 0.82);
-    color: var(--ink-bg);
-}
-
-.detail-page .surface-ink .btn-secondary {
-    border-color: var(--ink-line);
-    color: var(--ink-fg);
-}
-
-.detail-page .surface-ink .btn-secondary:hover { border-color: var(--ink-fg); }
-
-/* ---------- Buttons: monochrome + the theme toggle's 4px curve ---------- */
-.detail-page .btn-primary,
-body:has(main.detail-page) .btn-primary {
-    background: var(--text-primary);
-    color: var(--surface-a);
-    border-radius: var(--radius-btn);
-}
-
-.detail-page .btn-primary:hover,
-body:has(main.detail-page) .btn-primary:hover {
-    background: var(--text-secondary);
-    color: var(--surface-a);
-}
-
-.detail-page .btn-secondary,
-body:has(main.detail-page) .btn-secondary { border-radius: var(--radius-btn); }
 
 /* ---------- Detail-page responsive ---------- */
 @media (max-width: 899px) {
