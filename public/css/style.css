@@ -1551,6 +1551,27 @@ body.lightbox-open {
     font-size: 0.95rem;
 }
 
+/* Live-site capture: the full desktop page (1280px wide, whole scroll) framed
+   as a wide window. Fitting 3300px of page into the column would push the
+   gallery three screens down, so the frame crops to the top of the build. */
+.live-shot {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    /* Same rhythm as the gallery gap below it */
+    margin-bottom: 1.5rem;
+}
+
+.live-shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
