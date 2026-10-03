@@ -1,0 +1,23 @@
+---
+// Phase 7 - chapter entry: big number, micro-label, oversized heading,
+// optional lead paragraph. The number is the section's single green accent.
+interface Props {
+  num: string;
+  label: string;
+  title: string;
+  lead?: string;
+  /** 'ink' inverts the label/lead colours for dark surfaces */
+  tone?: 'default' | 'ink';
+}
+
+const { num, label, title, lead, tone = 'default' } = Astro.props;
+---
+
+<header class={`chapter-head chapter-head--${tone}`}>
+    <span class="chapter-num" aria-hidden="true">{num}</span>
+    <div class="chapter-head-body">
+        <span class="system-label">{label}</span>
+        <h2 class="section-title">{title}</h2>
+        {lead && <p class="section-lead">{lead}</p>}
+    </div>
+</header>

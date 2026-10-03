@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
+import ChapterHead from '../../components/ChapterHead.astro';
 
 const navLinks = [
   { href: '#overview', label: 'OVERVIEW' },
@@ -16,14 +17,14 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
   path="/encplus/"
   ogType="article"
   ogTitle='EncPlus – AES File Encryption'
-  ogImage="/assets/images/og-cover.jpg?v=2"
+  ogImage="/assets/images/og-cover.png?v=3"
   ogImageWidth={1200}
   ogImageHeight={630}
   scripts={['/js/icons.js', '/js/script.js', '/js/terminal.js']}
 >
     <Navbar ariaLabel='Case study navigation' links={navLinks} action={{ href: '/#projects', label: 'BACK TO PROJECTS', icon: 'ti-arrow-left' }} />
 
-    <main id="main-content" class="container project-detail-container">
+    <main id="main-content" class="container project-detail-container detail-page">
 
         <!-- Hero Title Section -->
         <div class="project-detail-header">
@@ -62,9 +63,8 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
         </div>
 
         <!-- Project Stats -->
-        <section class="section-padding" id="overview">
-            <span class="system-label">Key Metrics</span>
-            <h2 class="section-title">At A Glance</h2>
+        <section class="chapter-section surface-b" id="overview">
+            <ChapterHead num="01" label="Key Metrics" title="At A Glance" />
             
             <div class="stats-grid">
                 <div class="stat-card">
@@ -87,9 +87,8 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
         </section>
 
         <!-- Architecture Overview -->
-        <section class="section-padding">
-            <span class="system-label">Architecture</span>
-            <h2 class="section-title">System Design</h2>
+        <section class="chapter-section surface-a">
+            <ChapterHead num="02" label="Architecture" title="System Design" />
             
             <div class="architecture-flow">
                 <div class="arch-node">
@@ -117,9 +116,8 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
         </section>
 
         <!-- Key Features -->
-        <section class="section-padding" id="functionality">
-            <span class="system-label">Features</span>
-            <h2 class="section-title">Key Features</h2>
+        <section class="chapter-section surface-b" id="functionality">
+            <ChapterHead num="03" label="Features" title="Key Features" />
             
             <div class="features-grid features-grid--three">
                 <div class="feature-card">
@@ -141,9 +139,8 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
         </section>
 
         <!-- Technical Overview -->
-        <section class="section-padding" id="stack">
-            <span class="system-label">Tech Stack</span>
-            <h2 class="section-title">Tools & Technologies</h2>
+        <section class="chapter-section surface-a" id="stack">
+            <ChapterHead num="04" label="Tech Stack" title="Tools &amp; Technologies" />
             
             <div class="stack-categories stack-categories--three">
                 <div class="stack-category">
@@ -170,9 +167,8 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
         </section>
 
         <!-- Challenges & Solutions -->
-        <section class="section-padding" id="insights">
-            <span class="system-label">Lessons</span>
-            <h2 class="section-title">Challenges & Solutions</h2>
+        <section class="chapter-section surface-b" id="insights">
+            <ChapterHead num="05" label="Lessons" title="Challenges &amp; Solutions" />
             
             <div class="challenge-grid">
                 <div class="challenge-card">
@@ -191,9 +187,8 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
         </section>
 
         <!-- Image Gallery Showcase -->
-        <section class="section-padding">
-            <span class="system-label">Screenshots</span>
-            <h2 class="section-title">Application Screenshots</h2>
+        <section class="chapter-section surface-a">
+            <ChapterHead num="06" label="Screenshots" title="Application Screenshots" />
 
             <div class="gallery-grid gallery-grid--three">
                 <div class="gallery-card">
@@ -226,11 +221,12 @@ const description = 'EncPlus: AES-256 file encryption app with Firebase auth. En
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- GitHub CTA -->
-            <div class="project-cta-box">
-                <h3>Explore the full implementation</h3>
-                <p>View the complete Flutter source code on GitHub, including all screens, services, and encryption logic.</p>
+        <!-- Closing CTA (ink chapter) -->
+        <section class="chapter-section surface-ink detail-cta">
+            <ChapterHead num="07" tone="ink" label="Source" title="Explore the full implementation" lead="View the complete Flutter source code on GitHub, including all screens, services, and encryption logic." />
+            <div class="hero-cta">
                 <a href="https://github.com/martinmzumara/encplus" target="_blank" rel="noopener noreferrer" class="btn-primary">
                     <i class="ti ti-brand-github"></i> VIEW REPOSITORY ON GITHUB
                 </a>

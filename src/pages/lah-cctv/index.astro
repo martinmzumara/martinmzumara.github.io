@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
+import ChapterHead from '../../components/ChapterHead.astro';
 
 const navLinks = [
   { href: '#overview', label: 'OVERVIEW' },
@@ -16,14 +17,14 @@ const description = 'CCTV case study: 10+ camera HD surveillance system for Lilo
   path="/lah-cctv/"
   ogType="article"
   ogTitle='LAH CCTV – 10+ Camera Surveillance Installation'
-  ogImage="/assets/images/og-cover.jpg?v=2"
+  ogImage="/assets/images/og-cover.png?v=3"
   ogImageWidth={1200}
   ogImageHeight={630}
   scripts={['/js/icons.js', '/js/script.js', '/js/terminal.js']}
 >
     <Navbar ariaLabel='Case study navigation' links={navLinks} action={{ href: '/#projects', label: 'BACK TO PROJECTS', icon: 'ti-arrow-left' }} />
 
-    <main id="main-content" class="container project-detail-container">
+    <main id="main-content" class="container project-detail-container detail-page">
 
         <!-- Hero Title Section -->
         <div class="project-detail-header">
@@ -66,9 +67,8 @@ const description = 'CCTV case study: 10+ camera HD surveillance system for Lilo
         </div>
 
         <!-- Project Stats -->
-        <section class="section-padding" id="overview">
-            <span class="system-label">Key Metrics</span>
-            <h2 class="section-title">At A Glance</h2>
+        <section class="chapter-section surface-b" id="overview">
+            <ChapterHead num="01" label="Key Metrics" title="At A Glance" />
 
             <div class="stats-grid">
                 <div class="stat-card">
@@ -91,16 +91,13 @@ const description = 'CCTV case study: 10+ camera HD surveillance system for Lilo
         </section>
 
         <!-- The Brief -->
-        <section class="section-padding">
-            <span class="system-label">Overview</span>
-            <h2 class="section-title">The Brief</h2>
-            <p class="section-lead">Lilongwe Adventist Hospital required reliable visual coverage of key indoor and outdoor areas, with footage retained on-site and accessible to authorized personnel. Bits &amp; Bytes Computers contracted the deployment; I served on the installation team supporting deployment and configuration through commissioning and handover.</p>
+        <section class="chapter-section surface-a">
+            <ChapterHead num="02" label="Overview" title="The Brief" lead="Lilongwe Adventist Hospital required reliable visual coverage of key indoor and outdoor areas, with footage retained on-site and accessible to authorized personnel. Bits &amp; Bytes Computers contracted the deployment; I served on the installation team supporting deployment and configuration through commissioning and handover." />
         </section>
 
         <!-- What Was Installed -->
-        <section class="section-padding" id="scope">
-            <span class="system-label">Scope</span>
-            <h2 class="section-title">What Was Installed</h2>
+        <section class="chapter-section surface-b" id="scope">
+            <ChapterHead num="03" label="Scope" title="What Was Installed" />
 
             <div class="challenge-grid challenge-grid--four">
                 <div class="challenge-card">
@@ -127,10 +124,8 @@ const description = 'CCTV case study: 10+ camera HD surveillance system for Lilo
         </section>
 
         <!-- Handover -->
-        <section class="section-padding" id="handover">
-            <span class="system-label">Handover</span>
-            <h2 class="section-title">Result &amp; Handover</h2>
-            <p class="section-lead">The system was installed, configured, tested, and commissioned successfully, then formally handed over to Lilongwe Adventist Hospital for operational use - with an operation &amp; maintenance guide covering:</p>
+        <section class="chapter-section surface-a" id="handover">
+            <ChapterHead num="04" label="Handover" title="Result &amp; Handover" lead="The system was installed, configured, tested, and commissioned successfully, then formally handed over to Lilongwe Adventist Hospital for operational use - with an operation &amp; maintenance guide covering:" />
 
             <ul class="custom-list">
                 <li><i class="ti ti-player-play list-icon"></i> Power reliability for the NVR, UPS, and network equipment.</li>
@@ -144,9 +139,8 @@ const description = 'CCTV case study: 10+ camera HD surveillance system for Lilo
         </section>
 
         <!-- Field Notes -->
-        <section class="section-padding" id="insights">
-            <span class="system-label">Lessons</span>
-            <h2 class="section-title">Field Notes</h2>
+        <section class="chapter-section surface-b" id="insights">
+            <ChapterHead num="05" label="Lessons" title="Field Notes" />
 
             <div class="challenge-grid">
                 <div class="challenge-card">
@@ -168,9 +162,8 @@ const description = 'CCTV case study: 10+ camera HD surveillance system for Lilo
         </section>
 
         <!-- Image Gallery Showcase -->
-        <section class="section-padding" id="gallery">
-            <span class="system-label">Gallery</span>
-            <h2 class="section-title">Installation Photos</h2>
+        <section class="chapter-section surface-a" id="gallery">
+            <ChapterHead num="06" label="Gallery" title="Installation Photos" />
 
             <div class="gallery-grid gallery-grid--uniform">
                 <!-- PHOTO 1: Outdoor bullet (side view) -->
@@ -221,16 +214,15 @@ const description = 'CCTV case study: 10+ camera HD surveillance system for Lilo
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Contact CTA -->
-            <div class="project-cta-box">
-                <h3>Need CCTV or network infrastructure?</h3>
-                <p>I deploy surveillance and network systems for clinics, lodges, offices, and homes - scoped, installed, and handed over with documentation.</p>
-                <div class="hero-cta" style="justify-content: center;">
-                    <a href="/#contact" class="btn-primary">
-                        <i class="ti ti-mail"></i> GET IN TOUCH
-                    </a>
-                </div>
+        <!-- Closing CTA (ink chapter) -->
+        <section class="chapter-section surface-ink detail-cta">
+            <ChapterHead num="07" tone="ink" label="Contact" title="Need CCTV or network infrastructure?" lead="I deploy surveillance and network systems for clinics, lodges, offices, and homes - scoped, installed, and handed over with documentation." />
+            <div class="hero-cta">
+                <a href="/#contact" class="btn-primary">
+                    <i class="ti ti-mail"></i> GET IN TOUCH
+                </a>
             </div>
         </section>
     </main>

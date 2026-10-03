@@ -19,10 +19,28 @@ export function ent(value: string): string {
     .join('');
 }
 
+/**
+ * Options for {@link emailLink}.
+ *
+ * The href and the visible text are both derived from the same `email`
+ * argument, so `showAddress: false` only drops the trailing visible copy -
+ * the entity-encoded `mailto:` (and therefore the decode path) is untouched.
+ */
+export interface EmailLinkOptions {
+  /** Append the entity-encoded address after `extraInnerHtml` (default true). */
+  showAddress?: boolean;
+}
+
 /** Anchor markup for an e-mail address, entity-encoded end to end. */
-export function emailLink(email: string, className?: string, extraInnerHtml = ''): string {
+export function emailLink(
+  email: string,
+  className?: string,
+  extraInnerHtml = '',
+  options: EmailLinkOptions = {}
+): string {
   const cls = className ? ` class="${className}"` : '';
-  return `<a${cls} href="${ent(`mailto:${email}`)}">${extraInnerHtml}${ent(email)}</a>`;
+  const visible = options.showAddress === false ? '' : ent(email);
+  return `<a${cls} href="${ent(`mailto:${email}`)}">${extraInnerHtml}${visible}</a>`;
 }
 
 /** Anchor markup for a phone number, entity-encoded end to end. */
