@@ -995,7 +995,8 @@ body::after {
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
 }
 
-/* Glass caption plate floating on the photo */
+/* Caption plate - Inter body copy on the same frosted surface as the arrows
+   (same background token, same 10px blur, no border, same 4px curve). */
 .showcase-caption {
     position: absolute;
     left: 10px;
@@ -1005,12 +1006,19 @@ body::after {
     align-items: center;
     gap: 0.4rem;
     padding: 0.45rem 0.6rem;
-    border-radius: 11px;
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    letter-spacing: 0.01em;
-    color: #fff;
-    background: rgba(6,8,12,0.62);
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-primary);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: var(--elev-2);
     pointer-events: none;
     transition: transform 0.3s ease;
 }
@@ -2995,12 +3003,6 @@ section[id] { scroll-margin-top: 90px; }
     scroll-snap-align: start;
 }
 
-#showcase .showcase-caption {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-}
-
 
    /* ============================================================
    Even-row grids (design-lab) - explicit column counts so a row
@@ -3472,12 +3474,8 @@ section > .section-lead {
     box-shadow: none;
 }
 
-.page-home .showcase-carousel--full .showcase-caption {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-}
-
+/* The carousel caption used to be re-set to mono/letter-spaced here - the
+   base .showcase-caption rule carries the editorial treatment now. */
 .page-home .showcase-carousel--full .carousel-foot {
     max-width: var(--content-max);
     margin: 0 auto;
