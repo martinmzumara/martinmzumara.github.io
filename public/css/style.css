@@ -3952,6 +3952,18 @@ section[id] { scroll-margin-top: 90px; }
 
 .page-home .contact-cta { margin-top: clamp(2.5rem, 5vw, 4rem); }
 
+/* Side by side (>=769px) the two contact CTAs share one width so they read as
+   a matched pair: the wider label (VIEW RESUME, 174px) sets the floor for both
+   and each label is centred in it. Below 769px the base rule stacks them with
+   align-items:stretch, so they already match and need nothing here. */
+@media (min-width: 769px) {
+    .page-home .contact-cta .btn-primary,
+    .page-home .contact-cta .btn-secondary {
+        min-width: 174px;
+        justify-content: center;
+    }
+}
+
 /* Homepage buttons stay monochrome so green reads purely as the accent;
    the ink section flips them to light-on-ink. */
 .page-home .btn-primary {
