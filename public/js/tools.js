@@ -96,7 +96,15 @@
             toolsModal.classList.add('active');
             toolsModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('tools-open');
-            if (toolsModalClose) toolsModalClose.focus();
+            // The dialog only becomes focusable once the style tick that starts
+            // its open transition has run - a focus() issued here is dropped,
+            // and one frame later it still is. Two frames puts keyboard users
+            // on the close button instead of the card behind the dialog.
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    if (toolsModal.classList.contains('active') && toolsModalClose) toolsModalClose.focus();
+                });
+            });
         };
 
         var closeToolModal = function () {
@@ -121,8 +129,29 @@
         if (toolsModalClose) toolsModalClose.addEventListener('click', closeToolModal);
         if (toolsModalBackdrop) toolsModalBackdrop.addEventListener('click', closeToolModal);
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && toolsModal && toolsModal.classList.contains('active')) {
+            if (!toolsModal || !toolsModal.classList.contains('active')) return;
+            if (e.key === 'Escape') {
                 closeToolModal();
+                return;
+            }
+            // Same tab cycle the lightbox uses: with the dialog open, Tab and
+            // Shift+Tab wrap on the close button instead of walking the page
+            // behind it.
+            if (e.key === 'Tab') {
+                // a[href], not [href]: the sprite's <use href="#ic-..."> nodes
+                // match [href] but are never focusable, which would put the
+                // wrap point on an element that can never be activeElement.
+                var focusable = toolsModal.querySelectorAll(
+                    'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                if (focusable.length === 0) return;
+                var firstElem = focusable[0];
+                var lastElem = focusable[focusable.length - 1];
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElem) { e.preventDefault(); lastElem.focus(); }
+                } else {
+                    if (document.activeElement === lastElem) { e.preventDefault(); firstElem.focus(); }
+                }
             }
         });
     };

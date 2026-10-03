@@ -2397,31 +2397,34 @@ body.loaded .hero-cta {
 .ci.icon-moon { display: none; }
 
 /* ---------- Tools reading modal ---------- */
-.tools-modal { position: fixed; inset: 0; z-index: 1500; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-.tools-modal.active { visibility: visible; opacity: 1; }
-.tools-modal-backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.tools-modal { position: fixed; inset: 0; z-index: 1500; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+/* visibility flips on the opening frame (so the close button can take focus)
+   and only after the fade on close. */
+.tools-modal.active { visibility: visible; opacity: 1; transition: opacity 0.3s ease, visibility 0s linear 0s; }
+/* Flat scrim - the blur was the last glass layer on the overlay */
+.tools-modal-backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.4); }
 [data-theme="dark"] .tools-modal-backdrop { background: rgba(5, 8, 14, 0.62); }
 .tools-modal-card {
     position: relative;
     width: min(680px, 100%);
     max-height: 86vh;
     overflow-y: auto;
-    background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(30px) saturate(160%);
-    backdrop-filter: blur(30px) saturate(160%);
+    /* Flat chapter surface + hairline + the same 4px curve as every button */
+    background: var(--surface-a);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-    padding: 2.2rem 2rem;
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    padding: var(--space-4);
     transform: translateY(18px) scale(0.98);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .tools-modal.active .tools-modal-card { transform: none; opacity: 1; }
-.tools-modal-close { position: sticky; top: 0; float: right; background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease; }
-.tools-modal-close:hover { background: var(--accent-blue); color: #fff; transform: rotate(90deg); }
-.tools-modal-content h3 { font-family: var(--font-display); font-size: 1.6rem; margin: 0.6rem 0 0.2rem; }
-.tools-modal-content .tool-meta { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 1rem; display: block; }
+.tools-modal-close { position: sticky; top: 0; float: right; background: transparent; border: 1px solid var(--glass-border); color: var(--text-primary); width: 36px; height: 36px; border-radius: var(--radius-btn); cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 1.15rem; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.tools-modal-close:hover { background: var(--surface-b); border-color: var(--accent-blue); color: var(--accent-blue); }
+.tools-modal-content h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.6rem); letter-spacing: -0.02em; margin: 0.6rem 0 0.2rem; }
+/* The lead is a sentence, not a spec line - body font like the card summary */
+.tools-modal-content .tool-meta { font-family: var(--font-primary); font-size: 0.95rem; line-height: 1.6; letter-spacing: 0; color: var(--text-secondary); margin-bottom: 1rem; display: block; }
 .tools-modal-content p { color: var(--text-secondary); margin: 0.75rem 0; line-height: 1.7; }
 .tools-modal-content ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; padding: 0; }
 .tools-modal-content li { display: flex; gap: 0.65rem; align-items: flex-start; color: var(--text-secondary); font-size: 0.93rem; }
