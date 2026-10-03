@@ -13,8 +13,9 @@ export const SITE = {
     'Martin Mzumara - Software Developer & IT Technician in Malawi. IoT systems, web apps, networks.',
   // ?v=3 busts link-preview scraper caches: the cover was regenerated in the
   // Phase 7 design-lab direction (1200x630, #fafafa, Bricolage Grotesque
-  // headline + portrait graduation crop on the right).
-  ogImage: `${SITE_URL}/assets/images/og-cover.png?v=3`,
+  // headline + portrait graduation crop on the right). JPEG at quality 85,
+  // progressive: the most compatible format for link previews.
+  ogImage: `${SITE_URL}/assets/images/og-cover.jpg?v=3`,
   ogImageAlt: 'Martin Mzumara - Software Developer & IT Technician',
   locale: 'en_US',
   themeColor: '#ffffff',
