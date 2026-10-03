@@ -554,28 +554,11 @@ document.addEventListener("DOMContentLoaded", () => {
         statValues.forEach(el => { el.textContent = el.getAttribute('data-count'); });
     }
 
-    // =============== 12. 3D tilt + cursor spotlight on cards ===============
-    if (!reduceMotion && finePointer) {
-        document.querySelectorAll('.card, .project-card, .tool-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const r = card.getBoundingClientRect();
-                const x = (e.clientX - r.left) / r.width - 0.5;
-                const y = (e.clientY - r.top) / r.height - 0.5;
-                card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-                card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-                if (r.width >= 280 && !card.classList.contains('tool-card')) {
-                    card.style.transform = `perspective(760px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-6px)`;
-                } else {
-                    card.style.transform = 'translateY(-5px)';
-                }
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.removeProperty('--mx');
-                card.style.removeProperty('--my');
-                card.style.transform = '';
-            });
-        });
-    }
+    // =============== 12. Card spotlight removed ===============
+    // Was: 3D tilt + a --mx/--my green radial spotlight on .card/.project-card/.tool-card.
+    // Removed because the glow contradicted "structure from borders, not glows", and the
+    // tilt branch only ever matched .card/.project-card - neither of which exists any more.
+    // Tool cards keep their CSS-only lift from .tool-card:hover.
 
     // =============== 13. Magnetic primary buttons ===============
     if (!reduceMotion && finePointer) {

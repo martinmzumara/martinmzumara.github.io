@@ -228,17 +228,13 @@ h1, h2, .section-title, .footer-brand h2 {
    Structural elements
    ============================================================ */
 
-/* Section dividers - plain hairline (defined below, with .section-title) */
-
 /* Nav links */
 /* Flat terminal buttons - black pill primary (Resend), green on hover */
-.btn-primary,
-.project-cta-box .btn-primary {
+.btn-primary {
     background: var(--btn-bg);
     box-shadow: none;
 }
-.btn-primary:hover,
-.project-cta-box .btn-primary:hover {
+.btn-primary:hover {
     background: var(--btn-hover-bg);
     box-shadow: none;
 }
@@ -325,19 +321,6 @@ body::after {
     line-height: 1.05;
     margin-bottom: 2rem;
     max-width: var(--measure);
-}
-
-/* Section padding */
-.section-padding {
-    padding-top: var(--space-6);
-    padding-bottom: var(--space-6);
-}
-
-.section-divider {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--glass-border-strong), transparent);
-    margin: 2rem auto;
 }
 
 /* ---------- Navigation (solid bar, hairline border - Resend style) ---------- */
@@ -649,53 +632,9 @@ body::after {
     color: var(--accent-blue);
 }
 
-/* ---------- General Grid & Cards (glass) ---------- */
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 1.5rem;
-}
-
-.card {
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1.6rem;
-    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-/* top-left colorful sheen on cards */
-.card::before {
-    content: '';
-    position: absolute;
-    top: -55%;
-    left: -25%;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-blue-glow), transparent 65%);
-    filter: blur(6px);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    border-color: var(--glass-border-strong);
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-}
-
-/* Colorful hover sheen removed (Resend pass). The empty content keeps this
-   pseudo-element inert (no title-bar rule applies to .card any more). */
-.card:hover::before {
-    opacity: 0;
-}
-
+/* ---------- Cards ----------
+   The generic .card and .grid-cards glass primitives are gone: no markup uses
+   them. .icon-large is kept because it is still referenced. */
 .icon-large {
     color: var(--accent-blue);
     width: 32px;
@@ -703,96 +642,7 @@ body::after {
     margin-bottom: 1rem;
 }
 
-.card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
-.card p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-/* ---------- Projects Section ---------- */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--glass-shadow-soft), inset 0 1px 0 var(--glass-highlight);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--glass-border-strong);
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-}
-
-.project-thumb {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    background-color: rgba(0,0,0,0.18);
-}
-
-.project-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.9;
-    transition: transform 0.4s ease, opacity 0.3s ease;
-}
-
-.project-card:hover .project-thumb img {
-    opacity: 1;
-    transform: scale(1.05);
-}
-
-.project-thumb::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 45%, rgba(8,9,14,0.55));
-    pointer-events: none;
-}
-
-.project-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-    color: #fff;
-    font-size: 0.7rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    padding: 0.3rem 0.7rem;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px var(--accent-blue-glow);
-}
-
-.project-badge.muted {
-    background: var(--glass-bg-soft);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    color: var(--text-secondary);
-    box-shadow: none;
-}
-
+/* ---------- Placeholder thumbnail (tools modal + gallery fallback) ---------- */
 .placeholder-thumb {
     display: flex;
     align-items: center;
@@ -808,53 +658,6 @@ body::after {
     height: 48px;
     color: var(--text-secondary);
     filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));
-}
-
-.project-body {
-    padding: 1.6rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.project-body h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.6rem;
-}
-
-.project-body p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 1.25rem;
-    flex-grow: 1;
-}
-
-.project-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.45rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    background: var(--glass-bg-soft);
-    border: 1px solid var(--glass-border);
-    border-radius: 6px;
-    padding: 0.55rem 0.7rem;
-    margin: -0.5rem 0 1.25rem;
-}
-
-.project-note i {
-    color: var(--accent-blue);
-    font-size: 15px;
-    line-height: 1.4;
-    flex-shrink: 0;
-}
-
-.project-meta {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
 }
 
 .tag {
@@ -1638,54 +1441,7 @@ body.lightbox-open {
     color: var(--text-primary);
 }
 
-/* Project CTA Box */
-.project-cta-box {
-    position: relative;
-    margin-top: 3rem;
-    background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(170%);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 3rem 2.5rem;
-    text-align: center;
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-    overflow: hidden;
-}
-
-.project-cta-box::before {
-    content: '';
-    position: absolute;
-    top: -60%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-blue-glow), transparent 65%);
-    filter: blur(20px);
-}
-
-.project-cta-box h3 {
-    position: relative;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.project-cta-box p {
-    position: relative;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    max-width: 500px;
-    margin: 0 auto 1.5rem;
-}
-
-.project-cta-box .btn-primary {
-    position: relative;
-}
-
-.main-title,
-.page-title {
+.main-title {
     font-family: var(--font-display);
     font-size: var(--text-hero);
     font-weight: 600;
@@ -1877,15 +1633,12 @@ body.lightbox-open {
     object-position: center;
 }
 
-/* ---------- Footer (glass) ---------- */
+/* ---------- Footer (flat surface + hairline top, no glass) ---------- */
 .footer {
     border-top: 1px solid var(--glass-border);
-    background: var(--glass-bg-soft);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    background: var(--surface-b);
     padding: 3rem 0 2rem;
     margin-top: 4rem;
-    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: background-color 0.2s ease;
 }
 
@@ -2257,24 +2010,8 @@ body.lightbox-open {
         gap: 0.25rem;
     }
 
-    .project-thumb {
-        height: 160px;
-    }
-
     .showcase-carousel {
         --card-w: min(72vw, 240px);
-    }
-
-    .error-code {
-        font-size: 4rem;
-    }
-
-    .error-title {
-        font-size: 1.4rem;
-    }
-
-    .project-cta-box {
-        padding: 2rem 1.25rem;
     }
 }
 
@@ -2569,56 +2306,12 @@ body.loaded .hero-cta {
 .reveal-el { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
 .reveal-el.revealed { opacity: 1; transform: none; }
 
-/* 3D spotlight on cards */
-.card, .project-card, .tool-card { transform-style: preserve-3d; }
-.card::after, .project-card::after, .tool-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.10), transparent 60%);
-}
-.card:hover::after, .project-card:hover::after, .tool-card:hover::after { opacity: 1; }
+/* Card spotlight removed: the green radial glow tracked by --mx/--my contradicted
+   "structure from borders, not glows". The JS that set those custom properties is
+   gone too - the 3D tilt branch it guarded only ever matched .card/.project-card,
+   which no longer exist, and tool cards already lift via .tool-card:hover. */
 
-[data-theme="dark"] .card::after,
-[data-theme="dark"] .project-card::after,
-[data-theme="dark"] .tool-card::after {
-    background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(63, 185, 80, 0.16), transparent 60%);
-    mix-blend-mode: screen;
-}
-
-/* ---------- Tools section: filters + grid + cards ---------- */
-.tools-filter { display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; }
-.filter-btn {
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(10px) saturate(150%);
-    backdrop-filter: blur(10px) saturate(150%);
-    border: 1px solid var(--glass-border);
-    color: var(--text-secondary);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.1rem;
-    border-radius: 999px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-.filter-btn i { width: 16px; height: 16px; }
-.filter-btn:hover { color: var(--text-primary); border-color: var(--glass-border-strong); transform: translateY(-1px); }
-.filter-btn.active {
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-    color: #fff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px var(--accent-blue-glow), inset 0 1px 0 rgba(255,255,255,0.25);
-}
+/* ---------- Tools section (grid + cards; the old filter chips are gone) ---------- */
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
 .tool-card {
     background: var(--glass-bg);
@@ -2718,38 +2411,8 @@ body.tools-open { overflow: hidden; }
 }
 
 /* ============================================================
-   Additions: project-card links, testimonials, contact section
+   Additions: testimonials, contact section
    ============================================================ */
-
-/* ---------- Project cards: real link targets ---------- */
-.project-card { position: relative; color: inherit; }
-.project-thumb-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-}
-.project-body h3 a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.project-body h3 a:hover { color: var(--accent-blue); }
-
-a.project-link-btn {
-    text-decoration: none;
-    color: var(--accent-blue);
-}
-a.project-link-btn i,
-a.project-link-btn .ci {
-    transition: transform 0.2s ease;
-}
-a.project-link-btn:hover {
-    color: var(--accent-cyan);
-}
-a.project-link-btn:hover i,
-a.project-link-btn:hover .ci {
-    transform: translateX(3px);
-}
 
 /* ---------- Testimonials ---------- */
 .testimonials-grid {
@@ -3338,15 +3001,13 @@ section[id] { scroll-margin-top: 90px; }
    /* ============================================================
    Even-row grids (design-lab) - explicit column counts so a row
    never forms a partial line (no 3+1 / 2+2+1 orphans).
-   Counts: grid-cards 4 · projects 4 · contact 6 · tools 3 ·
+   Counts: contact 6 · tools 3 ·
    specs 6 (--five: 5) · features 6 (--three: 3) · stack 4
    (--three: 3) · challenge 3 (--four: 4) · gallery 4 (--three: 3)
    ============================================================ */
 
 /* -- Desktop >= 1200px: full lines (4 / 3 per row) -- */
 @media (min-width: 1200px) {
-    .grid-cards { grid-template-columns: repeat(4, 1fr); }
-    .projects-grid { grid-template-columns: repeat(4, 1fr); }
     .tools-grid { grid-template-columns: repeat(3, 1fr); }
     .contact-grid { grid-template-columns: repeat(3, 1fr); }
     .specs-grid { grid-template-columns: repeat(3, 1fr); }
@@ -3363,8 +3024,6 @@ section[id] { scroll-margin-top: 90px; }
 
 /* -- Tablet 769-1199px: even splits only (2+2 / 3+3 / one line) -- */
 @media (min-width: 769px) and (max-width: 1199px) {
-    .grid-cards { grid-template-columns: repeat(2, 1fr); }
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
     .tools-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: repeat(3, 1fr); }
     .specs-grid { grid-template-columns: repeat(3, 1fr); }

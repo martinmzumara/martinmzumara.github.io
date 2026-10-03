@@ -115,12 +115,8 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
              cleared only from js/script.js. If that file fails to load or throws, the page would
              stay black forever, so force the loaded state if it never arrives. -->
         <script is:inline data-preload-failsafe>(function(){window.__preloadFailsafe=setTimeout(function(){if(document.body.classList.contains("loaded")){return}document.documentElement.style.overflow="";document.body.classList.add("loaded");var p=document.getElementById("preloader");if(p){p.classList.add("done");if(p.parentNode){p.parentNode.removeChild(p)}}},4500)})();</script>
-        <noscript>
-            <style is:inline>
-                .preloader { display: none !important; }
-                .hero-title, .hero-lede, .hero-cta { opacity: 1 !important; transform: none !important; }
-            </style>
-        </noscript>
+    <!-- The no-JS override for .preloader/.hero-* now lives in BaseLayout.astro so it
+         applies to every page, not just this one. -->
     </Fragment>
     <Fragment slot="head-end">
         <!-- Structured Data: Person -->
