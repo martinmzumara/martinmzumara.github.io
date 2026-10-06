@@ -7,9 +7,9 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 ## Current Features
 
 - **Editorial chapter design system** - the homepage is split into numbered chapters, each headed by `src/components/ChapterHead.astro` (`num`, `label`, `title`) and sitting on an alternating surface (`surface-a`, `surface-b`, `surface-ink` in `src/pages/index.astro`); glass pills are replaced by hairline borders and a `4px` button radius; Bricolage Grotesque carries display type, Inter the body, JetBrains Mono the uppercase `system-label` eyebrows; two themes (light / dark) are selected with `data-theme` via the footer toggle.
-- **Animated, non-static experience** - preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, a cursor-following work-index preview, and an auto-hiding navbar (`.nav-hidden`) that slides away as you scroll down and reveals on any scroll up.
+- **Animated, non-static experience** - preloader, scroll-progress bar, scroll-reveal sections, animated stat counters, skills marquee, and an auto-hiding navbar (`.nav-hidden`) that slides away as you scroll down and reveals on any scroll up.
 - **Liquid-glass surfaces** - iOS-style frosted materials: the sticky navbar (all widths) and the mobile dropdown panel (floating rounded card with rim lighting and an opening sheen pulse) blur the page behind them; built with `backdrop-filter` on sibling pseudo-elements so nested filters never cancel each other.
-- **Articles & Tools** - the homepage shows a few featured posts with glass reading modals (data in `src/data/tools.ts`); a **"View All Posts"** button and the nav's Blog link point to the blog at [martinmzumara.com/blog](https://martinmzumara.com/blog/), which is merged into this repo (pages in `src/pages/blog/`, posts in `src/content/posts/`).
+- **Blog** - a markdown blog at [martinmzumara.com/blog](https://martinmzumara.com/blog/) (pages in `src/pages/blog/`, posts in `src/content/posts/`, per-tag archives at `/blog/tag/<tag>/`); the homepage "Recent Writing" section lists the three newest posts. The old standalone blog repo is merged into this repo (URLs unchanged).
 - **Testimonials / social proof** - intentionally omitted for now (see "Adding Testimonials Later").
 - **Contact section** - email / phone / location glass cards with a copy-to-clipboard email button, `mailto:` + resume CTAs, and a matching nav link + hero "Get in Touch" button.
 - **Custom icon system** - a single SVG sprite swapped in at runtime; no icon font CDN.
@@ -35,7 +35,9 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 - `src/pages/404.astro`: Custom error page for missing routes (GitHub Pages serves it automatically; intentionally `noindex`).
 - `src/pages/blog/index.astro`, `src/pages/blog/posts/[...slug].astro`: The blog at `/blog/` - index plus one page per post, migrated from the old standalone blog repo (URLs unchanged). Posts live in `src/content/posts/` behind the `posts` collection in `src/content.config.ts`; `src/layouts/BlogPostLayout.astro` wraps each post in the portfolio shell, and `public/css/blog.css` (loaded per page, `style.css` untouched) carries the blog-specific rules.
 - `src/pages/sitemap.xml.ts`, `src/pages/robots.txt.ts`: Generated at build time from `site.ts`.
-- `src/data/tools.ts`: The posts data array (`SITE_TOOLS`) - the single source for both the pre-rendered homepage cards and the modal bodies (embedded as page JSON; see below).
+- `src/data/tools.ts`: The tools & software data array (`SITE_TOOLS`) - now only feeds the reading modal (embedded as page JSON in `src/pages/index.astro`, read by `public/js/tools.js`); the homepage shows recent blog posts instead of tool cards.
+- `src/utils/tags.ts`: Blog helpers shared by the routes - `tagSlug()` (tag -> URL slug), `isPublished()` (drafts hidden outside `astro dev`) and `publishedPosts()` (newest first).
+- `scripts/new-post.mjs`: `npm run new:post -- "Title"` scaffolds a dated, draft markdown file in `src/content/posts/`.
 - `src/utils/obfuscate.ts`: Build-time entity encoder used for contact details (see below).
 - `scripts/check.mjs`: Post-build check - internal link/fragment audit plus a stale-domain guard that fails the build if the old `github.io` domain appears in any built text file.
 - `public/css/style.css`: Custom styles - CSS variables, liquid-glass navbar and mobile panel, responsive breakpoints, `prefers-reduced-motion` fallbacks. Note: the page uses `overflow-x: clip` (not `hidden`) - `hidden` on `html`/`body` silently breaks the navbar's `position: sticky`.
@@ -59,31 +61,46 @@ Icons are hand-picked **Phosphor Icons** (regular weight, MIT) embedded as an SV
 3. Preview a production build with `npm run preview`, or serve `dist/` over HTTP (required for the icon sprite to load - `file://` blocks the fetch):
    - `python3 -m http.server 8000 --directory dist` then open `http://localhost:8000`.
 
-## Adding a Tools & Software Post
+## Writing a blog post
 
-The articles are rendered from a typed data array in `src/data/tools.ts`
-(`SITE_TOOLS`). The homepage's **featured** subset is pre-rendered into static
-HTML at build time; the full list is embedded as page JSON for the reading
-modal (`public/js/tools.js` reads it from `#site-tools-data`). Each entry is
-an object in the array:
+Posts live in `src/content/posts/*.md` behind the `posts` collection
+(`src/content.config.ts`). The filename is the URL slug - `my-post.md` becomes
+`/blog/posts/my-post/`. Frontmatter:
 
-```ts
-{
-    name: 'Visual Studio Code',   // card title + modal heading
-    dev: 'laptop',                // 'laptop' or 'phone' (drives the filter + badge)
-    tag: 'Code Editor',           // small label shown on the card
-    icon: 'ti-brand-vscode',      // icon converted by public/js/icons.js to the sprite
-    featured: true,               // show on the homepage (keep ~3 featured)
-    summary: 'One-line card blurb.',
-    intro: 'Opening paragraph of the modal.',
-    body: 'Longer body text of the modal.',
-    bullets: ['Key point 1', 'Key point 2']
-}
+```md
+---
+title: 'My Post Title'
+description: 'One-line summary - the index excerpt and the page description.'
+date: 2026-10-06
+tag: 'Linux'        # groups the post and drives its /blog/tag/<slug>/ archive
+device: 'laptop'    # 'laptop' | 'phone' (optional - adds the device chip)
+draft: true         # optional - drafts are visible in `npm run dev` only
+---
+
+## A heading
+
+Body text - `inline code`, lists, > quotes, fenced code blocks and images
+(`![alt](/assets/images/foo.webp)`) are all styled by `public/css/blog.css`.
 ```
 
-To add a post, append an entry, then run `npm run build` - no other files
-need to change. (`js/tools-data.js` no longer exists; it was merged into
-`src/data/tools.ts` during the Astro migration.)
+Scaffold a pre-filled, dated, draft file and edit it:
+
+```bash
+npm run new:post -- "My Post Title"
+```
+
+Then:
+
+1. `npm run dev` and preview at `http://localhost:4321/blog/` (drafts included).
+2. When ready, set `draft: false` (or delete the line).
+3. `npm run build` - runs `astro build` + `scripts/check.mjs`; a broken internal
+   link or image path fails the build.
+4. Commit on a branch and open a PR.
+
+Nothing else needs editing: the `/blog/` index, the homepage "Recent Writing"
+section, the `/blog/tag/<tag>/` archives and `sitemap.xml` are all generated
+from the collection at build time. Post images go in `public/assets/images/`
+and are referenced with an absolute path (`/assets/images/...`).
 
 ## Contact-detail obfuscation
 
