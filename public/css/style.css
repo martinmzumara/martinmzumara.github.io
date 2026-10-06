@@ -642,17 +642,7 @@ body::after {
     margin-bottom: 1rem;
 }
 
-/* ---------- Placeholder thumbnail (tools modal + gallery fallback) ---------- */
-.placeholder-thumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-        radial-gradient(60% 60% at 30% 30%, rgba(63,185,80,0.25), transparent 70%),
-        radial-gradient(60% 60% at 75% 70%, rgba(63,185,80,0.15), transparent 70%),
-        var(--glass-bg-soft);
-}
-
+/* ---------- Placeholder icon (gallery fallback) ---------- */
 .placeholder-icon {
     width: 48px;
     height: 48px;
@@ -2747,8 +2737,8 @@ section[id] { scroll-margin-top: 90px; }
 .term-egg-close { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-secondary); font-size: 1.1rem; line-height: 1; }
 /* ============================================================
    Work index (editorial project list - design-lab Phase 3)
-   Rows: num / title / meta / arrow; inline thumb on mobile,
-   cursor-following preview on desktop hover.
+   Rows: num / title / meta / arrow. Text-only - the inline
+   thumbnail and the hover-preview image were both removed.
    ============================================================ */
 .work-index {
     border-top: 1px solid var(--glass-border);
@@ -2830,82 +2820,15 @@ section[id] { scroll-margin-top: 90px; }
     color: var(--accent-blue);
 }
 
-/* Inline thumb - mobile only (rows stay image-free on desktop) */
-.work-row-thumb {
-    display: none;
-}
-
-/* Floating preview - desktop only, positioned by script.js */
-.work-preview {
-    display: none;
-}
-
-@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
-    .work-preview {
-        display: block;
-        position: fixed;
-        z-index: 900;
-        width: 340px;
-        aspect-ratio: 3 / 2;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--elev-3);
-        background: var(--glass-bg-soft);
-        pointer-events: none;
-        opacity: 0;
-        transform: scale(0.96);
-        transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-
-    .work-preview.visible {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .work-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-}
+/* Rows are text-only: the inline mobile thumbnail and the desktop hover-preview
+   were both removed, so no preview/thumb plumbing is left here. */
 
 @media (max-width: 899px) {
     .work-row {
-        grid-template-columns: auto 1fr auto;
-        grid-template-areas: 'thumb main meta' 'thumb desc arrow';
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: 'main meta' 'desc arrow';
         gap: 0.35rem 1rem;
         padding: 1.1rem 0.25rem;
-    }
-
-    .work-row-thumb {
-        display: block;
-        grid-area: thumb;
-        width: 72px;
-        height: 52px;
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid var(--glass-border);
-        background: var(--glass-bg-soft);
-        align-self: center;
-    }
-
-    .work-row-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .work-row-thumb .placeholder-icon {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-faint);
-        font-size: 1.2rem;
     }
 
     .work-row-num { display: none; }
@@ -3772,16 +3695,11 @@ main .btn-primary:hover {
     .page-home .profile-layout { grid-template-columns: minmax(0, 1fr); }
     .page-home .profile-figure { max-width: 340px; }
 
-    /* Mobile work rows keep the base grid-template-areas (thumb | main | meta
-       over thumb | desc | arrow). Only the track SIZES may change here -
-       overriding grid-template-columns alone desynced the tracks from the named
-       areas and let the thumbnail overlap the title and description. */
+    /* Mobile work rows: text-only, matching the base 1fr / auto text layout. */
     .page-home .work-row {
-        grid-template-columns: 5.5rem minmax(0, 1fr) auto;
         gap: 0.4rem 1rem;
         padding-block: clamp(1.25rem, 3vw, 1.75rem);
     }
-    .page-home .work-row-thumb { width: 84px; height: 60px; }
 }
 
 @media (max-width: 768px) {
@@ -3798,15 +3716,6 @@ main .btn-primary:hover {
     .page-home .hero-label { margin-bottom: 1rem; }
     .page-home .hero-title { margin-bottom: 1.25rem; }
     .page-home .hero-lede { margin-bottom: 1.75rem; }
-
-    /* Project thumbnails are a desktop/tablet affordance - mobile rows are text
-       only. The named areas drop the thumb track so the text is not indented by
-       an empty column. */
-    .page-home .work-row {
-        grid-template-columns: minmax(0, 1fr) auto;
-        grid-template-areas: 'main meta' 'desc arrow';
-    }
-    .page-home .work-row-thumb { display: none; }
 
     .page-home .chapter-head { gap: 0.75rem 1.25rem; }
     .page-home .tools-grid { grid-template-columns: minmax(0, 1fr); }
