@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import ChapterHead from '../../../components/ChapterHead.astro';
+import { publishedPosts, tagSlug } from '../../../utils/tags';
+
+export async function getStaticPaths() {
+  const posts = await publishedPosts();
+  const tags = [...new Set(posts.map((post) => post.data.tag))];
+  return tags.map((tag) => ({ params: { tag: tagSlug(tag) }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+const posts = (await publishedPosts()).filter((post) => post.data.tag === tag);
+
+const description = `Posts tagged "${tag}" - notes on software, networks and the IT field work behind them.`;
+
+const navLinks = [
+  { href: '/', label: 'HOME' },
+  { href: '/blog/', label: 'BLOG' },
+  { href: '/#projects', label: 'PROJECTS' },
+  { href: '/#contact', label: 'CONTACT' },
+];
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const deviceLabel = (device: string) => (device === 'phone' ? 'Phone' : 'Laptop');
+---
+<BaseLayout
+    title={`${tag} - Blog - Martin Mzumara`}
+    description={description}
+    path={`/blog/tag/${tagSlug(tag)}/`}
+    ogType='website'
+    scripts={['/js/icons.js', '/js/script.js']}
+>
+    <Fragment slot='head-end'>
+        <link rel='stylesheet' href='/css/blog.css' />
+    </Fragment>
+
+    <Navbar ariaLabel='Blog navigation' links={navLinks} action={{ href: '/cv/', label: 'VIEW RESUME' }} />
+
+    <main id='main-content'>
+        <section class='chapter-section surface-a'>
+            <div class='container'>
+                <a class='blog-back-link' href='/blog/'>&larr; All posts</a>
+
+                <ChapterHead num='01' label='Tag' title={tag} lead={description} as='h1' display />
+
+                <ul class='blog-post-list'>
+                    {posts.map((post) => (
+                        <li>
+                            <a class='blog-post-card' href={`/blog/posts/${post.id}/`}>
+                                <div class='blog-post-meta'>
+                                    <span class='blog-meta-tag'>{post.data.tag}</span>
+                                    <span>{formatDate(post.data.date)}</span>
+                                    {post.data.device && (
+                                        <span class='blog-meta-device'>{deviceLabel(post.data.device)}</span>
+                                    )}
+                                </div>
+                                <h2 class='blog-post-title'>{post.data.title}</h2>
+                                <p class='blog-post-excerpt'>{post.data.description}</p>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

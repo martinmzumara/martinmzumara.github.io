@@ -52,6 +52,11 @@
 
 .blog-post-meta .blog-meta-tag { color: var(--accent-blue); }
 
+/* When the tag is a link (post header), keep the mono look; underline on hover */
+.blog-post-meta a.blog-meta-tag { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+.blog-post-meta a.blog-meta-tag:hover,
+.blog-post-meta a.blog-meta-tag:focus-visible { border-bottom-color: currentColor; }
+
 .blog-post-meta .blog-meta-sep {
     color: var(--text-faint);
     opacity: 0.6;
