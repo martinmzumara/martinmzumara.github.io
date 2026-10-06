@@ -102,6 +102,33 @@ section, the `/blog/tag/<tag>/` archives and `sitemap.xml` are all generated
 from the collection at build time. Post images go in `public/assets/images/`
 and are referenced with an absolute path (`/assets/images/...`).
 
+## Publishing from GitHub Mobile
+
+You can create and publish a post from the GitHub Mobile app - a post is just
+a markdown file in the repo.
+
+1. Open the repository in GitHub Mobile and go to `src/content/posts/`.
+2. Tap **+** and create a new file named `<slug>.md` (the filename becomes the
+   URL slug, e.g. `my-post.md` -> `/blog/posts/my-post/`).
+3. Paste the frontmatter and body from `scripts/post-template.md`.
+4. Leave out `draft` (or set `draft: false`) so the post publishes - a
+   `draft: true` post only shows under `npm run dev`, which you cannot run on a
+   phone.
+5. Commit to `main` (or a branch, then open a PR). Pushing to `main` runs the
+   Pages deploy automatically.
+6. Check the **Actions** tab - a red run means the build failed and the post
+   did not publish.
+
+Things to watch on mobile:
+
+- The frontmatter is validated at build time. A typo, a missing required field
+  (`title`, `description`, `date`) or an invalid date fails the build.
+- There is no local preview on a phone - you only see the rendered post after
+  the deploy finishes (~1-2 min).
+- Images are awkward to add from the app. Keep mobile posts text-only, or add
+  images from a desktop (`public/assets/images/`, referenced as
+  `/assets/images/...`); a missing image also fails the build.
+
 ## Contact-detail obfuscation
 
 E-mail and phone numbers never appear as plain text in the served HTML
