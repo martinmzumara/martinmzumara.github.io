@@ -3708,16 +3708,23 @@ main .btn-primary:hover {
 }
 
 @media (max-width: 768px) {
-    /* Hero: top-aligned and shorter on mobile so the headline sits near the top
-       of the viewport on first paint instead of floating inside a tall 90vh
-       block. Content runs from the top (flex-start); the 75vh minimum keeps
-       the section compact. Desktop is untouched (see the base .hero-full). */
+    /* Hero: top-aligned on mobile so the headline sits near the top of the
+       viewport on first paint. No min-height - the 75vh floor outpaced the
+       hero content on phones, and the leftover height read as dead space under
+       the CTAs; auto lets the section end with its content so the next band
+       follows right after. Desktop is untouched (see the base .hero-full). */
     .page-home .hero-full {
         justify-content: flex-start;
-        min-height: 75vh;
+        min-height: auto;
         padding-top: clamp(3rem, 10vh, 6rem);
-        padding-bottom: clamp(2rem, 5vh, 4rem);
+        padding-bottom: clamp(1rem, 3vh, 2rem);
     }
+
+    /* Buttons sit left, matching the headline and lede above them. The shared
+       `.hero-cta` rule centres the stacked buttons on small screens, so this
+       (higher-specificity) rule restores flex-start. */
+    .page-home .hero-cta { align-items: flex-start; }
+
     .page-home .hero-label { margin-bottom: 1rem; }
     .page-home .hero-title { margin-bottom: 1.25rem; }
     .page-home .hero-lede { margin-bottom: 1.75rem; }
