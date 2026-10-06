@@ -462,26 +462,9 @@ document.addEventListener("DOMContentLoaded", () => {
         updateProgress();
     }
 
-    // =============== 8. Live local time (Lilongwe) ===============
-    const clockEl = document.getElementById('local-time');
-    const updateClock = () => {
-        if (!clockEl) return;
-        try {
-            clockEl.textContent = new Intl.DateTimeFormat('en-GB', {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-                timeZone: 'Africa/Blantyre'
-            }).format(new Date());
-        } catch (e) {
-            clockEl.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-        }
-    };
-    if (clockEl) {
-        updateClock();
-        setInterval(updateClock, 1000);
-    }
-
+    // =============== 8. Live local time - removed ===============
+    // The hero status badge no longer shows a clock (the "--:-- GMT+2" line was
+    // dropped), so the Lilongwe clock updater and its #local-time target are gone.
     // =============== 9. Skills marquee: duplicate for seamless loop ===============
     const marqueeTrack = document.getElementById('marquee-track');
     if (marqueeTrack && !reduceMotion) {
