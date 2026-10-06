@@ -2,11 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import ChapterHead from '../../components/ChapterHead.astro';
-import { getCollection } from 'astro:content';
+import { publishedPosts } from '../../utils/tags';
 
-const posts = (await getCollection('posts')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const posts = await publishedPosts();
 
 const description =
   'Articles on software development, IoT systems, IT field work, and the tools I use daily.';

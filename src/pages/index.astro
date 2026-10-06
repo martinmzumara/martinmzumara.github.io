@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import ChapterHead from '../components/ChapterHead.astro';
 import { SITE } from '../config/site';
 import { SITE_TOOLS } from '../data/tools';
-import { getCollection } from 'astro:content';
+import { publishedPosts } from '../utils/tags';
 import { emailLink, phoneLink } from '../utils/obfuscate';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -48,9 +48,7 @@ const emailCtaHtml = emailLink(
 // Recent writing: the 3 newest posts from the posts collection, sorted by date
 // descending. The full tools list stays embedded as JSON below for the reading
 // modal (tools.js), though this section no longer shows tool cards.
-const recentPosts = (await getCollection('posts'))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const recentPosts = (await publishedPosts()).slice(0, 3);
 const formatDate = (date: Date) =>
   date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 

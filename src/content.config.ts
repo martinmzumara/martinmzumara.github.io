@@ -9,6 +9,7 @@ const posts = defineCollection({
     date: z.coerce.date(),
     tag: z.string().default('General'),
     device: z.enum(['laptop', 'phone']).optional(),
+    draft: z.boolean().default(false),
   }),
 });
 
