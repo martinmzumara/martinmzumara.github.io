@@ -3708,15 +3708,15 @@ main .btn-primary:hover {
 }
 
 @media (max-width: 768px) {
-    /* Hero: centred in the viewport again (pre-Phase-7 the hero used
-       align-items:center). A slightly larger top than bottom padding biases the
-       block into the lower half so the headline and CTAs feel grounded rather
-       than pinned to the top. The 90vh minimum and the type scale are
-       unchanged. */
+    /* Hero: top-aligned and shorter on mobile so the headline sits near the top
+       of the viewport on first paint instead of floating inside a tall 90vh
+       block. Content runs from the top (flex-start); the 75vh minimum keeps
+       the section compact. Desktop is untouched (see the base .hero-full). */
     .page-home .hero-full {
-        justify-content: center;
-        padding-top: clamp(4rem, 11vh, 7rem);
-        padding-bottom: clamp(2.5rem, 6vh, 4rem);
+        justify-content: flex-start;
+        min-height: 75vh;
+        padding-top: clamp(3rem, 10vh, 6rem);
+        padding-bottom: clamp(2rem, 5vh, 4rem);
     }
     .page-home .hero-label { margin-bottom: 1rem; }
     .page-home .hero-title { margin-bottom: 1.25rem; }
