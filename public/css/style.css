@@ -3725,6 +3725,13 @@ main .btn-primary:hover {
        (higher-specificity) rule restores flex-start. */
     .page-home .hero-cta { align-items: flex-start; }
 
+    /* Larger hero headline on phones: raise the display-scale floor. Scoped to
+       .page-home because the shared --text-display token also feeds .main-title
+       on the case-study and blog pages, which should stay as they are. The
+       floor only binds below ~560px (above that 10vw already wins the clamp),
+       so this is a phone-range change only. */
+    .page-home { --text-display: clamp(3.5rem, 10vw, 8rem); }
+
     .page-home .hero-label { margin-bottom: 1rem; }
     .page-home .hero-title { margin-bottom: 1.25rem; }
     .page-home .hero-lede { margin-bottom: 1.75rem; }
