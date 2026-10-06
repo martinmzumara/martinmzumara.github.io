@@ -2962,6 +2962,7 @@ section[id] { scroll-margin-top: 90px; }
 .cred-strip-label {
     font-family: var(--font-mono);
     font-size: 0.7rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-faint);
