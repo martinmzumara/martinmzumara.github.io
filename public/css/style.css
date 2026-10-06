@@ -3022,6 +3022,31 @@ section[id] { scroll-margin-top: 90px; }
     line-height: 1.55;
 }
 
+/* Core-stack groups inside the credential strip: mono micro-labels over a
+   compact list, so the strip stays one strip and never becomes a section. */
+.stack-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.stack-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem 0.6rem;
+}
+
+.stack-group-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    min-width: 6rem;
+}
+
 @media (max-width: 600px) {
     .cred-strip-item {
         grid-template-columns: 1fr;
