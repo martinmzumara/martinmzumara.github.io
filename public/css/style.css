@@ -2988,7 +2988,7 @@ section[id] { scroll-margin-top: 90px; }
 
 .stack-group {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: baseline;
     gap: 0.15rem 0.6rem;
 }
