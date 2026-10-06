@@ -194,6 +194,29 @@
     margin: clamp(2rem, 4vw, 2.75rem) 0;
 }
 
+/* Images: full-measure, hairline frame, flat. Point src at /assets/images/... */
+.blog-prose img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    margin: 1.75rem 0;
+}
+
+.blog-prose figure { margin: 1.75rem 0; }
+
+.blog-prose figure img { margin: 0; }
+
+.blog-prose figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    margin-top: 0.6rem;
+}
+
 /* Inline code: hairline, flat, mono - no glass */
 .blog-prose code {
     font-family: var(--font-mono);
