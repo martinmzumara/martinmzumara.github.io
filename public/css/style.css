@@ -3521,6 +3521,20 @@ section > .section-lead {
 
 .page-home .tool-summary { font-size: 1rem; line-height: 1.6; }
 
+/* Recent-writing cards: the tools slot now lists blog posts. The tag reuses the
+   .tool-tag mono micro-label; the date is the same treatment in a faint tone. */
+.page-home a.tool-card { text-decoration: none; }
+
+.page-home .tool-date {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    white-space: nowrap;
+}
+
 /* ---------- 06 Field band (full-bleed, immersive) ---------- */
 .page-home .showcase-carousel--full { --card-w: 420px; }
 

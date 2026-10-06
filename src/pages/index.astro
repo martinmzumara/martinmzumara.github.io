@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import ChapterHead from '../components/ChapterHead.astro';
 import { SITE } from '../config/site';
 import { SITE_TOOLS } from '../data/tools';
+import { getCollection } from 'astro:content';
 import { emailLink, phoneLink } from '../utils/obfuscate';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -44,11 +45,14 @@ const emailCtaHtml = emailLink(
   { showAddress: false }
 );
 
-// Featured tools are pre-rendered into static HTML at build time (no JS needed
-// to see them); the full list is embedded as JSON below for the reading modal.
-const featuredTools = SITE_TOOLS.filter((t) => t.featured);
-const deviceIcon = (dev: string) => (dev === 'phone' ? 'ti-device-mobile' : 'ti-device-laptop');
-const deviceLabel = (dev: string) => (dev === 'phone' ? 'Phone' : 'Laptop');
+// Recent writing: the 3 newest posts from the posts collection, sorted by date
+// descending. The full tools list stays embedded as JSON below for the reading
+// modal (tools.js), though this section no longer shows tool cards.
+const recentPosts = (await getCollection('posts'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
 // Field photos for the showcase carousel. Each entry carries its own srcset
 // widths (one original is capped at 765px) plus the full-size file the
@@ -357,23 +361,22 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
             </div>
         </section>
 
-        <!-- ============ 05 - TOOLS ============ -->
-        <section id="tools" class="chapter-section surface-a">
+        <!-- ============ 05 - WRITING ============ -->
+        <section id="writing" class="chapter-section surface-a">
             <div class="container">
-                <ChapterHead num="05" label="Tools" title="Tools &amp; Software I Use"
-                    lead="The apps and services I rely on daily - for development, IT work, and getting things done - on both my laptop and my phone." />
+                <ChapterHead num="05" label="Writing" title="Recent Writing"
+                    lead="Latest posts from the blog - notes on software, networks, and the IT field work behind them." />
 
-                <div class="tools-grid" id="tools-grid">{featuredTools.map((t, i) => (
-                    <button class="tool-card" data-id={t.name} style={`animation-delay:${i * 70}ms`}>
+                <div class="tools-grid">{recentPosts.map((post, i) => (
+                    <a class="tool-card" href={`/blog/posts/${post.id}/`} style={`animation-delay:${i * 70}ms`}>
                         <div class="tool-card-top">
-                            <span class="tool-icon"><i class={`ti ${t.icon}`}></i></span>
-                            <span class={`tool-device ${t.dev}`}><i class={`ti ${deviceIcon(t.dev)}`}></i> {deviceLabel(t.dev)}</span>
+                            <span class="tool-tag">{post.data.tag}</span>
+                            <span class="tool-date">{formatDate(post.data.date)}</span>
                         </div>
-                        <span class="tool-tag">{t.tag}</span>
-                        <h3>{t.name}</h3>
-                        <p class="tool-summary">{t.summary}</p>
-                        <span class="tool-arrow">Read more <i class="ti ti-arrow-right"></i></span>
-                    </button>
+                        <h3>{post.data.title}</h3>
+                        <p class="tool-summary">{post.data.description}</p>
+                        <span class="tool-arrow">Read post <i class="ti ti-arrow-right"></i></span>
+                    </a>
                 ))}</div>
                 <!-- Full tools data for the reading modal (tools.js) - replaces js/tools-data.js -->
                 <script type="application/json" id="site-tools-data" set:html={JSON.stringify(SITE_TOOLS).replace(/</g, '\\u003c')}></script>
