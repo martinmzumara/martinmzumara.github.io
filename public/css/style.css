@@ -3702,6 +3702,8 @@ main .btn-primary:hover {
 
     /* Mobile work rows: text-only, matching the base 1fr / auto text layout. */
     .page-home .work-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: 'main meta' 'desc arrow';
         gap: 0.4rem 1rem;
         padding-block: clamp(1.25rem, 3vw, 1.75rem);
     }
