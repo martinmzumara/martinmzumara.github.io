@@ -17,25 +17,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 1. Light / Dark Theme Toggle Setup
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    const themeToggleLabel = document.getElementById("theme-toggle-label");
+    // Both the footer toggle and the navbar toggle carry .theme-toggle-btn, so
+    // wire up every one and keep their labels / aria-labels in sync.
+    const themeToggleBtns = document.querySelectorAll(".theme-toggle-btn");
+    const themeToggleLabels = document.querySelectorAll(".theme-toggle-label");
 
     const updateThemeToggleLabel = () => {
-        if (!themeToggleLabel) return;
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const label = currentTheme === "light" ? "Change to dark theme" : "Change to light theme";
-        themeToggleLabel.textContent = label;
+        themeToggleLabels.forEach(el => { el.textContent = label; });
         // Accessible name must match the visible text, otherwise Lighthouse's
         // label-content-name-mismatch audit fails (a static aria-label that
         // differs from the visible label causes the mismatch).
-        if (themeToggleBtn) themeToggleBtn.setAttribute("aria-label", label);
+        themeToggleBtns.forEach(btn => btn.setAttribute("aria-label", label));
     };
 
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener("click", () => {
+    themeToggleBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
             const currentTheme = document.documentElement.getAttribute("data-theme");
             const newTheme = currentTheme === "light" ? "dark" : "light";
-            
+
             document.documentElement.setAttribute("data-theme", newTheme);
             try {
                 localStorage.setItem("theme", newTheme);
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             updateThemeToggleLabel();
         });
-    }
+    });
 
     // Initialize theme toggle label
     updateThemeToggleLabel();
