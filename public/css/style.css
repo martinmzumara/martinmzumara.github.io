@@ -1972,6 +1972,12 @@ body.lightbox-open {
         margin-left: auto;
     }
 
+    /* Mobile only: drop the toggle's border so it reads as a light icon control
+       beside the borderless hamburger instead of a chunky bordered square. */
+    .nav-theme-toggle {
+        border: none;
+    }
+
     .nav-links {
         display: none;
         position: absolute;
