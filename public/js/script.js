@@ -17,25 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 1. Light / Dark Theme Toggle Setup
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    const themeToggleLabel = document.getElementById("theme-toggle-label");
+    // The navbar toggle carries .theme-toggle-btn; keep its accessible name in
+    // sync with the current theme.
+    const themeToggleBtns = document.querySelectorAll(".theme-toggle-btn");
 
     const updateThemeToggleLabel = () => {
-        if (!themeToggleLabel) return;
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const label = currentTheme === "light" ? "Change to dark theme" : "Change to light theme";
-        themeToggleLabel.textContent = label;
-        // Accessible name must match the visible text, otherwise Lighthouse's
-        // label-content-name-mismatch audit fails (a static aria-label that
-        // differs from the visible label causes the mismatch).
-        if (themeToggleBtn) themeToggleBtn.setAttribute("aria-label", label);
+        // Icon-only button - the aria-label is its only accessible name.
+        themeToggleBtns.forEach(btn => btn.setAttribute("aria-label", label));
     };
 
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener("click", () => {
+    themeToggleBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
             const currentTheme = document.documentElement.getAttribute("data-theme");
             const newTheme = currentTheme === "light" ? "dark" : "light";
-            
+
             document.documentElement.setAttribute("data-theme", newTheme);
             try {
                 localStorage.setItem("theme", newTheme);
@@ -44,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             updateThemeToggleLabel();
         });
-    }
+    });
 
     // Initialize theme toggle label
     updateThemeToggleLabel();
@@ -156,11 +153,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (sec) sections.push({ id, sec, link });
         }
     });
+    // Cache each section's document offset once, then refresh on resize/load -
+    // the scroll handler itself never touches layout (no per-scroll reflow).
+    let sectionTops = [];
+    const cacheSectionTops = () => {
+        sectionTops = sections.map(s => ({ id: s.id, top: s.sec.offsetTop }));
+    };
     const spy = () => {
         const pos = window.scrollY + 120;
         let currentId = sections.length ? sections[0].id : null;
-        sections.forEach(s => {
-            if (s.sec.offsetTop <= pos) currentId = s.id;
+        sectionTops.forEach(s => {
+            if (s.top <= pos) currentId = s.id;
         });
         navLinksAll.forEach(link => {
             const isActive = link.getAttribute('href') === '#/' + currentId ||
@@ -176,8 +179,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
     if (sections.length > 0) {
-        window.addEventListener('scroll', spy, { passive: true });
-        window.addEventListener('resize', spy, { passive: true });
+        // rAF throttle (same ticking guard pattern as the navbar handler below)
+        // so a burst of scroll events collapses to one update per frame.
+        let spyTicking = false;
+        const onSpyScroll = () => {
+            if (!spyTicking) {
+                spyTicking = true;
+                requestAnimationFrame(() => { spyTicking = false; spy(); });
+            }
+        };
+        window.addEventListener('scroll', onSpyScroll, { passive: true });
+        window.addEventListener('resize', () => { cacheSectionTops(); onSpyScroll(); }, { passive: true });
+        window.addEventListener('load', cacheSectionTops);
+        cacheSectionTops();
         spy();
     }
     // 4. Lightbox Modal + focus management for showcase items
@@ -451,14 +465,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // =============== 7. Scroll progress bar ===============
     const progressBar = document.getElementById('scroll-progress');
     if (progressBar) {
+        let progressTicking = false;
         const updateProgress = () => {
+            progressTicking = false;
             const doc = document.documentElement;
             const max = doc.scrollHeight - window.innerHeight;
             const sy = doc.scrollTop || window.pageYOffset || 0;
             progressBar.style.transform = `scaleX(${max > 0 ? sy / max : 0})`;
         };
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        window.addEventListener('resize', updateProgress, { passive: true });
+        // rAF throttle, same ticking guard pattern as the navbar handler.
+        const requestProgress = () => {
+            if (!progressTicking) {
+                progressTicking = true;
+                requestAnimationFrame(updateProgress);
+            }
+        };
+        window.addEventListener('scroll', requestProgress, { passive: true });
+        window.addEventListener('resize', requestProgress, { passive: true });
         updateProgress();
     }
 

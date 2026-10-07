@@ -341,15 +341,13 @@ body::after {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: rgba(255,255,255,0.9);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    background: rgba(250,250,250,0.97);
     border-bottom: 1px solid var(--glass-border);
     box-shadow: none;
 }
 
 [data-theme="dark"] .navbar::before {
-    background: rgba(13,18,24,0.55);
+    background: rgba(11,15,20,0.97);
     border-bottom-color: rgba(255,255,255,0.10);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
 }
@@ -387,6 +385,9 @@ body::after {
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    /* Centre the link row so the theme toggle + action group on the right. */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .nav-link {
@@ -455,41 +456,17 @@ body::after {
     box-shadow: 0 0 10px var(--accent-blue-glow);
 }
 
-.footer-theme-toggle {
-    margin-top: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.9rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: var(--font-display);
-    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+/* ---------- Navbar theme toggle ----------
+   The shared .theme-toggle-btn markup sits between .nav-links and .nav-actions;
+   the nav links centre themselves (see .nav-links) so the button clusters with
+   the action on the right. */
+.nav-theme-toggle {
+    flex-shrink: 0;
 }
 
-.footer-theme-toggle:hover {
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
-    background-color: var(--glass-bg);
-    box-shadow: 0 0 12px var(--accent-blue-glow);
-}
-
-.footer-theme-toggle .icon-sun,
-.footer-theme-toggle .icon-moon {
-    font-size: 16px;
-}
-
-.theme-toggle-label {
-    font-family: var(--font-display);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+.nav-theme-toggle .icon-sun,
+.nav-theme-toggle .icon-moon {
+    font-size: 18px;
 }
 
 .icon-sun {
@@ -1990,6 +1967,15 @@ body.lightbox-open {
 
     .nav-toggle-btn {
         display: block;
+        /* Push the hamburger + theme toggle + action group to the right, with the
+           toggle between the hamburger and the action (never in the dropdown). */
+        margin-left: auto;
+    }
+
+    /* Mobile only: drop the toggle's border so it reads as a light icon control
+       beside the borderless hamburger instead of a chunky bordered square. */
+    .nav-theme-toggle {
+        border: none;
     }
 
     .nav-links {
@@ -2071,6 +2057,20 @@ body.lightbox-open {
         padding: 0.55rem 1rem;
     }
 
+    /* The action button shrinks on small screens but the toggle icon stayed 18px,
+       which made the (square, bordered) toggle read larger than the button.
+       Cap the toggle so it sits at or below the action button's height. */
+    .nav-theme-toggle {
+        padding: 0.4rem;
+    }
+
+    .nav-theme-toggle .icon-sun,
+    .nav-theme-toggle .icon-moon {
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+    }
+
     .hero-cta {
         flex-direction: column;
         align-items: flex-start;
@@ -2089,7 +2089,6 @@ body.lightbox-open {
 /* ---------- Auto-hiding navbar ---------- */
 .navbar {
     transition: transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    will-change: transform;
 }
 
 .navbar.nav-hidden {
@@ -2357,7 +2356,7 @@ body.loaded .hero-cta {
 .marquee::before, .marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 1; pointer-events: none; }
 .marquee::before { left: 0; background: linear-gradient(90deg, var(--bg-main), transparent); }
 .marquee::after { right: 0; background: linear-gradient(-90deg, var(--bg-main), transparent); }
-.marquee-track { display: flex; align-items: center; gap: 2.6rem; width: max-content; white-space: nowrap; animation: marquee 30s linear infinite; will-change: transform; }
+.marquee-track { display: flex; align-items: center; gap: 2.6rem; width: max-content; white-space: nowrap; animation: marquee 30s linear infinite; }
 .marquee-track span { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text-secondary); }
 .marquee-track i { color: var(--accent-blue); font-size: 16px; opacity: 0.7; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -2757,12 +2756,11 @@ section[id] { scroll-margin-top: 90px; }
     border-bottom: 1px solid var(--glass-border);
     text-decoration: none;
     color: inherit;
-    transition: background-color 0.2s ease, padding-left 0.25s ease;
+    transition: background-color 0.2s ease;
 }
 
 .work-row:hover {
     background: var(--glass-bg-soft);
-    padding-left: 0.9rem;
 }
 
 .work-row-num {
@@ -2785,11 +2783,12 @@ section[id] { scroll-margin-top: 90px; }
     letter-spacing: -0.02em;
     line-height: 1.15;
     color: var(--text-primary);
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .work-row:hover .work-row-title {
     color: var(--accent-blue);
+    transform: translateX(4px);
 }
 
 .work-row-desc {
@@ -3349,7 +3348,6 @@ section > .section-lead {
     padding-inline: 0;
     border-bottom: 1px solid var(--glass-border);
     background: transparent;
-    transition: padding-left 0.3s ease;
 }
 
 /* Pronounced hover: ink rail slides in + the row steps right */
@@ -3368,7 +3366,6 @@ section > .section-lead {
 
 .page-home .work-row:hover {
     background: transparent;
-    padding-left: clamp(1rem, 2.5vw, 2rem);
 }
 
 .page-home .work-row:hover::before { transform: scaleY(1); }
@@ -3386,7 +3383,7 @@ section > .section-lead {
     letter-spacing: -0.03em;
 }
 
-.page-home .work-row:hover .work-row-title { color: var(--text-primary); }
+.page-home .work-row:hover .work-row-title { color: var(--text-primary); transform: translateX(4px); }
 
 .page-home .work-row-desc {
     margin-top: 0.5rem;

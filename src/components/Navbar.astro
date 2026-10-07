@@ -31,6 +31,13 @@ const { ariaLabel = 'Main navigation', links, action } = Astro.props;
             ))}
         </nav>
 
+        <!-- Theme toggle: wired up by js/script.js alongside any other
+             .theme-toggle-btn on the page. -->
+        <button class="theme-toggle-btn nav-theme-toggle" id="theme-toggle-nav" type="button" aria-label="Change to dark theme">
+            <i class="ti ti-sun icon-sun" aria-hidden="true"></i>
+            <i class="ti ti-moon icon-moon" aria-hidden="true"></i>
+        </button>
+
         <div class="nav-actions">
             <a href={action.href} class="btn-primary">{action.icon && <><i class={`ti ${action.icon}`}></i>{' '}</>}{action.label}</a>
         </div>
