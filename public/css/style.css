@@ -2754,12 +2754,11 @@ section[id] { scroll-margin-top: 90px; }
     border-bottom: 1px solid var(--glass-border);
     text-decoration: none;
     color: inherit;
-    transition: background-color 0.2s ease, padding-left 0.25s ease;
+    transition: background-color 0.2s ease;
 }
 
 .work-row:hover {
     background: var(--glass-bg-soft);
-    padding-left: 0.9rem;
 }
 
 .work-row-num {
@@ -2782,11 +2781,12 @@ section[id] { scroll-margin-top: 90px; }
     letter-spacing: -0.02em;
     line-height: 1.15;
     color: var(--text-primary);
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .work-row:hover .work-row-title {
     color: var(--accent-blue);
+    transform: translateX(4px);
 }
 
 .work-row-desc {
@@ -3346,7 +3346,6 @@ section > .section-lead {
     padding-inline: 0;
     border-bottom: 1px solid var(--glass-border);
     background: transparent;
-    transition: padding-left 0.3s ease;
 }
 
 /* Pronounced hover: ink rail slides in + the row steps right */
@@ -3365,7 +3364,6 @@ section > .section-lead {
 
 .page-home .work-row:hover {
     background: transparent;
-    padding-left: clamp(1rem, 2.5vw, 2rem);
 }
 
 .page-home .work-row:hover::before { transform: scaleY(1); }
@@ -3383,7 +3381,7 @@ section > .section-lead {
     letter-spacing: -0.03em;
 }
 
-.page-home .work-row:hover .work-row-title { color: var(--text-primary); }
+.page-home .work-row:hover .work-row-title { color: var(--text-primary); transform: translateX(4px); }
 
 .page-home .work-row-desc {
     margin-top: 0.5rem;
