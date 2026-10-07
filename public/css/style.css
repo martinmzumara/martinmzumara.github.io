@@ -2051,6 +2051,20 @@ body.lightbox-open {
         padding: 0.55rem 1rem;
     }
 
+    /* The action button shrinks on small screens but the toggle icon stayed 18px,
+       which made the (square, bordered) toggle read larger than the button.
+       Cap the toggle so it sits at or below the action button's height. */
+    .nav-theme-toggle {
+        padding: 0.4rem;
+    }
+
+    .nav-theme-toggle .icon-sun,
+    .nav-theme-toggle .icon-moon {
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+    }
+
     .hero-cta {
         flex-direction: column;
         align-items: flex-start;
