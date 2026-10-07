@@ -17,18 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 1. Light / Dark Theme Toggle Setup
-    // Both the footer toggle and the navbar toggle carry .theme-toggle-btn, so
-    // wire up every one and keep their labels / aria-labels in sync.
+    // The navbar toggle carries .theme-toggle-btn; keep its accessible name in
+    // sync with the current theme.
     const themeToggleBtns = document.querySelectorAll(".theme-toggle-btn");
-    const themeToggleLabels = document.querySelectorAll(".theme-toggle-label");
 
     const updateThemeToggleLabel = () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const label = currentTheme === "light" ? "Change to dark theme" : "Change to light theme";
-        themeToggleLabels.forEach(el => { el.textContent = label; });
-        // Accessible name must match the visible text, otherwise Lighthouse's
-        // label-content-name-mismatch audit fails (a static aria-label that
-        // differs from the visible label causes the mismatch).
+        // Icon-only button - the aria-label is its only accessible name.
         themeToggleBtns.forEach(btn => btn.setAttribute("aria-label", label));
     };
 

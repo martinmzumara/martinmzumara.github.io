@@ -385,6 +385,9 @@ body::after {
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    /* Centre the link row so the theme toggle + action group on the right. */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .nav-link {
@@ -453,50 +456,10 @@ body::after {
     box-shadow: 0 0 10px var(--accent-blue-glow);
 }
 
-.footer-theme-toggle {
-    margin-top: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.9rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: var(--font-display);
-    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.footer-theme-toggle:hover {
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
-    background-color: var(--glass-bg);
-    box-shadow: 0 0 12px var(--accent-blue-glow);
-}
-
-.footer-theme-toggle .icon-sun,
-.footer-theme-toggle .icon-moon {
-    font-size: 16px;
-}
-
-.theme-toggle-label {
-    font-family: var(--font-display);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-}
-
-/* ---------- Navbar theme toggle (two preview positions) ----------
-   Same button as the footer's, sitting between .nav-links and .nav-actions.
-   Position is switched by a class on the .navbar <header> so either layout can
-   be previewed live in DevTools:
-     nav-theme-a (default) - grouped with the action in the top-right cluster
-     nav-theme-b           - hugs the right of the nav links, action pushed out
-   Swap nav-theme-a / nav-theme-b on <header class="navbar"> to preview. */
+/* ---------- Navbar theme toggle ----------
+   The shared .theme-toggle-btn markup sits between .nav-links and .nav-actions;
+   the nav links centre themselves (see .nav-links) so the button clusters with
+   the action on the right. */
 .nav-theme-toggle {
     flex-shrink: 0;
 }
@@ -504,25 +467,6 @@ body::after {
 .nav-theme-toggle .icon-sun,
 .nav-theme-toggle .icon-moon {
     font-size: 18px;
-}
-
-@media (min-width: 769px) {
-    /* Option A: links stay centred; toggle + action form the top-right cluster. */
-    .navbar.nav-theme-a .nav-links {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Option B: toggle hugs the right side of the nav links; the action is
-       pushed to the far edge, leaving the gap before it. */
-    .navbar.nav-theme-b .nav-links {
-        margin-left: auto;
-        margin-right: 0;
-    }
-
-    .navbar.nav-theme-b .nav-theme-toggle {
-        margin-right: auto;
-    }
 }
 
 .icon-sun {
@@ -2023,19 +1967,9 @@ body.lightbox-open {
 
     .nav-toggle-btn {
         display: block;
-        order: 2;
-    }
-
-    /* Theme toggle sits beside the hamburger in the top-right cluster - never
-       inside the dropdown. Same placement for nav-theme-a and nav-theme-b. */
-    .nav-theme-toggle {
-        order: 1;
+        /* Push the hamburger + theme toggle + action group to the right, with the
+           toggle between the hamburger and the action (never in the dropdown). */
         margin-left: auto;
-        margin-right: 0;
-    }
-
-    .nav-actions {
-        order: 3;
     }
 
     .nav-links {

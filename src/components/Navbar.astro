@@ -14,7 +14,7 @@ interface Props {
 
 const { ariaLabel = 'Main navigation', links, action } = Astro.props;
 ---
-<header class="navbar nav-theme-a" id="navbar">
+<header class="navbar" id="navbar">
     <div class="nav-container">
         <a href="/" class="logo">Martin Mzumara</a>
 
@@ -31,8 +31,8 @@ const { ariaLabel = 'Main navigation', links, action } = Astro.props;
             ))}
         </nav>
 
-        <!-- Theme toggle: position switched by nav-theme-a / nav-theme-b on the
-             <header class="navbar">. Kept in sync with the footer toggle by js/script.js. -->
+        <!-- Theme toggle: wired up by js/script.js alongside any other
+             .theme-toggle-btn on the page. -->
         <button class="theme-toggle-btn nav-theme-toggle" id="theme-toggle-nav" type="button" aria-label="Change to dark theme">
             <i class="ti ti-sun icon-sun" aria-hidden="true"></i>
             <i class="ti ti-moon icon-moon" aria-hidden="true"></i>
