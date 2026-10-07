@@ -2087,7 +2087,6 @@ body.lightbox-open {
 /* ---------- Auto-hiding navbar ---------- */
 .navbar {
     transition: transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    will-change: transform;
 }
 
 .navbar.nav-hidden {
@@ -2355,7 +2354,7 @@ body.loaded .hero-cta {
 .marquee::before, .marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 1; pointer-events: none; }
 .marquee::before { left: 0; background: linear-gradient(90deg, var(--bg-main), transparent); }
 .marquee::after { right: 0; background: linear-gradient(-90deg, var(--bg-main), transparent); }
-.marquee-track { display: flex; align-items: center; gap: 2.6rem; width: max-content; white-space: nowrap; animation: marquee 30s linear infinite; will-change: transform; }
+.marquee-track { display: flex; align-items: center; gap: 2.6rem; width: max-content; white-space: nowrap; animation: marquee 30s linear infinite; }
 .marquee-track span { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text-secondary); }
 .marquee-track i { color: var(--accent-blue); font-size: 16px; opacity: 0.7; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
