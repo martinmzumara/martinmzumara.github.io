@@ -82,7 +82,20 @@ const {
             imagesizes="(max-width: 768px) min(280px, 70vw), 320px"
             fetchpriority="high" />
     )}
-    <meta name="theme-color" content={SITE.themeColor}>
+    <meta name="theme-color" content={SITE.themeColor} id="theme-color"
+          data-light={SITE.themeColor} data-dark={SITE.themeColorDark}>
+    <!-- Phase 9: the meta above cannot use a media query, because the site theme
+         is driven by data-theme (set by the inline script at the top of head),
+         not by prefers-color-scheme. The two hex values ride on the tag itself,
+         so js/script.js re-applies them on toggle without repeating them. -->
+    <script is:inline>
+        (function () {
+            var meta = document.getElementById('theme-color');
+            if (!meta) { return; }
+            var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+            meta.setAttribute('content', dark ? meta.getAttribute('data-dark') : meta.getAttribute('data-light'));
+        })();
+    </script>
     {robots && <meta name="robots" content={robots}>}
 
     <!-- Favicon (generated from assets/images/logo.png) -->

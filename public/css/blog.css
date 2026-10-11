@@ -50,7 +50,7 @@
     margin-bottom: 0.75rem;
 }
 
-.blog-post-meta .blog-meta-tag { color: var(--accent-blue); }
+.blog-post-meta .blog-meta-tag { color: var(--accent-green); }
 
 /* When the tag is a link (post header), keep the mono look; underline on hover */
 .blog-post-meta a.blog-meta-tag { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
@@ -101,7 +101,7 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     text-decoration: none;
     border-bottom: 1px solid var(--term-line);
     padding-bottom: 0.35rem;
@@ -145,7 +145,7 @@
 .blog-prose strong { color: var(--text-primary); font-weight: 600; }
 
 .blog-prose a {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
@@ -178,10 +178,10 @@
 
 .blog-prose li { margin-bottom: 0.55rem; }
 
-.blog-prose li::marker { color: var(--accent-blue); }
+.blog-prose li::marker { color: var(--accent-green); }
 
 .blog-prose blockquote {
-    border-left: 2px solid var(--accent-blue);
+    border-left: 2px solid var(--accent-green);
     padding-left: 1.2rem;
     margin: 1.75rem 0;
     color: var(--text-primary);
