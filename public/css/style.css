@@ -69,6 +69,33 @@
     /* Gentle button curve - matches .theme-toggle-btn, never a pill */
     --radius-btn: 4px;
 
+    /* ---- Micro-label tiers (Phase 8) ----
+       Every mono uppercase mark on the site is one of exactly two things:
+       EYEBROW opens a section, or a group inside one; META annotates a row,
+       a date or a counter under it. The homepage had reached five sizes,
+       three letter-spacings and four weights for this one job, so
+       neighbouring sections read as different documents. Add a label with
+       these tokens, never with a new size. */
+    --label-size: 0.72rem;
+    --label-tracking: 0.1em;
+    --label-weight: 500;
+    --meta-size: 0.7rem;
+    --meta-tracking: 0.08em;
+    --meta-weight: 700;
+
+    /* One row rhythm for every hairline list: skills rows, the work index,
+       the timeline, the credential strip and the contact cards. They ran at
+       five different paddings (44/56/64/72/88px per row at desktop) for the
+       same job. The clamp tops out well below the old work-row value on
+       purpose: that row holds two lines, the others hold one. */
+    --space-row: clamp(1.25rem, 2.5vw, 1.75rem);
+
+    /* Availability dot glow - tokenised so dark mode's mint reaches it. It
+       was a hard-coded #22c55e / rgba(34,197,94) pair, the one colour on the
+       page that ignored the theme patch. */
+    --status-glow: rgba(34, 197, 94, 0.55);
+    --status-glow-0: rgba(34, 197, 94, 0);
+
     /* Surfaces - white cards on white page; hairlines carry the structure */
     --glass-bg: #ffffff;
     --glass-bg-strong: #ffffff;
@@ -144,6 +171,8 @@
     --accent-cyan: #2dd4a7;
     --accent-mint: #62ffb3;
     --accent-blue-glow: rgba(63, 185, 80, 0.35);
+    --status-glow: rgba(98, 255, 179, 0.45);
+    --status-glow-0: rgba(98, 255, 179, 0);
     --accent-amber: #e3b341;
     --accent-amber-soft: rgba(227, 179, 65, 0.15);
     --accent-violet: #e3b341;
@@ -301,13 +330,14 @@ body::after {
     padding: 0 1.5rem;
 }
 
-/* Section micro-labels - mono engineering marks (// 01 - LABEL) */
+/* Section micro-labels - mono engineering marks (// 01 - LABEL).
+   Eyebrow tier of the micro-label pair in :root (Phase 8). */
 .system-label {
     font-family: var(--font-mono);
     color: var(--text-faint);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    font-weight: 500;
+    font-size: var(--label-size);
+    letter-spacing: var(--label-tracking);
+    font-weight: var(--label-weight);
     text-transform: uppercase;
     display: block;
     margin-bottom: 1rem;
@@ -321,6 +351,9 @@ body::after {
     line-height: 1.05;
     margin-bottom: 2rem;
     max-width: var(--measure);
+    /* Phase 8: the hero already balanced its own line breaks; section titles
+       did not, so "Experience & Qualifications" split 1 word / 1 word. */
+    text-wrap: balance;
 }
 
 /* ---------- Navigation (solid bar, hairline border - Resend style) ---------- */
@@ -353,9 +386,14 @@ body::after {
 }
 
 .nav-container {
-    max-width: 1280px;
+    /* Phase 8: the bar now shares the page's content rail (main .container
+       and .hero-full-inner use the same pair), so the logo sits on the same
+       left axis as the hero headline and every chapter heading. It was
+       max-width 1280 + 1.5rem padding, which put the logo 130px left of the
+       H1 at 1440px. The <=380px rule below still tightens this. */
+    max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding-inline: var(--gutter);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -693,12 +731,27 @@ body::after {
     gap: 2.5rem;
 }
 
+/* Phase 8: this is a group eyebrow, not a heading. At 1.2rem it sat BELOW
+   the .timeline-header h4 job titles it labels (up to 1.8rem), so the
+   section's own entry point was the smallest type in it and the page ran
+   h2 (4.75rem) -> h3 (1.15rem) -> h4 (1.8rem). It now takes the eyebrow
+   tier, which .skills-col-title already uses in the section above. */
 .column-title {
-    font-size: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: var(--label-size);
+    font-weight: var(--label-weight);
+    letter-spacing: var(--label-tracking);
+    text-transform: uppercase;
+    color: var(--text-faint);
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.column-title i {
+    width: 16px;
+    height: 16px;
 }
 
 .timeline-item {
@@ -708,17 +761,12 @@ body::after {
     position: relative;
 }
 
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -6px;
-    top: 4px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-    box-shadow: 0 0 10px var(--accent-blue-glow);
-}
+/* The timeline dot was removed in Phase 8. It was a 10px green gradient with
+   a 10px outer glow, positioned at left:-6px to sit on the old border-left
+   rail. Phase 7 replaced that rail with a border-top hairline and set
+   padding-left:0, which left the dot hanging 6px OUTSIDE the text axis as a
+   floating glow - against both the shared left rail and the site's own
+   "structure from borders, not glows" rule. */
 
 .timeline-header {
     display: flex;
@@ -732,10 +780,16 @@ body::after {
     font-size: 1.05rem;
 }
 
+/* Meta tier. Green is spent on the chapter number, so the dates are
+   metadata: four green date ranges in one section broke the page's own
+   one-accent-per-section rule, and they now match .tool-date. */
 .timeline-date {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent-blue);
+    font-size: var(--meta-size);
+    font-weight: var(--meta-weight);
+    letter-spacing: var(--meta-tracking);
+    text-transform: uppercase;
+    color: var(--text-faint);
 }
 
 .timeline-org {
@@ -962,8 +1016,13 @@ body::after {
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
 }
 
-/* Caption plate - Inter body copy on the same frosted surface as the arrows
-   (same background token, same 10px blur, no border, same 4px curve). */
+/* Caption plate - Phase 8: an ink scrim on the photo, not a frosted tile.
+   The plate sat on --glass-bg-strong + a 10px blur + --elev-2 while the
+   frame it sits in had just been flattened to a borderless, shadowless
+   window, so every photo carried a small glass box on a flat frame. The
+   scrim is opaque enough (0.72) that white copy clears 8:1 even over a
+   white photo, and its glyph is light instead of green - 14 green glyphs in
+   one band was the worst break of the one-accent-per-section rule. */
 .showcase-caption {
     position: absolute;
     left: 10px;
@@ -981,11 +1040,9 @@ body::after {
     line-height: 1.35;
     letter-spacing: 0;
     text-transform: none;
-    color: var(--text-primary);
-    background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(10px) saturate(140%);
-    backdrop-filter: blur(10px) saturate(140%);
-    box-shadow: var(--elev-2);
+    color: #fff;
+    background: rgba(10, 12, 16, 0.72);
+    box-shadow: none;
     pointer-events: none;
     transition: transform 0.3s ease;
 }
@@ -995,7 +1052,7 @@ body::after {
     width: 13px;
     height: 13px;
     flex: none;
-    color: var(--accent-blue);
+    color: rgba(255, 255, 255, 0.72);
 }
 /* Arrows float over the rail; dots sit centred underneath */
 .carousel-foot {
@@ -1004,6 +1061,10 @@ body::after {
     margin-top: 0.9rem;
 }
 
+/* Phase 8: this was the last glass surface on the page - a blurred 50%
+   circle with --elev-2, the one control that ignored the hairline system
+   and the 4px curve every other button takes. It is a flat opaque square
+   now; 44px keeps the Lighthouse target size. */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -1014,15 +1075,13 @@ body::after {
     justify-content: center;
     width: 44px;
     height: 44px;
-    border: none;
-    border-radius: 50%;
-    background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(10px) saturate(140%);
-    backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-btn);
+    background: var(--surface-a);
     color: var(--text-primary);
-    box-shadow: var(--elev-2);
+    box-shadow: none;
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
 .carousel-btn--prev { left: 0.25rem; }
@@ -1085,10 +1144,13 @@ body::after {
 }
 
 @media (hover: hover) and (pointer: fine) {
+    /* Flat control: hover deepens the hairline instead of lifting a shadow,
+       and stays neutral so this band's green is still only the chapter
+       number and the active dot. */
     .carousel-btn:hover:not([disabled]) {
         transform: translateY(-50%) scale(1.06);
-        box-shadow: var(--glass-shadow);
-        color: var(--accent-blue);
+        border-color: var(--glass-border-strong);
+        color: var(--text-primary);
     }
 }
 
@@ -1841,8 +1903,10 @@ body.lightbox-open {
 /* Mid-range screens: reduce spacing to prevent CTA overflow */
 @media (max-width: 1024px) and (min-width: 769px) {
     .nav-container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        /* Phase 8: keep the content rail. This used to cut the gutter to 1rem
+           while main .container still used --gutter (38-51px in this range),
+           which put the logo ~25-35px left of the content below it. */
+        padding-inline: var(--gutter);
         gap: 0.5rem;
     }
 
@@ -1948,13 +2012,17 @@ body.lightbox-open {
     .arch-node {
         min-width: 100%;
     }
-    .container,
-    .nav-container {
+    .container {
         padding-left: 1rem;
         padding-right: 1rem;
     }
 
     .nav-container {
+        /* Phase 8: the bar keeps the page rail at this size too. It was
+           dropping to a flat 1rem while main .container still used
+           --gutter (30-38px here), so the logo drifted off the axis the
+           rest of the page sits on. The <=380px rule below still wins. */
+        padding-inline: var(--gutter);
         gap: 0.5rem;
     }
 
@@ -2302,7 +2370,9 @@ body.loaded .hero-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--surface-b);
+    /* Phase 8: this chip sits inside a surface-b chapter (01 Profile), so a
+       --surface-b fill rendered as a border-only outline in both themes. */
+    background: var(--surface-a);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-btn);
     padding: 0.4rem 0.9rem;
@@ -2316,14 +2386,16 @@ body.loaded .hero-cta {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+    /* Phase 8: theme tokens instead of a hard-coded #22c55e, so dark mode's
+       mint (#62ffb3) actually reaches the dot. */
+    background: var(--accent-mint);
+    box-shadow: 0 0 0 0 var(--status-glow);
     animation: pulse-dot 2s ease-out infinite;
 }
 @keyframes pulse-dot {
-    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
-    70%  { box-shadow: 0 0 0 9px rgba(34, 197, 94, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    0%   { box-shadow: 0 0 0 0 var(--status-glow); }
+    70%  { box-shadow: 0 0 0 9px var(--status-glow-0); }
+    100% { box-shadow: 0 0 0 0 var(--status-glow-0); }
 }
 .status-time i { width: 16px; height: 16px; }
 
@@ -2341,7 +2413,9 @@ body.loaded .hero-cta {
     background-clip: text;
     color: transparent;
 }
-.stat-label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-top: 0.3rem; }
+/* Meta tier - a counter caption under a stat value. Shared with the detail
+   pages' metric cards (leaksafe / encplus / manguzi / lah-cctv). */
+.stat-label { display: block; font-family: var(--font-mono); font-size: var(--meta-size); font-weight: var(--meta-weight); text-transform: uppercase; letter-spacing: var(--meta-tracking); color: var(--text-faint); margin-top: 0.3rem; }
 
 /* The .stat-value rule above sets width: fit-content (so the gradient spans only
    the text), which left-aligns the block box inside a centered card. Auto margins
@@ -2401,12 +2475,19 @@ body.loaded .hero-cta {
 .tool-device i { width: 14px; height: 14px; }
 .tool-device.laptop { color: var(--accent-blue); border-color: var(--glass-border-strong); }
 .tool-device.phone { color: var(--accent-violet); border-color: var(--glass-border-strong); }
-.tool-tag { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan); }
+/* Meta tier, and no second hue: --accent-cyan (teal) was the only colour on
+   the homepage that was neither the green accent nor a neutral, and the
+   progress-bar comment already records "green stays the only accent". */
+.tool-tag { font-family: var(--font-mono); font-size: var(--meta-size); font-weight: var(--meta-weight); letter-spacing: var(--meta-tracking); text-transform: uppercase; color: var(--text-faint); }
 .tool-card h3 { font-family: var(--font-display); font-size: 1.25rem; margin: 0.1rem 0 0; }
 .tool-summary { color: var(--text-secondary); font-size: 0.9rem; flex: 1; }
-.tool-arrow { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-blue); display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 0.4rem; }
+.tool-arrow { font-family: var(--font-mono); font-size: var(--meta-size); font-weight: var(--meta-weight); letter-spacing: var(--meta-tracking); text-transform: uppercase; color: var(--text-faint); display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 0.4rem; transition: color 0.2s ease; }
 .tool-arrow i { width: 15px; height: 15px; transition: transform 0.2s ease; }
 .tool-card:hover .tool-arrow i { transform: translateX(4px); }
+/* The arrow carries the card's hover now: the per-card top hairline is gone
+   (see the Phase 8 note on .page-home .tool-card), so the colour step on the
+   arrow is the affordance, exactly as .work-row-arrow does it below. */
+.tool-card:hover .tool-arrow { color: var(--text-primary); }
 
 /* ---------- Custom iOS-style SVG icons ---------- */
 .ci {
@@ -2622,19 +2703,21 @@ body.tools-open { overflow: hidden; }
     text-decoration: underline;
 }
 
+/* Phase 8: flat hairline control on the meta tier, matching .tools-view-all.
+   It renders on the ink contact card, where the Phase 7 override already
+   made it transparent, so this only drops the leftover 8px blur and the
+   pill radius the global button rule was silently correcting. */
 .copy-btn {
     margin-top: 0.4rem;
-    background: var(--glass-bg-soft);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    background: transparent;
     border: 1px solid var(--glass-border);
-    color: var(--accent-blue);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-size: var(--meta-size);
+    font-weight: var(--meta-weight);
+    letter-spacing: var(--meta-tracking);
     padding: 0.5rem 1rem;
-    border-radius: 999px;
+    border-radius: var(--radius-btn);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -2648,10 +2731,13 @@ body.tools-open { overflow: hidden; }
     transform: translateY(-1px);
 }
 
+/* Phase 8: left-aligned with every other block. This was the only CTA row
+   that centred (the hero's is flex-start), so the closing chapter ended on a
+   different axis from the one the page opened on. */
 .contact-cta {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: 2.5rem;
 }
@@ -2682,15 +2768,18 @@ body.tools-open { overflow: hidden; }
 .tools-cta {
     margin-top: 2.5rem;
     display: flex;
-    justify-content: center;
+    /* Phase 8: left, like .hero-cta and .contact-cta. */
+    justify-content: flex-start;
 }
 .tools-view-all {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(10px) saturate(150%);
-    backdrop-filter: blur(10px) saturate(150%);
+    /* Phase 8: a plain hairline button. It was carrying a 10px blur and a
+       --glass-bg fill in a page built from flat surfaces and hairlines, and
+       a 999px pill that the later global button rule was already overriding
+       to 4px. */
+    background: transparent;
     border: 1px solid var(--glass-border);
     color: var(--text-secondary);
     font-family: var(--font-mono);
@@ -2699,7 +2788,7 @@ body.tools-open { overflow: hidden; }
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 0.55rem 1.1rem;
-    border-radius: 999px;
+    border-radius: var(--radius-btn);
     text-decoration: none;
     transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -2759,6 +2848,10 @@ section[id] { scroll-margin-top: 90px; }
     transition: background-color 0.2s ease;
 }
 
+/* Phase 8: the hover animated padding-left, which reflowed every column of
+   the row (and, now that the row shares the chapter rail, moved its axis on
+   hover). The step is a transform on the title instead - same read, no
+   layout work. */
 .work-row:hover {
     background: var(--glass-bg-soft);
 }
@@ -2898,8 +2991,8 @@ section[id] { scroll-margin-top: 90px; }
 }
 
 .skills-col-title i {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
 }
 
 .skills-list {
@@ -2962,11 +3055,12 @@ section[id] { scroll-margin-top: 90px; }
     align-items: baseline;
 }
 
+/* Eyebrow tier - the key column of the credential table. */
 .cred-strip-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-size: var(--label-size);
+    font-weight: var(--label-weight);
+    letter-spacing: var(--label-tracking);
     text-transform: uppercase;
     color: var(--text-faint);
 }
@@ -2992,11 +3086,13 @@ section[id] { scroll-margin-top: 90px; }
     gap: 0.15rem 0.6rem;
 }
 
+/* Meta tier - a key inside the "Core stack" cell, annotating the row above
+   it rather than opening a section of its own. */
 .stack-group-label {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-size: var(--meta-size);
+    font-weight: var(--meta-weight);
+    letter-spacing: var(--meta-tracking);
     text-transform: uppercase;
     color: var(--text-faint);
     min-width: 6rem;
@@ -3210,11 +3306,14 @@ section > .section-lead {
     object-position: center 20%;
 }
 
+/* Meta tier - it was the last label on the page with a third rhythm
+   (0.72rem / 0.06em). */
 .page-home .profile-figure figcaption {
     margin-top: 0.9rem;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
+    font-size: var(--meta-size);
+    font-weight: var(--meta-weight);
+    letter-spacing: var(--meta-tracking);
     color: var(--text-faint);
 }
 
@@ -3227,8 +3326,14 @@ section > .section-lead {
     margin-bottom: 2rem;
 }
 
+/* Phase 8: the stat row is a rail, not three floating numbers - a hairline
+   over it ties it to the bio above, and the gap tightens to 24px so
+   lede -> badge -> stats read as one block while the marks below separate.
+   The three gaps used to be 32 / 43 / 32-48px, i.e. nothing grouped. */
 .page-home .profile-body .hero-stats {
-    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--glass-border);
     gap: clamp(2rem, 5vw, 4rem);
 }
 
@@ -3244,17 +3349,15 @@ section > .section-lead {
     color: var(--text-primary);
 }
 
-.page-home .stat-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-}
+/* .page-home .stat-label is gone: the base rule is the meta tier now and
+   sets mono itself, so the counter captions match the detail pages' metric
+   cards instead of being a homepage-only variant. */
 
 .page-home .profile-highlights {
     list-style: none;
-    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    /* Loose on purpose: these three marks are the weakest content in the
+       section, so they sit well clear of the stat rail above them. */
+    margin: var(--space-6) 0 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
@@ -3287,14 +3390,17 @@ section > .section-lead {
     padding-top: clamp(2rem, 4vw, 3rem);
 }
 
+/* Eyebrow tier - the group label above each skills column. */
 .page-home .skills-col-title {
     color: var(--text-primary);
-    font-size: 0.78rem;
+    font-size: var(--label-size);
+    letter-spacing: var(--label-tracking);
     margin-bottom: 1.5rem;
 }
 
+/* Shared row rhythm (44px max before - the shortest of the five). */
 .page-home .skills-list li {
-    padding-block: clamp(1rem, 2vw, 1.4rem);
+    padding-block: var(--space-row);
     font-size: clamp(1.05rem, 1.5vw, 1.25rem);
     font-weight: 500;
 }
@@ -3302,10 +3408,13 @@ section > .section-lead {
 .page-home .skills-list li span { font-size: 0.8rem; }
 
 /* ---------- Transition band: oversized type marquee ---------- */
+/* Phase 8: no border-block. Every other band is delimited by its surface and
+   the section rhythm alone; this was the only one drawing its own rules, so
+   it read as a chapter with no label. Padding uses --space-6 instead of its
+   own clamp. */
 .page-home .band-marquee {
     background: var(--surface-b);
-    border-block: 1px solid var(--glass-border);
-    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    padding-block: var(--space-6);
 }
 
 .page-home .band-marquee .marquee {
@@ -3322,13 +3431,17 @@ section > .section-lead {
 
 .page-home .band-marquee .marquee-track { gap: clamp(1.5rem, 4vw, 3rem); }
 
+/* Phase 8: this is texture between two chapters, not a heading. At 4rem
+   (64px) it was 84% of the 4.75rem section titles and out-shouted "What I
+   do" and "The Work" while saying less, so it drops to 2.75rem and the
+   secondary tone. */
 .page-home .band-marquee .marquee-track span {
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 5.5vw, 4rem);
+    font-size: clamp(1.5rem, 4vw, 2.75rem);
     font-weight: 600;
     letter-spacing: var(--tracking-section);
     text-transform: none;
-    color: var(--text-primary);
+    color: var(--text-secondary);
 }
 
 .page-home .band-marquee .marquee-track i {
@@ -3340,11 +3453,18 @@ section > .section-lead {
 /* ---------- 03 Work index ---------- */
 .page-home .work-index { border-top: 1px solid var(--glass-border); }
 
+/* Phase 8: the first column plus the gap now equals the chapter head's
+   (--rail-num + --rail-gap - see the rail block at the end of this file), so
+   a project title starts on the same vertical axis as "The Work" heading it.
+   It was 4.5rem + 3vw = 112px against the chapter head's 43px + 32px = 75px,
+   which made section 03 the only one whose content missed the shared left
+   rail. Padding-block is the shared --space-row rhythm (88px max before, the
+   tallest row on the page). */
 .page-home .work-row {
     position: relative;
-    grid-template-columns: 4.5rem minmax(0, 1fr) auto 3rem;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
+    grid-template-columns: var(--rail-num) minmax(0, 1fr) auto 3rem;
+    gap: var(--rail-gap);
+    padding-block: var(--space-row);
     padding-inline: 0;
     border-bottom: 1px solid var(--glass-border);
     background: transparent;
@@ -3364,6 +3484,8 @@ section > .section-lead {
     transition: transform 0.3s ease;
 }
 
+/* The step is a transform on the title now, so the row never reflows and its
+   left axis stays put under the cursor. */
 .page-home .work-row:hover {
     background: transparent;
 }
@@ -3390,10 +3512,13 @@ section > .section-lead {
     font-size: clamp(0.95rem, 1.2vw, 1.1rem);
 }
 
+/* Meta tier. It was the only label on the page still at body weight
+   (0.72rem / 400) while .tool-date and .tool-tag sat at 700. */
 .page-home .work-row-meta {
     border: none;
     padding: 0;
-    font-size: 0.72rem;
+    font-size: var(--meta-size);
+    font-weight: var(--meta-weight);
     color: var(--text-faint);
 }
 
@@ -3403,17 +3528,16 @@ section > .section-lead {
 /* ---------- 04 Experience ---------- */
 .page-home .timeline-column { max-width: 920px; }
 
-.page-home .column-title {
-    font-size: clamp(1rem, 1.4vw, 1.15rem);
-    color: var(--text-primary);
-}
+/* .page-home .column-title used to live here as a 1.15rem near-body override.
+   It has to go: at (0,2,0) it would beat the base .column-title rule and
+   re-impose the heading-ish size this pass replaced with the eyebrow tier. */
 
+/* Shared row rhythm (64px max before). */
 .page-home .timeline-item {
     border-left: 0;
     padding-left: 0;
     border-top: 1px solid var(--glass-border);
-    padding-top: clamp(1.5rem, 3vw, 2rem);
-    padding-bottom: clamp(1.5rem, 3vw, 2rem);
+    padding-block: var(--space-row);
     margin-bottom: 0;
 }
 
@@ -3426,13 +3550,14 @@ section > .section-lead {
 
 .page-home .timeline-desc { max-width: 64ch; }
 
-.page-home .timeline-date { font-size: 0.78rem; }
+/* .page-home .timeline-date (a 0.78rem override) is gone: the date takes the
+   base meta tier now, and the override would beat it at (0,2,0). */
 
 .page-home .cred-strip { margin-top: clamp(2.5rem, 5vw, 4rem); }
 
 .page-home .cred-strip-item {
     grid-template-columns: 12rem minmax(0, 1fr);
-    padding-block: clamp(1.25rem, 2.5vw, 1.75rem);
+    padding-block: var(--space-row);
 }
 
 .page-home .cred-strip-value { font-size: clamp(1rem, 1.3vw, 1.15rem); }
@@ -3445,22 +3570,24 @@ section > .section-lead {
     padding-top: clamp(2rem, 4vw, 3rem);
 }
 
+/* Phase 8: no per-card top hairline. Together with the grid's border-top
+   above it, the page drew one long rule and three short ones 32-48px under
+   it, where every other block (skills matrix, work index, credential strip)
+   shows a single rule over its rows. The arrow carries the hover instead -
+   see .tool-card:hover .tool-arrow in the base block. */
 .page-home .tool-card {
     background: none;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     border: 0;
-    border-top: 1px solid var(--glass-border);
     border-radius: 0;
     box-shadow: none;
-    padding: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+    padding: 0;
     overflow: visible;
-    transition: border-color 0.25s ease;
 }
 
 .page-home .tool-card:hover {
     transform: none;
-    border-top-color: var(--text-primary);
     border-radius: 0;
     box-shadow: none;
 }
@@ -3540,6 +3667,11 @@ section > .section-lead {
 
 .page-home .surface-ink .principle i { color: var(--ink-fg-muted); }
 
+/* Phase 8: the middot separators were still --text-faint (#6c6c6c), which is
+   3.6:1 on --ink-bg against the principle text's 7.3:1 - the dots read
+   dimmer than the words they separate. */
+.page-home .surface-ink .principle-sep { color: var(--ink-fg-muted); }
+
 .page-home .surface-ink .contact-grid { margin-top: clamp(2.5rem, 5vw, 4rem); }
 
 .page-home .surface-ink .contact-card {
@@ -3577,11 +3709,12 @@ section > .section-lead {
 /* Icon sitting inside a button label (e-mail CTA send arrow) */
 .page-home .btn-icon { width: 1.05em; height: 1.05em; }
 
+/* Eyebrow tier (was 0.75rem - the fifth micro-label size on the page). */
 .page-home .surface-ink .contact-card h3 {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    font-size: var(--label-size);
+    font-weight: var(--label-weight);
+    letter-spacing: var(--label-tracking);
     text-transform: uppercase;
     color: var(--ink-fg-muted);
 }
@@ -3691,6 +3824,13 @@ main .btn-primary:hover {
 /* ---------- Phase 7 responsive ---------- */
 @media (max-width: 1099px) {
     .page-home .showcase-carousel--full { --card-w: 340px; }
+
+    /* Phase 8: in this band three post cards are only ~210-300px wide and
+       .tool-card-top (a tag plus a non-breaking date) has to wrap. The shared
+       even-row block drops .tools-grid to one column here, but the Phase 7
+       rule above wins on specificity, so the count is set here. The 768px
+       block below still takes it to a single column. */
+    .page-home .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 899px) {
@@ -4040,5 +4180,67 @@ html:has(main.detail-page) { overflow-x: clip; }
     .detail-page .arch-node,
     .detail-page .stack-category,
     .detail-page .gallery-card { transition: none; }
+}
+
+/* ============================================================
+   PHASE 8 - homepage hierarchy, rhythm and consistency pass
+
+   Follow-up to Phase 7. No new content and no new component: this
+   closes the places where the homepage disagreed with its own
+   system. The in-place edits (label tiers, glass removal, accent
+   discipline, row rhythm) live next to the rules they change; what
+   is left is the cross-cutting part.
+
+   1. ONE LEFT RAIL. The chapter head's number column and the gap
+      after it are declared once and shared with the work index, so
+      section 03 stops sitting ~35px right of the axis that every
+      other section uses.
+   2. SECTION RHYTHM ON PHONES. --space-section's 8rem floor made
+      phones pay desktop whitespace (256px of dead space between
+      chapters on a 390px screen). It is lowered only below 900px -
+      the desktop rhythm is byte-for-byte what it was.
+   3. CHROME ON THE CONTENT RAIL. The navbar, the footer and main's
+      content each had their own measure (104 / 144 / 234px at
+      1440px), so the logo did not line up with the H1.
+   ============================================================ */
+
+/* ---------- One left rail ----------
+   --rail-num is the chapter number column, --rail-gap the gap after it.
+   .chapter-head measured `auto` = 43px + 32px = 75px while .work-row
+   measured 4.5rem + 3vw = 112px: the same axis, two numbers. */
+.page-home {
+    --rail-num: 3rem;
+    --rail-gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+@media (min-width: 900px) {
+    /* .work-row already reads both tokens (see the Phase 7 03 block); this
+       brings the chapter head onto the same second rail. Below 900px the
+       work rows are a two-column text layout and the chapter head stacks at
+       600px, so neither keeps a fixed number column there. */
+    .page-home .chapter-head {
+        grid-template-columns: var(--rail-num) minmax(0, 1fr);
+        gap: 1.25rem var(--rail-gap);
+    }
+}
+
+/* ---------- Section rhythm on phones ----------
+   15vw only beats the 8rem floor above 853px, so every phone was paying a
+   flat 128px top + 128px bottom between chapters - ~30% of an 844px
+   viewport - while the page's own type does compress at that size. */
+.page-home { --space-section: clamp(5rem, 15vw, 12rem); }
+
+@media (max-width: 899px) {
+    .page-home { --space-section: clamp(4.5rem, 12vw, 7rem); }
+}
+
+/* ---------- The footer joins the content rail ----------
+   The footer's .container is 1200px + 1.5rem while main's measure is 1100px
+   + --gutter, so the footer brand sat 90px left of the H1 at 1440px. Scoped
+   to the footer: .container is shared with the blog and the CV page, which
+   keep their own measure. */
+.footer .container {
+    max-width: var(--content-max);
+    padding-inline: var(--gutter);
 }
 
