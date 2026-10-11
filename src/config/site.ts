@@ -19,6 +19,10 @@ export const SITE = {
   ogImageAlt: 'Martin Mzumara - Software Developer & IT Technician',
   locale: 'en_US',
   themeColor: '#ffffff',
+  // Dark theme --bg-main from public/css/style.css. The theme is toggled with
+  // data-theme, not prefers-color-scheme, so the theme-color meta is synced by
+  // BaseLayout (first paint) and js/script.js (on toggle) from these two values.
+  themeColorDark: '#0b0f14',
 } as const;
 
 /** Absolute URL for a root-relative path ("/leaksafe/" -> "https://…/leaksafe/"). */

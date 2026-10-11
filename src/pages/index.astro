@@ -407,7 +407,7 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                     <button type="button" class="carousel-btn carousel-btn--next" data-carousel-next aria-label="Next photos"><i class="ti ti-arrow-right"></i></button>
                 </div>
                 <div class="carousel-foot">
-                    <div class="carousel-dots" data-carousel-dots role="tablist" aria-label="Showcase pages"></div>
+                    <div class="carousel-dots" data-carousel-dots role="group" aria-label="Showcase pages"></div>
                 </div>
             </div>
         </section>
@@ -434,6 +434,10 @@ const personLdJson = JSON.stringify(personLd).replace(`mailto:${EMAIL}`, `mailto
                         <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard">
                             <i class="ti ti-copy"></i> COPY EMAIL
                         </button>
+                        <!-- Phase 9: the button's own label swap (COPY EMAIL -> COPIED!)
+                             is not announced reliably, so the result is mirrored here.
+                             js/script.js writes the text. -->
+                        <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
                     </div>
                     <div class="contact-card">
                         <Fragment set:html={inlineIcon('ic-phone', 'contact-card-icon')} />

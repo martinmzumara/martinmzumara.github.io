@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!saved) {
             document.documentElement.setAttribute("data-theme", "light");
             updateThemeToggleLabel();
+            syncThemeColor();
         }
     };
     if (mediaQuery.addEventListener) {
@@ -20,6 +21,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // The navbar toggle carries .theme-toggle-btn; keep its accessible name in
     // sync with the current theme.
     const themeToggleBtns = document.querySelectorAll(".theme-toggle-btn");
+
+    // Phase 9: keep the browser UI colour (mobile address bar) in step with the
+    // site theme. The two values ride on the meta tag itself (data-light /
+    // data-dark, from SITE.themeColor and SITE.themeColorDark in config/site.ts),
+    // so no hex is repeated here and both come from one source.
+    const syncThemeColor = () => {
+        const meta = document.getElementById("theme-color");
+        if (!meta) { return; }
+        const dark = document.documentElement.getAttribute("data-theme") === "dark";
+        const next = meta.getAttribute(dark ? "data-dark" : "data-light");
+        if (next) { meta.setAttribute("content", next); }
+    };
 
     const updateThemeToggleLabel = () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -40,11 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 // localStorage unavailable - theme still works for this session
             }
             updateThemeToggleLabel();
+            syncThemeColor();
         });
     });
 
-    // Initialize theme toggle label
+    // Initialize theme toggle label + the theme-color meta
     updateThemeToggleLabel();
+    syncThemeColor();
 
     // 3. Dynamic Copyright Year
     const yearSpan = document.getElementById("current-year");
@@ -58,10 +73,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Assembled at runtime so the address never appears as plain text in
         // the served source (see src/utils/obfuscate.ts for the HTML side).
         const EMAIL = ["martin", "martinmzumara.com"].join("@");
+        const copyStatus = document.getElementById("copy-status");
         const setCopied = (ok) => {
             copyEmailBtn.innerHTML = ok
                 ? '<i class="ti ti-check"></i> COPIED!'
                 : '<i class="ti ti-copy"></i> COPY EMAIL';
+            // Phase 9: the label swap above is cosmetic. This is what a screen
+            // reader hears (index.astro renders the live region).
+            if (copyStatus) {
+                copyStatus.textContent = ok
+                    ? "Email address copied to clipboard"
+                    : "Copy failed. The address is shown above the button.";
+            }
             clearTimeout(setCopied._t);
             setCopied._t = setTimeout(() => {
                 copyEmailBtn.innerHTML = '<i class="ti ti-copy"></i> COPY EMAIL';
@@ -303,8 +326,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     const dot = document.createElement('button');
                     dot.className = 'carousel-dot';
                     dot.type = 'button';
-                    dot.setAttribute('role', 'tab');
-                    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+                    // Phase 9: aria-selected is only valid on tab/option roles. These
+                    // are plain buttons inside a role="group" rail, so the active
+                    // state rides on aria-current (.carousel-dot[aria-current="true"]).
+                    dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
                     dot.setAttribute('aria-label', 'Go to showcase page ' + (i + 1));
                     dot.addEventListener('click', () => goToPage(i));
                     dotsWrap.appendChild(dot);
@@ -316,7 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 buildDots();
                 const active = activePage();
                 if (dotsWrap) {
-                    Array.from(dotsWrap.children).forEach((d, i) => d.setAttribute('aria-selected', i === active ? 'true' : 'false'));
+                    Array.from(dotsWrap.children).forEach((d, i) => d.setAttribute('aria-current', i === active ? 'true' : 'false'));
                 }
                 // snap-start leaves the rail resting ~4px in, so treat the
                 // outermost pixels as "at the edge" to keep the arrows from

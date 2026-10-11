@@ -39,16 +39,16 @@
    Light is the DEFAULT (no attribute needed); [data-theme="dark"] overrides.
    Structure comes from hairline borders, not glows: green is a sparse accent. */
 :root {
-    /* Primary brand accent - deep green (AA on white) + sparse mint */
-    --accent-blue: #1a7f37;
-    --accent-blue-hover: #116329;
-    --accent-blue-deep: #0e4f22;
-    --accent-cyan: #0f766e;
-    --accent-mint: #22c55e;
-    --accent-blue-glow: rgba(26, 127, 55, 0.18);
-    --accent-amber: #9a6700;
-    --accent-amber-soft: rgba(154, 103, 0, 0.15);
-    --accent-violet: #9a6700;
+    /* Primary brand accent - deep green (AA on white). Phase 9: one hue only.
+       The teal (--accent-cyan) and amber (--accent-violet, declared with the
+       same value as --accent-amber) tokens are gone, so no second accent is
+       declared here either. */
+    --accent-green: #1a7f37;
+    --accent-green-hover: #116329;
+    --accent-green-deep: #0e4f22;
+    /* Status only - the "available for work" dot. Not a UI accent. */
+    --status-dot: #22c55e;
+    --accent-green-glow: rgba(26, 127, 55, 0.18);
 
     /* Spacing rhythm - 8px-based scale */
     --space-1: 0.5rem;
@@ -165,17 +165,13 @@
 
 /* ---------- Dark Theme Tokens (terminal night mode) ---------- */
 [data-theme="dark"] {
-    --accent-blue: #3fb950;
-    --accent-blue-hover: #2ea043;
-    --accent-blue-deep: #238636;
-    --accent-cyan: #2dd4a7;
-    --accent-mint: #62ffb3;
-    --accent-blue-glow: rgba(63, 185, 80, 0.35);
+    --accent-green: #3fb950;
+    --accent-green-hover: #2ea043;
+    --accent-green-deep: #238636;
+    --status-dot: #62ffb3;
+    --accent-green-glow: rgba(63, 185, 80, 0.35);
     --status-glow: rgba(98, 255, 179, 0.45);
     --status-glow-0: rgba(98, 255, 179, 0);
-    --accent-amber: #e3b341;
-    --accent-amber-soft: rgba(227, 179, 65, 0.15);
-    --accent-violet: #e3b341;
 
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-bg-strong: rgba(255, 255, 255, 0.05);
@@ -210,10 +206,14 @@
 
     /* ---- Phase 7: dark-mode surface inversion ----
        Section contrast shifts invert: the ink section becomes the deepest
-       black (darker than the page) so it stays the most dramatic block. */
+       surface (darker than the page) so it stays the most dramatic block.
+       Phase 9: the value was #000000, which has no hue at all and read as a
+       hole punched through the layout rather than a surface. #05070a carries
+       the same blue cast as the rest of the dark palette while staying the
+       deepest block on the page. */
     --surface-a: #0b0f14;
     --surface-b: #14181f;
-    --ink-bg: #000000;
+    --ink-bg: #05070a;
     --ink-fg: #fafafa;
     --ink-fg-muted: rgba(250, 250, 250, 0.60);
     --ink-line: rgba(255, 255, 255, 0.18);
@@ -234,6 +234,19 @@ html, body {
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 90px;
+    /* Phase 9: let the UA paint native UI (scrollbars, form controls, the
+       caret) in the scheme the site is actually showing. */
+    color-scheme: light;
+}
+
+/* The site theme is driven by data-theme, not prefers-color-scheme. */
+html[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+/* Phase 9: kill the double-tap-zoom delay on controls. */
+a, button, input, select, textarea, summary {
+    touch-action: manipulation;
 }
 
 body {
@@ -303,7 +316,7 @@ body::after {
     position: absolute;
     top: -40px;
     left: 0;
-    background: var(--accent-blue);
+    background: var(--accent-green);
     color: #fff;
     padding: 0.5rem 1rem;
     z-index: 3000;
@@ -319,7 +332,7 @@ body::after {
 
 /* Visible focus indicators */
 :focus-visible {
-    outline: 2px solid var(--accent-blue);
+    outline: 2px solid var(--accent-green);
     outline-offset: 2px;
     border-radius: 2px;
 }
@@ -412,11 +425,11 @@ body::after {
 
 [data-theme="dark"] .logo {
     color: #fff;
-    text-shadow: 0 0 18px var(--accent-blue-glow);
+    text-shadow: 0 0 18px var(--accent-green-glow);
 }
 
 .logo span {
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 .nav-links {
@@ -447,7 +460,7 @@ body::after {
     bottom: 0;
     height: 2px;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent-blue), var(--accent-blue));
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-green));
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.25s ease;
@@ -489,9 +502,9 @@ body::after {
 }
 
 .theme-toggle-btn:hover {
-    border-color: var(--accent-blue);
+    border-color: var(--accent-green);
     background-color: var(--glass-bg);
-    box-shadow: 0 0 10px var(--accent-blue-glow);
+    box-shadow: 0 0 10px var(--accent-green-glow);
 }
 
 /* ---------- Navbar theme toggle ----------
@@ -629,7 +642,7 @@ body::after {
 }
 
 .hero-title .accent-dot {
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 .hero-lede {
@@ -644,14 +657,14 @@ body::after {
    between the hero and the first chapter now carries the break on its own.) */
 
 .icon-blue {
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 /* ---------- Cards ----------
    The generic .card and .grid-cards glass primitives are gone: no markup uses
    them. .icon-large is kept because it is still referenced. */
 .icon-large {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     width: 32px;
     height: 32px;
     margin-bottom: 1rem;
@@ -679,15 +692,15 @@ body::after {
 }
 
 .tag:hover {
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
 }
 
 .project-link-btn {
     font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 700;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -717,7 +730,7 @@ body::after {
     font-size: 0.95rem;
 }
 .custom-list .list-icon {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     font-size: 18px;
     line-height: 1;
     margin-top: 0.2rem;
@@ -849,7 +862,7 @@ body::after {
 .check-icon {
     width: 14px;
     height: 14px;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     flex-shrink: 0;
 }
 
@@ -873,8 +886,8 @@ body::after {
 }
 
 .skill-tags span:hover {
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
 }
 
 /* ---------- Identity & Fieldwork Showcase ---------- */
@@ -920,7 +933,7 @@ body::after {
 }
 
 .carousel-viewport:focus-visible {
-    outline: 2px solid var(--accent-blue);
+    outline: 2px solid var(--accent-green);
     outline-offset: 4px;
     border-radius: 16px;
 }
@@ -969,7 +982,7 @@ body::after {
 }
 
 .showcase-item:focus-visible {
-    outline: 2px solid var(--accent-blue);
+    outline: 2px solid var(--accent-green);
     outline-offset: 3px;
 }
 
@@ -1100,7 +1113,7 @@ body::after {
 
 .carousel-btn:focus-visible,
 .carousel-dot:focus-visible {
-    outline: 2px solid var(--accent-blue);
+    outline: 2px solid var(--accent-green);
     outline-offset: 2px;
 }
 
@@ -1134,13 +1147,13 @@ body::after {
     transition: width 0.25s ease, background 0.25s ease;
 }
 
-.carousel-dot[aria-selected="true"] {
+.carousel-dot[aria-current="true"] {
     opacity: 1;
 }
 
-.carousel-dot[aria-selected="true"]::before {
+.carousel-dot[aria-current="true"]::before {
     width: 22px;
-    background: var(--accent-blue);
+    background: var(--accent-green);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1182,6 +1195,9 @@ body::after {
     backdrop-filter: blur(14px);
     align-items: center;
     justify-content: center;
+    /* Phase 9: a full-screen overlay must not chain scroll to the page behind
+       it (trackpads and touch do this by default). */
+    overscroll-behavior: contain;
 }
 
 .lightbox-modal.active {
@@ -1214,8 +1230,8 @@ body::after {
 }
 
 .lightbox-close:hover {
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
 }
 
 body.lightbox-open {
@@ -1272,10 +1288,12 @@ body.lightbox-open {
     display: block;
     font-size: 2.2rem;
     font-weight: 700;
-    background: linear-gradient(100deg, var(--accent-blue), var(--accent-cyan) 60%, var(--accent-blue));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    /* Phase 9: the green-to-teal text gradient is gone. Both consumers
+       (.page-home and .detail-page) already overrode it back to flat text, so
+       it was dead code that also carried the last second hue. tabular-nums
+       keeps the counter from reflowing as it animates up. */
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
     font-family: var(--font-display);
     margin-bottom: 0.25rem;
 }
@@ -1330,14 +1348,14 @@ body.lightbox-open {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     flex-shrink: 0;
 }
 
 .arch-arrow i {
     width: 24px;
     height: 24px;
-    filter: drop-shadow(0 0 8px var(--accent-blue-glow));
+    filter: drop-shadow(0 0 8px var(--accent-green-glow));
 }
 
 /* Features Grid */
@@ -1410,7 +1428,7 @@ body.lightbox-open {
 .stack-title i {
     width: 18px;
     height: 18px;
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 .stack-tags {
@@ -1448,7 +1466,7 @@ body.lightbox-open {
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     border: 1px solid var(--glass-border);
     background: var(--glass-bg-soft);
     -webkit-backdrop-filter: blur(8px);
@@ -1570,7 +1588,7 @@ body.lightbox-open {
 .spec-label {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     display: block;
     margin-bottom: 0.25rem;
 }
@@ -1652,7 +1670,7 @@ body.lightbox-open {
 .gallery-placeholder .placeholder-icon {
     width: 48px;
     height: 48px;
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 .gallery-info h3 {
@@ -1788,7 +1806,7 @@ body.lightbox-open {
 .footer-connect h3 {
     font-family: var(--font-display);
     font-size: 0.85rem;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     margin-bottom: 0.75rem;
 }
 
@@ -1810,7 +1828,7 @@ body.lightbox-open {
 .contact-list i {
     width: 16px;
     height: 16px;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     flex-shrink: 0;
 }
 
@@ -1824,7 +1842,7 @@ body.lightbox-open {
 
 .contact-list a:hover,
 .contact-list a:focus-visible {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     text-decoration: underline;
 }
 
@@ -1863,9 +1881,9 @@ body.lightbox-open {
 }
 
 .social-link:hover {
-    color: var(--accent-blue);
-    border-color: var(--accent-blue);
-    background: var(--accent-blue-glow);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+    background: var(--accent-green-glow);
     transform: translateY(-3px);
 }
 
@@ -2188,8 +2206,8 @@ body.lightbox-open {
 }
 
 .code-link:hover {
-    color: var(--accent-blue);
-    border-bottom-color: var(--accent-blue);
+    color: var(--accent-green);
+    border-bottom-color: var(--accent-green);
 }
 
 .code-link i {
@@ -2273,7 +2291,7 @@ body.lightbox-open {
     flex-wrap: wrap;
 }
 .contact-principles i {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     width: 15px;
     height: 15px;
     flex-shrink: 0;
@@ -2309,7 +2327,8 @@ body.lightbox-open {
     right: 0;
     height: 3px;
     z-index: 1200;
-    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-violet));
+    /* Phase 9: one hue. The three-stop green-teal-amber sweep is gone. */
+    background: var(--accent-green);
     transform: scaleX(0);
     transform-origin: 0 50%;
     pointer-events: none;
@@ -2333,10 +2352,10 @@ body.lightbox-open {
     font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 700;
     line-height: 1;
-    background: linear-gradient(100deg, var(--accent-blue), var(--accent-cyan) 60%, var(--accent-blue));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    /* Phase 9: flat accent ink. The teal stop made the counter the first
+       second hue a visitor saw. */
+    color: var(--accent-green);
+    font-variant-numeric: tabular-nums;
 }
 .preloader-label {
     font-family: var(--font-mono);
@@ -2387,8 +2406,10 @@ body.loaded .hero-cta {
     height: 8px;
     border-radius: 50%;
     /* Phase 8: theme tokens instead of a hard-coded #22c55e, so dark mode's
-       mint (#62ffb3) actually reaches the dot. */
-    background: var(--accent-mint);
+       brighter status green (#62ffb3) actually reaches the dot.
+       Phase 9: the token is --status-dot rather than --accent-mint - this dot
+       is its only consumer, and it reads as a status colour, not an accent. */
+    background: var(--status-dot);
     box-shadow: 0 0 0 0 var(--status-glow);
     animation: pulse-dot 2s ease-out infinite;
 }
@@ -2408,10 +2429,8 @@ body.loaded .hero-cta {
     line-height: 1;
     display: block;
     width: fit-content;
-    background: linear-gradient(100deg, var(--accent-blue), var(--accent-cyan) 65%, var(--accent-violet));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
 }
 /* Meta tier - a counter caption under a stat value. Shared with the detail
    pages' metric cards (leaksafe / encplus / manguzi / lah-cctv). */
@@ -2432,7 +2451,7 @@ body.loaded .hero-cta {
 .marquee::after { right: 0; background: linear-gradient(-90deg, var(--bg-main), transparent); }
 .marquee-track { display: flex; align-items: center; gap: 2.6rem; width: max-content; white-space: nowrap; animation: marquee 30s linear infinite; }
 .marquee-track span { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text-secondary); }
-.marquee-track i { color: var(--accent-blue); font-size: 16px; opacity: 0.7; }
+.marquee-track i { color: var(--accent-green); font-size: 16px; opacity: 0.7; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* Scroll reveal system */
@@ -2470,14 +2489,15 @@ body.loaded .hero-cta {
 .tool-card.hidden { display: none; }
 .tool-card:hover { transform: translateY(-5px); border-color: var(--glass-border-strong); box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight); }
 .tool-card-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.tool-icon { width: 46px; height: 46px; flex-shrink: 0; border-radius: 13px; background: var(--glass-bg-strong); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: var(--accent-blue); font-size: 22px; box-shadow: inset 0 1px 0 var(--glass-highlight); }
+.tool-icon { width: 46px; height: 46px; flex-shrink: 0; border-radius: 13px; background: var(--glass-bg-strong); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-size: 22px; box-shadow: inset 0 1px 0 var(--glass-highlight); }
 .tool-device { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.65rem; border-radius: 999px; border: 1px solid var(--glass-border); background: var(--glass-bg-soft); color: var(--text-faint); display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; }
 .tool-device i { width: 14px; height: 14px; }
-.tool-device.laptop { color: var(--accent-blue); border-color: var(--glass-border-strong); }
-.tool-device.phone { color: var(--accent-violet); border-color: var(--glass-border-strong); }
-/* Meta tier, and no second hue: --accent-cyan (teal) was the only colour on
-   the homepage that was neither the green accent nor a neutral, and the
-   progress-bar comment already records "green stays the only accent". */
+.tool-device.laptop { color: var(--accent-green); border-color: var(--glass-border-strong); }
+.tool-device.phone { color: var(--text-secondary); border-color: var(--glass-border-strong); }
+/* Meta tier, and no second hue. The phone chip used to carry amber
+   (--accent-violet, declared with the same value as --accent-amber) - the
+   last non-green accent in the stylesheet. Phase 9 removed both tokens, so
+   the chip sits one neutral step above the base .tool-device tone instead. */
 .tool-tag { font-family: var(--font-mono); font-size: var(--meta-size); font-weight: var(--meta-weight); letter-spacing: var(--meta-tracking); text-transform: uppercase; color: var(--text-faint); }
 .tool-card h3 { font-family: var(--font-display); font-size: 1.25rem; margin: 0.1rem 0 0; }
 .tool-summary { color: var(--text-secondary); font-size: 0.9rem; flex: 1; }
@@ -2505,7 +2525,7 @@ body.loaded .hero-cta {
 .ci.icon-moon { display: none; }
 
 /* ---------- Tools reading modal ---------- */
-.tools-modal { position: fixed; inset: 0; z-index: 1500; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+.tools-modal { position: fixed; inset: 0; z-index: 1500; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; visibility: hidden; overscroll-behavior: contain; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
 /* visibility flips on the opening frame (so the close button can take focus)
    and only after the fade on close. */
 .tools-modal.active { visibility: visible; opacity: 1; transition: opacity 0.3s ease, visibility 0s linear 0s; }
@@ -2529,7 +2549,7 @@ body.loaded .hero-cta {
 }
 .tools-modal.active .tools-modal-card { transform: none; opacity: 1; }
 .tools-modal-close { position: sticky; top: 0; float: right; background: transparent; border: 1px solid var(--glass-border); color: var(--text-primary); width: 36px; height: 36px; border-radius: var(--radius-btn); cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 1.15rem; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
-.tools-modal-close:hover { background: var(--surface-b); border-color: var(--accent-blue); color: var(--accent-blue); }
+.tools-modal-close:hover { background: var(--surface-b); border-color: var(--accent-green); color: var(--accent-green); }
 /* Device chip + category label share one row, spaced with the same 0.5rem
    rhythm the stack/tag rows use instead of sitting flush against each other. */
 .tools-modal-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
@@ -2558,7 +2578,7 @@ body.loaded .hero-cta {
 .tools-modal-content p { color: var(--text-secondary); margin: 0.75rem 0; line-height: 1.7; }
 .tools-modal-content ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; padding: 0; }
 .tools-modal-content li { display: flex; gap: 0.65rem; align-items: flex-start; color: var(--text-secondary); font-size: 0.93rem; }
-.tools-modal-content li i { color: var(--accent-blue); flex-shrink: 0; margin-top: 0.15rem; width: 16px; height: 16px; }
+.tools-modal-content li i { color: var(--accent-green); flex-shrink: 0; margin-top: 0.15rem; width: 16px; height: 16px; }
 body.tools-open { overflow: hidden; }
 
 /* Responsive for new blocks */
@@ -2677,7 +2697,7 @@ body.tools-open { overflow: hidden; }
     /* icons.js swaps <i> for <svg class="contact-card-icon"> sized ~20px;
        border-box padding insets the SVG viewport so the glyph sits with air */
     padding: 0.55rem;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     box-shadow: inset 0 1px 0 var(--glass-highlight);
 }
 
@@ -2699,7 +2719,7 @@ body.tools-open { overflow: hidden; }
 
 .contact-card p a:hover,
 .contact-card p a:focus-visible {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     text-decoration: underline;
 }
 
@@ -2880,7 +2900,7 @@ section[id] { scroll-margin-top: 90px; }
 }
 
 .work-row:hover .work-row-title {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     transform: translateX(4px);
 }
 
@@ -2913,7 +2933,7 @@ section[id] { scroll-margin-top: 90px; }
 
 .work-row:hover .work-row-arrow {
     transform: translateX(6px);
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 /* Rows are text-only: the inline mobile thumbnail and the desktop hover-preview
@@ -2938,15 +2958,19 @@ section[id] { scroll-margin-top: 90px; }
     .work-row-arrow { grid-area: arrow; align-self: center; }
 }
 
-.term-egg-close:hover { color: var(--accent-blue); }
+.term-egg-close:hover { color: var(--accent-green); }
 .term-egg-out { flex: 1; overflow-y: auto; padding: 0.9rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); min-height: 220px; }
 .term-egg-line { white-space: pre-wrap; word-break: break-word; }
-.term-egg-cmd { color: var(--accent-blue); }
-.term-egg-ok { color: var(--accent-blue); }
+.term-egg-cmd { color: var(--accent-green); }
+.term-egg-ok { color: var(--accent-green); }
 .term-egg-err { color: #f85149; }
 .term-egg-input-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 0.9rem; border-top: 1px solid var(--glass-border); }
-.term-egg-prompt { color: var(--accent-blue); font-size: 0.85rem; white-space: nowrap; }
-.term-egg-input { flex: 1; background: none; border: none; outline: none; color: var(--text-primary); font: inherit; font-size: 0.85rem; }
+.term-egg-prompt { color: var(--accent-green); font-size: 0.85rem; white-space: nowrap; }
+.term-egg-input { flex: 1; background: none; border: none; color: var(--text-primary); font: inherit; font-size: 0.85rem; }
+/* Phase 9: outline:none here removed the global :focus-visible ring from the
+   only text input on the page. The ring is inset so it cannot clip against
+   the input row's hairline. */
+.term-egg-input:focus-visible { outline-offset: -2px; }
 @media (prefers-reduced-motion: reduce) {
     .term-egg, .term-egg-window { transition: none; }
 }
@@ -2956,7 +2980,7 @@ section[id] { scroll-margin-top: 90px; }
 /* Chips/badges keep definition via --chip-shadow; hover lifts the chip
    one elevation instead of drawing a heavier outline. */
 .tag:hover {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     border-color: transparent;
     box-shadow: var(--elev-2);
 }
@@ -2986,7 +3010,7 @@ section[id] { scroll-margin-top: 90px; }
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     margin-bottom: 1.25rem;
 }
 
@@ -3040,11 +3064,17 @@ section[id] { scroll-margin-top: 90px; }
     }
 }
 
-/* Credential strip - full-width rows under the timeline */
+/* Credential strip - rows under the timeline, held to the same measure as
+   the timeline column above it (see .page-home .cred-strip). */
 .cred-strip {
     margin-top: 2.5rem;
     border-top: 1px solid var(--glass-border);
 }
+
+/* Phase 9: the timeline caps at 920px for a readable measure while the strip
+   below it ran the full container, so chapter 04 ended on two right edges.
+   Both now share the one measure. */
+.page-home .cred-strip { max-width: 920px; }
 
 .cred-strip-item {
     display: grid;
@@ -3258,7 +3288,7 @@ main.container {
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     padding-top: 0.2em;
 }
 
@@ -3936,7 +3966,7 @@ html:has(main.detail-page) { overflow-x: clip; }
     overflow-wrap: break-word;
 }
 
-.detail-page .main-title .accent-dot { color: var(--accent-blue); }
+.detail-page .main-title .accent-dot { color: var(--accent-green); }
 
 .lead-text {
     font-size: clamp(1.05rem, 1.6vw, 1.35rem);
@@ -4086,7 +4116,7 @@ html:has(main.detail-page) { overflow-x: clip; }
 /* The arch arrows were glowed; a plain accent mark matches the flat grid */
 .detail-page .arch-arrow i {
     filter: none;
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 /* ---------- Tags (hairline chips, not glass pills) ---------- */
@@ -4147,7 +4177,7 @@ html:has(main.detail-page) { overflow-x: clip; }
     color: var(--text-secondary);
 }
 
-.detail-page .custom-list .list-icon { color: var(--accent-blue); }
+.detail-page .custom-list .list-icon { color: var(--accent-green); }
 
 
 
